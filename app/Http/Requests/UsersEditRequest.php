@@ -23,12 +23,13 @@ class UsersEditRequest extends FormRequest
     public function rules()
     {
 		
+		$rec_id = request()->route('rec_id');
+
         return [
             
-				"firstname" => "filled|string",
+				"firstname" => "filled|string|unique:users,firstname,$rec_id,id",
 				"lastname" => "nullable|string",
 				"nickname" => "nullable|string",
-				"email" => "filled|email",
 				"matno" => "nullable|string",
 				"phone" => "filled|string",
 				"level" => "nullable|string",
@@ -46,7 +47,6 @@ class UsersEditRequest extends FormRequest
 				"facebook_link" => "nullable|string",
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
-				"email_verified_at" => "nullable|date",
             
         ];
     }

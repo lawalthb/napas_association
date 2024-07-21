@@ -1,9 +1,12 @@
 <?php 
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
-class Users extends Model 
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+class Users extends Authenticatable implements MustVerifyEmail
 {
+	use Notifiable;
 	
 
 	/**
@@ -20,16 +23,7 @@ class Users extends Model
      * @var string
      */
 	protected $primaryKey = 'id';
-	
-
-	/**
-     * Table fillable fields
-     *
-     * @var array
-     */
-	protected $fillable = [
-		'firstname','lastname','nickname','email','password','matno','phone','level','member_type','expectation_msg','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','image','facebook_link','x_link','linkedin_link','email_verified_at'
-	];
+	protected $fillable = ['firstname','lastname','nickname','email','password','matno','phone','level','member_type','expectation_msg','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','image','facebook_link','x_link','linkedin_link'];
 	public $timestamps = false;
 	
 
@@ -46,7 +40,6 @@ class Users extends Model
 				lastname LIKE ?  OR 
 				nickname LIKE ?  OR 
 				email LIKE ?  OR 
-				password LIKE ?  OR 
 				matno LIKE ?  OR 
 				phone LIKE ?  OR 
 				level LIKE ?  OR 
@@ -59,7 +52,7 @@ class Users extends Model
 				linkedin_link LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -165,7 +158,6 @@ class Users extends Model
 			"role",
 			"bio",
 			"dob",
-			"image",
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
@@ -201,7 +193,108 @@ class Users extends Model
 			"role",
 			"bio",
 			"dob",
+			"facebook_link",
+			"x_link",
+			"linkedin_link",
+			"email_verified_at" 
+		];
+	}
+	
+
+	/**
+     * return accountedit page fields of the model.
+     * 
+     * @return array
+     */
+	public static function accounteditFields(){
+		return [ 
+			"id",
+			"firstname",
+			"lastname",
+			"nickname",
+			"matno",
+			"phone",
+			"level",
+			"member_type",
+			"expectation_msg",
+			"session_start",
+			"session_end",
+			"is_active",
+			"is_ban",
+			"fee_paid",
+			"role",
+			"bio",
+			"dob",
 			"image",
+			"facebook_link",
+			"x_link",
+			"linkedin_link" 
+		];
+	}
+	
+
+	/**
+     * return accountview page fields of the model.
+     * 
+     * @return array
+     */
+	public static function accountviewFields(){
+		return [ 
+			"id",
+			"firstname",
+			"lastname",
+			"nickname",
+			"email",
+			"matno",
+			"phone",
+			"level",
+			"member_type",
+			"expectation_msg",
+			"session_start",
+			"session_end",
+			"created_at",
+			"updated_at",
+			"is_active",
+			"is_ban",
+			"fee_paid",
+			"role",
+			"bio",
+			"dob",
+			"facebook_link",
+			"x_link",
+			"linkedin_link",
+			"email_verified_at" 
+		];
+	}
+	
+
+	/**
+     * return exportAccountview page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportAccountviewFields(){
+		return [ 
+			"id",
+			"firstname",
+			"lastname",
+			"nickname",
+			"email",
+			"matno",
+			"phone",
+			"level",
+			"member_type",
+			"expectation_msg",
+			"session_start",
+			"session_end",
+			"created_at",
+			"updated_at",
+			"is_active",
+			"is_ban",
+			"fee_paid",
+			"role",
+			"bio",
+			"dob",
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
@@ -221,7 +314,6 @@ class Users extends Model
 			"firstname",
 			"lastname",
 			"nickname",
-			"email",
 			"matno",
 			"phone",
 			"level",
@@ -238,8 +330,52 @@ class Users extends Model
 			"image",
 			"facebook_link",
 			"x_link",
-			"linkedin_link",
-			"email_verified_at" 
+			"linkedin_link" 
 		];
+	}
+	
+
+	/**
+     * Get current user name
+     * @return string
+     */
+	public function UserName(){
+		return $this->firstname;
+	}
+	
+
+	/**
+     * Get current user id
+     * @return string
+     */
+	public function UserId(){
+		return $this->id;
+	}
+	public function UserEmail(){
+		return $this->email;
+	}
+	public function UserPhoto(){
+		return $this->image;
+	}
+	
+
+	/**
+     * Send Password reset link to user email 
+	 * @param string $token
+     * @return string
+     */
+	public function sendPasswordResetNotification($token)
+	{
+		$this->notify(new \App\Notifications\ResetPassword($token));
+	}
+	
+
+	/**
+     * Send user account verification link to user email
+     * @return string
+     */
+	public function sendEmailVerificationNotification()
+	{
+		$this->notify(new \App\Notifications\VerifyEmail);
 	}
 }

@@ -49,7 +49,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-firstname-holder" class=" ">
-                                            <input id="ctrl-firstname" data-field="firstname"  value="<?php  echo $data['firstname']; ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  class="form-control " />
+                                            <input id="ctrl-firstname" data-field="firstname"  value="<?php  echo $data['firstname']; ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  data-url="componentsdata/users_firstname_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                            <div class="check-status"></div> 
                                         </div>
                                     </div>
                                 </div>
@@ -74,18 +75,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col-sm-8">
                                         <div id="ctrl-nickname-holder" class=" ">
                                             <input id="ctrl-nickname" data-field="nickname"  value="<?php  echo $data['nickname']; ?>" type="text" placeholder="Enter Nickname"  name="nickname"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="email">Email <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-email-holder" class=" ">
-                                            <input id="ctrl-email" data-field="email"  value="<?php  echo $data['email']; ?>" type="email" placeholder="Enter Email"  required="" name="email"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
@@ -388,19 +377,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col-sm-8">
                                         <div id="ctrl-linkedin_link-holder" class=" ">
                                             <input id="ctrl-linkedin_link" data-field="linkedin_link"  value="<?php  echo $data['linkedin_link']; ?>" type="text" placeholder="Enter Linkedin Link"  name="linkedin_link"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="email_verified_at">Email Verified At </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-email_verified_at-holder" class="input-group ">
-                                            <input id="ctrl-email_verified_at" data-field="email_verified_at" class="form-control datepicker  datepicker" value="<?php  echo $data['email_verified_at']; ?>" type="datetime"  name="email_verified_at" placeholder="Enter Email Verified At" data-enable-time="true" data-min-date="" data-max-date="" data-date-format="Y-m-d H:i:S" data-alt-format="F j, Y - H:i" data-inline="false" data-no-calendar="false" data-mode="single" /> 
-                                            <span class="input-group-text"><i class="material-icons">date_range</i></span>
                                         </div>
                                     </div>
                                 </div>
