@@ -1,10 +1,10 @@
 @php
 
 
-  
-$webSection  = App\Models\WebSetting::where('id', 1)->first();
 
-  $webSection->maintenance;
+$webSection = App\Models\WebSettings::where('id', 1)->first();
+
+$webSection->maintenance;
 @endphp
 @if($webSection->maintenance != 'on')
 @extends('landingpage.layout')
@@ -15,13 +15,13 @@ $webSection  = App\Models\WebSetting::where('id', 1)->first();
 
 
 @if($webSection->top_bar == 'on')
-  @include('landingpage.topbar')
-  @else
-  <style>
-#header{
-  margin-top: -35px;
-}
-  </style>
+@include('landingpage.topbar')
+@else
+<style>
+  #header {
+    margin-top: -35px;
+  }
+</style>
 @endif
 
 
@@ -39,77 +39,77 @@ $webSection  = App\Models\WebSetting::where('id', 1)->first();
 
 <main id="main">
 
-@if($webSection->vission == 'on')
-@include('landingpage.vission_mission')
-@endif
+  @if($webSection->vission == 'on')
+  @include('landingpage.vission_mission')
+  @endif
 
-@if($webSection->cta == 'on')
-@include('landingpage.cta')
-@endif
-
-
-@if($webSection->about == 'on')
-@include('landingpage.about')
-@endif
-
-@if($webSection->count == 'on')
-@include('landingpage.counts')
-@endif
+  @if($webSection->cta == 'on')
+  @include('landingpage.cta')
+  @endif
 
 
-@if($webSection->benefit == 'on')
-@include('landingpage.benefit')
-@endif
-  
+  @if($webSection->about == 'on')
+  @include('landingpage.about')
+  @endif
 
-@if($webSection->resources == 'on')
-@include('landingpage.resources')
-@endif
-  
+  @if($webSection->count == 'on')
+  @include('landingpage.counts')
+  @endif
 
 
-@if($webSection->registration == 'on')
-@include('landingpage.registration')
-@endif
-  
-
-@if($webSection->events == 'on')
-@include('landingpage.events')
-@endif
-  
-
-@if($webSection->excos == 'on')
-@include('landingpage.excos')
-@endif
-  
+  @if($webSection->benefit == 'on')
+  @include('landingpage.benefit')
+  @endif
 
 
-@if($webSection->gallery == 'on')
-@include('landingpage.gallery')
-@endif
-  
+  @if($webSection->resources == 'on')
+  @include('landingpage.resources')
+  @endif
 
-@if($webSection->pricing == 'on')
-{{-- @include('landingpage.pricing') --}}
-@endif
-  
 
-@if($webSection->faq == 'on')
-{{-- @include('landingpage.faq')--}}
-@endif
-  
-@if($webSection->contact == 'on')
-@include('landingpage.contact')
-@endif
 
- 
+  @if($webSection->registration == 'on')
+  @include('landingpage.registration')
+  @endif
 
-  
 
-  
- 
+  @if($webSection->events == 'on')
+  @include('landingpage.events')
+  @endif
 
-  
+
+  @if($webSection->excos == 'on')
+  @include('landingpage.excos')
+  @endif
+
+
+
+  @if($webSection->gallery == 'on')
+  @include('landingpage.gallery')
+  @endif
+
+
+  @if($webSection->pricing == 'on')
+  {{-- @include('landingpage.pricing') --}}
+  @endif
+
+
+  @if($webSection->faq == 'on')
+  {{-- @include('landingpage.faq')--}}
+  @endif
+
+  @if($webSection->contact == 'on')
+  @include('landingpage.contact')
+  @endif
+
+
+
+
+
+
+
+
+
 
 
 

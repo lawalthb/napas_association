@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\LandingpageController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +17,13 @@ use App\Http\Controllers\LandingpageController;
 
 
 
-	//Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
+//Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
+use App\Http\Controllers\LandingpageController;
+Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
+Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
+Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
+
+
 	Route::get('index/login', 'IndexController@login')->name('login');
 
 	Route::post('auth/login', 'AuthController@login')->name('auth.login');
@@ -561,6 +567,3 @@ Route::get('info/changelocale/{locale}', function ($locale) {
 })->name('info.changelocale');
 
 
-Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
-Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
-Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
