@@ -1,0 +1,461 @@
+<!-- 
+expose component model to current view
+e.g $arrDataFromDb = $comp_model->fetchData(); //function name
+-->
+@inject('comp_model', 'App\Models\ComponentsData')
+<?php
+    $pageTitle = "Add New User"; //set dynamic page title
+?>
+@extends($layout)
+@section('title', $pageTitle)
+@section('content')
+<section class="page" data-page-type="add" data-page-url="{{ url()->full() }}">
+    <?php
+        if( $show_header == true ){
+    ?>
+    <div  class="bg-light p-3 mb-3" >
+        <div class="container">
+            <div class="row justify-content-between align-items-center">
+                <div class="col-auto  back-btn-col" >
+                    <a class="back-btn btn " href="{{ url()->previous() }}" >
+                        <i class="material-icons">arrow_back</i>                                
+                    </a>
+                </div>
+                <div class="col  " >
+                    <div class="">
+                        <div class="h5 font-weight-bold text-primary">Add New User</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <?php
+        }
+    ?>
+    <div  class="" >
+        <div class="container">
+            <div class="row ">
+                <div class="col-md-9 comp-grid " >
+                    <div  class="card card-1 border rounded page-content" >
+                        <!--[form-start]-->
+                        <form id="users-add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('users.store') }}" method="post">
+                            @csrf
+                            <div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="firstname">Firstname <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-firstname-holder" class=" ">
+                                                <input id="ctrl-firstname" data-field="firstname"  value="<?php echo get_value('firstname') ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="lastname">Lastname </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-lastname-holder" class=" ">
+                                                <input id="ctrl-lastname" data-field="lastname"  value="<?php echo get_value('lastname') ?>" type="text" placeholder="Enter Lastname"  name="lastname"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="nickname">Nickname </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-nickname-holder" class=" ">
+                                                <input id="ctrl-nickname" data-field="nickname"  value="<?php echo get_value('nickname') ?>" type="text" placeholder="Enter Nickname"  name="nickname"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="email">Email <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-email-holder" class=" ">
+                                                <input id="ctrl-email" data-field="email"  value="<?php echo get_value('email') ?>" type="email" placeholder="Enter Email"  required="" name="email"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="password">Password <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-password-holder" class="input-group ">
+                                                <input id="ctrl-password" data-field="password"  value="<?php echo get_value('password') ?>" type="password" placeholder="Enter Password"  required="" name="password"  class="form-control  password password-strength" />
+                                                <button type="button" class="btn btn-outline-secondary btn-toggle-password">
+                                                <i class="material-icons">visibility</i>
+                                                </button>
+                                            </div>
+                                            <div class="password-strength-msg">
+                                                <small class="fw-bold">Should contain</small>
+                                                <small class="length chip">6 Characters minimum</small>
+                                                <small class="caps chip">Capital Letter</small>
+                                                <small class="number chip">Number</small>
+                                                <small class="special chip">Symbol</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-confirm_password-holder" class="input-group ">
+                                                <input id="ctrl-password-confirm" data-match="#ctrl-password"  class="form-control password-confirm " type="password" name="confirm_password" required placeholder="Confirm Password" />
+                                                <button type="button" class="btn btn-outline-secondary btn-toggle-password">
+                                                <i class="material-icons">visibility</i>
+                                                </button>
+                                                <div class="invalid-feedback">
+                                                    Password does not match
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="matno">Matno </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-matno-holder" class=" ">
+                                                <input id="ctrl-matno" data-field="matno"  value="<?php echo get_value('matno') ?>" type="text" placeholder="Enter Matno"  name="matno"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="phone">Phone <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-phone-holder" class=" ">
+                                                <input id="ctrl-phone" data-field="phone"  value="<?php echo get_value('phone') ?>" type="text" placeholder="Enter Phone"  required="" name="phone"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="level">Level </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-level-holder" class=" ">
+                                                <input id="ctrl-level" data-field="level"  value="<?php echo get_value('level') ?>" type="text" placeholder="Enter Level"  name="level"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-member_type-holder" class=" ">
+                                                <select required=""  id="ctrl-member_type" data-field="member_type" name="member_type"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php
+                                                    $options = Menu::memberType();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    $selected = Html::get_field_selected('member_type', $value, "");
+                                                ?>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="expectation_msg">Expectation Msg </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-expectation_msg-holder" class=" ">
+                                                <textarea placeholder="Enter Expectation Msg" id="ctrl-expectation_msg" data-field="expectation_msg"  rows="5" name="expectation_msg" class=" form-control"><?php echo get_value('expectation_msg') ?></textarea>
+                                                <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="session_start">Session Start </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-session_start-holder" class=" ">
+                                                <input id="ctrl-session_start" data-field="session_start"  value="<?php echo get_value('session_start') ?>" type="text" placeholder="Enter Session Start"  name="session_start"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="session_end">Session End </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-session_end-holder" class=" ">
+                                                <input id="ctrl-session_end" data-field="session_end"  value="<?php echo get_value('session_end') ?>" type="text" placeholder="Enter Session End"  name="session_end"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="is_active">Is Active <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-is_active-holder" class=" ">
+                                                <select required=""  id="ctrl-is_active" data-field="is_active" name="is_active"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php
+                                                    $options = Menu::isActive();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    $selected = Html::get_field_selected('is_active', $value, "");
+                                                ?>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="is_ban">Is Ban <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-is_ban-holder" class=" ">
+                                                <select required=""  id="ctrl-is_ban" data-field="is_ban" name="is_ban"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php
+                                                    $options = Menu::isActive();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    $selected = Html::get_field_selected('is_ban', $value, "");
+                                                ?>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="fee_paid">Fee Paid <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-fee_paid-holder" class=" ">
+                                                <select required=""  id="ctrl-fee_paid" data-field="fee_paid" name="fee_paid"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php
+                                                    $options = Menu::isActive();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    $selected = Html::get_field_selected('fee_paid', $value, "");
+                                                ?>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="role">Role <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-role-holder" class=" ">
+                                                <select required=""  id="ctrl-role" data-field="role" name="role"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php
+                                                    $options = Menu::role();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    $selected = Html::get_field_selected('role', $value, "");
+                                                ?>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="bio">Bio </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-bio-holder" class=" ">
+                                                <textarea placeholder="Enter Bio" id="ctrl-bio" data-field="bio"  rows="5" name="bio" class=" form-control"><?php echo get_value('bio') ?></textarea>
+                                                <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="dob">Dob </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-dob-holder" class="input-group ">
+                                                <input id="ctrl-dob" data-field="dob" class="form-control datepicker  datepicker"  value="<?php echo get_value('dob') ?>" type="datetime" name="dob" placeholder="Enter Dob" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
+                                                <span class="input-group-text"><i class="material-icons">date_range</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="image">Image </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-image-holder" class=" ">
+                                                <div class="dropzone " input="#ctrl-image" fieldname="image" uploadurl="{{ url('fileuploader/upload/image') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
+                                                    <input name="image" id="ctrl-image" data-field="image" class="dropzone-input form-control" value="<?php echo get_value('image') ?>" type="text"  />
+                                                    <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
+                                                    <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="facebook_link">Facebook Link </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-facebook_link-holder" class=" ">
+                                                <input id="ctrl-facebook_link" data-field="facebook_link"  value="<?php echo get_value('facebook_link') ?>" type="text" placeholder="Enter Facebook Link"  name="facebook_link"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="x_link">X Link </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-x_link-holder" class=" ">
+                                                <input id="ctrl-x_link" data-field="x_link"  value="<?php echo get_value('x_link') ?>" type="text" placeholder="Enter X Link"  name="x_link"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="linkedin_link">Linkedin Link </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-linkedin_link-holder" class=" ">
+                                                <input id="ctrl-linkedin_link" data-field="linkedin_link"  value="<?php echo get_value('linkedin_link') ?>" type="text" placeholder="Enter Linkedin Link"  name="linkedin_link"  class="form-control " />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="email_verified_at">Email Verified At </label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-email_verified_at-holder" class="input-group ">
+                                                <input id="ctrl-email_verified_at" data-field="email_verified_at" class="form-control datepicker  datepicker" value="<?php echo get_value('email_verified_at') ?>" type="datetime"  name="email_verified_at" placeholder="Enter Email Verified At" data-enable-time="true" data-min-date="" data-max-date="" data-date-format="Y-m-d H:i:S" data-alt-format="F j, Y - H:i" data-inline="false" data-no-calendar="false" data-mode="single" /> 
+                                                <span class="input-group-text"><i class="material-icons">date_range</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-ajax-status"></div>
+                            <!--[form-button-start]-->
+                            <div class="form-group form-submit-btn-holder text-center mt-3">
+                                <button class="btn btn-primary" type="submit">
+                                Submit
+                                <i class="material-icons">send</i>
+                                </button>
+                            </div>
+                            <!--[form-button-end]-->
+                        </form>
+                        <!--[form-end]-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@endsection
