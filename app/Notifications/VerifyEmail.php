@@ -5,9 +5,12 @@ namespace App\Notifications;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
+use Illuminate\Support\Facades\Log;
 
 class VerifyEmail extends VerifyEmailBase
 {
+
+    public $record = [];
     //    use Queueable;
 
     // change as you want
@@ -18,12 +21,11 @@ class VerifyEmail extends VerifyEmailBase
         }
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address'))
-            // ->line(Lang::get('Please click the button below to verify your email address.'))
-            // ->action(Lang::get('Verify Email Address'), $this->verificationUrl($notifiable))
-            // ->line(Lang::get('If you did not create an account, no further action is required.'));
             ->view('pages.verifyemail.verify-email', [
                 'verificationUrl' => $this->verificationUrl($notifiable),
-                'user' => $notifiable,
+                'name' => $notifiable->firstname,
+                'payment_link' => $notifiable->checkoutLink,
+                'password' => $notifiable->or_password,
             ]);
     }
 }

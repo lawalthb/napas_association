@@ -5,19 +5,22 @@
   <title>{{ __('Verify Email Address') }}</title>
 </head>
 
+
 <body>
-  <p>{{ __('Hello') }} {{ $user-firstname }},</p>
-  <p>{{ __('Hello') }} {{ $user->checkoutLink }},</p>
+  <p>{{ __('Hello') }} {{ $name }},</p>
+  <p>Use this link to make payment incase you have not pay.</p>
+  <p>Your password is : {{ $password }} </p>
 
-  <p>{{ __('Please click the button below to verify your email address.') }}</p>
 
-  <a href="{{ $verificationUrl }}" style="display: inline-block; padding: 10px 20px; background-color: #3490dc; color: white; text-decoration: none; border-radius: 5px;">
-    {{ __('Verify Email Address') }}
+  <p>Please click the button below to verify your email address and make payment if you have not</p>
+
+  <a href="{{ $payment_link }}" style="display: inline-block; padding: 10px 20px; background-color: #3490dc; color: white; text-decoration: none; border-radius: 5px;">
+    Make Payment
   </a>
 
   <p>{{ __('If you did not create an account, no further action is required.') }}</p>
 
-  <p>{{ __('Regards,') }}<br>{{ config('app.name') }}</p>
+  <p>Thanks <br>{{ config('app.name') }}</p>
 </body>
 
 </html>

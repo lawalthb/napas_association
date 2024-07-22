@@ -5,13 +5,17 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Users;
 use App\Http\Requests\UsersRegisterRequest;
+use App\Models\AppSettings;
 use App\Models\PriceSettings;
+use App\Models\Transactions;
 use Exception;
+use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Mail\Message;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
@@ -77,17 +81,37 @@ class AuthController extends Controller
 		$level_id = $request->level;
 
 		$price_setting = PriceSettings::where('level_id', $level_id)->first();
-		$amount = $price_setting->amount;
-		$callbackUrl = 'https://talosmart-monodone-frontend.vercel.app/customer';
+		if ($price_setting) {
+			$amount = $price_setting->amount;
+		} else {
+			return null;
+		}
+
+		$callbackUrl = route("registerCallback");
 		$response = makePayment($amount, $request->email, $callbackUrl);
 		$checkoutLink  = $response['checkoutLink'];
 		//	$result['data']['checkoutLink'];
 		$user['checkoutLink'] = $checkoutLink;
-		$user->sendEmailVerificationNotification();
+		$user['or_password'] = $request->password;
 
-		return redirect()->away($checkoutLink);
+		if ($response) {
+			Transactions::create([
+				'user_id' => $user->id,
+				'price_settings_id' => $price_setting->id,
+				'email' =>  $request->email,
+				'amount' =>	$amount,
+				'fullname' =>   $request->lastname . " " . $request->firstname,
+				'phone_number' => $request->phone,
+				'callback_url' => $callbackUrl,
+				'reference' =>  $response['orderReference'],
+				'authorization_url' =>  $response['checkoutLink'],
+			]);
+
+			$user->sendEmailVerificationNotification();
+
+			return redirect()->away($checkoutLink);
+		}
 	}
-
 
 	/**
 	 * Logout user from session
@@ -290,5 +314,77 @@ class AuthController extends Controller
 		return redirect()->back()
 			->withInput($request->only('email'))
 			->withErrors(['email' => trans($response)]);
+	}
+
+
+	public function PaymentCallback(Request $request)
+	{
+		$reference = $request->orderReference;
+		$orderId = $request->orderId;
+
+		$access_token = nombaAccessToken();
+		$AccountId = AppSettings::where(['slug' => 'nombaAccountID'])->first()->value;
+		$curl = curl_init();
+		curl_setopt_array($curl, [
+			CURLOPT_URL => "https://api.nomba.com/v1/checkout/transaction?idType=ORDER_REFERENCE&id=$reference",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => [
+				"Authorization: Bearer $access_token",
+				"accountId: $AccountId"
+			],
+		]);
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			$response;
+			// dd($response);
+			$data = json_decode($response, true);
+			if ($data) {
+
+				if ($data['data']['message'] == 'PAYMENT SUCCESSFUL') {
+					$status  = 'Success';
+				} else {
+					$status  = 'Pending';
+				}
+				// dd($status);
+				$updatedRecord =  Transactions::where('reference', $orderId)->update([
+
+					'gateway_response' => '',
+					'channel' => '',
+					'paid_at' => now(),
+					'other_info' => $response,
+					'status' =>  $status,
+					'message' => $data['data']['message'],
+
+
+				]);
+			}
+		}
+		$user_id = Transactions::where('reference', $orderId)->value('user_id');
+		// Validation
+		$user_record = User::where('id', $user_id)->first(['email', 'password']);
+
+		if ($user_record) {
+			// Authenticate the user
+			Auth::login($user_record);
+
+			// Redirect the user after successful login
+			return redirect('/home');
+		} else {
+			// Handle the case where the user with the specified ID does not exist
+		}
+
+		//return redirect()->away(url('/user/order/page#no'));
 	}
 }
