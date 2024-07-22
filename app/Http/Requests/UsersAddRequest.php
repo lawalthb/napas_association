@@ -30,6 +30,7 @@ class UsersAddRequest extends FormRequest
 				"password" => "required|same:confirm_password",
 				"phone" => "required|string",
 				"image" => "nullable",
+				"level_id" => "nullable",
             
         ];
     }

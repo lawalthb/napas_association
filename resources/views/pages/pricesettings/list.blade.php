@@ -76,6 +76,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-created_at" > Created At</th>
                                         <th class="td-updated_at" > Updated At</th>
                                         <th class="td-updated_by" > Updated By</th>
+                                        <th class="td-level_id" > Level Id</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -125,77 +126,82 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <i class="material-icons">visibility</i> <?php echo "Users" ?>
                                     </a>
                                 </td>
-                                <!--PageComponentEnd-->
-                                <td class="td-btn">
-                                    <div class="dropdown" >
-                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                        <i class="material-icons">menu</i> 
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item "   href="<?php print_link("pricesettings/view/$rec_id"); ?>" >
-                                            <i class="material-icons">visibility</i> View
-                                        </a>
-                                        <a class="dropdown-item "   href="<?php print_link("pricesettings/edit/$rec_id"); ?>" >
-                                        <i class="material-icons">edit</i> Edit
-                                    </a>
-                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("pricesettings/delete/$rec_id"); ?>" >
-                                    <i class="material-icons">delete_sweep</i> Delete
+                                <td class="td-level_id">
+                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                    <i class="material-icons">visibility</i> <?php echo "Levels" ?>
                                 </a>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <?php 
-                    }
-                ?>
-                <!--endrecord-->
-            </tbody>
-            <tbody class="search-data"></tbody>
-            <?php
+                            </td>
+                            <!--PageComponentEnd-->
+                            <td class="td-btn">
+                                <div class="dropdown" >
+                                    <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                    <i class="material-icons">menu</i> 
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <a class="dropdown-item "   href="<?php print_link("pricesettings/view/$rec_id"); ?>" >
+                                        <i class="material-icons">visibility</i> View
+                                    </a>
+                                    <a class="dropdown-item "   href="<?php print_link("pricesettings/edit/$rec_id"); ?>" >
+                                    <i class="material-icons">edit</i> Edit
+                                </a>
+                                <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("pricesettings/delete/$rec_id"); ?>" >
+                                <i class="material-icons">delete_sweep</i> Delete
+                            </a>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
+            <?php 
                 }
-                else{
             ?>
-            <tbody class="page-data">
-                <tr>
-                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                        <i class="material-icons">block</i> No record found
-                    </td>
-                </tr>
-            </tbody>
+            <!--endrecord-->
+        </tbody>
+        <tbody class="search-data"></tbody>
+        <?php
+            }
+            else{
+        ?>
+        <tbody class="page-data">
+            <tr>
+                <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                    <i class="material-icons">block</i> No record found
+                </td>
+            </tr>
+        </tbody>
+        <?php
+            }
+        ?>
+    </table>
+</div>
+<?php
+    if($show_footer){
+?>
+<div class=" mt-3">
+    <div class="row align-items-center justify-content-between">    
+        <div class="col-md-auto d-flex">    
+            <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("pricesettings/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+            <i class="material-icons">delete_sweep</i> Delete Selected
+            </button>
+        </div>
+        <div class="col">   
             <?php
+                if($show_pagination == true){
+                $pager = new Pagination($total_records, $record_count);
+                $pager->show_page_count = false;
+                $pager->show_record_count = true;
+                $pager->show_page_limit =false;
+                $pager->limit = $limit;
+                $pager->show_page_number_list = true;
+                $pager->pager_link_range=5;
+                $pager->render();
                 }
             ?>
-        </table>
-    </div>
-    <?php
-        if($show_footer){
-    ?>
-    <div class=" mt-3">
-        <div class="row align-items-center justify-content-between">    
-            <div class="col-md-auto d-flex">    
-                <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("pricesettings/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                <i class="material-icons">delete_sweep</i> Delete Selected
-                </button>
-            </div>
-            <div class="col">   
-                <?php
-                    if($show_pagination == true){
-                    $pager = new Pagination($total_records, $record_count);
-                    $pager->show_page_count = false;
-                    $pager->show_record_count = true;
-                    $pager->show_page_limit =false;
-                    $pager->limit = $limit;
-                    $pager->show_page_number_list = true;
-                    $pager->pager_link_range=5;
-                    $pager->render();
-                    }
-                ?>
-            </div>
         </div>
     </div>
-    <?php
-        }
-    ?>
+</div>
+<?php
+    }
+?>
 </div>
 </div>
 </div>

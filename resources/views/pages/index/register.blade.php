@@ -43,102 +43,109 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class="col-md-9 comp-grid " >
                     <div  class="card card-1 border rounded page-content" >
                         <!--[form-start]-->
-                        <form id="users-userregister-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('auth.register_store') }}" method="post">
+                        <form id="users-userregister-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-vertical needs-validation" action="{{ route('auth.register_store') }}" method="post">
                             <!--[form-content-start]-->
                             @csrf
                             <div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="firstname">Firstname <span class="text-danger">*</span></label>
+                                <div class="row">
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="firstname">Firstname <span class="text-danger">*</span></label>
+                                        <div id="ctrl-firstname-holder" class=" "> 
+                                            <input id="ctrl-firstname" data-field="firstname"  value="<?php echo get_value('firstname') ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  data-url="componentsdata/users_firstname_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                            <div class="check-status"></div> 
                                         </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-firstname-holder" class=" ">
-                                                <input id="ctrl-firstname" data-field="firstname"  value="<?php echo get_value('firstname') ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  data-url="componentsdata/users_firstname_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
-                                                <div class="check-status"></div> 
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="lastname">Lastname </label>
+                                        <div id="ctrl-lastname-holder" class=" "> 
+                                            <input id="ctrl-lastname" data-field="lastname"  value="<?php echo get_value('lastname') ?>" type="text" placeholder="Enter Lastname"  name="lastname"  class="form-control " />
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="phone">Phone <span class="text-danger">*</span></label>
+                                        <div id="ctrl-phone-holder" class=" "> 
+                                            <input id="ctrl-phone" data-field="phone"  value="<?php echo get_value('phone') ?>" type="text" placeholder="Enter Phone"  required="" name="phone"  data-url="componentsdata/users_phone_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                            <div class="check-status"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="email">Email <span class="text-danger">*</span></label>
+                                        <div id="ctrl-email-holder" class=" "> 
+                                            <input id="ctrl-email" data-field="email"  value="<?php echo get_value('email') ?>" type="email" placeholder="Enter Email"  required="" name="email"  data-url="componentsdata/users_email_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                            <div class="check-status"></div> 
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="password">Password <span class="text-danger">*</span></label>
+                                        <div id="ctrl-password-holder" class="input-group "> 
+                                            <input id="ctrl-password" data-field="password"  value="<?php echo get_value('password') ?>" type="password" placeholder="Enter Password"  required="" name="password"  class="form-control  password password-strength" />
+                                            <button type="button" class="btn btn-outline-secondary btn-toggle-password">
+                                            <i class="material-icons">visibility</i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
+                                        <div id="ctrl-confirm_password-holder" class="input-group "> 
+                                            <input id="ctrl-password-confirm" data-match="#ctrl-password"  class="form-control password-confirm " type="password" name="confirm_password" required placeholder="Confirm Password" />
+                                            <button type="button" class="btn btn-outline-secondary btn-toggle-password">
+                                            <i class="material-icons">visibility</i>
+                                            </button>
+                                            <div class="invalid-feedback">
+                                                Password does not match
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="level_id">Level Id </label>
+                                        <div id="ctrl-level_id-holder" class=" "> 
+                                            <select  id="ctrl-level_id" data-field="level_id" name="level_id"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php 
+                                                $options = $comp_model->level_id_option_list() ?? [];
+                                                foreach($options as $option){
+                                                $value = $option->value;
+                                                $label = $option->label ?? $value;
+                                                $selected = Html::get_field_selected('level_id', $value, "");
+                                            ?>
+                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                            <?php echo $label; ?>
+                                            </option>
+                                            <?php
+                                                }
+                                            ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-sm-6">
+                                        <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
+                                        <div id="ctrl-member_type-holder" class=" "> 
+                                            <select required=""  id="ctrl-member_type" data-field="member_type" name="member_type"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::memberType();
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_field_selected('member_type', $value, "");
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="email">Email <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-email-holder" class=" ">
-                                                <input id="ctrl-email" data-field="email"  value="<?php echo get_value('email') ?>" type="email" placeholder="Enter Email"  required="" name="email"  data-url="componentsdata/users_email_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
-                                                <div class="check-status"></div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="password">Password <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-password-holder" class="input-group ">
-                                                <input id="ctrl-password" data-field="password"  value="<?php echo get_value('password') ?>" type="password" placeholder="Enter Password"  required="" name="password"  class="form-control  password password-strength" />
-                                                <button type="button" class="btn btn-outline-secondary btn-toggle-password">
-                                                <i class="material-icons">visibility</i>
-                                                </button>
-                                            </div>
-                                            <div class="password-strength-msg">
-                                                <small class="fw-bold">Should contain</small>
-                                                <small class="length chip">6 Characters minimum</small>
-                                                <small class="caps chip">Capital Letter</small>
-                                                <small class="number chip">Number</small>
-                                                <small class="special chip">Symbol</small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="confirm_password">Confirm Password <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-confirm_password-holder" class="input-group ">
-                                                <input id="ctrl-password-confirm" data-match="#ctrl-password"  class="form-control password-confirm " type="password" name="confirm_password" required placeholder="Confirm Password" />
-                                                <button type="button" class="btn btn-outline-secondary btn-toggle-password">
-                                                <i class="material-icons">visibility</i>
-                                                </button>
-                                                <div class="invalid-feedback">
-                                                    Password does not match
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="phone">Phone <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-phone-holder" class=" ">
-                                                <input id="ctrl-phone" data-field="phone"  value="<?php echo get_value('phone') ?>" type="text" placeholder="Enter Phone"  required="" name="phone"  class="form-control " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="image">Image </label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-image-holder" class=" ">
-                                                <div class="dropzone " input="#ctrl-image" fieldname="image" uploadurl="{{ url('fileuploader/upload/image') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
-                                                    <input name="image" id="ctrl-image" data-field="image" class="dropzone-input form-control" value="<?php echo get_value('image') ?>" type="text"  />
-                                                    <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
-                                                    <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <label class="control-label" for="expectation_msg">Expectation Msg </label>
+                                    <div id="ctrl-expectation_msg-holder" class=" "> 
+                                        <textarea placeholder="Enter Expectation Msg" id="ctrl-expectation_msg" data-field="expectation_msg"  rows="3" name="expectation_msg" class=" form-control"><?php echo get_value('expectation_msg') ?></textarea>
+                                        <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
                                     </div>
                                 </div>
                             </div>

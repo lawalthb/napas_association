@@ -80,23 +80,29 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="level">Level </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-level-holder" class=" ">
-                                            <input id="ctrl-level" data-field="level"  value="<?php  echo $data['level']; ?>" type="text" placeholder="Enter Level"  name="level"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
                                         <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-member_type-holder" class=" ">
-                                            <input id="ctrl-member_type" data-field="member_type"  value="<?php  echo $data['member_type']; ?>" type="text" placeholder="Enter Member Type"  required="" name="member_type"  class="form-control " />
+                                            <select required=""  id="ctrl-member_type" data-field="member_type" name="member_type"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::memberType();
+                                                $field_value = $data['member_type'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_record_selected($field_value, $value);
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -145,7 +151,25 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-is_active-holder" class=" ">
-                                            <input id="ctrl-is_active" data-field="is_active"  value="<?php  echo $data['is_active']; ?>" type="text" placeholder="Enter Is Active"  required="" name="is_active"  class="form-control " />
+                                            <select required=""  id="ctrl-is_active" data-field="is_active" name="is_active"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::isActive();
+                                                $field_value = $data['is_active'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_record_selected($field_value, $value);
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -157,7 +181,25 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-is_ban-holder" class=" ">
-                                            <input id="ctrl-is_ban" data-field="is_ban"  value="<?php  echo $data['is_ban']; ?>" type="text" placeholder="Enter Is Ban"  required="" name="is_ban"  class="form-control " />
+                                            <select required=""  id="ctrl-is_ban" data-field="is_ban" name="is_ban"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::isActive();
+                                                $field_value = $data['is_ban'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_record_selected($field_value, $value);
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +211,25 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-fee_paid-holder" class=" ">
-                                            <input id="ctrl-fee_paid" data-field="fee_paid"  value="<?php  echo $data['fee_paid']; ?>" type="text" placeholder="Enter Fee Paid"  required="" name="fee_paid"  class="form-control " />
+                                            <select required=""  id="ctrl-fee_paid" data-field="fee_paid" name="fee_paid"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::isActive();
+                                                $field_value = $data['fee_paid'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_record_selected($field_value, $value);
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -181,7 +241,25 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-role-holder" class=" ">
-                                            <input id="ctrl-role" data-field="role"  value="<?php  echo $data['role']; ?>" type="text" placeholder="Enter Role"  required="" name="role"  class="form-control " />
+                                            <select required=""  id="ctrl-role" data-field="role" name="role"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = Menu::role();
+                                                $field_value = $data['role'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                $selected = Html::get_record_selected($field_value, $value);
+                                            ?>
+                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                            <?php echo $label ?>
+                                            </option>                                   
+                                            <?php
+                                                }
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -261,6 +339,18 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col-sm-8">
                                         <div id="ctrl-linkedin_link-holder" class=" ">
                                             <input id="ctrl-linkedin_link" data-field="linkedin_link"  value="<?php  echo $data['linkedin_link']; ?>" type="text" placeholder="Enter Linkedin Link"  name="linkedin_link"  class="form-control " />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="level_id">Level Id </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-level_id-holder" class=" ">
+                                            <input id="ctrl-level_id" data-field="level_id"  value="<?php  echo $data['level_id']; ?>" type="number" placeholder="Enter Level Id" step="any"  name="level_id"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>

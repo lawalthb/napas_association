@@ -2,7 +2,7 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-class PriceSettings extends Model 
+class AppSettings extends Model 
 {
 	
 
@@ -11,7 +11,7 @@ class PriceSettings extends Model
      *
      * @var string
      */
-	protected $table = 'price_settings';
+	protected $table = 'app_settings';
 	
 
 	/**
@@ -28,7 +28,7 @@ class PriceSettings extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','amount','accademic_session_id','is_active','updated_by','level_id'
+		'name','value','slug'
 	];
 	public $timestamps = false;
 	
@@ -42,10 +42,12 @@ class PriceSettings extends Model
 		//search table record 
 		$search_condition = '(
 				id LIKE ?  OR 
-				name LIKE ? 
+				name LIKE ?  OR 
+				value LIKE ?  OR 
+				slug LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -61,13 +63,10 @@ class PriceSettings extends Model
 		return [ 
 			"id",
 			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
+			"value",
+			"slug",
 			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"updated_at" 
 		];
 	}
 	
@@ -81,13 +80,10 @@ class PriceSettings extends Model
 		return [ 
 			"id",
 			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
+			"value",
+			"slug",
 			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"updated_at" 
 		];
 	}
 	
@@ -101,13 +97,10 @@ class PriceSettings extends Model
 		return [ 
 			"id",
 			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
+			"value",
+			"slug",
 			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"updated_at" 
 		];
 	}
 	
@@ -121,13 +114,10 @@ class PriceSettings extends Model
 		return [ 
 			"id",
 			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
+			"value",
+			"slug",
 			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"updated_at" 
 		];
 	}
 	
@@ -141,11 +131,8 @@ class PriceSettings extends Model
 		return [ 
 			"id",
 			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
-			"updated_by",
-			"level_id" 
+			"value",
+			"slug" 
 		];
 	}
 }

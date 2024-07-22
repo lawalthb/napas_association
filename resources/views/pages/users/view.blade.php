@@ -133,18 +133,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Level</small>
-                                                    <div class="fw-bold">
-                                                        <?php echo  $data['level'] ; ?>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                            <div class="row align-items-center">
-                                                <div class="col">
                                                     <small class="text-muted">Member Type</small>
                                                     <div class="fw-bold">
                                                         <?php echo  $data['member_type'] ; ?>
@@ -333,32 +321,46 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-12">
+                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <small class="text-muted">Level Id</small>
+                                                    <div class="fw-bold">
+                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                                        <i class="material-icons">visibility</i> <?php echo "Levels Detail" ?>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <!--PageComponentEnd-->
-                                <div class="d-flex align-items-center gap-2">
-                                    <a class="btn btn-sm btn-success has-tooltip "   title="Edit" href="<?php print_link("users/edit/$rec_id"); ?>" >
-                                    <i class="material-icons">edit</i> Edit
-                                </a>
-                                <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" title="Delete" href="<?php print_link("users/delete/$rec_id?redirect=users"); ?>" >
-                                <i class="material-icons">delete_sweep</i> Delete
+                            </div>
+                            <!--PageComponentEnd-->
+                            <div class="d-flex align-items-center gap-2">
+                                <a class="btn btn-sm btn-success has-tooltip "   title="Edit" href="<?php print_link("users/edit/$rec_id"); ?>" >
+                                <i class="material-icons">edit</i> Edit
                             </a>
-                        </div>
+                            <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" title="Delete" href="<?php print_link("users/delete/$rec_id?redirect=users"); ?>" >
+                            <i class="material-icons">delete_sweep</i> Delete
+                        </a>
                     </div>
                 </div>
-                <?php
-                    }
-                    else{
-                ?>
-                <!-- Empty Record Message -->
-                <div class="text-muted p-3">
-                    <i class="material-icons">block</i> No Record Found
-                </div>
-                <?php
-                    }
-                ?>
             </div>
+            <?php
+                }
+                else{
+            ?>
+            <!-- Empty Record Message -->
+            <div class="text-muted p-3">
+                <i class="material-icons">block</i> No Record Found
+            </div>
+            <?php
+                }
+            ?>
         </div>
     </div>
+</div>
 </div>
 </div>
 </section>

@@ -3,6 +3,7 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
 
 @endphp
 
+@inject('comp_model', 'App\Models\ComponentsData')
 <!-- ======= Registration Section ======= -->
 <section id="registration" class="appointment section-bg">
   <style>
@@ -18,7 +19,7 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
       <p>{{$reg->text}}</p>
     </div>
 
-    <form action="#registration" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
+    <form action="{{ route('auth.register_store') }}#registration" method="post" role="form" class="php-email-form" data-aos="fade-up" data-aos-delay="100">
       @csrf
       <div class="row">
         <div class="col-md-4 form-group">
@@ -54,8 +55,8 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
           @enderror
         </div>
         <div class="col-md-4 form-group mt-3 mt-md-0">
-          <input type="password" class="form-control" name="password_confirmation" value="{{ old('password_confirmation') }}" id="password_confirmation" placeholder=" Confirmed Password">
-          @error('password_confirmation')
+          <input type="password" class="form-control" name="confirm_password" data-match="#ctrl-password" value="{{ old('confirm_password') }}" id="ctrl-password-confirm" placeholder=" Confirmed Password">
+          @error('confirm_password')
           <p class="error_msg">{{ $message }}</p>
           @enderror
         </div>
@@ -71,12 +72,19 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
         <div class="col-md-4 form-group mt-3">
           <select name="level" id="level" class="form-select">
             <option value="">Select Level</option>
-            <option value="ND 1" {{ old('level') == 'ND 1' ? 'selected' : '' }}>ND 1</option>
-            <option value="ND 2" {{ old('level') == 'ND 2' ? 'selected' : '' }}>ND 2</option>
-            <option value="ND 2" {{ old('level') == 'ND 3' ? 'selected' : '' }}>ND 3</option>
-            <option value="HND 1" {{ old('level') == 'HND 1' ? 'selected' : '' }}>HND 1</option>
-            <option value="HND 2" {{ old('level') == 'HND 2' ? 'selected' : '' }}>HND 2</option>
-            <option value="HND 3" {{ old('level') == 'HND 3' ? 'selected' : '' }}>HND 3</option>
+            <?php
+            $options = $comp_model->level_id_option_list() ?? [];
+            foreach ($options as $option) {
+              $value = $option->value;
+              $label = $option->label ?? $value;
+              $selected = Html::get_field_selected('level_id', $value, "");
+            ?>
+              <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                <?php echo $label; ?>
+              </option>
+            <?php
+            }
+            ?>
           </select>
           @error('level')
           <p class="error_msg">{{ $message }}</p>

@@ -75,7 +75,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-email" > Email</th>
                                         <th class="td-matno" > Matno</th>
                                         <th class="td-phone" > Phone</th>
-                                        <th class="td-level" > Level</th>
                                         <th class="td-member_type" > Member Type</th>
                                         <th class="td-expectation_msg" > Expectation Msg</th>
                                         <th class="td-session_start" > Session Start</th>
@@ -93,6 +92,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-x_link" > X Link</th>
                                         <th class="td-linkedin_link" > Linkedin Link</th>
                                         <th class="td-email_verified_at" > Email Verified At</th>
+                                        <th class="td-level_id" > Level Id</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -134,9 +134,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </td>
                                         <td class="td-phone">
                                             <a href="<?php print_link("tel:$data[phone]") ?>"><?php echo $data['phone']; ?></a>
-                                        </td>
-                                        <td class="td-level">
-                                            <?php echo  $data['level'] ; ?>
                                         </td>
                                         <td class="td-member_type">
                                             <?php echo  $data['member_type'] ; ?>
@@ -191,79 +188,84 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-email_verified_at">
                                             <a href="<?php print_link("mailto:$data[email_verified_at]") ?>"><?php echo $data['email_verified_at']; ?></a>
                                         </td>
-                                        <!--PageComponentEnd-->
-                                        <td class="td-btn">
-                                            <div class="dropdown" >
-                                                <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                                <i class="material-icons">menu</i> 
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <a class="dropdown-item "   href="<?php print_link("users/view/$rec_id"); ?>" >
-                                                    <i class="material-icons">visibility</i> View
-                                                </a>
-                                                <a class="dropdown-item "   href="<?php print_link("users/edit/$rec_id"); ?>" >
-                                                <i class="material-icons">edit</i> Edit
-                                            </a>
-                                            <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("users/delete/$rec_id"); ?>" >
-                                            <i class="material-icons">delete_sweep</i> Delete
+                                        <td class="td-level_id">
+                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                            <i class="material-icons">visibility</i> <?php echo "Levels" ?>
                                         </a>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
-                        <?php 
-                            }
-                        ?>
-                        <!--endrecord-->
-                    </tbody>
-                    <tbody class="search-data"></tbody>
-                    <?php
+                                    </td>
+                                    <!--PageComponentEnd-->
+                                    <td class="td-btn">
+                                        <div class="dropdown" >
+                                            <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                            <i class="material-icons">menu</i> 
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <a class="dropdown-item "   href="<?php print_link("users/view/$rec_id"); ?>" >
+                                                <i class="material-icons">visibility</i> View
+                                            </a>
+                                            <a class="dropdown-item "   href="<?php print_link("users/edit/$rec_id"); ?>" >
+                                            <i class="material-icons">edit</i> Edit
+                                        </a>
+                                        <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("users/delete/$rec_id"); ?>" >
+                                        <i class="material-icons">delete_sweep</i> Delete
+                                    </a>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                    <?php 
                         }
-                        else{
                     ?>
-                    <tbody class="page-data">
-                        <tr>
-                            <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                                <i class="material-icons">block</i> No record found
-                            </td>
-                        </tr>
-                    </tbody>
+                    <!--endrecord-->
+                </tbody>
+                <tbody class="search-data"></tbody>
+                <?php
+                    }
+                    else{
+                ?>
+                <tbody class="page-data">
+                    <tr>
+                        <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                            <i class="material-icons">block</i> No record found
+                        </td>
+                    </tr>
+                </tbody>
+                <?php
+                    }
+                ?>
+            </table>
+        </div>
+        <?php
+            if($show_footer){
+        ?>
+        <div class=" mt-3">
+            <div class="row align-items-center justify-content-between">    
+                <div class="col-md-auto d-flex">    
+                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("users/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                    <i class="material-icons">delete_sweep</i> Delete Selected
+                    </button>
+                </div>
+                <div class="col">   
                     <?php
+                        if($show_pagination == true){
+                        $pager = new Pagination($total_records, $record_count);
+                        $pager->show_page_count = false;
+                        $pager->show_record_count = true;
+                        $pager->show_page_limit =false;
+                        $pager->limit = $limit;
+                        $pager->show_page_number_list = true;
+                        $pager->pager_link_range=5;
+                        $pager->render();
                         }
                     ?>
-                </table>
-            </div>
-            <?php
-                if($show_footer){
-            ?>
-            <div class=" mt-3">
-                <div class="row align-items-center justify-content-between">    
-                    <div class="col-md-auto d-flex">    
-                        <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("users/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                        <i class="material-icons">delete_sweep</i> Delete Selected
-                        </button>
-                    </div>
-                    <div class="col">   
-                        <?php
-                            if($show_pagination == true){
-                            $pager = new Pagination($total_records, $record_count);
-                            $pager->show_page_count = false;
-                            $pager->show_record_count = true;
-                            $pager->show_page_limit =false;
-                            $pager->limit = $limit;
-                            $pager->show_page_number_list = true;
-                            $pager->pager_link_range=5;
-                            $pager->render();
-                            }
-                        ?>
-                    </div>
                 </div>
             </div>
-            <?php
-                }
-            ?>
         </div>
+        <?php
+            }
+        ?>
     </div>
+</div>
 </div>
 </div>
 </div>

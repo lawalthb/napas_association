@@ -30,6 +30,7 @@ class PriceSettingsEditRequest extends FormRequest
 				"accademic_session_id" => "filled",
 				"is_active" => "filled",
 				"updated_by" => "filled",
+				"level_id" => "filled",
             
         ];
     }

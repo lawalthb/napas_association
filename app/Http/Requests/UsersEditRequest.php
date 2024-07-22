@@ -32,7 +32,6 @@ class UsersEditRequest extends FormRequest
 				"nickname" => "nullable|string",
 				"matno" => "nullable|string",
 				"phone" => "filled|string",
-				"level" => "nullable|string",
 				"member_type" => "filled",
 				"expectation_msg" => "nullable",
 				"session_start" => "nullable|string",
@@ -47,6 +46,7 @@ class UsersEditRequest extends FormRequest
 				"facebook_link" => "nullable|string",
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
+				"level_id" => "nullable",
             
         ];
     }

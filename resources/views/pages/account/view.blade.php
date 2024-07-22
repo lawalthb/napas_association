@@ -149,18 +149,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                                             <div class="row align-items-center">
                                                                 <div class="col">
-                                                                    <small class="text-muted">Level</small>
-                                                                    <div class="fw-bold">
-                                                                        <?php echo  $data['level'] ; ?>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                                            <div class="row align-items-center">
-                                                                <div class="col">
                                                                     <small class="text-muted">Member Type</small>
                                                                     <div class="fw-bold">
                                                                         <?php echo  $data['member_type'] ; ?>
@@ -349,40 +337,54 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div class="col-12">
+                                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                                            <div class="row align-items-center">
+                                                                <div class="col">
+                                                                    <small class="text-muted">Level Id</small>
+                                                                    <div class="fw-bold">
+                                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                                                        <i class="material-icons">visibility</i> <?php echo "Levels Detail" ?>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <!--PageComponentEnd-->
                                             </div>
+                                            <!--PageComponentEnd-->
                                         </div>
-                                        <div class="tab-pane fade" id="AccountPageEdit" role="tabpanel">
-                                            <div class=" reset-grids">
-                                                <x-sub-page url="{{ url('account/edit') }}"></x-sub-page>
-                                            </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="AccountPageEdit" role="tabpanel">
+                                        <div class=" reset-grids">
+                                            <x-sub-page url="{{ url('account/edit') }}"></x-sub-page>
                                         </div>
-                                        <div class="tab-pane fade" id="AccountPageChangePassword" role="tabpanel">
-                                            <div class=" reset-grids">
-                                                @include("pages.account.changepassword")
-                                            </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="AccountPageChangePassword" role="tabpanel">
+                                        <div class=" reset-grids">
+                                            @include("pages.account.changepassword")
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <?php
-                            }
-                            else{
-                        ?>
-                        <!-- Empty Record Message -->
-                        <div class="text-muted p-3">
-                            <i class="material-icons">block</i> No Record Found
-                        </div>
-                        <?php
-                            }
-                        ?>
                     </div>
+                    <?php
+                        }
+                        else{
+                    ?>
+                    <!-- Empty Record Message -->
+                    <div class="text-muted p-3">
+                        <i class="material-icons">block</i> No Record Found
+                    </div>
+                    <?php
+                        }
+                    ?>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </section>
 <!-- Page custom js --><script><!--pageautofill--><!--custom page js--><!--pagejs--></script>
 <!-- Page custom css --><style><!--custom page css--><!--pagecss--></style>

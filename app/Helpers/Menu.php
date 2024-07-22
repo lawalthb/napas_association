@@ -212,6 +212,32 @@
 			'path' => 'webvissions',
 			'label' => "Web Vissions", 
 			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'appsettings',
+			'label' => "App Settings", 
+			'icon' => '<i class="material-icons">extension</i>'
+		]
+	] ;
+	}
+	
+	public static function navbartopleft(){
+		return [
+		[
+			'path' => 'appsettings',
+			'label' => "App Settings", 
+			'icon' => '<i class="material-icons">extension</i>'
+		]
+	] ;
+	}
+	
+	public static function navbartopright(){
+		return [
+		[
+			'path' => 'appsettings',
+			'label' => "App Settings", 
+			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
 	}

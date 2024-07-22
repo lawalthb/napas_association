@@ -106,18 +106,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="level">Level </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-level-holder" class=" ">
-                                            <input id="ctrl-level" data-field="level"  value="<?php  echo $data['level']; ?>" type="text" placeholder="Enter Level"  name="level"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
                                         <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
@@ -377,6 +365,33 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col-sm-8">
                                         <div id="ctrl-linkedin_link-holder" class=" ">
                                             <input id="ctrl-linkedin_link" data-field="linkedin_link"  value="<?php  echo $data['linkedin_link']; ?>" type="text" placeholder="Enter Linkedin Link"  name="linkedin_link"  class="form-control " />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="level_id">Level Id </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-level_id-holder" class=" ">
+                                            <select  id="ctrl-level_id" data-field="level_id" name="level_id"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = $comp_model->level_id_option_list() ?? [];
+                                                foreach($options as $option){
+                                                $value = $option->value;
+                                                $label = $option->label ?? $value;
+                                                $selected = ( $value == $data['level_id'] ? 'selected' : null );
+                                            ?>
+                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                            <?php echo $label; ?>
+                                            </option>
+                                            <?php
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

@@ -23,7 +23,7 @@ class Users extends Authenticatable implements MustVerifyEmail
      * @var string
      */
 	protected $primaryKey = 'id';
-	protected $fillable = ['firstname','lastname','nickname','email','password','matno','phone','level','member_type','expectation_msg','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','image','facebook_link','x_link','linkedin_link'];
+	protected $fillable = ['firstname','lastname','phone','email','password','level_id','member_type','expectation_msg','image','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link'];
 	public $timestamps = false;
 	
 
@@ -42,7 +42,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 				email LIKE ?  OR 
 				matno LIKE ?  OR 
 				phone LIKE ?  OR 
-				level LIKE ?  OR 
 				expectation_msg LIKE ?  OR 
 				session_start LIKE ?  OR 
 				session_end LIKE ?  OR 
@@ -52,7 +51,7 @@ class Users extends Authenticatable implements MustVerifyEmail
 				linkedin_link LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
+			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -73,7 +72,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -90,7 +88,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -109,7 +108,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -126,7 +124,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -145,7 +144,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -161,7 +159,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -180,7 +179,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -196,7 +194,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -214,7 +213,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"nickname",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -228,7 +226,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"image",
 			"facebook_link",
 			"x_link",
-			"linkedin_link" 
+			"linkedin_link",
+			"level_id" 
 		];
 	}
 	
@@ -247,7 +246,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -263,7 +261,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -282,7 +281,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"email",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -298,7 +296,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"email_verified_at" 
+			"email_verified_at",
+			"level_id" 
 		];
 	}
 	
@@ -316,7 +315,6 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"nickname",
 			"matno",
 			"phone",
-			"level",
 			"member_type",
 			"expectation_msg",
 			"session_start",
@@ -330,7 +328,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"image",
 			"facebook_link",
 			"x_link",
-			"linkedin_link" 
+			"linkedin_link",
+			"level_id" 
 		];
 	}
 	

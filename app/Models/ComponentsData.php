@@ -152,6 +152,21 @@ class ComponentsData{
 	 * @param string $value
      * @return bool
      */
+	function users_phone_value_exist(Request $request){
+		$value = trim($request->value);
+		$exist = DB::table('users')->where('phone', $value)->value('phone');   
+		if($exist){
+			return true;
+		}
+		return false;
+	}
+	
+
+	/**
+     * Check if value already exist in Users table
+	 * @param string $value
+     * @return bool
+     */
 	function users_email_value_exist(Request $request){
 		$value = trim($request->value);
 		$exist = DB::table('users')->where('email', $value)->value('email');   
