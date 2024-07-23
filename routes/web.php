@@ -19,7 +19,7 @@ use App\Http\Controllers\LandingpageController;
 Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
 Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
-
+Route::get('payment_callback', 'AuthController@PaymentCallback')->name('registerCallback');
 //Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
 Route::get('index/login', 'IndexController@login')->name('login');
 
@@ -40,7 +40,7 @@ Route::get('webabouts', 'WebAboutsController@index')->name('webabouts.index');
 Route::get('webabouts/index/{filter?}/{filtervalue?}', 'WebAboutsController@index')->name('webabouts.index');
 Route::get('webabouts/view/{rec_id}', 'WebAboutsController@view')->name('webabouts.view');
 Route::post('auth/login', 'AuthController@login')->name('auth.login');
-Route::get('payment_callback', 'AuthController@PaymentCallback')->name('registerCallback');
+
 Route::get('auth/password/forgotpassword', 'AuthController@showForgotPassword')->name('password.forgotpassword');
 Route::post('auth/password/sendemail', 'AuthController@sendPasswordResetLink')->name('password.email');
 Route::get('auth/password/reset', 'AuthController@showResetPassword')->name('password.reset.token');

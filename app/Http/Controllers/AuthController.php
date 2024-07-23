@@ -357,8 +357,9 @@ class AuthController extends Controller
 				} else {
 					$status  = 'Pending';
 				}
-				// dd($status);
-				$updatedRecord =  Transactions::where('reference', $orderId)->update([
+
+				$user_id = Transactions::where('reference', $orderId)->value('user_id');
+				$updateRecord =  Transactions::where('reference', $orderId)->update([
 
 					'gateway_response' => '',
 					'channel' => '',
@@ -366,12 +367,15 @@ class AuthController extends Controller
 					'other_info' => $response,
 					'status' =>  $status,
 					'message' => $data['data']['message'],
-
-
 				]);
+
+				if ($updateRecord) {
+					$user = Users::findOrFail($user_id);
+					$user->markEmailAsVerified();
+				}
 			}
 		}
-		$user_id = Transactions::where('reference', $orderId)->value('user_id');
+
 		// Validation
 		$user_record = User::where('id', $user_id)->first(['email', 'password']);
 
@@ -384,7 +388,5 @@ class AuthController extends Controller
 		} else {
 			// Handle the case where the user with the specified ID does not exist
 		}
-
-		//return redirect()->away(url('/user/order/page#no'));
 	}
 }
