@@ -5,6 +5,7 @@ use App\Http\Requests\TransactionsAddRequest;
 use App\Http\Requests\TransactionsEditRequest;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class TransactionsController extends Controller
 {
@@ -25,11 +26,16 @@ class TransactionsController extends Controller
 			$search = trim($request->search);
 			Transactions::search($query, $search); // search table records
 		}
+		$query->join("price_settings", "transactions.price_settings_id", "=", "price_settings.id");
 		$orderby = $request->orderby ?? "transactions.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->price_settings_id){
+			$val = $request->price_settings_id;
+			$query->where(DB::raw("transactions.price_settings_id"), "=", $val);
 		}
 		$records = $query->paginate($limit, Transactions::listFields());
 		return $this->renderView($view, compact("records"));
@@ -43,6 +49,7 @@ class TransactionsController extends Controller
      */
 	function view($rec_id = null){
 		$query = Transactions::query();
+		$query->join("price_settings", "transactions.price_settings_id", "=", "price_settings.id");
 		$record = $query->findOrFail($rec_id, Transactions::viewFields());
 		return $this->renderView("pages.transactions.view", ["data" => $record]);
 	}
@@ -102,5 +109,32 @@ class TransactionsController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function member_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.transactions.member_list";
+		$query = Transactions::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			Transactions::search($query, $search); // search table records
+		}
+		$orderby = $request->orderby ?? "transactions.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("user_id", "=" , auth()->user()->id);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Transactions::memberListFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

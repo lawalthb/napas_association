@@ -25,9 +25,15 @@ class WebColoursController extends Controller
 			$search = trim($request->search);
 			WebColours::search($query, $search); // search table records
 		}
-		$orderby = $request->orderby ?? "web_colours.id";
-		$ordertype = $request->ordertype ?? "desc";
-		$query->orderBy($orderby, $ordertype);
+		$query->join("users", "web_colours.updated_by", "=", "users.id");
+		if($request->orderby){
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		}
+		else{
+			$query->orderBy("web_colours.id", "ASC");
+		}
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
@@ -45,29 +51,6 @@ class WebColoursController extends Controller
 		$query = WebColours::query();
 		$record = $query->findOrFail($rec_id, WebColours::viewFields());
 		return $this->renderView("pages.webcolours.view", ["data" => $record]);
-	}
-	
-
-	/**
-     * Display form page
-     * @return \Illuminate\View\View
-     */
-	function add(){
-		return $this->renderView("pages.webcolours.add");
-	}
-	
-
-	/**
-     * Save form record to the table
-     * @return \Illuminate\Http\Response
-     */
-	function store(WebColoursAddRequest $request){
-		$modeldata = $this->normalizeFormData($request->validated());
-		
-		//save WebColours record
-		$record = WebColours::create($modeldata);
-		$rec_id = $record->id;
-		return $this->redirect("webcolours", "Record added successfully");
 	}
 	
 

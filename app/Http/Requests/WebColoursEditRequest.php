@@ -27,7 +27,6 @@ class WebColoursEditRequest extends FormRequest
             
 				"name" => "nullable|string",
 				"colour" => "nullable|string",
-				"updated_by" => "filled",
             
         ];
     }

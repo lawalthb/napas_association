@@ -49,7 +49,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-name-holder" class=" ">
-                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="Enter Name"  name="name"  class="form-control " />
+                                            <input id="ctrl-name" data-field="name"  value="<?php  echo $data['name']; ?>" type="text" placeholder="Enter Name"  readonly name="name"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
@@ -61,34 +61,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-colour-holder" class=" ">
-                                            <input id="ctrl-colour" data-field="colour"  value="<?php  echo $data['colour']; ?>" type="text" placeholder="Enter Colour"  name="colour"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="updated_by">Updated By <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-updated_by-holder" class=" ">
-                                            <select required=""  id="ctrl-updated_by" data-field="updated_by" name="updated_by"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = $comp_model->updated_by_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['updated_by'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
+                                            <input id="ctrl-colour" data-field="colour"  value="<?php  echo $data['colour']; ?>" type="color" placeholder="Enter Colour"  name="colour"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
@@ -112,6 +85,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     </div>
 </div>
 </section>
-
+<!-- Page custom js --><script>$(document).ready(function(){
+	// custom javascript | jquery codes
+});$(document).ready(function(){
+	// custom javascript | jquery codes
+});</script>
 
 @endsection

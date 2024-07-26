@@ -9,7 +9,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $pageTitle = "Web Colours"; //set dynamic page title
+    $pageTitle = "Transactions"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -21,16 +21,26 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     <div  class="bg-light p-3 mb-3" >
         <div class="container-fluid">
             <div class="row justify-content-between align-items-center gap-3">
-                <div class="col-md-4 comp-grid " >
+                <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold">Edit Website Colour</div>
+                        <div class="h5 font-weight-bold text-primary">Transactions</div>
                     </div>
                 </div>
-                <div class="col-md-3  " >
-                    <a  class="btn btn-primary btn-block" href="<?php print_link("webcolours/index") ?>" >
-                    <i class="material-icons ">refresh</i>                              
-                    Refresh 
+                <div class="col-auto  " >
+                    <a  class="btn btn-primary btn-block" href="<?php print_link("transactions/add", true) ?>" >
+                    <i class="material-icons">add</i>                               
+                    Add New Transaction 
                 </a>
+            </div>
+            <div class="col-md-3  " >
+                <!-- Page drop down search component -->
+                <form  class="search" action="{{ url()->current() }}" method="get">
+                    <input type="hidden" name="page" value="1" />
+                    <div class="input-group">
+                        <input value="<?php echo get_value('search'); ?>" class="form-control page-search" type="text" name="search"  placeholder="Search" />
+                        <button class="btn btn-primary"><i class="material-icons">search</i></button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -43,9 +53,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
         <div class="row ">
             <div class="col comp-grid " >
                 <div  class=" page-content" >
-                    <div id="webcolours-list-records">
+                    <div id="transactions-member_list-records">
                         <div id="page-main-content" class="table-responsive">
-                            <?php Html::page_bread_crumb("/webcolours/", $field_name, $field_value); ?>
+                            <?php Html::page_bread_crumb("/transactions/member_list", $field_name, $field_value); ?>
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
@@ -53,10 +63,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
                                     <tr>
-                                        <th class="td-name" > Name</th>
-                                        <th class="td-colour" > Colour</th>
-                                        <th class="td-updated_at" > Last Update</th>
-                                        <th class="td-updated_by" > Updated By</th>
+                                        <th class="td-id" > Id</th>
+                                        <th class="td-email" > Email</th>
+                                        <th class="td-amount" > Amount</th>
+                                        <th class="td-reference" > Reference</th>
+                                        <th class="td-created_at" > Date</th>
+                                        <th class="td-status" > Status</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -73,21 +85,32 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     ?>
                                     <tr>
                                         <!--PageComponentStart-->
-                                        <td class="td-name">
-                                            <?php echo  $data['name'] ; ?>
+                                        <td class="td-id">
+                                            <a href="<?php print_link("/transactions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
-                                        <td class="td-colour"><input type="color" value="<?php echo $data['colour']; ?>" /></td>
-                                        <td class="td-updated_at">
-                                            <?php echo  $data['updated_at'] ; ?>
+                                        <td class="td-email">
+                                            <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
                                         </td>
-                                        <td class="td-updated_by">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                            <?php echo $data['users_lastname'] ?>
+                                        <td class="td-amount">
+                                            <?php echo  $data['amount'] ; ?>
+                                        </td>
+                                        <td class="td-reference">
+                                            <?php echo str_truncate( $data['reference'] , 13,'...'); ?>
+                                        </td>
+                                        <td class="td-created_at">
+                                            <span title="<?php echo human_datetime($data['created_at']); ?>" class="has-tooltip">
+                                            <?php echo relative_date($data['created_at']); ?>
+                                            </span>
+                                        </td>
+                                        <td class="td-status">
+                                            <?php echo  $data['status'] ; ?>
+                                        </td>
+                                        <!--PageComponentEnd-->
+                                        <td class="td-btn">
+                                            <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("transactions/view/$rec_id"); ?>" >
+                                            <i class="material-icons ">receipt</i> Receipt
                                         </a>
-                                    </td>
-                                    <!--PageComponentEnd-->
-                                    <td class="td-btn">
-                                        <a class="btn btn-sm btn-success has-tooltip page-modal"    href="<?php print_link("webcolours/edit/$rec_id"); ?>" >
+                                        <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("transactions/edit/$rec_id"); ?>" >
                                         <i class="material-icons">edit</i> Edit
                                     </a>
                                 </td>
@@ -120,7 +143,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class=" mt-3">
                     <div class="row align-items-center justify-content-between">    
                         <div class="col-md-auto d-flex">    
-                            <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("webcolours/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                            <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("transactions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                             <i class="material-icons">delete_sweep</i> Delete Selected
                             </button>
                         </div>

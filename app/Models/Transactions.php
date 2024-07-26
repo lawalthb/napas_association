@@ -41,20 +41,20 @@ class Transactions extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				email LIKE ?  OR 
-				fullname LIKE ?  OR 
-				phone_number LIKE ?  OR 
-				reference LIKE ?  OR 
-				authorization_url LIKE ?  OR 
-				callback_url LIKE ?  OR 
-				gateway_response LIKE ?  OR 
-				paid_at LIKE ?  OR 
-				channel LIKE ?  OR 
-				message LIKE ?  OR 
-				orderId LIKE ?  OR 
-				other_info LIKE ?  OR 
-				purpose_name LIKE ? 
+				transactions.id LIKE ?  OR 
+				transactions.fullname LIKE ?  OR 
+				transactions.email LIKE ?  OR 
+				transactions.phone_number LIKE ?  OR 
+				transactions.reference LIKE ?  OR 
+				transactions.purpose_name LIKE ?  OR 
+				transactions.authorization_url LIKE ?  OR 
+				transactions.callback_url LIKE ?  OR 
+				transactions.gateway_response LIKE ?  OR 
+				transactions.paid_at LIKE ?  OR 
+				transactions.channel LIKE ?  OR 
+				transactions.message LIKE ?  OR 
+				transactions.orderId LIKE ?  OR 
+				transactions.other_info LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
@@ -71,26 +71,15 @@ class Transactions extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"user_id",
-			"price_settings_id",
-			"email",
-			"amount",
-			"fullname",
-			"phone_number",
-			"reference",
-			"created_at",
-			"status",
-			"updated_at",
-			"authorization_url",
-			"callback_url",
-			"gateway_response",
-			"paid_at",
-			"channel",
-			"message",
-			"orderId AS orderid",
-			"other_info",
-			"purpose_name" 
+			"transactions.id AS id",
+			"transactions.fullname AS fullname",
+			"transactions.email AS email",
+			"transactions.amount AS amount",
+			"transactions.phone_number AS phone_number",
+			"transactions.reference AS reference",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"price_settings.name AS pricesettings_name" 
 		];
 	}
 	
@@ -102,26 +91,15 @@ class Transactions extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"user_id",
-			"price_settings_id",
-			"email",
-			"amount",
-			"fullname",
-			"phone_number",
-			"reference",
-			"created_at",
-			"status",
-			"updated_at",
-			"authorization_url",
-			"callback_url",
-			"gateway_response",
-			"paid_at",
-			"channel",
-			"message",
-			"orderId AS orderid",
-			"other_info",
-			"purpose_name" 
+			"transactions.id AS id",
+			"transactions.fullname AS fullname",
+			"transactions.email AS email",
+			"transactions.amount AS amount",
+			"transactions.phone_number AS phone_number",
+			"transactions.reference AS reference",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"price_settings.name AS pricesettings_name" 
 		];
 	}
 	
@@ -133,26 +111,20 @@ class Transactions extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"price_settings_id",
-			"email",
-			"amount",
-			"fullname",
-			"phone_number",
-			"reference",
-			"created_at",
-			"status",
-			"updated_at",
-			"authorization_url",
-			"callback_url",
-			"gateway_response",
-			"paid_at",
-			"channel",
-			"message",
-			"orderId AS orderid",
-			"other_info",
-			"purpose_name" 
+			"transactions.id AS id",
+			"transactions.user_id AS user_id",
+			"transactions.price_settings_id AS price_settings_id",
+			"price_settings.name AS pricesettings_name",
+			"transactions.email AS email",
+			"transactions.amount AS amount",
+			"transactions.fullname AS fullname",
+			"transactions.phone_number AS phone_number",
+			"transactions.reference AS reference",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"transactions.gateway_response AS gateway_response",
+			"transactions.channel AS channel",
+			"transactions.purpose_name AS purpose_name" 
 		];
 	}
 	
@@ -164,26 +136,20 @@ class Transactions extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"price_settings_id",
-			"email",
-			"amount",
-			"fullname",
-			"phone_number",
-			"reference",
-			"created_at",
-			"status",
-			"updated_at",
-			"authorization_url",
-			"callback_url",
-			"gateway_response",
-			"paid_at",
-			"channel",
-			"message",
-			"orderId AS orderid",
-			"other_info",
-			"purpose_name" 
+			"transactions.id AS id",
+			"transactions.user_id AS user_id",
+			"transactions.price_settings_id AS price_settings_id",
+			"price_settings.name AS pricesettings_name",
+			"transactions.email AS email",
+			"transactions.amount AS amount",
+			"transactions.fullname AS fullname",
+			"transactions.phone_number AS phone_number",
+			"transactions.reference AS reference",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"transactions.gateway_response AS gateway_response",
+			"transactions.channel AS channel",
+			"transactions.purpose_name AS purpose_name" 
 		];
 	}
 	
@@ -213,6 +179,40 @@ class Transactions extends Model
 			"orderId AS orderid",
 			"other_info",
 			"purpose_name" 
+		];
+	}
+	
+
+	/**
+     * return memberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function memberListFields(){
+		return [ 
+			"id",
+			"email",
+			"amount",
+			"reference",
+			"created_at",
+			"status" 
+		];
+	}
+	
+
+	/**
+     * return exportMemberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportMemberListFields(){
+		return [ 
+			"id",
+			"email",
+			"amount",
+			"reference",
+			"created_at",
+			"status" 
 		];
 	}
 }

@@ -175,4 +175,28 @@ class ComponentsData{
 		}
 		return false;
 	}
+	
+
+	/**
+     * getcount_ Model Action
+     * @return int
+     */
+	function getcount_(){
+		$sqltext = "SELECT SUM(amount) AS num  FROM transactions WHERE `status` = 'Success'";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+	
+
+	/**
+     * price_settings_id_option_list_2 Model Action
+     * @return array
+     */
+	function price_settings_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM price_settings ORDER BY name DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
 }

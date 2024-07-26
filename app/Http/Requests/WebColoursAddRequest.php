@@ -25,9 +25,6 @@ class WebColoursAddRequest extends FormRequest
 		
         return [
             
-				"name" => "nullable|string",
-				"colour" => "nullable|string",
-				"updated_by" => "required",
             
         ];
     }

@@ -9,6 +9,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
+    $price_settings_id_option_list_2 = $comp_model->price_settings_id_option_list_2();
     $pageTitle = "Transactions"; //set dynamic page title
 ?>
 @extends($layout)
@@ -27,9 +28,19 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                     </div>
                 </div>
                 <div class="col-auto  " >
-                    <a  class="btn btn-primary btn-block" href="<?php print_link("transactions/add", true) ?>" >
-                    <i class="material-icons">add</i>                               
-                    Add New Transaction 
+                    <?php $rec_count = $comp_model->getcount_();  ?>
+                    <a class="animated zoomIn record-count "  href='<?php print_link("#") ?>' style="color:green">
+                    <div class="row gutter-sm align-items-center">
+                        <div class="col-auto" style="opacity: 1;">
+                        </div>
+                        <div class="col">
+                            <div class="flex-column justify-content align-center">
+                                <div class="title"></div>
+                                <small class="">Total Success</small>
+                            </div>
+                            <h2 class="value"><?php echo $rec_count; ?></h2>
+                        </div>
+                    </div>
                 </a>
             </div>
             <div class="col-md-3  " >
@@ -51,7 +62,36 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <div  class="" >
     <div class="container-fluid">
         <div class="row ">
-            <div class="col comp-grid " >
+            <div class="col-md-2 comp-grid " >
+                <form method="get" action="" class="form">
+                    <div class="card mb-3 p-3 ">
+                        <div class="">
+                            <div class="fw-bold">Filter by Payment Purpose</div>
+                        </div>
+                        <select   name="price_settings_id" class="form-select custom " >
+                        <option value="">Select a value ...</option>
+                        <?php 
+                            $options = $price_settings_id_option_list_2 ?? [];
+                            foreach($options as $option){
+                            $value = $option->value;
+                            $label = $option->label ?? $value;
+                            $selected = Html::get_field_selected('price_settings_id', $value);
+                        ?>
+                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                        <?php echo $label; ?>
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-10 comp-grid " >
                 <div  class=" page-content" >
                     <div id="transactions-list-records">
                         <div id="page-main-content" class="table-responsive">
@@ -59,6 +99,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
+                                <?php
+                                    Html::filter_tag('price_settings_id', 'Payment Purpose', $price_settings_id_option_list_2);
+                                ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
@@ -69,25 +112,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </label>
                                         </th>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-user_id" > User Id</th>
-                                        <th class="td-price_settings_id" > Price Settings Id</th>
+                                        <th class="td-fullname" > Fullname</th>
                                         <th class="td-email" > Email</th>
                                         <th class="td-amount" > Amount</th>
-                                        <th class="td-fullname" > Fullname</th>
-                                        <th class="td-phone_number" > Phone Number</th>
+                                        <th class="td-phone_number" > Phone</th>
                                         <th class="td-reference" > Reference</th>
-                                        <th class="td-created_at" > Created At</th>
+                                        <th class="td-created_at" > Date</th>
                                         <th class="td-status" > Status</th>
-                                        <th class="td-updated_at" > Updated At</th>
-                                        <th class="td-authorization_url" > Authorization Url</th>
-                                        <th class="td-callback_url" > Callback Url</th>
-                                        <th class="td-gateway_response" > Gateway Response</th>
-                                        <th class="td-paid_at" > Paid At</th>
-                                        <th class="td-channel" > Channel</th>
-                                        <th class="td-message" > Message</th>
-                                        <th class="td-orderid" > Orderid</th>
-                                        <th class="td-other_info" > Other Info</th>
-                                        <th class="td-purpose_name" > Purpose Name</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -112,140 +143,100 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-id">
                                             <a href="<?php print_link("/transactions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
-                                        <td class="td-user_id">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                        <td class="td-fullname">
+                                            <?php echo  $data['fullname'] ; ?>
+                                        </td>
+                                        <td class="td-email">
+                                            <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
+                                        </td>
+                                        <td class="td-amount">
+                                            <?php echo  $data['amount'] ; ?>
+                                        </td>
+                                        <td class="td-phone_number">
+                                            <a href="<?php print_link("tel:$data[phone_number]") ?>"><?php echo $data['phone_number']; ?></a>
+                                        </td>
+                                        <td class="td-reference">
+                                            <?php echo str_truncate( $data['reference'] , 8,'...'); ?>
+                                        </td>
+                                        <td class="td-created_at">
+                                            <?php echo  $data['created_at'] ; ?>
+                                        </td>
+                                        <td class="td-status">
+                                            <?php echo  $data['status'] ; ?>
+                                        </td>
+                                        <!--PageComponentEnd-->
+                                        <td class="td-btn">
+                                            <div class="dropdown" >
+                                                <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                                <i class="material-icons">menu</i> 
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <a class="dropdown-item "   href="<?php print_link("transactions/view/$rec_id"); ?>" >
+                                                    <i class="material-icons">visibility</i> View
+                                                </a>
+                                                <a class="dropdown-item "   href="<?php print_link("transactions/edit/$rec_id"); ?>" >
+                                                <i class="material-icons">edit</i> Edit
+                                            </a>
+                                            <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("transactions/delete/$rec_id"); ?>" >
+                                            <i class="material-icons">delete_sweep</i> Delete
                                         </a>
-                                    </td>
-                                    <td class="td-price_settings_id">
-                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("pricesettings/view/$data[price_settings_id]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Price Settings" ?>
-                                    </a>
-                                </td>
-                                <td class="td-email">
-                                    <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
-                                </td>
-                                <td class="td-amount">
-                                    <?php echo  $data['amount'] ; ?>
-                                </td>
-                                <td class="td-fullname">
-                                    <?php echo  $data['fullname'] ; ?>
-                                </td>
-                                <td class="td-phone_number">
-                                    <a href="<?php print_link("tel:$data[phone_number]") ?>"><?php echo $data['phone_number']; ?></a>
-                                </td>
-                                <td class="td-reference">
-                                    <?php echo  $data['reference'] ; ?>
-                                </td>
-                                <td class="td-created_at">
-                                    <?php echo  $data['created_at'] ; ?>
-                                </td>
-                                <td class="td-status">
-                                    <?php echo  $data['status'] ; ?>
-                                </td>
-                                <td class="td-updated_at">
-                                    <?php echo  $data['updated_at'] ; ?>
-                                </td>
-                                <td class="td-authorization_url">
-                                    <?php echo  $data['authorization_url'] ; ?>
-                                </td>
-                                <td class="td-callback_url">
-                                    <?php echo  $data['callback_url'] ; ?>
-                                </td>
-                                <td class="td-gateway_response">
-                                    <?php echo  $data['gateway_response'] ; ?>
-                                </td>
-                                <td class="td-paid_at">
-                                    <?php echo  $data['paid_at'] ; ?>
-                                </td>
-                                <td class="td-channel">
-                                    <?php echo  $data['channel'] ; ?>
-                                </td>
-                                <td class="td-message">
-                                    <?php echo  $data['message'] ; ?>
-                                </td>
-                                <td class="td-orderid">
-                                    <?php echo  $data['orderid'] ; ?>
-                                </td>
-                                <td class="td-other_info">
-                                    <?php echo  $data['other_info'] ; ?>
-                                </td>
-                                <td class="td-purpose_name">
-                                    <?php echo  $data['purpose_name'] ; ?>
-                                </td>
-                                <!--PageComponentEnd-->
-                                <td class="td-btn">
-                                    <div class="dropdown" >
-                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                        <i class="material-icons">menu</i> 
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <a class="dropdown-item "   href="<?php print_link("transactions/view/$rec_id"); ?>" >
-                                            <i class="material-icons">visibility</i> View
-                                        </a>
-                                        <a class="dropdown-item "   href="<?php print_link("transactions/edit/$rec_id"); ?>" >
-                                        <i class="material-icons">edit</i> Edit
-                                    </a>
-                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("transactions/delete/$rec_id"); ?>" >
-                                    <i class="material-icons">delete_sweep</i> Delete
-                                </a>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                <?php 
-                    }
-                ?>
-                <!--endrecord-->
-            </tbody>
-            <tbody class="search-data"></tbody>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php 
+                            }
+                        ?>
+                        <!--endrecord-->
+                    </tbody>
+                    <tbody class="search-data"></tbody>
+                    <?php
+                        }
+                        else{
+                    ?>
+                    <tbody class="page-data">
+                        <tr>
+                            <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                                <i class="material-icons">block</i> No record found
+                            </td>
+                        </tr>
+                    </tbody>
+                    <?php
+                        }
+                    ?>
+                </table>
+            </div>
             <?php
-                }
-                else{
+                if($show_footer){
             ?>
-            <tbody class="page-data">
-                <tr>
-                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                        <i class="material-icons">block</i> No record found
-                    </td>
-                </tr>
-            </tbody>
+            <div class=" mt-3">
+                <div class="row align-items-center justify-content-between">    
+                    <div class="col-md-auto d-flex">    
+                        <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("transactions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                        <i class="material-icons">delete_sweep</i> Delete Selected
+                        </button>
+                    </div>
+                    <div class="col">   
+                        <?php
+                            if($show_pagination == true){
+                            $pager = new Pagination($total_records, $record_count);
+                            $pager->show_page_count = false;
+                            $pager->show_record_count = true;
+                            $pager->show_page_limit =false;
+                            $pager->limit = $limit;
+                            $pager->show_page_number_list = true;
+                            $pager->pager_link_range=5;
+                            $pager->render();
+                            }
+                        ?>
+                    </div>
+                </div>
+            </div>
             <?php
                 }
             ?>
-        </table>
-    </div>
-    <?php
-        if($show_footer){
-    ?>
-    <div class=" mt-3">
-        <div class="row align-items-center justify-content-between">    
-            <div class="col-md-auto d-flex">    
-                <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("transactions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                <i class="material-icons">delete_sweep</i> Delete Selected
-                </button>
-            </div>
-            <div class="col">   
-                <?php
-                    if($show_pagination == true){
-                    $pager = new Pagination($total_records, $record_count);
-                    $pager->show_page_count = false;
-                    $pager->show_record_count = true;
-                    $pager->show_page_limit =false;
-                    $pager->limit = $limit;
-                    $pager->show_page_number_list = true;
-                    $pager->pager_link_range=5;
-                    $pager->render();
-                    }
-                ?>
-            </div>
         </div>
     </div>
-    <?php
-        }
-    ?>
-</div>
-</div>
 </div>
 </div>
 </div>

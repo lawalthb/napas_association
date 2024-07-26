@@ -7,13 +7,31 @@
 		[
 			'path' => 'home',
 			'label' => "Home", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">airplay</i>'
 		],
 		
 		[
 			'path' => 'academicsessions',
 			'label' => "Academic Sessions", 
 			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'transactions',
+			'label' => "_Transactions", 
+			'icon' => '<i class="material-icons ">attach_money</i>'
+		],
+		
+		[
+			'path' => 'transactions/member_list',
+			'label' => "Transaction", 
+			'icon' => '<i class="material-icons ">attach_money</i>'
+		],
+		
+		[
+			'path' => 'webcolours',
+			'label' => "Website Management", 
+			'icon' => '<i class="material-icons ">add_to_queue</i>'
 		],
 		
 		[
@@ -97,12 +115,6 @@
 		[
 			'path' => 'supervisorusers',
 			'label' => "Supervisor Users", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'transactions',
-			'label' => "Transactions", 
 			'icon' => '<i class="material-icons">extension</i>'
 		],
 		
@@ -211,32 +223,6 @@
 		[
 			'path' => 'webvissions',
 			'label' => "Web Vissions", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'appsettings',
-			'label' => "App Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
-		]
-	] ;
-	}
-	
-	public static function navbartopleft(){
-		return [
-		[
-			'path' => 'appsettings',
-			'label' => "App Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
-		]
-	] ;
-	}
-	
-	public static function navbartopright(){
-		return [
-		[
-			'path' => 'appsettings',
-			'label' => "App Settings", 
 			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;

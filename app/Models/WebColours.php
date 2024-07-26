@@ -28,7 +28,7 @@ class WebColours extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','colour','updated_by'
+		'name','colour'
 	];
 	public $timestamps = false;
 	
@@ -41,9 +41,9 @@ class WebColours extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				name LIKE ?  OR 
-				colour LIKE ?  OR 
-				id LIKE ? 
+				web_colours.name LIKE ?  OR 
+				web_colours.colour LIKE ?  OR 
+				web_colours.id LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,11 +60,12 @@ class WebColours extends Model
      */
 	public static function listFields(){
 		return [ 
-			"name",
-			"colour",
-			"id",
-			"updated_by",
-			"updated_at" 
+			"web_colours.name AS name",
+			"web_colours.colour AS colour",
+			"web_colours.updated_at AS updated_at",
+			"web_colours.id AS id",
+			"web_colours.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -76,11 +77,12 @@ class WebColours extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"name",
-			"colour",
-			"id",
-			"updated_by",
-			"updated_at" 
+			"web_colours.name AS name",
+			"web_colours.colour AS colour",
+			"web_colours.updated_at AS updated_at",
+			"web_colours.id AS id",
+			"web_colours.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -126,8 +128,7 @@ class WebColours extends Model
 		return [ 
 			"name",
 			"colour",
-			"id",
-			"updated_by" 
+			"id" 
 		];
 	}
 }
