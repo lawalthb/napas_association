@@ -69,6 +69,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::any('academicsessions/edit/{rec_id}', 'AcademicSessionsController@edit')->name('academicsessions.edit');	
 	Route::get('academicsessions/delete/{rec_id}', 'AcademicSessionsController@delete');
 
+/* routes for AppSettings Controller */
+	Route::get('appsettings', 'AppSettingsController@index')->name('appsettings.index');
+	Route::get('appsettings/index/{filter?}/{filtervalue?}', 'AppSettingsController@index')->name('appsettings.index');	
+	Route::get('appsettings/view/{rec_id}', 'AppSettingsController@view')->name('appsettings.view');	
+	Route::get('appsettings/add', 'AppSettingsController@add')->name('appsettings.add');
+	Route::post('appsettings/add', 'AppSettingsController@store')->name('appsettings.store');
+		
+	Route::any('appsettings/edit/{rec_id}', 'AppSettingsController@edit')->name('appsettings.edit');	
+	Route::get('appsettings/delete/{rec_id}', 'AppSettingsController@delete');
+
 /* routes for ContestCategories Controller */
 	Route::get('contestcategories', 'ContestCategoriesController@index')->name('contestcategories.index');
 	Route::get('contestcategories/index/{filter?}/{filtervalue?}', 'ContestCategoriesController@index')->name('contestcategories.index');	
@@ -391,9 +401,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('webtopbars', 'WebTopbarsController@index')->name('webtopbars.index');
 	Route::get('webtopbars/index/{filter?}/{filtervalue?}', 'WebTopbarsController@index')->name('webtopbars.index');	
 	Route::get('webtopbars/view/{rec_id}', 'WebTopbarsController@view')->name('webtopbars.view');	
-	Route::get('webtopbars/add', 'WebTopbarsController@add')->name('webtopbars.add');
-	Route::post('webtopbars/add', 'WebTopbarsController@store')->name('webtopbars.store');
-		
 	Route::any('webtopbars/edit/{rec_id}', 'WebTopbarsController@edit')->name('webtopbars.edit');	
 	Route::get('webtopbars/delete/{rec_id}', 'WebTopbarsController@delete');
 

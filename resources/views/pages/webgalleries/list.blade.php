@@ -69,12 +69,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </label>
                                         </th>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-academic_session" > Academic Session</th>
                                         <th class="td-images" > Images</th>
                                         <th class="td-position" > Position</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_by" > Updated By</th>
-                                        <th class="td-updated_at" > Updated At</th>
+                                        <th class="td-updated_by" > Updated by</th>
+                                        <th class="td-updated_at" > Last Update</th>
+                                        <th class="td-academic_session_id" > Academic Session</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -99,9 +98,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-id">
                                             <a href="<?php print_link("/webgalleries/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
-                                        <td class="td-academic_session">
-                                            <?php echo  $data['academic_session'] ; ?>
-                                        </td>
                                         <td class="td-images">
                                             <?php 
                                                 Html :: page_img($data['images'], '50px', '50px', "small", 1); 
@@ -110,89 +106,91 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-position">
                                             <?php echo  $data['position'] ; ?>
                                         </td>
-                                        <td class="td-created_at">
-                                            <?php echo  $data['created_at'] ; ?>
-                                        </td>
                                         <td class="td-updated_by">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                            <?php echo $data['users_lastname'] ?>
                                         </a>
                                     </td>
                                     <td class="td-updated_at">
-                                        <?php echo  $data['updated_at'] ; ?>
+                                        <?php echo relative_date( $data['updated_at'] ); ?>
                                     </td>
-                                    <!--PageComponentEnd-->
-                                    <td class="td-btn">
-                                        <div class="dropdown" >
-                                            <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                            <i class="material-icons">menu</i> 
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <a class="dropdown-item "   href="<?php print_link("webgalleries/view/$rec_id"); ?>" >
-                                                <i class="material-icons">visibility</i> View
-                                            </a>
-                                            <a class="dropdown-item "   href="<?php print_link("webgalleries/edit/$rec_id"); ?>" >
-                                            <i class="material-icons">edit</i> Edit
-                                        </a>
-                                        <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("webgalleries/delete/$rec_id"); ?>" >
-                                        <i class="material-icons">delete_sweep</i> Delete
+                                    <td class="td-academic_session_id">
+                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
+                                        <i class="material-icons">visibility</i> <?php echo $data['academicsessions_session_name'] ?>
                                     </a>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php 
-                        }
-                    ?>
-                    <!--endrecord-->
-                </tbody>
-                <tbody class="search-data"></tbody>
-                <?php
+                                </td>
+                                <!--PageComponentEnd-->
+                                <td class="td-btn">
+                                    <div class="dropdown" >
+                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                        <i class="material-icons">menu</i> 
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <a class="dropdown-item "   href="<?php print_link("webgalleries/view/$rec_id"); ?>" >
+                                            <i class="material-icons">visibility</i> View
+                                        </a>
+                                        <a class="dropdown-item "   href="<?php print_link("webgalleries/edit/$rec_id"); ?>" >
+                                        <i class="material-icons">edit</i> Edit
+                                    </a>
+                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("webgalleries/delete/$rec_id"); ?>" >
+                                    <i class="material-icons">delete_sweep</i> Delete
+                                </a>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <?php 
                     }
-                    else{
                 ?>
-                <tbody class="page-data">
-                    <tr>
-                        <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                            <i class="material-icons">block</i> No record found
-                        </td>
-                    </tr>
-                </tbody>
+                <!--endrecord-->
+            </tbody>
+            <tbody class="search-data"></tbody>
+            <?php
+                }
+                else{
+            ?>
+            <tbody class="page-data">
+                <tr>
+                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                        <i class="material-icons">block</i> No record found
+                    </td>
+                </tr>
+            </tbody>
+            <?php
+                }
+            ?>
+        </table>
+    </div>
+    <?php
+        if($show_footer){
+    ?>
+    <div class=" mt-3">
+        <div class="row align-items-center justify-content-between">    
+            <div class="col-md-auto d-flex">    
+                <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("webgalleries/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                <i class="material-icons">delete_sweep</i> Delete Selected
+                </button>
+            </div>
+            <div class="col">   
                 <?php
+                    if($show_pagination == true){
+                    $pager = new Pagination($total_records, $record_count);
+                    $pager->show_page_count = false;
+                    $pager->show_record_count = true;
+                    $pager->show_page_limit =false;
+                    $pager->limit = $limit;
+                    $pager->show_page_number_list = true;
+                    $pager->pager_link_range=5;
+                    $pager->render();
                     }
                 ?>
-            </table>
-        </div>
-        <?php
-            if($show_footer){
-        ?>
-        <div class=" mt-3">
-            <div class="row align-items-center justify-content-between">    
-                <div class="col-md-auto d-flex">    
-                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("webgalleries/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                    <i class="material-icons">delete_sweep</i> Delete Selected
-                    </button>
-                </div>
-                <div class="col">   
-                    <?php
-                        if($show_pagination == true){
-                        $pager = new Pagination($total_records, $record_count);
-                        $pager->show_page_count = false;
-                        $pager->show_record_count = true;
-                        $pager->show_page_limit =false;
-                        $pager->limit = $limit;
-                        $pager->show_page_number_list = true;
-                        $pager->pager_link_range=5;
-                        $pager->render();
-                        }
-                    ?>
-                </div>
             </div>
         </div>
-        <?php
-            }
-        ?>
     </div>
+    <?php
+        }
+    ?>
+</div>
 </div>
 </div>
 </div>

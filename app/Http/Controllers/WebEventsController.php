@@ -25,6 +25,7 @@ class WebEventsController extends Controller
 			$search = trim($request->search);
 			WebEvents::search($query, $search); // search table records
 		}
+		$query->join("users", "web_events.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_events.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -94,7 +95,7 @@ class WebEventsController extends Controller
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
 			$record->update($modeldata);
-			return $this->redirect("webevents", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webevents.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

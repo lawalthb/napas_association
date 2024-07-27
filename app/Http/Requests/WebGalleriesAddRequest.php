@@ -25,10 +25,10 @@ class WebGalleriesAddRequest extends FormRequest
 		
         return [
             
-				"academic_session" => "required|string",
 				"images" => "nullable",
-				"position" => "required|numeric",
-				"updated_by" => "required",
+				"position" => "required|numeric|min:1",
+				"updated_by" => "nullable",
+				"academic_session_id" => "required",
             
         ];
     }

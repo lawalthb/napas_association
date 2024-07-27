@@ -41,9 +41,9 @@ class WebTestimonials extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ?  OR 
-				testimony LIKE ? 
+				web_testimonials.id LIKE ?  OR 
+				web_testimonials.name LIKE ?  OR 
+				web_testimonials.testimony LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,14 +60,14 @@ class WebTestimonials extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"name",
-			"picture",
-			"testimony",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_testimonials.id AS id",
+			"web_testimonials.name AS name",
+			"web_testimonials.picture AS picture",
+			"web_testimonials.testimony AS testimony",
+			"web_testimonials.position AS position",
+			"web_testimonials.updated_at AS updated_at",
+			"web_testimonials.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -79,14 +79,14 @@ class WebTestimonials extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"name",
-			"picture",
-			"testimony",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_testimonials.id AS id",
+			"web_testimonials.name AS name",
+			"web_testimonials.picture AS picture",
+			"web_testimonials.testimony AS testimony",
+			"web_testimonials.position AS position",
+			"web_testimonials.updated_at AS updated_at",
+			"web_testimonials.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -136,12 +136,12 @@ class WebTestimonials extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"name",
 			"picture",
 			"testimony",
 			"position",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

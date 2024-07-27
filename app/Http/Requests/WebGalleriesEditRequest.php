@@ -25,10 +25,10 @@ class WebGalleriesEditRequest extends FormRequest
 		
         return [
             
-				"academic_session" => "filled|string",
 				"images" => "nullable",
-				"position" => "filled|numeric",
-				"updated_by" => "filled",
+				"position" => "filled|numeric|min:1",
+				"updated_by" => "nullable",
+				"academic_session_id" => "filled",
             
         ];
     }

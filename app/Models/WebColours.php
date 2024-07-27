@@ -63,9 +63,9 @@ class WebColours extends Model
 			"web_colours.name AS name",
 			"web_colours.colour AS colour",
 			"web_colours.updated_at AS updated_at",
-			"web_colours.id AS id",
 			"web_colours.updated_by AS updated_by",
-			"users.lastname AS users_lastname" 
+			"users.lastname AS users_lastname",
+			"web_colours.id AS id" 
 		];
 	}
 	
@@ -80,9 +80,9 @@ class WebColours extends Model
 			"web_colours.name AS name",
 			"web_colours.colour AS colour",
 			"web_colours.updated_at AS updated_at",
-			"web_colours.id AS id",
 			"web_colours.updated_by AS updated_by",
-			"users.lastname AS users_lastname" 
+			"users.lastname AS users_lastname",
+			"web_colours.id AS id" 
 		];
 	}
 	

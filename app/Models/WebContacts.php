@@ -144,14 +144,14 @@ class WebContacts extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"email1",
 			"email2",
 			"phone1",
 			"phone2",
 			"address",
 			"text",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

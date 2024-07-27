@@ -25,6 +25,7 @@ class WebTestimonialsController extends Controller
 			$search = trim($request->search);
 			WebTestimonials::search($query, $search); // search table records
 		}
+		$query->join("users", "web_testimonials.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_testimonials.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -73,7 +74,7 @@ class WebTestimonialsController extends Controller
 		//save WebTestimonials record
 		$record = WebTestimonials::create($modeldata);
 		$rec_id = $record->id;
-		return $this->redirect("webtestimonials", "Record added successfully");
+		return $this->redirect("webcolours", "Record added successfully");
 	}
 	
 

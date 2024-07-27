@@ -82,7 +82,7 @@ class WebContactsController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("webcontacts", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webcontacts.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

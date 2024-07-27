@@ -49,29 +49,6 @@ class WebTopbarsController extends Controller
 	
 
 	/**
-     * Display form page
-     * @return \Illuminate\View\View
-     */
-	function add(){
-		return $this->renderView("pages.webtopbars.add");
-	}
-	
-
-	/**
-     * Save form record to the table
-     * @return \Illuminate\Http\Response
-     */
-	function store(WebTopbarsAddRequest $request){
-		$modeldata = $this->normalizeFormData($request->validated());
-		
-		//save WebTopbars record
-		$record = WebTopbars::create($modeldata);
-		$rec_id = $record->id;
-		return $this->redirect("webtopbars", "Record added successfully");
-	}
-	
-
-	/**
      * Update table record with form data
 	 * @param string $rec_id //select record by table primary key
      * @return \Illuminate\View\View;
@@ -82,7 +59,7 @@ class WebTopbarsController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("webtopbars", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webtopbars.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

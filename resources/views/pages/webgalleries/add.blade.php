@@ -44,18 +44,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="academic_session">Academic Session <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-academic_session-holder" class=" ">
-                                                <input id="ctrl-academic_session" data-field="academic_session"  value="<?php echo get_value('academic_session') ?>" type="text" placeholder="Enter Academic Session"  required="" name="academic_session"  class="form-control " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
                                             <label class="control-label" for="images">Images </label>
                                         </div>
                                         <div class="col-sm-8">
@@ -76,26 +64,39 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-position-holder" class=" ">
-                                                <input id="ctrl-position" data-field="position"  value="<?php echo get_value('position', "1") ?>" type="number" placeholder="Enter Position" step="any"  required="" name="position"  class="form-control " />
+                                                <input id="ctrl-position" data-field="position"  value="<?php echo get_value('position', "1") ?>" type="number" placeholder="Enter Position" min="1" step="1"  required="" name="position"  class="form-control " />
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input id="ctrl-updated_by" data-field="updated_by"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter Updated By" list="updated_by_list"  name="updated_by"  class="form-control " />
+                                <datalist id="updated_by_list">
+                                <?php 
+                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                    foreach($options as $option){
+                                    $value = $option->value;
+                                    $label = $option->label ?? $value;
+                                ?>
+                                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </datalist>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="updated_by">Updated By <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="academic_session_id">Academic Session <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <div id="ctrl-updated_by-holder" class=" ">
-                                                <select required=""  id="ctrl-updated_by" data-field="updated_by" name="updated_by"  placeholder="Select a value ..."    class="form-select" >
+                                            <div id="ctrl-academic_session_id-holder" class=" ">
+                                                <select required=""  id="ctrl-academic_session_id" data-field="academic_session_id" name="academic_session_id"  placeholder="Select a value ..."    class="form-select" >
                                                 <option value="">Select a value ...</option>
                                                 <?php 
-                                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                                    $options = $comp_model->academic_session_id_option_list() ?? [];
                                                     foreach($options as $option){
                                                     $value = $option->value;
                                                     $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('updated_by', $value, "");
+                                                    $selected = Html::get_field_selected('academic_session_id', $value, "");
                                                 ?>
                                                 <option <?php echo $selected; ?> value="<?php echo $value; ?>">
                                                 <?php echo $label; ?>

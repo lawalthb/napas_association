@@ -25,6 +25,8 @@ class WebGalleriesController extends Controller
 			$search = trim($request->search);
 			WebGalleries::search($query, $search); // search table records
 		}
+		$query->join("users", "web_galleries.updated_by", "=", "users.id");
+		$query->join("academic_sessions", "web_galleries.academic_session_id", "=", "academic_sessions.id");
 		$orderby = $request->orderby ?? "web_galleries.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -94,7 +96,7 @@ class WebGalleriesController extends Controller
 			$modeldata['images'] = $fileInfo['filepath'];
 		}
 			$record->update($modeldata);
-			return $this->redirect("webgalleries", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webgalleries.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

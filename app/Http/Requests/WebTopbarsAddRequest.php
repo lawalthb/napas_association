@@ -25,9 +25,6 @@ class WebTopbarsAddRequest extends FormRequest
 		
         return [
             
-				"current_session" => "nullable|string",
-				"support_phone" => "nullable|string",
-				"updated_by" => "required",
             
         ];
     }

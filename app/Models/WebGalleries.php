@@ -28,7 +28,7 @@ class WebGalleries extends Model
      * @var array
      */
 	protected $fillable = [
-		'academic_session','images','position','updated_by'
+		'images','position','updated_by','academic_session_id'
 	];
 	public $timestamps = false;
 	
@@ -41,11 +41,10 @@ class WebGalleries extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				academic_session LIKE ? 
+				web_galleries.id LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%"
+			"%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -59,13 +58,14 @@ class WebGalleries extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"images",
-			"position",
-			"created_at",
-			"updated_by",
-			"updated_at" 
+			"web_galleries.id AS id",
+			"web_galleries.images AS images",
+			"web_galleries.position AS position",
+			"web_galleries.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_galleries.updated_at AS updated_at",
+			"web_galleries.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
 		];
 	}
 	
@@ -77,13 +77,14 @@ class WebGalleries extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"images",
-			"position",
-			"created_at",
-			"updated_by",
-			"updated_at" 
+			"web_galleries.id AS id",
+			"web_galleries.images AS images",
+			"web_galleries.position AS position",
+			"web_galleries.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_galleries.updated_at AS updated_at",
+			"web_galleries.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
 		];
 	}
 	
@@ -96,12 +97,12 @@ class WebGalleries extends Model
 	public static function viewFields(){
 		return [ 
 			"id",
-			"academic_session",
 			"images",
 			"position",
 			"created_at",
 			"updated_by",
-			"updated_at" 
+			"updated_at",
+			"academic_session_id" 
 		];
 	}
 	
@@ -114,12 +115,12 @@ class WebGalleries extends Model
 	public static function exportViewFields(){
 		return [ 
 			"id",
-			"academic_session",
 			"images",
 			"position",
 			"created_at",
 			"updated_by",
-			"updated_at" 
+			"updated_at",
+			"academic_session_id" 
 		];
 	}
 	
@@ -131,11 +132,11 @@ class WebGalleries extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
-			"academic_session",
 			"images",
 			"position",
-			"updated_by" 
+			"updated_by",
+			"academic_session_id",
+			"id" 
 		];
 	}
 }

@@ -27,9 +27,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                     </div>
                 </div>
                 <div class="col-auto  " >
-                    <a  class="btn btn-primary btn-block" href="<?php print_link("webtopbars/add", true) ?>" >
-                    <i class="material-icons">add</i>                               
-                    Add New Web Topbar 
+                    <a  class="btn " href="<?php print_link("webtopbars") ?>" >
+                    <i class="material-icons ">refresh</i>                              
+                    Refresh 
                 </a>
             </div>
             <div class="col-md-3  " >

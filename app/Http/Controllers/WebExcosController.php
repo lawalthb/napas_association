@@ -25,6 +25,7 @@ class WebExcosController extends Controller
 			$search = trim($request->search);
 			WebExcos::search($query, $search); // search table records
 		}
+		$query->join("users", "web_excos.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_excos.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -94,7 +95,7 @@ class WebExcosController extends Controller
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
 			$record->update($modeldata);
-			return $this->redirect("webexcos", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webexcos.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

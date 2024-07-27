@@ -41,10 +41,10 @@ class WebEvents extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				title LIKE ?  OR 
-				short_text LIKE ?  OR 
-				long_text LIKE ? 
+				web_events.id LIKE ?  OR 
+				web_events.title LIKE ?  OR 
+				web_events.short_text LIKE ?  OR 
+				web_events.long_text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -61,15 +61,15 @@ class WebEvents extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"title",
-			"short_text",
-			"image",
-			"long_text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_events.id AS id",
+			"web_events.title AS title",
+			"web_events.short_text AS short_text",
+			"web_events.image AS image",
+			"web_events.long_text AS long_text",
+			"web_events.updated_at AS updated_at",
+			"web_events.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_events.position AS position" 
 		];
 	}
 	
@@ -81,15 +81,15 @@ class WebEvents extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"title",
-			"short_text",
-			"image",
-			"long_text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_events.id AS id",
+			"web_events.title AS title",
+			"web_events.short_text AS short_text",
+			"web_events.image AS image",
+			"web_events.long_text AS long_text",
+			"web_events.updated_at AS updated_at",
+			"web_events.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_events.position AS position" 
 		];
 	}
 	
@@ -141,13 +141,13 @@ class WebEvents extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"title",
 			"short_text",
 			"image",
 			"long_text",
 			"updated_by",
-			"position" 
+			"position",
+			"id" 
 		];
 	}
 }

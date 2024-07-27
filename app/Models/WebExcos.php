@@ -41,9 +41,9 @@ class WebExcos extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ?  OR 
-				post LIKE ? 
+				web_excos.id LIKE ?  OR 
+				web_excos.name LIKE ?  OR 
+				web_excos.post LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,14 +60,14 @@ class WebExcos extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"image",
-			"name",
-			"post",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_excos.id AS id",
+			"web_excos.image AS image",
+			"web_excos.name AS name",
+			"web_excos.post AS post",
+			"web_excos.position AS position",
+			"web_excos.updated_at AS updated_at",
+			"web_excos.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -79,14 +79,14 @@ class WebExcos extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"image",
-			"name",
-			"post",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_excos.id AS id",
+			"web_excos.image AS image",
+			"web_excos.name AS name",
+			"web_excos.post AS post",
+			"web_excos.position AS position",
+			"web_excos.updated_at AS updated_at",
+			"web_excos.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -136,12 +136,12 @@ class WebExcos extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"image",
 			"name",
 			"post",
 			"position",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

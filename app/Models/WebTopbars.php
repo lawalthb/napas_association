@@ -124,10 +124,10 @@ class WebTopbars extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"current_session",
 			"support_phone",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }
