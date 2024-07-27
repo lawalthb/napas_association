@@ -64,6 +64,12 @@ class WebHeadersController extends Controller
 	function store(WebHeadersAddRequest $request){
 		$modeldata = $this->normalizeFormData($request->validated());
 		
+		if( array_key_exists("logo", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['logo'], "logo");
+			$modeldata['logo'] = $fileInfo['filepath'];
+		}
+		
 		//save WebHeaders record
 		$record = WebHeaders::create($modeldata);
 		$rec_id = $record->id;
@@ -81,8 +87,14 @@ class WebHeadersController extends Controller
 		$record = $query->findOrFail($rec_id, WebHeaders::editFields());
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("logo", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['logo'], "logo");
+			$modeldata['logo'] = $fileInfo['filepath'];
+		}
 			$record->update($modeldata);
-			return $this->redirect("webheaders", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webheaders.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

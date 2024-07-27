@@ -25,6 +25,7 @@ class WebSlidersController extends Controller
 			$search = trim($request->search);
 			WebSliders::search($query, $search); // search table records
 		}
+		$query->join("users", "web_sliders.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_sliders.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

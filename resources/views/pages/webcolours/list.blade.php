@@ -54,7 +54,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webcolours/index") ?>"><i class="material-icons ">playlist_add_check</i> Website Colour </a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webtopbars/edit/1") ?>"><i class="material-icons ">playlist_add_check</i> Website Topbar </a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webheaders/edit/1") ?>"><i class="material-icons ">playlist_add_check</i> Website Header </a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php print_link("websliders/edit/1") ?>"><i class="material-icons ">playlist_add_check</i> Website Slider </a></li>
+                        <li class="nav-item"><a class="nav-link" href="<?php print_link("websliders/index") ?>"><i class="material-icons ">playlist_add_check</i> Website Slider </a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webvissions/index") ?>"><i class="material-icons ">playlist_add_check</i> Mission & Vission </a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webctas/edit/1") ?>"><i class="material-icons ">playlist_add_check</i> Call to Action </a></li>
                         <li class="nav-item"><a class="nav-link" href="<?php print_link("webabouts/edit/1") ?>"><i class="material-icons ">playlist_add_check</i> About Us </a></li>

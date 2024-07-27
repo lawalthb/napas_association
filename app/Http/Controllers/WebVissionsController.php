@@ -25,6 +25,7 @@ class WebVissionsController extends Controller
 			$search = trim($request->search);
 			WebVissions::search($query, $search); // search table records
 		}
+		$query->join("users", "web_vissions.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_vissions.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

@@ -25,9 +25,8 @@ class WebHeadersEditRequest extends FormRequest
 		
         return [
             
-				"logo" => "nullable|string",
+				"logo" => "nullable",
 				"site_name" => "nullable|string",
-				"menus" => "nullable",
 				"updated_by" => "filled",
             
         ];

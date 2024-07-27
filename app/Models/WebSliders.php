@@ -41,9 +41,9 @@ class WebSliders extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				caption LIKE ?  OR 
-				text LIKE ? 
+				web_sliders.id LIKE ?  OR 
+				web_sliders.caption LIKE ?  OR 
+				web_sliders.text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,14 +60,14 @@ class WebSliders extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"image",
-			"caption",
-			"text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_sliders.id AS id",
+			"web_sliders.image AS image",
+			"web_sliders.caption AS caption",
+			"web_sliders.text AS text",
+			"web_sliders.updated_at AS updated_at",
+			"web_sliders.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_sliders.position AS position" 
 		];
 	}
 	
@@ -79,14 +79,14 @@ class WebSliders extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"image",
-			"caption",
-			"text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_sliders.id AS id",
+			"web_sliders.image AS image",
+			"web_sliders.caption AS caption",
+			"web_sliders.text AS text",
+			"web_sliders.updated_at AS updated_at",
+			"web_sliders.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_sliders.position AS position" 
 		];
 	}
 	
@@ -136,12 +136,12 @@ class WebSliders extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"image",
 			"caption",
 			"text",
 			"updated_by",
-			"position" 
+			"position",
+			"id" 
 		];
 	}
 }

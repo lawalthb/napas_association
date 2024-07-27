@@ -41,10 +41,10 @@ class WebVissions extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ?  OR 
-				icon LIKE ?  OR 
-				text LIKE ? 
+				web_vissions.id LIKE ?  OR 
+				web_vissions.name LIKE ?  OR 
+				web_vissions.icon LIKE ?  OR 
+				web_vissions.text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -61,14 +61,14 @@ class WebVissions extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"name",
-			"icon",
-			"text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_vissions.id AS id",
+			"web_vissions.name AS name",
+			"web_vissions.icon AS icon",
+			"web_vissions.text AS text",
+			"web_vissions.position AS position",
+			"web_vissions.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_vissions.updated_at AS updated_at" 
 		];
 	}
 	
@@ -80,14 +80,14 @@ class WebVissions extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"name",
-			"icon",
-			"text",
-			"updated_by",
-			"updated_at",
-			"created_at",
-			"position" 
+			"web_vissions.id AS id",
+			"web_vissions.name AS name",
+			"web_vissions.icon AS icon",
+			"web_vissions.text AS text",
+			"web_vissions.position AS position",
+			"web_vissions.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_vissions.updated_at AS updated_at" 
 		];
 	}
 	
@@ -137,12 +137,12 @@ class WebVissions extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"name",
 			"icon",
 			"text",
 			"updated_by",
-			"position" 
+			"position",
+			"id" 
 		];
 	}
 }

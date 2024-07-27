@@ -72,9 +72,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-image" > Image</th>
                                         <th class="td-caption" > Caption</th>
                                         <th class="td-text" > Text</th>
+                                        <th class="td-updated_at" > Last update</th>
                                         <th class="td-updated_by" > Updated By</th>
-                                        <th class="td-updated_at" > Updated At</th>
-                                        <th class="td-created_at" > Created At</th>
                                         <th class="td-position" > Position</th>
                                         <th class="td-btn"></th>
                                     </tr>
@@ -111,16 +110,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-text">
                                             <?php echo  $data['text'] ; ?>
                                         </td>
+                                        <td class="td-updated_at">
+                                            <?php echo relative_date( $data['updated_at'] ); ?>
+                                        </td>
                                         <td class="td-updated_by">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                            <?php echo $data['users_lastname'] ?>
                                         </a>
-                                    </td>
-                                    <td class="td-updated_at">
-                                        <?php echo  $data['updated_at'] ; ?>
-                                    </td>
-                                    <td class="td-created_at">
-                                        <?php echo  $data['created_at'] ; ?>
                                     </td>
                                     <td class="td-position">
                                         <?php echo  $data['position'] ; ?>
@@ -132,10 +128,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <i class="material-icons">menu</i> 
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <a class="dropdown-item "   href="<?php print_link("websliders/view/$rec_id"); ?>" >
+                                                <a class="dropdown-item page-modal"   href="<?php print_link("websliders/view/$rec_id"); ?>" >
                                                 <i class="material-icons">visibility</i> View
                                             </a>
-                                            <a class="dropdown-item "   href="<?php print_link("websliders/edit/$rec_id"); ?>" >
+                                            <a class="dropdown-item page-modal"   href="<?php print_link("websliders/edit/$rec_id"); ?>" >
                                             <i class="material-icons">edit</i> Edit
                                         </a>
                                         <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("websliders/delete/$rec_id"); ?>" >

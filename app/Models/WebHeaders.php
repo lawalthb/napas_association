@@ -28,7 +28,7 @@ class WebHeaders extends Model
      * @var array
      */
 	protected $fillable = [
-		'logo','site_name','menus','updated_by'
+		'logo','site_name','updated_by'
 	];
 	public $timestamps = false;
 	
@@ -129,11 +129,10 @@ class WebHeaders extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"logo",
 			"site_name",
-			"menus",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }
