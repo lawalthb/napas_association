@@ -101,7 +101,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <a href="<?php print_link("/webabouts/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
                                         <td class="td-body">
-                                            <?php echo  $data['body'] ; ?>
+                                            <div><?php echo $data['body']; ?></div>
                                         </td>
                                         <td class="td-image">
                                             <?php 
@@ -112,7 +112,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <?php echo  $data['text'] ; ?>
                                         </td>
                                         <td class="td-custom">
-                                            <?php echo  $data['custom'] ; ?>
+                                            <div><?php echo $data['custom']; ?></div>
                                         </td>
                                         <td class="td-updated_at">
                                             <?php echo  $data['updated_at'] ; ?>

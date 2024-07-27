@@ -115,7 +115,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </td>
                                             <td class="td-updated_by">
                                                 <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                                <i class="material-icons">visibility</i> <?php echo $data['users_lastname'] ?>
+                                                <?php echo $data['users_lastname'] ?>
                                             </a>
                                         </td>
                                         <td class="td-position">

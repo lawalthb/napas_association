@@ -94,7 +94,7 @@ class WebAboutsController extends Controller
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
 			$record->update($modeldata);
-			return $this->redirect("webabouts", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webabouts.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

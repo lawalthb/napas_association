@@ -67,7 +67,7 @@ class WebCtasController extends Controller
 		//save WebCtas record
 		$record = WebCtas::create($modeldata);
 		$rec_id = $record->id;
-		return $this->redirect("webctas", "Record added successfully");
+		return $this->redirect("webcolours", "Record added successfully");
 	}
 	
 
@@ -82,7 +82,7 @@ class WebCtasController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("webctas", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webctas.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

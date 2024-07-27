@@ -41,10 +41,10 @@ class WebBenefits extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				title LIKE ?  OR 
-				icon LIKE ?  OR 
-				text LIKE ? 
+				web_benefits.id LIKE ?  OR 
+				web_benefits.title LIKE ?  OR 
+				web_benefits.icon LIKE ?  OR 
+				web_benefits.text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -61,15 +61,15 @@ class WebBenefits extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"title",
-			"icon",
-			"text",
-			"position",
-			"image",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"web_benefits.id AS id",
+			"web_benefits.title AS title",
+			"web_benefits.icon AS icon",
+			"web_benefits.text AS text",
+			"web_benefits.position AS position",
+			"web_benefits.image AS image",
+			"web_benefits.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_benefits.updated_at AS updated_at" 
 		];
 	}
 	
@@ -81,15 +81,15 @@ class WebBenefits extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"title",
-			"icon",
-			"text",
-			"position",
-			"image",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"web_benefits.id AS id",
+			"web_benefits.title AS title",
+			"web_benefits.icon AS icon",
+			"web_benefits.text AS text",
+			"web_benefits.position AS position",
+			"web_benefits.image AS image",
+			"web_benefits.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_benefits.updated_at AS updated_at" 
 		];
 	}
 	
@@ -141,13 +141,13 @@ class WebBenefits extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"title",
 			"icon",
 			"text",
 			"position",
 			"image",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

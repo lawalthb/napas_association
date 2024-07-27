@@ -41,9 +41,9 @@ class WebCounters extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				icon LIKE ?  OR 
-				text LIKE ? 
+				web_counters.id LIKE ?  OR 
+				web_counters.icon LIKE ?  OR 
+				web_counters.text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,14 +60,13 @@ class WebCounters extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"icon",
-			"count",
-			"text",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_counters.id AS id",
+			"web_counters.icon AS icon",
+			"web_counters.count AS count",
+			"web_counters.text AS text",
+			"web_counters.position AS position",
+			"web_counters.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -79,14 +78,13 @@ class WebCounters extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"icon",
-			"count",
-			"text",
-			"position",
-			"updated_at",
-			"created_at",
-			"updated_by" 
+			"web_counters.id AS id",
+			"web_counters.icon AS icon",
+			"web_counters.count AS count",
+			"web_counters.text AS text",
+			"web_counters.position AS position",
+			"web_counters.updated_by AS updated_by",
+			"users.lastname AS users_lastname" 
 		];
 	}
 	
@@ -136,12 +134,12 @@ class WebCounters extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"icon",
 			"count",
 			"text",
 			"position",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

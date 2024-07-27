@@ -41,10 +41,10 @@ class WebResources extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				icon LIKE ?  OR 
-				title LIKE ?  OR 
-				text LIKE ? 
+				web_resources.id LIKE ?  OR 
+				web_resources.icon LIKE ?  OR 
+				web_resources.title LIKE ?  OR 
+				web_resources.text LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -61,14 +61,14 @@ class WebResources extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"icon",
-			"title",
-			"text",
-			"position",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"web_resources.id AS id",
+			"web_resources.icon AS icon",
+			"web_resources.title AS title",
+			"web_resources.text AS text",
+			"web_resources.position AS position",
+			"web_resources.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_resources.updated_at AS updated_at" 
 		];
 	}
 	
@@ -80,14 +80,14 @@ class WebResources extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"icon",
-			"title",
-			"text",
-			"position",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"web_resources.id AS id",
+			"web_resources.icon AS icon",
+			"web_resources.title AS title",
+			"web_resources.text AS text",
+			"web_resources.position AS position",
+			"web_resources.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"web_resources.updated_at AS updated_at" 
 		];
 	}
 	
@@ -137,12 +137,12 @@ class WebResources extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"icon",
 			"title",
 			"text",
 			"position",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

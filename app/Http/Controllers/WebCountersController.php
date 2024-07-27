@@ -25,9 +25,15 @@ class WebCountersController extends Controller
 			$search = trim($request->search);
 			WebCounters::search($query, $search); // search table records
 		}
-		$orderby = $request->orderby ?? "web_counters.id";
-		$ordertype = $request->ordertype ?? "desc";
-		$query->orderBy($orderby, $ordertype);
+		$query->join("users", "web_counters.updated_by", "=", "users.id");
+		if($request->orderby){
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		}
+		else{
+			$query->orderBy("web_counters.id", "ASC");
+		}
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}

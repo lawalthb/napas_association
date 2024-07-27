@@ -16,6 +16,8 @@
 		<link rel="stylesheet" href="{{ asset('css/blueimp-gallery.css') }}" />
 <link rel="stylesheet" href="{{ asset('css/bootstrap-theme-bootstrap.css') }}" />
 	<link rel="stylesheet" href="{{ asset('css/flatpickr.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/summernote.min.css') }}" />
+	<link rel="stylesheet" href="{{ asset('css/bootstrap-editable.css') }}" />
 	<link rel="stylesheet" href="{{ asset('css/dropzone.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('css/custom-style.css') }}" />
 		<script type="text/javascript" src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
@@ -148,6 +150,8 @@
 		<script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/plugins/app-plugins.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/plugins/flatpickr.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins/summernote.min.js') }}"></script>
+	<script type="text/javascript" src="{{ asset('js/plugins/bootstrap-editable.min.js') }}"></script>
 	<script type="text/javascript" src="{{ asset('js/plugins/dropzone.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/page-scripts.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/form-page-scripts.js') }}"></script>

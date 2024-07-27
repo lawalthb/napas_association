@@ -25,6 +25,7 @@ class WebBenefitsController extends Controller
 			$search = trim($request->search);
 			WebBenefits::search($query, $search); // search table records
 		}
+		$query->join("users", "web_benefits.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "web_benefits.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -94,7 +95,7 @@ class WebBenefitsController extends Controller
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
 			$record->update($modeldata);
-			return $this->redirect("webbenefits", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webbenefits.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

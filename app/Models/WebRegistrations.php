@@ -124,10 +124,10 @@ class WebRegistrations extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"title",
 			"text",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

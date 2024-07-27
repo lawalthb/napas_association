@@ -26,7 +26,7 @@ class WebCtasAddRequest extends FormRequest
         return [
             
 				"title" => "nullable|string",
-				"text" => "nullable|string",
+				"text" => "nullable",
 				"button_text" => "nullable|string",
 				"updated_by" => "required",
             

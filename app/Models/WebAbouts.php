@@ -28,7 +28,7 @@ class WebAbouts extends Model
      * @var array
      */
 	protected $fillable = [
-		'body','image','text','custom','updated_by'
+		'text','body','image','custom','updated_by'
 	];
 	public $timestamps = false;
 	
@@ -137,12 +137,12 @@ class WebAbouts extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
+			"text",
 			"body",
 			"image",
-			"text",
 			"custom",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

@@ -82,7 +82,7 @@ class WebRegistrationsController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("webregistrations", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webregistrations.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

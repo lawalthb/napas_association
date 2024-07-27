@@ -52,6 +52,61 @@ function loadPageData(ajaxPage, url){
 }
 Dropzone.autoDiscover = false;
 function initPlugins(){
+	$('textarea.htmleditor').each(function(){
+		var editor = $(this);
+		var progressBar = $("#ajax-progress-bar");
+		var numRows = parseInt(editor.attr("rows")) || 4;
+		var height = numRows * 25;
+		editor.summernote({
+		dialogsInBody: true,
+			callbacks: {
+				onImageUpload: function(files) {
+					for(let i=0; i < files.length; i++) {
+						ajaxUploadFile(files[i]);
+					}
+				}
+			},
+			height: height,
+		});
+		// upload file
+		function ajaxUploadFile(file) {
+			data = new FormData();
+			data.append("file", file);
+			data.append("csrf_token", csrfToken);
+			progressBar.fadeIn();
+			$.ajax({
+				data: data,
+				type: 'POST',
+				xhr: function () {
+					var myXhr = $.ajaxSettings.xhr();
+					if (myXhr.upload) myXhr.upload.addEventListener('progress', ajaxUploadingEventFunction, false);
+					return myXhr;
+				},
+				url: siteAddr + "fileuploader/upload/summernote_images_upload",
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: function (url) {
+					var image = $('<img>').attr('src', setPathLink(url));
+					editor.summernote("insertNode", image[0]);
+				}
+			});
+		}
+		// update progress bar
+		function ajaxUploadingEventFunction(e) {
+			if (e.lengthComputable) {
+				var percentComplete = (e.loaded / e.total) * 100;
+				var progress = progressBar.find(".progress-bar")
+				progress.css("width", percentComplete + "%")
+				progress.attr('aria-valuenow', percentComplete);
+				// reset progress on complete
+				if (e.loaded == e.total) {
+					progress.css("width", "0");
+					progressBar.fadeOut();
+				}
+			}
+		}
+	});
 	$('.datepicker').flatpickr({
 		altInput: true, 
 		allowInput:true,
@@ -158,6 +213,21 @@ function initPlugins(){
 			headers: { 'x-csrf-token': csrfToken},
 			/* dictRemoveFile:'' */
 		});
+	});
+	$.fn.editableform.buttons = '<button type="submit" class="btn btn-sm btn-primary editable-submit">&check;</button><button type="button" class="btn btn-sm btn-secondary editable-cancel">&times;</button>';
+	$.fn.editable.defaults.ajaxOptions = {type: "post"};
+	$.fn.editable.defaults.params = function(params) {
+		//originally params contain pk, name and value
+		params.csrf_token = csrfToken;
+		params[params.name] = params.value;
+		return params;
+	}
+	$.fn.editable.defaults.emptytext = '...';
+	$.fn.editable.defaults.textFieldName = 'label';
+	$('.is-editable').editable();
+	$(document).on('click', '.inline-edit-btn', function(e){
+		e.stopPropagation();
+		$(this).closest('td').find('.make-editable').editable('toggle');
 	});
 	$('.ajax-pagination').each(function(){
 		var pager = $(this);

@@ -25,9 +25,15 @@ class WebResourcesController extends Controller
 			$search = trim($request->search);
 			WebResources::search($query, $search); // search table records
 		}
-		$orderby = $request->orderby ?? "web_resources.id";
-		$ordertype = $request->ordertype ?? "desc";
-		$query->orderBy($orderby, $ordertype);
+		$query->join("users", "web_resources.updated_by", "=", "users.id");
+		if($request->orderby){
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		}
+		else{
+			$query->orderBy("web_resources.id", "ASC");
+		}
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
@@ -82,7 +88,7 @@ class WebResourcesController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("webresources", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.webresources.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}

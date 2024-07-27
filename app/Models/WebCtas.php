@@ -129,11 +129,11 @@ class WebCtas extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"title",
 			"text",
 			"button_text",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

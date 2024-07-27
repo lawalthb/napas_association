@@ -178,6 +178,18 @@ class ComponentsData{
 	
 
 	/**
+     * icon_option_list Model Action
+     * @return array
+     */
+	function icon_option_list(){
+		$sqltext = "";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * getcount_ Model Action
      * @return int
      */

@@ -25,9 +25,9 @@ class WebAboutsEditRequest extends FormRequest
 		
         return [
             
+				"text" => "nullable",
 				"body" => "nullable",
 				"image" => "nullable",
-				"text" => "nullable",
 				"custom" => "nullable",
 				"updated_by" => "filled",
             

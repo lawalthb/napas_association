@@ -294,7 +294,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('webcounters/add', 'WebCountersController@add')->name('webcounters.add');
 	Route::post('webcounters/add', 'WebCountersController@store')->name('webcounters.store');
 		
-	Route::any('webcounters/edit/{rec_id}', 'WebCountersController@edit')->name('webcounters.edit');	
+	Route::any('webcounters/edit/{rec_id}', 'WebCountersController@edit')->name('webcounters.edit');Route::any('webcounters/editfield/{rec_id}', 'WebCountersController@editfield');	
 	Route::get('webcounters/delete/{rec_id}', 'WebCountersController@delete');
 
 /* routes for WebCtas Controller */
@@ -494,6 +494,12 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 		return $compModel->users_email_value_exist($request);
 	}
 );
+	
+Route::get('componentsdata/icon_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->icon_option_list($request);
+	}
+)->middleware(['auth']);
 	
 Route::get('componentsdata/getcount_',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
