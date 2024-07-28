@@ -25,14 +25,14 @@ class FinalProjectsAddRequest extends FormRequest
 		
         return [
             
-				"user_id" => "required|numeric",
-				"level_id" => "required",
-				"topic1" => "nullable|string",
-				"topic2" => "nullable|string",
-				"topic3" => "nullable|string",
-				"approve_num" => "required|numeric",
-				"supervisor_topic" => "nullable|string",
-				"has_submit" => "required",
+				"row.*.user_id" => "required|numeric",
+				"row.*.level_id" => "required",
+				"row.*.topic1" => "nullable|string",
+				"row.*.topic2" => "nullable|string",
+				"row.*.topic3" => "nullable|string",
+				"row.*.approve_num" => "required|numeric",
+				"row.*.supervisor_topic" => "nullable|string",
+				"row.*.has_submit" => "required",
             
         ];
     }

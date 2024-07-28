@@ -25,12 +25,12 @@ class PriceSettingsEditRequest extends FormRequest
 		
         return [
             
+				"accademic_session_id" => "filled",
+				"level_id" => "filled",
 				"name" => "filled|string",
 				"amount" => "filled|numeric",
-				"accademic_session_id" => "filled",
 				"is_active" => "filled",
 				"updated_by" => "filled",
-				"level_id" => "filled",
             
         ];
     }

@@ -65,16 +65,17 @@ class UsersController extends Controller
      * @return \Illuminate\View\View
      */
 	function add(){
-		return $this->renderView("pages.users.add");
+		return view("pages.users.add");
 	}
 	
 
 	/**
-     * Save form record to the table
+     * Insert multiple record into the database table
      * @return \Illuminate\Http\Response
      */
 	function store(UsersAddRequest $request){
-		$modeldata = $this->normalizeFormData($request->validated());
+		$postdata = $request->input("row");
+		$modeldata = array_values($postdata);
 		
 		if( array_key_exists("image", $modeldata) ){
 			//move uploaded file from temp directory to destination directory
@@ -82,10 +83,7 @@ class UsersController extends Controller
 			$modeldata['image'] = $fileInfo['filepath'];
 		}
 		$modeldata['password'] = bcrypt($modeldata['password']);
-		
-		//save Users record
-		$record = Users::create($modeldata);
-		$rec_id = $record->id;
+		Users::insert($modeldata);
 		return $this->redirect("users", "Record added successfully");
 	}
 	

@@ -69,14 +69,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </label>
                                         </th>
                                         <th class="td-id" > Id</th>
+                                        <th class="td-accademic_session_id" > Accademic Session</th>
+                                        <th class="td-level_id" > Level</th>
                                         <th class="td-name" > Name</th>
                                         <th class="td-amount" > Amount</th>
-                                        <th class="td-accademic_session_id" > Accademic Session Id</th>
-                                        <th class="td-is_active" > Is Active</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
-                                        <th class="td-updated_by" > Updated By</th>
-                                        <th class="td-level_id" > Level Id</th>
+                                        <th class="td-updated_at" > Updated@</th>
+                                        <th class="td-updated_by" > UpdatedBy</th>
+                                        <th class="td-is_active" > IsActive</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -101,35 +100,34 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-id">
                                             <a href="<?php print_link("/pricesettings/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
-                                        <td class="td-name">
-                                            <?php echo  $data['name'] ; ?>
-                                        </td>
-                                        <td class="td-amount">
-                                            <?php echo  $data['amount'] ; ?>
-                                        </td>
                                         <td class="td-accademic_session_id">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[accademic_session_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Academic Sessions" ?>
+                                            <?php echo $data['academicsessions_session_name'] ?>
                                         </a>
                                     </td>
-                                    <td class="td-is_active">
-                                        <?php echo  $data['is_active'] ; ?>
-                                    </td>
-                                    <td class="td-created_at">
-                                        <?php echo  $data['created_at'] ; ?>
-                                    </td>
-                                    <td class="td-updated_at">
-                                        <?php echo  $data['updated_at'] ; ?>
-                                    </td>
-                                    <td class="td-updated_by">
-                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                    <td class="td-level_id">
+                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                        <?php echo $data['levels_name'] ?>
                                     </a>
                                 </td>
-                                <td class="td-level_id">
-                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
-                                    <i class="material-icons">visibility</i> <?php echo "Levels" ?>
+                                <td class="td-name">
+                                    <?php echo  $data['name'] ; ?>
+                                </td>
+                                <td class="td-amount">
+                                    <?php echo  $data['amount'] ; ?>
+                                </td>
+                                <td class="td-updated_at">
+                                    <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                    <?php echo relative_date($data['updated_at']); ?>
+                                    </span>
+                                </td>
+                                <td class="td-updated_by">
+                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
+                                    <?php echo $data['users_lastname'] ?>
                                 </a>
+                            </td>
+                            <td class="td-is_active">
+                                <?php echo  $data['is_active'] ; ?>
                             </td>
                             <!--PageComponentEnd-->
                             <td class="td-btn">

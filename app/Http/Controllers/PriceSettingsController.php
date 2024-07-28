@@ -25,6 +25,9 @@ class PriceSettingsController extends Controller
 			$search = trim($request->search);
 			PriceSettings::search($query, $search); // search table records
 		}
+		$query->join("academic_sessions", "price_settings.accademic_session_id", "=", "academic_sessions.id");
+		$query->join("levels", "price_settings.level_id", "=", "levels.id");
+		$query->join("users", "price_settings.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "price_settings.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

@@ -27,9 +27,9 @@ class ProjectSupervisorsEditRequest extends FormRequest
             
 				"name" => "filled|string",
 				"phone" => "filled|string",
-				"is_active" => "filled",
 				"email" => "nullable|email",
 				"other" => "nullable|string",
+				"is_active" => "filled",
             
         ];
     }

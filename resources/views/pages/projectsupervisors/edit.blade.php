@@ -69,36 +69,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="is_active">Is Active <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-is_active-holder" class=" ">
-                                            <select required=""  id="ctrl-is_active" data-field="is_active" name="is_active"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::isActive();
-                                                $field_value = $data['is_active'];
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
                                         <label class="control-label" for="email">Email </label>
                                     </div>
                                     <div class="col-sm-8">
@@ -116,6 +86,35 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col-sm-8">
                                         <div id="ctrl-other-holder" class=" ">
                                             <input id="ctrl-other" data-field="other"  value="<?php  echo $data['other']; ?>" type="text" placeholder="Enter Other"  name="other"  class="form-control " />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="is_active">Is Active <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-is_active-holder" class=" ">
+                                            <?php
+                                                $options = Menu::isActive();
+                                                $field_value = $data['is_active'];
+                                                if(!empty($options)){
+                                                foreach($options as $option){
+                                                $value = $option['value'];
+                                                $label = $option['label'];
+                                                //check if value is among checked options
+                                                $checked = Html::get_record_checked($field_value, $value);
+                                            ?>
+                                            <label class="form-check form-check-inline">
+                                            <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="is_active" />
+                                            <span class="form-check-label"><?php echo $label ?></span>
+                                            </label>
+                                            <?php
+                                                }
+                                                }
+                                            ?>
                                         </div>
                                     </div>
                                 </div>

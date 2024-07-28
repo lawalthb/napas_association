@@ -27,7 +27,7 @@ class SupervisorUsersEditRequest extends FormRequest
             
 				"supervisor_id" => "filled",
 				"user_id" => "filled",
-				"admin_id" => "filled|numeric",
+				"admin_id" => "filled",
             
         ];
     }

@@ -96,18 +96,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="admin_id">Admin Id <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-admin_id-holder" class=" ">
-                                            <input id="ctrl-admin_id" data-field="admin_id"  value="<?php  echo $data['admin_id']; ?>" type="number" placeholder="Enter Admin Id" step="any"  required="" name="admin_id"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <input id="ctrl-admin_id" data-field="admin_id"  value="<?php  echo $data['admin_id']; ?>" type="hidden" placeholder="Enter Admin Id"  required="" name="admin_id"  class="form-control " />
                         </div>
                         <div class="form-ajax-status"></div>
                         <!--[form-content-end]-->

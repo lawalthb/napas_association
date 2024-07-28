@@ -67,23 +67,23 @@
 		[
 			'path' => '#',
 			'label' => "Election", 
-			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+			'icon' => '<i class="material-icons ">group_add</i>','submenu' => [
 		[
 			'path' => 'electionpositions',
 			'label' => "Election Positions", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => 'electionaspirants',
 			'label' => "Election Aspirants", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => 'electionvotes',
 			'label' => "Election Votes", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
 		],
@@ -91,23 +91,23 @@
 		[
 			'path' => 'menu19',
 			'label' => "Contest", 
-			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+			'icon' => '<i class="material-icons ">contact_mail</i>','submenu' => [
 		[
 			'path' => 'contestcategories',
 			'label' => "Contest Categories", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => 'contestnominees',
 			'label' => "Contest Nominees", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => 'contestvotes',
 			'label' => "Contest Votes", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
 		],
@@ -115,17 +115,17 @@
 		[
 			'path' => '#',
 			'label' => "Users", 
-			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+			'icon' => '<i class="material-icons ">person</i>','submenu' => [
 		[
 			'path' => 'users',
 			'label' => "Members", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => '#',
 			'label' => "Admins", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
 		],
@@ -133,17 +133,23 @@
 		[
 			'path' => 'finalprojects',
 			'label' => "Final Year Projects", 
-			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+			'icon' => '<i class="material-icons ">assignment</i>','submenu' => [
 		[
 			'path' => 'projectsupervisors',
 			'label' => "Project Supervisors", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		],
 		
 		[
 			'path' => 'supervisorusers',
 			'label' => "Supervisor & Member", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'finalprojects',
+			'label' => "Topics", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
 		],
@@ -151,19 +157,19 @@
 		[
 			'path' => 'levels',
 			'label' => "Levels", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">format_list_numbered</i>'
 		],
 		
 		[
 			'path' => 'pricesettings',
 			'label' => "Price Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">perm_data_setting</i>'
 		],
 		
 		[
 			'path' => 'appsettings',
 			'label' => "App Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'icon' => '<i class="material-icons ">settings</i>'
 		]
 	] ;
 	}

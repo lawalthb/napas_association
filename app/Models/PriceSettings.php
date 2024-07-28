@@ -28,7 +28,7 @@ class PriceSettings extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','amount','accademic_session_id','is_active','updated_by','level_id'
+		'accademic_session_id','level_id','name','amount','is_active','updated_by'
 	];
 	public $timestamps = false;
 	
@@ -41,8 +41,8 @@ class PriceSettings extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ? 
+				price_settings.id LIKE ?  OR 
+				price_settings.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%"
@@ -59,15 +59,17 @@ class PriceSettings extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
-			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"price_settings.id AS id",
+			"price_settings.accademic_session_id AS accademic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"price_settings.level_id AS level_id",
+			"levels.name AS levels_name",
+			"price_settings.name AS name",
+			"price_settings.amount AS amount",
+			"price_settings.updated_at AS updated_at",
+			"price_settings.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"price_settings.is_active AS is_active" 
 		];
 	}
 	
@@ -79,15 +81,17 @@ class PriceSettings extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"name",
-			"amount",
-			"accademic_session_id",
-			"is_active",
-			"created_at",
-			"updated_at",
-			"updated_by",
-			"level_id" 
+			"price_settings.id AS id",
+			"price_settings.accademic_session_id AS accademic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"price_settings.level_id AS level_id",
+			"levels.name AS levels_name",
+			"price_settings.name AS name",
+			"price_settings.amount AS amount",
+			"price_settings.updated_at AS updated_at",
+			"price_settings.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"price_settings.is_active AS is_active" 
 		];
 	}
 	
@@ -139,13 +143,13 @@ class PriceSettings extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
+			"accademic_session_id",
+			"level_id",
 			"name",
 			"amount",
-			"accademic_session_id",
 			"is_active",
 			"updated_by",
-			"level_id" 
+			"id" 
 		];
 	}
 }

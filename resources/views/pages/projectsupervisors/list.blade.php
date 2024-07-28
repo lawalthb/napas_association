@@ -71,11 +71,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-id" > Id</th>
                                         <th class="td-name" > Name</th>
                                         <th class="td-phone" > Phone</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
-                                        <th class="td-is_active" > Is Active</th>
                                         <th class="td-email" > Email</th>
                                         <th class="td-other" > Other</th>
+                                        <th class="td-is_active" > Is Active</th>
+                                        <th class="td-updated_at" > Updated@</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -106,20 +105,19 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-phone">
                                             <a href="<?php print_link("tel:$data[phone]") ?>"><?php echo $data['phone']; ?></a>
                                         </td>
-                                        <td class="td-created_at">
-                                            <?php echo  $data['created_at'] ; ?>
-                                        </td>
-                                        <td class="td-updated_at">
-                                            <?php echo  $data['updated_at'] ; ?>
-                                        </td>
-                                        <td class="td-is_active">
-                                            <?php echo  $data['is_active'] ; ?>
-                                        </td>
                                         <td class="td-email">
                                             <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
                                         </td>
                                         <td class="td-other">
                                             <?php echo  $data['other'] ; ?>
+                                        </td>
+                                        <td class="td-is_active">
+                                            <?php echo  $data['is_active'] ; ?>
+                                        </td>
+                                        <td class="td-updated_at">
+                                            <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                            <?php echo relative_date($data['updated_at']); ?>
+                                            </span>
                                         </td>
                                         <!--PageComponentEnd-->
                                         <td class="td-btn">

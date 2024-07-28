@@ -27,7 +27,7 @@ class SupervisorUsersAddRequest extends FormRequest
             
 				"supervisor_id" => "required",
 				"user_id" => "required",
-				"admin_id" => "required|numeric",
+				"admin_id" => "required",
             
         ];
     }

@@ -28,7 +28,7 @@ class ProjectSupervisors extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','phone','is_active','email','other'
+		'name','phone','email','other','is_active','id'
 	];
 	public $timestamps = false;
 	
@@ -65,11 +65,10 @@ class ProjectSupervisors extends Model
 			"id",
 			"name",
 			"phone",
-			"created_at",
-			"updated_at",
-			"is_active",
 			"email",
-			"other" 
+			"other",
+			"is_active",
+			"updated_at" 
 		];
 	}
 	
@@ -84,11 +83,10 @@ class ProjectSupervisors extends Model
 			"id",
 			"name",
 			"phone",
-			"created_at",
-			"updated_at",
-			"is_active",
 			"email",
-			"other" 
+			"other",
+			"is_active",
+			"updated_at" 
 		];
 	}
 	
@@ -138,12 +136,12 @@ class ProjectSupervisors extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"name",
 			"phone",
-			"is_active",
 			"email",
-			"other" 
+			"other",
+			"is_active",
+			"id" 
 		];
 	}
 }

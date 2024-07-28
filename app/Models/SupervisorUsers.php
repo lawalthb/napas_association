@@ -126,10 +126,10 @@ class SupervisorUsers extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"supervisor_id",
 			"user_id",
-			"admin_id" 
+			"admin_id",
+			"id" 
 		];
 	}
 }

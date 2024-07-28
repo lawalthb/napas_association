@@ -63,20 +63,18 @@ class ProjectSupervisorsController extends Controller
      * @return \Illuminate\View\View
      */
 	function add(){
-		return $this->renderView("pages.projectsupervisors.add");
+		return view("pages.projectsupervisors.add");
 	}
 	
 
 	/**
-     * Save form record to the table
+     * Insert multiple record into the database table
      * @return \Illuminate\Http\Response
      */
 	function store(ProjectSupervisorsAddRequest $request){
-		$modeldata = $this->normalizeFormData($request->validated());
-		
-		//save ProjectSupervisors record
-		$record = ProjectSupervisors::create($modeldata);
-		$rec_id = $record->id;
+		$postdata = $request->input("row");
+		$modeldata = array_values($postdata);
+		ProjectSupervisors::insert($modeldata);
 		return $this->redirect("projectsupervisors", "Record added successfully");
 	}
 	

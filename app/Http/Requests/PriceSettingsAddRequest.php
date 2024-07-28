@@ -25,12 +25,12 @@ class PriceSettingsAddRequest extends FormRequest
 		
         return [
             
+				"accademic_session_id" => "required",
+				"level_id" => "required",
 				"name" => "required|string",
 				"amount" => "required|numeric",
-				"accademic_session_id" => "required",
 				"is_active" => "required",
 				"updated_by" => "required",
-				"level_id" => "required",
             
         ];
     }

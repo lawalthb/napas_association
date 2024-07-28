@@ -53,20 +53,18 @@ class FinalProjectsController extends Controller
      * @return \Illuminate\View\View
      */
 	function add(){
-		return $this->renderView("pages.finalprojects.add");
+		return view("pages.finalprojects.add");
 	}
 	
 
 	/**
-     * Save form record to the table
+     * Insert multiple record into the database table
      * @return \Illuminate\Http\Response
      */
 	function store(FinalProjectsAddRequest $request){
-		$modeldata = $this->normalizeFormData($request->validated());
-		
-		//save FinalProjects record
-		$record = FinalProjects::create($modeldata);
-		$rec_id = $record->id;
+		$postdata = $request->input("row");
+		$modeldata = array_values($postdata);
+		FinalProjects::insert($modeldata);
 		return $this->redirect("finalprojects", "Record added successfully");
 	}
 	
