@@ -122,9 +122,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
         </div>
         <div class="col comp-grid " >
             <div  class=" page-content" >
-                <div id="resourceitems-list-records">
+                <div id="resourceitems-_list-records">
                     <div id="page-main-content" class="table-responsive">
-                        <?php Html::page_bread_crumb("/resourceitems/", $field_name, $field_value); ?>
+                        <?php Html::page_bread_crumb("/resourceitems/_list", $field_name, $field_value); ?>
                         <?php Html::display_page_errors($errors); ?>
                         <div class="filter-tags mb-2">
                             <?php Html::filter_tag('search', __('Search')); ?>

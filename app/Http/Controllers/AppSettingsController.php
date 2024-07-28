@@ -28,6 +28,7 @@ class AppSettingsController extends Controller
 		$orderby = $request->orderby ?? "app_settings.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
+		$query->where("active", "=" , 1);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}

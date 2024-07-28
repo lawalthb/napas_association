@@ -95,7 +95,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <a href="<?php print_link("/webcounters/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                             </td>
                                             <td class="td-icon">
-                                                <span  data-source='<?php print_link('componentsdata/icon_option_list'); ?>' 
+                                                <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['icon']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
                                                 data-url="<?php print_link("webcounters/edit/" . urlencode($data['id'])); ?>" 
@@ -112,7 +112,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </td>
                                             <td class="td-count">
                                                 <span  data-step="any" 
-                                                data-source='<?php print_link('componentsdata/icon_option_list'); ?>' 
+                                                data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['count']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
                                                 data-url="<?php print_link("webcounters/edit/" . urlencode($data['id'])); ?>" 
@@ -128,7 +128,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 </span>
                                             </td>
                                             <td class="td-text">
-                                                <span  data-source='<?php print_link('componentsdata/icon_option_list'); ?>' 
+                                                <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['text']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
                                                 data-url="<?php print_link("webcounters/edit/" . urlencode($data['id'])); ?>" 
@@ -145,7 +145,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </td>
                                             <td class="td-position">
                                                 <span  data-step="any" 
-                                                data-source='<?php print_link('componentsdata/icon_option_list'); ?>' 
+                                                data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['position']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
                                                 data-url="<?php print_link("webcounters/edit/" . urlencode($data['id'])); ?>" 

@@ -28,6 +28,7 @@ class AppSettingsEditRequest extends FormRequest
 				"name" => "filled|string",
 				"value" => "filled|string",
 				"slug" => "filled|string",
+				"active" => "filled|numeric",
             
         ];
     }

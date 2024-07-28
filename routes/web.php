@@ -76,7 +76,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('appsettings/add', 'AppSettingsController@add')->name('appsettings.add');
 	Route::post('appsettings/add', 'AppSettingsController@store')->name('appsettings.store');
 		
-	Route::any('appsettings/edit/{rec_id}', 'AppSettingsController@edit')->name('appsettings.edit');	
+	Route::any('appsettings/edit/{rec_id}', 'AppSettingsController@edit')->name('appsettings.edit');Route::any('appsettings/editfield/{rec_id}', 'AppSettingsController@editfield');	
 	Route::get('appsettings/delete/{rec_id}', 'AppSettingsController@delete');
 
 /* routes for ContestCategories Controller */
@@ -215,7 +215,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 		
 	Route::get('resourceitems/add_videos', 'ResourceItemsController@add_videos')->name('resourceitems.add_videos');
 	Route::post('resourceitems/add_videos', 'ResourceItemsController@add_videos_store')->name('resourceitems.add_videos_store');
-	
+		
+	Route::get('resourceitems/member_list', 'ResourceItemsController@member_list');
+	Route::get('resourceitems/member_list/{filter?}/{filtervalue?}', 'ResourceItemsController@member_list');	
+	Route::any('resourceitems/edit_pdf/{rec_id}', 'ResourceItemsController@edit_pdf')->name('resourceitems.edit_pdf');	
+	Route::any('resourceitems/edit_video/{rec_id}', 'ResourceItemsController@edit_video')->name('resourceitems.edit_video');
 
 /* routes for ResourcesPaids Controller */
 	Route::get('resourcespaids', 'ResourcesPaidsController@index')->name('resourcespaids.index');
@@ -427,6 +431,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 	
+Route::get('componentsdata/value_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->value_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/academic_session_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->academic_session_id_option_list($request);
@@ -505,9 +515,15 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 	}
 );
 	
-Route::get('componentsdata/icon_option_list',  function(Request $request){
+Route::get('componentsdata/name_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->icon_option_list($request);
+		return $compModel->name_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->category_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	

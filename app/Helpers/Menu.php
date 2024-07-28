@@ -59,6 +59,40 @@
 		],
 		
 		[
+			'path' => 'resourceitems/member_list',
+			'label' => "_Resources", 
+			'icon' => '<i class="material-icons ">picture_as_pdf</i>'
+		],
+		
+		[
+			'path' => '#',
+			'label' => "Election", 
+			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+		[
+			'path' => 'electionpositions',
+			'label' => "Election Positions", 
+			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'electionaspirants',
+			'label' => "Election Aspirants", 
+			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'electionvotes',
+			'label' => "Election Votes", 
+			'icon' => '<i class="material-icons">extension</i>'
+		]
+	]
+		],
+		
+		[
+			'path' => 'menu19',
+			'label' => "Contest", 
+			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+		[
 			'path' => 'contestcategories',
 			'label' => "Contest Categories", 
 			'icon' => '<i class="material-icons">extension</i>'
@@ -74,30 +108,44 @@
 			'path' => 'contestvotes',
 			'label' => "Contest Votes", 
 			'icon' => '<i class="material-icons">extension</i>'
+		]
+	]
 		],
 		
 		[
-			'path' => 'electionaspirants',
-			'label' => "Election Aspirants", 
+			'path' => '#',
+			'label' => "Users", 
+			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+		[
+			'path' => 'users',
+			'label' => "Members", 
 			'icon' => '<i class="material-icons">extension</i>'
 		],
 		
 		[
-			'path' => 'electionpositions',
-			'label' => "Election Positions", 
+			'path' => '#',
+			'label' => "Admins", 
 			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'electionvotes',
-			'label' => "Election Votes", 
-			'icon' => '<i class="material-icons">extension</i>'
+		]
+	]
 		],
 		
 		[
 			'path' => 'finalprojects',
-			'label' => "Final Projects", 
+			'label' => "Final Year Projects", 
+			'icon' => '<i class="material-icons">extension</i>','submenu' => [
+		[
+			'path' => 'projectsupervisors',
+			'label' => "Project Supervisors", 
 			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'supervisorusers',
+			'label' => "Supervisor & Member", 
+			'icon' => '<i class="material-icons">extension</i>'
+		]
+	]
 		],
 		
 		[
@@ -109,24 +157,6 @@
 		[
 			'path' => 'pricesettings',
 			'label' => "Price Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'projectsupervisors',
-			'label' => "Project Supervisors", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'supervisorusers',
-			'label' => "Supervisor Users", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'users',
-			'label' => "Users", 
 			'icon' => '<i class="material-icons">extension</i>'
 		],
 		
@@ -268,6 +298,22 @@
 		[
 			'value' => 'off', 
 			'label' => "off", 
+		],] ;
+	}
+	
+	public static function fileType2(){
+		return [
+		[
+			'value' => 'Image', 
+			'label' => "Images", 
+		],
+		[
+			'value' => 'pdf', 
+			'label' => "PDF/Doc/Excel", 
+		],
+		[
+			'value' => 'videos', 
+			'label' => "Videos/Audio", 
 		],] ;
 	}
 	

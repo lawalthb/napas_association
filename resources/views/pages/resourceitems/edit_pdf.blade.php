@@ -38,37 +38,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class="col-md-9 comp-grid " >
                     <div  class="card card-1 border rounded page-content" >
                         <!--[form-start]-->
-                        <form novalidate  id="" role="form" enctype="multipart/form-data"  class="form page-form form-horizontal needs-validation" action="<?php print_link("resourceitems/edit/$rec_id"); ?>" method="post">
+                        <form novalidate  id="" role="form" enctype="multipart/form-data"  class="form page-form form-horizontal needs-validation" action="<?php print_link("resourceitems/edit_pdf/$rec_id"); ?>" method="post">
                         <!--[form-content-start]-->
                         @csrf
                         <div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="category_id">Category <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-category_id-holder" class=" ">
-                                            <select required=""  id="ctrl-category_id" data-field="category_id" name="category_id"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = $comp_model->resourceitems_category_id_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['category_id'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
@@ -101,7 +74,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-file_path-holder" class=" ">
-                                            <div class="dropzone " input="#ctrl-file_path" fieldname="file_path" uploadurl="{{ url('fileuploader/upload/file_path') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
+                                            <div class="dropzone " input="#ctrl-file_path" fieldname="file_path" uploadurl="{{ url('fileuploader/upload/file_path') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".docx,.doc,.xls,.xlsx,.xml,.csv,.pdf,.xps" filesize="3" maximum="1">
                                                 <input name="file_path" id="ctrl-file_path" data-field="file_path" class="dropzone-input form-control" value="<?php  echo $data['file_path']; ?>" type="text"  />
                                                 <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
                                                 <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
@@ -114,13 +87,36 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
+                                        <label class="control-label" for="category_id">Category Id <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-category_id-holder" class=" ">
+                                            <input id="ctrl-category_id" data-field="category_id"  value="<?php  echo $data['category_id']; ?>" type="number" placeholder="Enter Category Id" step="any"  required="" name="category_id"  class="form-control " />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
                                         <label class="control-label" for="price">Price </label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-price-holder" class=" ">
                                             <input id="ctrl-price" data-field="price"  value="<?php  echo $data['price']; ?>" type="number" placeholder="Enter Price" step="any"  name="price"  class="form-control " />
                                         </div>
-                                        <small class="form-text">Leave blank if is free</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="download_count">Download Count <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-download_count-holder" class=" ">
+                                            <input id="ctrl-download_count" data-field="download_count"  value="<?php  echo $data['download_count']; ?>" type="number" placeholder="Enter Download Count" step="any"  required="" name="download_count"  class="form-control " />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -157,11 +153,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="file_type">File Type </label>
+                                        <label class="control-label" for="file_type">File Type <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-file_type-holder" class=" ">
-                                            <select  id="ctrl-file_type" data-field="file_type" name="file_type"  placeholder="Select a value ..."    class="form-select" >
+                                            <select required=""  id="ctrl-file_type" data-field="file_type" name="file_type"  placeholder="Select a value ..."    class="form-select" >
                                             <option value="">Select a value ...</option>
                                             <?php
                                                 $options = Menu::fileType();

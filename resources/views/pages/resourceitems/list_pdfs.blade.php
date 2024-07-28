@@ -9,6 +9,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
+    $category_id_option_list_2 = $comp_model->category_id_option_list_2();
     $pageTitle = "Resource Items"; //set dynamic page title
 ?>
 @extends($layout)
@@ -52,21 +53,72 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     <div class="container-fluid">
         <div class="row ">
             <div class="col-md-2 comp-grid " >
-                <?php $menu_id = "menu-" . random_str(); ?>
-                <div class="card mb-3 p-3 " >
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $menu_id ?>" aria-expanded="false">
-                    <span class="navbar-toggler-icon"></span>
-                    </button>
-                    </nav>  
-                    <div class="collapse collapse-lg" id="<?php echo $menu_id ?>">
-                    <ul class="nav nav-tabs flex-column">
-                        <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/index") ?>"><i class="material-icons ">image</i> Images </a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/list_pdfs") ?>"><i class="material-icons ">picture_as_pdf</i> PDFs </a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/list_videos") ?>"><i class="material-icons ">video_library</i> Videos </a></li>
-                    </ul>
+                <form method="get" action="" class="form">
+                    <?php $menu_id = "menu-" . random_str(); ?>
+                    <div class="card mb-3 p-3 " >
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#<?php echo $menu_id ?>" aria-expanded="false">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+                        </nav>  
+                        <div class="collapse collapse-lg" id="<?php echo $menu_id ?>">
+                        <ul class="nav nav-tabs flex-column">
+                            <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/index") ?>"><i class="material-icons ">image</i> Images </a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/list_pdfs") ?>"><i class="material-icons ">picture_as_pdf</i> PDFs </a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?php print_link("resourceitems/list_videos") ?>"><i class="material-icons ">video_library</i> Videos </a></li>
+                        </ul>
+                    </div>
                 </div>
-            </div>
+                <div class="card mb-3 p-3 ">
+                    <div class="">
+                        <div class="fw-bold">Category</div>
+                    </div>
+                    <select   name="category_id" class="form-select custom " >
+                    <option value="">Select a value ...</option>
+                    <?php 
+                        $options = $category_id_option_list_2 ?? [];
+                        foreach($options as $option){
+                        $value = $option->value;
+                        $label = $option->label ?? $value;
+                        $selected = Html::get_field_selected('category_id', $value);
+                    ?>
+                    <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                    <?php echo $label; ?>
+                    </option>
+                    <?php
+                        }
+                    ?>
+                    </select>
+                </div>
+                <div class="card mb-3 p-3 ">
+                    <div class="">
+                        <div class="fw-bold">Published</div>
+                    </div>
+                    <div class="">
+                        <?php
+                            $options = Menu::isActive();
+                            if(!empty($options)){
+                            foreach($options as $option){
+                            $value = $option['value'];
+                            $label = $option['label'];
+                            //check if current option is checked option
+                            $checked = Html::get_field_checked('published', $value);
+                        ?>
+                        <label class="form-check">
+                        <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" name="published"  />
+                        <span class="form-check-label"><?php echo $label ?></span>
+                        </label>
+                        <?php
+                            }
+                            }
+                        ?>
+                    </div>
+                </div>
+                <hr />
+                <div class="form-group text-center">
+                    <button class="btn btn-primary">Filter</button>
+                </div>
+            </form>
         </div>
         <div class="col-10 comp-grid " >
             <div  class=" page-content" >
@@ -76,6 +128,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <?php Html::display_page_errors($errors); ?>
                         <div class="filter-tags mb-2">
                             <?php Html::filter_tag('search', __('Search')); ?>
+                            <?php
+                                Html::filter_tag('category_id', 'Category', $category_id_option_list_2);
+                            ?>
+                            <?php
+                                Html::filter_tag('published', 'Published', Menu::isActive());
+                            ?>
                         </div>
                         <table class="table table-hover table-striped table-sm text-left">
                             <thead class="table-header ">
@@ -146,7 +204,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <a class="dropdown-item "   href="<?php print_link("resourceitems/view/$rec_id"); ?>" >
                                             <i class="material-icons">visibility</i> View
                                         </a>
-                                        <a class="dropdown-item "   href="<?php print_link("resourceitems/edit/$rec_id"); ?>" >
+                                        <a class="dropdown-item "   href="<?php print_link("resourceitems/edit_pdf/$rec_id"); ?>" >
                                         <i class="material-icons">edit</i> Edit
                                     </a>
                                     <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("resourceitems/delete/$rec_id"); ?>" >

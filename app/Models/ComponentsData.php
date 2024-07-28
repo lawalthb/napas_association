@@ -13,6 +13,18 @@ class ComponentsData{
 	
 
 	/**
+     * value_option_list Model Action
+     * @return array
+     */
+	function value_option_list(){
+		$sqltext = "";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * academic_session_id_option_list Model Action
      * @return array
      */
@@ -178,11 +190,23 @@ class ComponentsData{
 	
 
 	/**
-     * icon_option_list Model Action
+     * name_option_list Model Action
      * @return array
      */
-	function icon_option_list(){
-		$sqltext = "";
+	function name_option_list(){
+		$sqltext = "SELECT  DISTINCT name AS value,name AS label FROM resource_categories ORDER BY name ASC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * category_id_option_list_2 Model Action
+     * @return array
+     */
+	function category_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM resource_categories ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;

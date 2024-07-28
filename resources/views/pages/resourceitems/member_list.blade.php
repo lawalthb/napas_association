@@ -9,7 +9,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $pageTitle = "App Settings"; //set dynamic page title
+    $name_option_list = $comp_model->name_option_list();
+    $pageTitle = "Resource Items"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -23,10 +24,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class="row justify-content-between align-items-center gap-3">
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">App Settings</div>
+                        <div class="h5 font-weight-bold text-primary">Images Resource</div>
                     </div>
-                </div>
-                <div class="col-auto  " >
                 </div>
                 <div class="col-md-3  " >
                     <!-- Page drop down search component -->
@@ -47,21 +46,84 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     <div  class="" >
         <div class="container-fluid">
             <div class="row ">
+                <div class="col-md-2 comp-grid " >
+                    <form method="get" action="" class="form">
+                        <div class="card mb-3 p-3 ">
+                            <div class="">
+                                <div class="fw-bold">Category</div>
+                            </div>
+                            <select   name="name" class="form-select custom " >
+                            <option value="">Select a value ...</option>
+                            <?php 
+                                $options = $name_option_list ?? [];
+                                foreach($options as $option){
+                                $value = $option->value;
+                                $label = $option->label ?? $value;
+                                $selected = Html::get_field_selected('name', $value);
+                            ?>
+                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                            <?php echo $label; ?>
+                            </option>
+                            <?php
+                                }
+                            ?>
+                            </select>
+                        </div>
+                        <div class="card mb-3 p-3 ">
+                            <div class="">
+                                <div class="fw-bold">Type</div>
+                            </div>
+                            <div class="">
+                                <?php
+                                    $options = Menu::fileType2();
+                                    if(!empty($options)){
+                                    foreach($options as $option){
+                                    $value = $option['value'];
+                                    $label = $option['label'];
+                                    //check if current option is checked option
+                                    $checked = Html::get_field_checked('file_type', $value);
+                                ?>
+                                <label class="form-check">
+                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" name="file_type"  />
+                                <span class="form-check-label"><?php echo $label ?></span>
+                                </label>
+                                <?php
+                                    }
+                                    }
+                                ?>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group text-center">
+                            <button class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                </div>
                 <div class="col comp-grid " >
                     <div  class=" page-content" >
-                        <div id="appsettings-list-records">
+                        <div id="resourceitems-member_list-records">
                             <div id="page-main-content" class="table-responsive">
-                                <?php Html::page_bread_crumb("/appsettings/", $field_name, $field_value); ?>
+                                <?php Html::page_bread_crumb("/resourceitems/member_list", $field_name, $field_value); ?>
                                 <?php Html::display_page_errors($errors); ?>
                                 <div class="filter-tags mb-2">
                                     <?php Html::filter_tag('search', __('Search')); ?>
+                                    <?php
+                                        Html::filter_tag('name', 'Name', $name_option_list);
+                                    ?>
+                                    <?php
+                                        Html::filter_tag('file_type', 'File Type', Menu::fileType2());
+                                    ?>
                                 </div>
                                 <table class="table table-hover table-striped table-sm text-left">
                                     <thead class="table-header ">
                                         <tr>
-                                            <th class="td-name" > Name</th>
-                                            <th class="td-value" > Value</th>
-                                            <th class="td-active" > Active</th>
+                                            <th class="td-id" > Id</th>
+                                            <th class="td-title" > Title</th>
+                                            <th class="td-description" > Description</th>
+                                            <th class="td-price" > Price</th>
+                                            <th class="td-published" > Published</th>
+                                            <th class="td-name" > Categories</th>
+                                            <th class="td-file_type" > File Type</th>
                                             <th class="td-btn"></th>
                                         </tr>
                                     </thead>
@@ -78,46 +140,31 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         ?>
                                         <tr>
                                             <!--PageComponentStart-->
-                                            <td class="td-name">
-                                                <?php echo  $data['name'] ; ?>
+                                            <td class="td-id">
+                                                <a href="<?php print_link("/resourceitems/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                             </td>
-                                            <td class="td-value">
-                                                <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
-                                                data-value="<?php echo $data['value']; ?>" 
-                                                data-pk="<?php echo $data['id'] ?>" 
-                                                data-url="<?php print_link("appsettings/edit/" . urlencode($data['id'])); ?>" 
-                                                data-name="value" 
-                                                data-title="Enter Value" 
-                                                data-placement="left" 
-                                                data-toggle="click" 
-                                                data-type="text" 
-                                                data-mode="popover" 
-                                                data-showbuttons="left" 
-                                                class="is-editable" >
-                                                <?php echo  $data['value'] ; ?>
-                                                </span>
+                                            <td class="td-title">
+                                                <?php echo  $data['title'] ; ?>
                                             </td>
-                                            <td class="td-active">
-                                                <span  data-step="any" 
-                                                data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
-                                                data-value="<?php echo $data['active']; ?>" 
-                                                data-pk="<?php echo $data['id'] ?>" 
-                                                data-url="<?php print_link("appsettings/edit/" . urlencode($data['id'])); ?>" 
-                                                data-name="active" 
-                                                data-title="Enter Active" 
-                                                data-placement="left" 
-                                                data-toggle="click" 
-                                                data-type="number" 
-                                                data-mode="popover" 
-                                                data-showbuttons="left" 
-                                                class="is-editable" >
-                                                <?php echo  $data['active'] ; ?>
-                                                </span>
+                                            <td class="td-description">
+                                                <?php echo  $data['description'] ; ?>
+                                            </td>
+                                            <td class="td-price">
+                                                <?php echo  $data['price'] ; ?>
+                                            </td>
+                                            <td class="td-published">
+                                                <?php echo  $data['published'] ; ?>
+                                            </td>
+                                            <td class="td-resourcecategories_name">
+                                                <?php echo  $data['resourcecategories_name'] ; ?>
+                                            </td>
+                                            <td class="td-file_type">
+                                                <?php echo  $data['file_type'] ; ?>
                                             </td>
                                             <!--PageComponentEnd-->
                                             <td class="td-btn">
-                                                <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("appsettings/edit/$rec_id"); ?>" >
-                                                <i class="material-icons">edit</i> Edit
+                                                <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("resourceitems/view/$rec_id"); ?>" >
+                                                <i class="material-icons">visibility</i> View
                                             </a>
                                         </td>
                                     </tr>
@@ -149,7 +196,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <div class=" mt-3">
                             <div class="row align-items-center justify-content-between">    
                                 <div class="col-md-auto d-flex">    
-                                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("appsettings/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("resourceitems/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                                     <i class="material-icons">delete_sweep</i> Delete Selected
                                     </button>
                                 </div>

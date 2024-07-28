@@ -28,7 +28,7 @@ class AppSettings extends Model
      * @var array
      */
 	protected $fillable = [
-		'name','value','slug'
+		'name','value','slug','active'
 	];
 	public $timestamps = false;
 	
@@ -41,9 +41,9 @@ class AppSettings extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
 				name LIKE ?  OR 
 				value LIKE ?  OR 
+				id LIKE ?  OR 
 				slug LIKE ? 
 		)';
 		$search_params = [
@@ -61,12 +61,10 @@ class AppSettings extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
 			"name",
 			"value",
-			"slug",
-			"created_at",
-			"updated_at" 
+			"active",
+			"id" 
 		];
 	}
 	
@@ -78,12 +76,10 @@ class AppSettings extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
 			"name",
 			"value",
-			"slug",
-			"created_at",
-			"updated_at" 
+			"active",
+			"id" 
 		];
 	}
 	
@@ -100,7 +96,8 @@ class AppSettings extends Model
 			"value",
 			"slug",
 			"created_at",
-			"updated_at" 
+			"updated_at",
+			"active" 
 		];
 	}
 	
@@ -117,7 +114,8 @@ class AppSettings extends Model
 			"value",
 			"slug",
 			"created_at",
-			"updated_at" 
+			"updated_at",
+			"active" 
 		];
 	}
 	
@@ -129,10 +127,11 @@ class AppSettings extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"name",
 			"value",
-			"slug" 
+			"slug",
+			"active",
+			"id" 
 		];
 	}
 }

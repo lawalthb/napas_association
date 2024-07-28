@@ -179,54 +179,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-12">
-                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <small class="text-muted">Resourcecategories Id</small>
-                                                <div class="fw-bold">
-                                                    <?php echo  $data['resourcecategories_id'] ; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <small class="text-muted">Resourcecategories Name</small>
-                                                <div class="fw-bold">
-                                                    <?php echo  $data['resourcecategories_name'] ; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <small class="text-muted">Resourcecategories Created At</small>
-                                                <div class="fw-bold">
-                                                    <?php echo  $data['resourcecategories_created_at'] ; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <small class="text-muted">Resourcecategories Updated At</small>
-                                                <div class="fw-bold">
-                                                    <?php echo  $data['resourcecategories_updated_at'] ; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                             <!--PageComponentEnd-->
                             <div class="d-flex align-items-center gap-2">

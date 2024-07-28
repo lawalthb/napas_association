@@ -78,6 +78,18 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="active">Active <span class="text-danger">*</span></label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-active-holder" class=" ">
+                                            <input id="ctrl-active" data-field="active"  value="<?php  echo $data['active']; ?>" type="number" placeholder="Enter Active" step="any"  required="" name="active"  class="form-control " />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-ajax-status"></div>
                         <!--[form-content-end]-->

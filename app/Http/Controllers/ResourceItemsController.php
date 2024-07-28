@@ -5,8 +5,11 @@ use App\Http\Requests\ResourceItemsAddRequest;
 use App\Http\Requests\ResourceItemsEditRequest;
 use App\Http\Requests\ResourceItemsadd_pdfsRequest;
 use App\Http\Requests\ResourceItemsadd_videosRequest;
+use App\Http\Requests\ResourceItemsedit_pdfRequest;
+use App\Http\Requests\ResourceItemsedit_videoRequest;
 use App\Models\ResourceItems;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class ResourceItemsController extends Controller
 {
@@ -35,6 +38,14 @@ class ResourceItemsController extends Controller
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
+		if($request->name){
+			$val = $request->name;
+			$query->where(DB::raw("resource_categories.name"), "=", $val);
+		}
+		if($request->published){
+			$val = $request->published;
+			$query->where(DB::raw("resource_items.published"), "=", $val);
+		}
 		$records = $query->paginate($limit, ResourceItems::listFields());
 		return $this->renderView($view, compact("records"));
 	}
@@ -47,6 +58,7 @@ class ResourceItemsController extends Controller
      */
 	function view($rec_id = null){
 		$query = ResourceItems::query();
+		$query->join("resource_categories", "resource_items.category_id", "=", "resource_categories.id");
 		$record = $query->findOrFail($rec_id, ResourceItems::viewFields());
 		return $this->renderView("pages.resourceitems.view", ["data" => $record]);
 	}
@@ -154,6 +166,14 @@ class ResourceItemsController extends Controller
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
+		if($request->category_id){
+			$val = $request->category_id;
+			$query->where(DB::raw("resource_items.category_id"), "=", $val);
+		}
+		if($request->published){
+			$val = $request->published;
+			$query->where(DB::raw("resource_items.published"), "=", $val);
+		}
 		$records = $query->paginate($limit, ResourceItems::listPdfsFields());
 		return $this->renderView($view, compact("records"));
 	}
@@ -181,6 +201,14 @@ class ResourceItemsController extends Controller
 		$query->where("file_type", "=" , "videos");
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->category_id){
+			$val = $request->category_id;
+			$query->where(DB::raw("resource_items.category_id"), "=", $val);
+		}
+		if($request->published){
+			$val = $request->published;
+			$query->where(DB::raw("resource_items.published"), "=", $val);
 		}
 		$records = $query->paginate($limit, ResourceItems::listVideosFields());
 		return $this->renderView($view, compact("records"));
@@ -242,5 +270,87 @@ class ResourceItemsController extends Controller
 		$record = ResourceItems::create($modeldata);
 		$rec_id = $record->id;
 		return $this->redirect("resourceitems/list_videos", "Record added successfully");
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function member_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.resourceitems.member_list";
+		$query = ResourceItems::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			ResourceItems::search($query, $search); // search table records
+		}
+		$query->join("resource_categories", "resource_items.category_id", "=", "resource_categories.id");
+		$orderby = $request->orderby ?? "resource_items.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("published", "=" , "Yes");
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->name){
+			$val = $request->name;
+			$query->where(DB::raw("resource_categories.name"), "=", $val);
+		}
+		if($request->file_type){
+			$val = $request->file_type;
+			$query->where(DB::raw("resource_items.file_type"), "=", $val);
+		}
+		$records = $query->paginate($limit, ResourceItems::memberListFields());
+		return $this->renderView($view, compact("records"));
+	}
+	
+
+	/**
+     * Update table record with form data
+	 * @param string $rec_id //select record by table primary key
+     * @return \Illuminate\View\View;
+     */
+	function edit_pdf(ResourceItemsedit_pdfRequest $request, $rec_id = null){
+		$query = ResourceItems::query();
+		$record = $query->findOrFail($rec_id, ResourceItems::editPdfFields());
+		if ($request->isMethod('post')) {
+			$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("file_path", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['file_path'], "file_path");
+			$modeldata['file_path'] = $fileInfo['filepath'];
+		}
+			$record->update($modeldata);
+			return $this->redirect("resourceitems", "Record updated successfully");
+		}
+		return $this->renderView("pages.resourceitems.edit_pdf", ["data" => $record, "rec_id" => $rec_id]);
+	}
+	
+
+	/**
+     * Update table record with form data
+	 * @param string $rec_id //select record by table primary key
+     * @return \Illuminate\View\View;
+     */
+	function edit_video(ResourceItemsedit_videoRequest $request, $rec_id = null){
+		$query = ResourceItems::query();
+		$record = $query->findOrFail($rec_id, ResourceItems::editVideoFields());
+		if ($request->isMethod('post')) {
+			$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("file_path", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['file_path'], "file_path");
+			$modeldata['file_path'] = $fileInfo['filepath'];
+		}
+			$record->update($modeldata);
+			return $this->redirect("resourceitems", "Record updated successfully");
+		}
+		return $this->renderView("pages.resourceitems.edit_video", ["data" => $record, "rec_id" => $rec_id]);
 	}
 }

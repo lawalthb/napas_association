@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AppSettingsAddRequest extends FormRequest
+class ResourceItemsedit_videoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +25,14 @@ class AppSettingsAddRequest extends FormRequest
 		
         return [
             
-				"name" => "required|string",
-				"value" => "required|string",
-				"slug" => "required|string",
-				"active" => "required|numeric",
+				"title" => "filled|string",
+				"description" => "nullable",
+				"file_path" => "nullable",
+				"category_id" => "filled|numeric",
+				"price" => "nullable|numeric",
+				"download_count" => "filled|numeric",
+				"published" => "filled",
+				"file_type" => "filled",
             
         ];
     }

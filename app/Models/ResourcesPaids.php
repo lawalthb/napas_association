@@ -139,13 +139,13 @@ class ResourcesPaids extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"user_id",
 			"resources_id",
 			"amount",
 			"payment_status",
 			"token",
-			"download_counts" 
+			"download_counts",
+			"id" 
 		];
 	}
 }
