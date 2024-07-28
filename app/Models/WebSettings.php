@@ -214,7 +214,6 @@ class WebSettings extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"top_bar",
 			"header",
 			"slider",
@@ -235,7 +234,8 @@ class WebSettings extends Model
 			"footer",
 			"user_id",
 			"maintenance",
-			"maintenance_text" 
+			"maintenance_text",
+			"id" 
 		];
 	}
 }

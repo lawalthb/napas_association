@@ -48,7 +48,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-top_bar-holder" class=" ">
-                                                <input id="ctrl-top_bar" data-field="top_bar"  value="<?php echo get_value('top_bar') ?>" type="text" placeholder="Enter Top Bar"  name="top_bar"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('top_bar', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="top_bar" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -60,7 +76,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-header-holder" class=" ">
-                                                <input id="ctrl-header" data-field="header"  value="<?php echo get_value('header') ?>" type="text" placeholder="Enter Header"  name="header"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('header', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="header" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +104,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-slider-holder" class=" ">
-                                                <input id="ctrl-slider" data-field="slider"  value="<?php echo get_value('slider') ?>" type="text" placeholder="Enter Slider"  name="slider"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('slider', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="slider" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -84,7 +132,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-vission-holder" class=" ">
-                                                <input id="ctrl-vission" data-field="vission"  value="<?php echo get_value('vission') ?>" type="text" placeholder="Enter Vission"  name="vission"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('vission', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="vission" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +160,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-cta-holder" class=" ">
-                                                <input id="ctrl-cta" data-field="cta"  value="<?php echo get_value('cta') ?>" type="text" placeholder="Enter Cta"  name="cta"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('cta', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="cta" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -108,7 +188,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-about-holder" class=" ">
-                                                <input id="ctrl-about" data-field="about"  value="<?php echo get_value('about') ?>" type="text" placeholder="Enter About"  name="about"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('about', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="about" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -120,7 +216,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-count-holder" class=" ">
-                                                <input id="ctrl-count" data-field="count"  value="<?php echo get_value('count') ?>" type="text" placeholder="Enter Count"  name="count"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('count', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="count" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +244,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-benefit-holder" class=" ">
-                                                <input id="ctrl-benefit" data-field="benefit"  value="<?php echo get_value('benefit') ?>" type="text" placeholder="Enter Benefit"  name="benefit"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('benefit', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="benefit" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -144,7 +272,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-resources-holder" class=" ">
-                                                <input id="ctrl-resources" data-field="resources"  value="<?php echo get_value('resources') ?>" type="text" placeholder="Enter Resources"  name="resources"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('resources', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="resources" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +300,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-registration-holder" class=" ">
-                                                <input id="ctrl-registration" data-field="registration"  value="<?php echo get_value('registration') ?>" type="text" placeholder="Enter Registration"  name="registration"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('registration', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="registration" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -168,7 +328,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-event-holder" class=" ">
-                                                <input id="ctrl-event" data-field="event"  value="<?php echo get_value('event') ?>" type="text" placeholder="Enter Event"  name="event"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('event', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="event" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -180,7 +356,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-testimonial-holder" class=" ">
-                                                <input id="ctrl-testimonial" data-field="testimonial"  value="<?php echo get_value('testimonial') ?>" type="text" placeholder="Enter Testimonial"  name="testimonial"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('testimonial', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="testimonial" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -192,7 +384,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-excos-holder" class=" ">
-                                                <input id="ctrl-excos" data-field="excos"  value="<?php echo get_value('excos') ?>" type="text" placeholder="Enter Excos"  name="excos"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('excos', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="excos" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +412,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-gallery-holder" class=" ">
-                                                <input id="ctrl-gallery" data-field="gallery"  value="<?php echo get_value('gallery') ?>" type="text" placeholder="Enter Gallery"  name="gallery"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('gallery', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="gallery" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -216,7 +440,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-pricing-holder" class=" ">
-                                                <input id="ctrl-pricing" data-field="pricing"  value="<?php echo get_value('pricing') ?>" type="text" placeholder="Enter Pricing"  name="pricing"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('pricing', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="pricing" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -228,7 +468,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-faq-holder" class=" ">
-                                                <input id="ctrl-faq" data-field="faq"  value="<?php echo get_value('faq') ?>" type="text" placeholder="Enter Faq"  name="faq"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('faq', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="faq" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -240,7 +496,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-contact-holder" class=" ">
-                                                <input id="ctrl-contact" data-field="contact"  value="<?php echo get_value('contact') ?>" type="text" placeholder="Enter Contact"  name="contact"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('contact', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="contact" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
@@ -252,38 +524,40 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-footer-holder" class=" ">
-                                                <input id="ctrl-footer" data-field="footer"  value="<?php echo get_value('footer') ?>" type="text" placeholder="Enter Footer"  name="footer"  class="form-control " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="user_id">User Id <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-user_id-holder" class=" ">
-                                                <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
-                                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
                                                     foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('user_id', $value, "");
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('footer', $value, "");
                                                 ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="footer" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
                                                 <?php
                                                     }
+                                                    }
                                                 ?>
-                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input id="ctrl-user_id" data-field="user_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter User Id" list="user_id_list"  required="" name="user_id"  class="form-control " />
+                                <datalist id="user_id_list">
+                                <?php 
+                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                    foreach($options as $option){
+                                    $value = $option->value;
+                                    $label = $option->label ?? $value;
+                                ?>
+                                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </datalist>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -291,7 +565,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-maintenance-holder" class=" ">
-                                                <input id="ctrl-maintenance" data-field="maintenance"  value="<?php echo get_value('maintenance') ?>" type="text" placeholder="Enter Maintenance"  name="maintenance"  class="form-control " />
+                                                <?php
+                                                    $options = Menu::topBar();
+                                                    if(!empty($options)){
+                                                    foreach($options as $option){
+                                                    $value = $option['value'];
+                                                    $label = $option['label'];
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('maintenance', $value, "");
+                                                ?>
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="maintenance" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
+                                                <?php
+                                                    }
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>

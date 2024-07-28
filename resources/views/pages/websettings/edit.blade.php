@@ -4,7 +4,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
-    $pageTitle = "Edit Web Setting"; //set dynamic page title
+    $pageTitle = "On or Off Section"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -23,7 +23,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 </div>
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Edit Web Setting</div>
+                        <div class="h5 font-weight-bold text-primary">On or Off Section</div>
                     </div>
                 </div>
             </div>
@@ -38,276 +38,465 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class="col-md-9 comp-grid " >
                     <div  class="card card-1 border rounded page-content" >
                         <!--[form-start]-->
-                        <form novalidate  id="" role="form" enctype="multipart/form-data"  class="form page-form form-horizontal needs-validation" action="<?php print_link("websettings/edit/$rec_id"); ?>" method="post">
+                        <form novalidate  id="" role="form" enctype="multipart/form-data"  class="form page-form form-inline needs-validation" action="<?php print_link("websettings/edit/$rec_id"); ?>" method="post">
                         <!--[form-content-start]-->
                         @csrf
                         <div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="top_bar">Top Bar </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-top_bar-holder" class=" ">
-                                            <input id="ctrl-top_bar" data-field="top_bar"  value="<?php  echo $data['top_bar']; ?>" type="text" placeholder="Enter Top Bar"  name="top_bar"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="top_bar">Top Bar </label>
+                                <div id="ctrl-top_bar-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['top_bar'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="top_bar" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="header">Header </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-header-holder" class=" ">
-                                            <input id="ctrl-header" data-field="header"  value="<?php  echo $data['header']; ?>" type="text" placeholder="Enter Header"  name="header"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="header">Header </label>
+                                <div id="ctrl-header-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['header'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="header" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="slider">Slider </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-slider-holder" class=" ">
-                                            <input id="ctrl-slider" data-field="slider"  value="<?php  echo $data['slider']; ?>" type="text" placeholder="Enter Slider"  name="slider"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="slider">Slider </label>
+                                <div id="ctrl-slider-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['slider'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="slider" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="vission">Vission </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-vission-holder" class=" ">
-                                            <input id="ctrl-vission" data-field="vission"  value="<?php  echo $data['vission']; ?>" type="text" placeholder="Enter Vission"  name="vission"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="vission">Vission </label>
+                                <div id="ctrl-vission-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['vission'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="vission" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="cta">Cta </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-cta-holder" class=" ">
-                                            <input id="ctrl-cta" data-field="cta"  value="<?php  echo $data['cta']; ?>" type="text" placeholder="Enter Cta"  name="cta"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="cta">Cta </label>
+                                <div id="ctrl-cta-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['cta'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="cta" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="about">About </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-about-holder" class=" ">
-                                            <input id="ctrl-about" data-field="about"  value="<?php  echo $data['about']; ?>" type="text" placeholder="Enter About"  name="about"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="about">About </label>
+                                <div id="ctrl-about-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['about'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="about" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="count">Count </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-count-holder" class=" ">
-                                            <input id="ctrl-count" data-field="count"  value="<?php  echo $data['count']; ?>" type="text" placeholder="Enter Count"  name="count"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="count">Count </label>
+                                <div id="ctrl-count-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['count'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="count" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="benefit">Benefit </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-benefit-holder" class=" ">
-                                            <input id="ctrl-benefit" data-field="benefit"  value="<?php  echo $data['benefit']; ?>" type="text" placeholder="Enter Benefit"  name="benefit"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="benefit">Benefit </label>
+                                <div id="ctrl-benefit-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['benefit'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="benefit" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="resources">Resources </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-resources-holder" class=" ">
-                                            <input id="ctrl-resources" data-field="resources"  value="<?php  echo $data['resources']; ?>" type="text" placeholder="Enter Resources"  name="resources"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="resources">Resources </label>
+                                <div id="ctrl-resources-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['resources'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="resources" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="registration">Registration </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-registration-holder" class=" ">
-                                            <input id="ctrl-registration" data-field="registration"  value="<?php  echo $data['registration']; ?>" type="text" placeholder="Enter Registration"  name="registration"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="registration">Registration </label>
+                                <div id="ctrl-registration-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['registration'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="registration" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="event">Event </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-event-holder" class=" ">
-                                            <input id="ctrl-event" data-field="event"  value="<?php  echo $data['event']; ?>" type="text" placeholder="Enter Event"  name="event"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="event">Event </label>
+                                <div id="ctrl-event-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['event'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="event" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="testimonial">Testimonial </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-testimonial-holder" class=" ">
-                                            <input id="ctrl-testimonial" data-field="testimonial"  value="<?php  echo $data['testimonial']; ?>" type="text" placeholder="Enter Testimonial"  name="testimonial"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="testimonial">Testimonial </label>
+                                <div id="ctrl-testimonial-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['testimonial'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="testimonial" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="excos">Excos </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-excos-holder" class=" ">
-                                            <input id="ctrl-excos" data-field="excos"  value="<?php  echo $data['excos']; ?>" type="text" placeholder="Enter Excos"  name="excos"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="excos">Excos </label>
+                                <div id="ctrl-excos-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['excos'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="excos" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="gallery">Gallery </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-gallery-holder" class=" ">
-                                            <input id="ctrl-gallery" data-field="gallery"  value="<?php  echo $data['gallery']; ?>" type="text" placeholder="Enter Gallery"  name="gallery"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="gallery">Gallery </label>
+                                <div id="ctrl-gallery-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['gallery'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="gallery" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="pricing">Pricing </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-pricing-holder" class=" ">
-                                            <input id="ctrl-pricing" data-field="pricing"  value="<?php  echo $data['pricing']; ?>" type="text" placeholder="Enter Pricing"  name="pricing"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="pricing">Pricing </label>
+                                <div id="ctrl-pricing-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['pricing'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="pricing" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="faq">Faq </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-faq-holder" class=" ">
-                                            <input id="ctrl-faq" data-field="faq"  value="<?php  echo $data['faq']; ?>" type="text" placeholder="Enter Faq"  name="faq"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="faq">Faq </label>
+                                <div id="ctrl-faq-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['faq'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="faq" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="contact">Contact </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-contact-holder" class=" ">
-                                            <input id="ctrl-contact" data-field="contact"  value="<?php  echo $data['contact']; ?>" type="text" placeholder="Enter Contact"  name="contact"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="contact">Contact </label>
+                                <div id="ctrl-contact-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['contact'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="contact" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="footer">Footer </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-footer-holder" class=" ">
-                                            <input id="ctrl-footer" data-field="footer"  value="<?php  echo $data['footer']; ?>" type="text" placeholder="Enter Footer"  name="footer"  class="form-control " />
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="footer">Footer </label>
+                                <div id="ctrl-footer-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['footer'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="footer" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                            <input id="ctrl-user_id" data-field="user_id"  value="<?php  echo $data['user_id']; ?>" type="hidden" placeholder="Enter User Id" list="user_id_list"  required="" name="user_id"  class="form-control " />
+                            <datalist id="user_id_list">
+                            <?php
+                                $options = $comp_model->updated_by_option_list() ?? [];
+                                foreach($options as $option){
+                                $value = $option->value;
+                                $label = $option->label ?? $value;
+                            ?>
+                            <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                            <?php
+                                }
+                            ?>
+                            </datalist>
+                            <div class="form-group ">
+                                <label class="control-label" for="maintenance">Maintenance </label>
+                                <div id="ctrl-maintenance-holder" class=" "> 
+                                    <?php
+                                        $options = Menu::topBar();
+                                        $field_value = $data['maintenance'];
+                                        if(!empty($options)){
+                                        foreach($options as $option){
+                                        $value = $option['value'];
+                                        $label = $option['label'];
+                                        //check if value is among checked options
+                                        $checked = Html::get_record_checked($field_value, $value);
+                                    ?>
+                                    <label class="form-check form-check-inline">
+                                    <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio"   name="maintenance" />
+                                    <span class="form-check-label"><?php echo $label ?></span>
+                                    </label>
+                                    <?php
+                                        }
+                                        }
+                                    ?>
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="user_id">User Id <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-user_id-holder" class=" ">
-                                            <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = $comp_model->updated_by_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = ( $value == $data['user_id'] ? 'selected' : null );
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="maintenance">Maintenance </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-maintenance-holder" class=" ">
-                                            <input id="ctrl-maintenance" data-field="maintenance"  value="<?php  echo $data['maintenance']; ?>" type="text" placeholder="Enter Maintenance"  name="maintenance"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="maintenance_text">Maintenance Text </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-maintenance_text-holder" class=" ">
-                                            <textarea placeholder="Enter Maintenance Text" id="ctrl-maintenance_text" data-field="maintenance_text"  rows="5" name="maintenance_text" class=" form-control"><?php  echo $data['maintenance_text']; ?></textarea>
-                                            <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
-                                        </div>
-                                    </div>
+                                <label class="control-label" for="maintenance_text">Maintenance Text </label>
+                                <div id="ctrl-maintenance_text-holder" class=" "> 
+                                    <textarea placeholder="Enter Maintenance Text" id="ctrl-maintenance_text" data-field="maintenance_text"  rows="5" name="maintenance_text" class=" form-control"><?php  echo $data['maintenance_text']; ?></textarea>
+                                    <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
                                 </div>
                             </div>
                         </div>

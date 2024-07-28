@@ -23,7 +23,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 </div>
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Add New Resource Item</div>
+                        <div class="h5 font-weight-bold text-primary">Add New Image Resource</div>
                     </div>
                 </div>
             </div>
@@ -41,6 +41,33 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <form id="resourceitems-add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('resourceitems.store') }}" method="post">
                             @csrf
                             <div>
+                                <div class="form-group ">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label class="control-label" for="category_id">Category <span class="text-danger">*</span></label>
+                                        </div>
+                                        <div class="col-sm-8">
+                                            <div id="ctrl-category_id-holder" class=" ">
+                                                <select required=""  id="ctrl-category_id" data-field="category_id" name="category_id"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
+                                                <?php 
+                                                    $options = $comp_model->resourceitems_category_id_option_list() ?? [];
+                                                    foreach($options as $option){
+                                                    $value = $option->value;
+                                                    $label = $option->label ?? $value;
+                                                    $selected = Html::get_field_selected('category_id', $value, "");
+                                                ?>
+                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                                <?php echo $label; ?>
+                                                </option>
+                                                <?php
+                                                    }
+                                                ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -69,7 +96,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="file_path">File Path </label>
+                                            <label class="control-label" for="file_path">File </label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-file_path-holder" class=" ">
@@ -85,51 +112,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="category_id">Category Id <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-category_id-holder" class=" ">
-                                                <select required=""  id="ctrl-category_id" data-field="category_id" name="category_id"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
-                                                    $options = $comp_model->resourceitems_category_id_option_list() ?? [];
-                                                    foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('category_id', $value, "");
-                                                ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
-                                                <?php
-                                                    }
-                                                ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
                                             <label class="control-label" for="price">Price </label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-price-holder" class=" ">
                                                 <input id="ctrl-price" data-field="price"  value="<?php echo get_value('price') ?>" type="number" placeholder="Enter Price" step="any"  name="price"  class="form-control " />
                                             </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="download_count">Download Count <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-download_count-holder" class=" ">
-                                                <input id="ctrl-download_count" data-field="download_count"  value="<?php echo get_value('download_count', "0") ?>" type="number" placeholder="Enter Download Count" step="any"  required="" name="download_count"  class="form-control " />
-                                            </div>
+                                            <small class="form-text">Leave blank if is free</small>
                                         </div>
                                     </div>
                                 </div>
@@ -140,28 +129,45 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-published-holder" class=" ">
-                                                <select required=""  id="ctrl-published" data-field="published" name="published"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
                                                 <?php
                                                     $options = Menu::isActive();
                                                     if(!empty($options)){
                                                     foreach($options as $option){
                                                     $value = $option['value'];
                                                     $label = $option['label'];
-                                                    $selected = Html::get_field_selected('published', $value, "");
+                                                    //check if current option is checked option
+                                                    $checked = Html::get_field_checked('published', $value, "Yes");
                                                 ?>
-                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                                <?php echo $label ?>
-                                                </option>                                   
+                                                <label class="form-check form-check-inline">
+                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="published" />
+                                                <span class="form-check-label"><?php echo $label ?></span>
+                                                </label>
                                                 <?php
                                                     }
                                                     }
                                                 ?>
-                                                </select>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <input id="ctrl-file_type" data-field="file_type"  value="<?php echo get_value('file_type', "image") ?>" type="hidden" placeholder="Enter File Type" list="file_type_list"  name="file_type"  class="form-control " />
+                                <datalist id="file_type_list">
+                                <?php
+                                    $options = Menu::fileType();
+                                    if(!empty($options)){
+                                    foreach($options as $option){
+                                    $value = $option['value'];
+                                    $label = $option['label'];
+                                    $selected = Html::get_field_selected('file_type', $value, "image");
+                                ?>
+                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                <?php echo $label ?>
+                                </option>
+                                <?php
+                                    }
+                                    }
+                                ?>
+                                </datalist>
                             </div>
                             <div class="form-ajax-status"></div>
                             <!--[form-button-start]-->

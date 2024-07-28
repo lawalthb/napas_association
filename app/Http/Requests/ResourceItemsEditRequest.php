@@ -25,13 +25,13 @@ class ResourceItemsEditRequest extends FormRequest
 		
         return [
             
+				"category_id" => "filled",
 				"title" => "filled|string",
 				"description" => "nullable",
 				"file_path" => "nullable",
-				"category_id" => "filled",
 				"price" => "nullable|numeric",
-				"download_count" => "filled|numeric",
 				"published" => "filled",
+				"file_type" => "nullable",
             
         ];
     }

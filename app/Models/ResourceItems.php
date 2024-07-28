@@ -28,7 +28,7 @@ class ResourceItems extends Model
      * @var array
      */
 	protected $fillable = [
-		'title','description','file_path','category_id','price','download_count','published'
+		'category_id','title','description','file_path','price','published','file_type','download_count'
 	];
 	public $timestamps = false;
 	
@@ -41,9 +41,9 @@ class ResourceItems extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				title LIKE ?  OR 
-				description LIKE ? 
+				resource_items.id LIKE ?  OR 
+				resource_items.title LIKE ?  OR 
+				resource_items.description LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,16 +60,15 @@ class ResourceItems extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"title",
-			"description",
-			"file_path",
-			"category_id",
-			"price",
-			"download_count",
-			"created_at",
-			"updated_at",
-			"published" 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.updated_at AS updated_at",
+			"resource_items.published AS published" 
 		];
 	}
 	
@@ -81,16 +80,15 @@ class ResourceItems extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"title",
-			"description",
-			"file_path",
-			"category_id",
-			"price",
-			"download_count",
-			"created_at",
-			"updated_at",
-			"published" 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.updated_at AS updated_at",
+			"resource_items.published AS published" 
 		];
 	}
 	
@@ -111,7 +109,8 @@ class ResourceItems extends Model
 			"download_count",
 			"created_at",
 			"updated_at",
-			"published" 
+			"published",
+			"file_type" 
 		];
 	}
 	
@@ -132,7 +131,8 @@ class ResourceItems extends Model
 			"download_count",
 			"created_at",
 			"updated_at",
-			"published" 
+			"published",
+			"file_type" 
 		];
 	}
 	
@@ -144,14 +144,92 @@ class ResourceItems extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
+			"category_id",
 			"title",
 			"description",
 			"file_path",
-			"category_id",
 			"price",
-			"download_count",
-			"published" 
+			"published",
+			"file_type",
+			"id" 
+		];
+	}
+	
+
+	/**
+     * return listPdfs page fields of the model.
+     * 
+     * @return array
+     */
+	public static function listPdfsFields(){
+		return [ 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.published AS published" 
+		];
+	}
+	
+
+	/**
+     * return exportListPdfs page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportListPdfsFields(){
+		return [ 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.published AS published" 
+		];
+	}
+	
+
+	/**
+     * return listVideos page fields of the model.
+     * 
+     * @return array
+     */
+	public static function listVideosFields(){
+		return [ 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.updated_at AS updated_at",
+			"resource_items.published AS published" 
+		];
+	}
+	
+
+	/**
+     * return exportListVideos page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportListVideosFields(){
+		return [ 
+			"resource_items.id AS id",
+			"resource_items.title AS title",
+			"resource_items.description AS description",
+			"resource_items.file_path AS file_path",
+			"resource_items.category_id AS category_id",
+			"resource_categories.name AS resourcecategories_name",
+			"resource_items.price AS price",
+			"resource_items.updated_at AS updated_at",
+			"resource_items.published AS published" 
 		];
 	}
 }

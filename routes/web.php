@@ -205,7 +205,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::post('resourceitems/add', 'ResourceItemsController@store')->name('resourceitems.store');
 		
 	Route::any('resourceitems/edit/{rec_id}', 'ResourceItemsController@edit')->name('resourceitems.edit');	
-	Route::get('resourceitems/delete/{rec_id}', 'ResourceItemsController@delete');
+	Route::get('resourceitems/delete/{rec_id}', 'ResourceItemsController@delete');	
+	Route::get('resourceitems/list_pdfs', 'ResourceItemsController@list_pdfs');
+	Route::get('resourceitems/list_pdfs/{filter?}/{filtervalue?}', 'ResourceItemsController@list_pdfs');	
+	Route::get('resourceitems/list_videos', 'ResourceItemsController@list_videos');
+	Route::get('resourceitems/list_videos/{filter?}/{filtervalue?}', 'ResourceItemsController@list_videos');	
+	Route::get('resourceitems/add_pdfs', 'ResourceItemsController@add_pdfs')->name('resourceitems.add_pdfs');
+	Route::post('resourceitems/add_pdfs', 'ResourceItemsController@add_pdfs_store')->name('resourceitems.add_pdfs_store');
+		
+	Route::get('resourceitems/add_videos', 'ResourceItemsController@add_videos')->name('resourceitems.add_videos');
+	Route::post('resourceitems/add_videos', 'ResourceItemsController@add_videos_store')->name('resourceitems.add_videos_store');
+	
 
 /* routes for ResourcesPaids Controller */
 	Route::get('resourcespaids', 'ResourcesPaidsController@index')->name('resourcespaids.index');

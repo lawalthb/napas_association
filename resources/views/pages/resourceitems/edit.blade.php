@@ -45,49 +45,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="title">Title <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-title-holder" class=" ">
-                                            <input id="ctrl-title" data-field="title"  value="<?php  echo $data['title']; ?>" type="text" placeholder="Enter Title"  required="" name="title"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="description">Description </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-description-holder" class=" ">
-                                            <textarea placeholder="Enter Description" id="ctrl-description" data-field="description"  rows="5" name="description" class=" form-control"><?php  echo $data['description']; ?></textarea>
-                                            <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="file_path">File Path </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-file_path-holder" class=" ">
-                                            <div class="dropzone " input="#ctrl-file_path" fieldname="file_path" uploadurl="{{ url('fileuploader/upload/file_path') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
-                                                <input name="file_path" id="ctrl-file_path" data-field="file_path" class="dropzone-input form-control" value="<?php  echo $data['file_path']; ?>" type="text"  />
-                                                <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
-                                                <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
-                                            </div>
-                                        </div>
-                                        <?php Html :: uploaded_files_list($data['file_path'], '#ctrl-file_path'); ?>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="category_id">Category Id <span class="text-danger">*</span></label>
+                                        <label class="control-label" for="category_id">Category <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-category_id-holder" class=" ">
@@ -114,11 +72,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="price">Price </label>
+                                        <label class="control-label" for="title">Title <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <div id="ctrl-price-holder" class=" ">
-                                            <input id="ctrl-price" data-field="price"  value="<?php  echo $data['price']; ?>" type="number" placeholder="Enter Price" step="any"  name="price"  class="form-control " />
+                                        <div id="ctrl-title-holder" class=" ">
+                                            <input id="ctrl-title" data-field="title"  value="<?php  echo $data['title']; ?>" type="text" placeholder="Enter Title"  required="" name="title"  class="form-control " />
                                         </div>
                                     </div>
                                 </div>
@@ -126,12 +84,43 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="download_count">Download Count <span class="text-danger">*</span></label>
+                                        <label class="control-label" for="description">Description </label>
                                     </div>
                                     <div class="col-sm-8">
-                                        <div id="ctrl-download_count-holder" class=" ">
-                                            <input id="ctrl-download_count" data-field="download_count"  value="<?php  echo $data['download_count']; ?>" type="number" placeholder="Enter Download Count" step="any"  required="" name="download_count"  class="form-control " />
+                                        <div id="ctrl-description-holder" class=" ">
+                                            <textarea placeholder="Enter Description" id="ctrl-description" data-field="description"  rows="5" name="description" class=" form-control"><?php  echo $data['description']; ?></textarea>
+                                            <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
                                         </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="file_path">File </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-file_path-holder" class=" ">
+                                            <div class="dropzone " input="#ctrl-file_path" fieldname="file_path" uploadurl="{{ url('fileuploader/upload/file_path') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
+                                                <input name="file_path" id="ctrl-file_path" data-field="file_path" class="dropzone-input form-control" value="<?php  echo $data['file_path']; ?>" type="text"  />
+                                                <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
+                                                <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
+                                            </div>
+                                        </div>
+                                        <?php Html :: uploaded_files_list($data['file_path'], '#ctrl-file_path'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <label class="control-label" for="price">Price </label>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div id="ctrl-price-holder" class=" ">
+                                            <input id="ctrl-price" data-field="price"  value="<?php  echo $data['price']; ?>" type="number" placeholder="Enter Price" step="any"  name="price"  class="form-control " />
+                                        </div>
+                                        <small class="form-text">Leave blank if is free</small>
                                     </div>
                                 </div>
                             </div>
@@ -142,8 +131,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-published-holder" class=" ">
-                                            <select required=""  id="ctrl-published" data-field="published" name="published"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
                                             <?php
                                                 $options = Menu::isActive();
                                                 $field_value = $data['published'];
@@ -151,20 +138,40 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 foreach($options as $option){
                                                 $value = $option['value'];
                                                 $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
+                                                //check if value is among checked options
+                                                $checked = Html::get_record_checked($field_value, $value);
                                             ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
+                                            <label class="form-check form-check-inline">
+                                            <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="published" />
+                                            <span class="form-check-label"><?php echo $label ?></span>
+                                            </label>
                                             <?php
                                                 }
                                                 }
                                             ?>
-                                            </select>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <input id="ctrl-file_type" data-field="file_type"  value="<?php  echo $data['file_type']; ?>" type="hidden" placeholder="Enter File Type" list="file_type_list"  name="file_type"  class="form-control " />
+                            <datalist id="file_type_list">
+                            <?php
+                                $options = Menu::fileType();
+                                $field_value = $data['file_type'];
+                                if(!empty($options)){
+                                foreach($options as $option){
+                                $value = $option['value'];
+                                $label = $option['label'];
+                                $selected = Html::get_record_selected($field_value, $value);
+                            ?>
+                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                            <?php echo $label ?>
+                            </option>
+                            <?php
+                                }
+                                }
+                            ?>
+                            </datalist>
                         </div>
                         <div class="form-ajax-status"></div>
                         <!--[form-content-end]-->

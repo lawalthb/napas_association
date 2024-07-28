@@ -25,13 +25,13 @@ class ResourceItemsAddRequest extends FormRequest
 		
         return [
             
+				"category_id" => "required",
 				"title" => "required|string",
 				"description" => "nullable",
 				"file_path" => "nullable",
-				"category_id" => "required",
 				"price" => "nullable|numeric",
-				"download_count" => "required|numeric",
 				"published" => "required",
+				"file_type" => "nullable",
             
         ];
     }

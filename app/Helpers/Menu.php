@@ -35,6 +35,30 @@
 		],
 		
 		[
+			'path' => '#',
+			'label' => "Resources", 
+			'icon' => '<i class="material-icons ">picture_as_pdf</i>','submenu' => [
+		[
+			'path' => 'resourcecategories',
+			'label' => "Categories", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'resourceitems',
+			'label' => "Resource Items", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'resourcespaids',
+			'label' => "Resources Paids", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		]
+	]
+		],
+		
+		[
 			'path' => 'contestcategories',
 			'label' => "Contest Categories", 
 			'icon' => '<i class="material-icons">extension</i>'
@@ -95,24 +119,6 @@
 		],
 		
 		[
-			'path' => 'resourcecategories',
-			'label' => "Resource Categories", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'resourceitems',
-			'label' => "Resource Items", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'resourcespaids',
-			'label' => "Resources Paids", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
 			'path' => 'supervisorusers',
 			'label' => "Supervisor Users", 
 			'icon' => '<i class="material-icons">extension</i>'
@@ -121,108 +127,6 @@
 		[
 			'path' => 'users',
 			'label' => "Users", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webabouts',
-			'label' => "Web Abouts", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webbenefits',
-			'label' => "Web Benefits", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webcolours',
-			'label' => "Web Colours", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webcontacts',
-			'label' => "Web Contacts", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webcounters',
-			'label' => "Web Counters", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webctas',
-			'label' => "Web Ctas", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webevents',
-			'label' => "Web Events", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webexcos',
-			'label' => "Web Excos", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webgalleries',
-			'label' => "Web Galleries", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webheaders',
-			'label' => "Web Headers", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webregistrations',
-			'label' => "Web Registrations", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webresources',
-			'label' => "Web Resources", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'websettings',
-			'label' => "Web Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'websliders',
-			'label' => "Web Sliders", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webtestimonials',
-			'label' => "Web Testimonials", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webtopbars',
-			'label' => "Web Topbars", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'webvissions',
-			'label' => "Web Vissions", 
 			'icon' => '<i class="material-icons">extension</i>'
 		],
 		
@@ -291,6 +195,22 @@
 		],] ;
 	}
 	
+	public static function fileType(){
+		return [
+		[
+			'value' => 'image', 
+			'label' => "image", 
+		],
+		[
+			'value' => 'pdf', 
+			'label' => "pdf", 
+		],
+		[
+			'value' => 'videos', 
+			'label' => "videos", 
+		],] ;
+	}
+	
 	public static function status(){
 		return [
 		[
@@ -336,6 +256,18 @@
 		[
 			'value' => 'Lecturer', 
 			'label' => "Lecturer", 
+		],] ;
+	}
+	
+	public static function topBar(){
+		return [
+		[
+			'value' => 'on', 
+			'label' => "on", 
+		],
+		[
+			'value' => 'off', 
+			'label' => "off", 
 		],] ;
 	}
 	

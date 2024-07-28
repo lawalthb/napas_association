@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResourceItemsAddRequest;
 use App\Http\Requests\ResourceItemsEditRequest;
+use App\Http\Requests\ResourceItemsadd_pdfsRequest;
+use App\Http\Requests\ResourceItemsadd_videosRequest;
 use App\Models\ResourceItems;
 use Illuminate\Http\Request;
 use Exception;
@@ -25,9 +27,11 @@ class ResourceItemsController extends Controller
 			$search = trim($request->search);
 			ResourceItems::search($query, $search); // search table records
 		}
+		$query->join("resource_categories", "resource_items.category_id", "=", "resource_categories.id");
 		$orderby = $request->orderby ?? "resource_items.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
+		$query->where("file_type", "=" , "image");
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
@@ -124,5 +128,119 @@ class ResourceItemsController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function list_pdfs(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.resourceitems.list_pdfs";
+		$query = ResourceItems::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			ResourceItems::search($query, $search); // search table records
+		}
+		$query->join("resource_categories", "resource_items.category_id", "=", "resource_categories.id");
+		$orderby = $request->orderby ?? "resource_items.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("file_type", "=" , "pdf");
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ResourceItems::listPdfsFields());
+		return $this->renderView($view, compact("records"));
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function list_videos(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.resourceitems.list_videos";
+		$query = ResourceItems::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			ResourceItems::search($query, $search); // search table records
+		}
+		$query->join("resource_categories", "resource_items.category_id", "=", "resource_categories.id");
+		$orderby = $request->orderby ?? "resource_items.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("file_type", "=" , "videos");
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ResourceItems::listVideosFields());
+		return $this->renderView($view, compact("records"));
+	}
+	
+
+	/**
+     * Display form page
+     * @return \Illuminate\View\View
+     */
+	function add_pdfs(){
+		return $this->renderView("pages.resourceitems.add_pdfs");
+	}
+	
+
+	/**
+     * Save form record to the table
+     * @return \Illuminate\Http\Response
+     */
+	function add_pdfs_store(ResourceItemsadd_pdfsRequest $request){
+		$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("file_path", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['file_path'], "file_path");
+			$modeldata['file_path'] = $fileInfo['filepath'];
+		}
+		
+		//save ResourceItems record
+		$record = ResourceItems::create($modeldata);
+		$rec_id = $record->id;
+		return $this->redirect("resourceitems/list_pdfs", "Record added successfully");
+	}
+	
+
+	/**
+     * Display form page
+     * @return \Illuminate\View\View
+     */
+	function add_videos(){
+		return $this->renderView("pages.resourceitems.add_videos");
+	}
+	
+
+	/**
+     * Save form record to the table
+     * @return \Illuminate\Http\Response
+     */
+	function add_videos_store(ResourceItemsadd_videosRequest $request){
+		$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("file_path", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['file_path'], "file_path");
+			$modeldata['file_path'] = $fileInfo['filepath'];
+		}
+		
+		//save ResourceItems record
+		$record = ResourceItems::create($modeldata);
+		$rec_id = $record->id;
+		return $this->redirect("resourceitems/list_videos", "Record added successfully");
 	}
 }

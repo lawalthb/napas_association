@@ -82,7 +82,7 @@ class WebSettingsController extends Controller
 		if ($request->isMethod('post')) {
 			$modeldata = $this->normalizeFormData($request->validated());
 			$record->update($modeldata);
-			return $this->redirect("websettings", "Record updated successfully");
+			return $this->redirect("webcolours", "Record updated successfully");
 		}
 		return $this->renderView("pages.websettings.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}
