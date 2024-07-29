@@ -29,7 +29,7 @@ class AcademicSessionsAddRequest extends FormRequest
 				"from_date" => "nullable|date",
 				"to_date" => "nullable|date",
 				"is_active" => "required",
-				"updated_by" => "required|numeric",
+				"updated_by" => "required",
             
         ];
     }

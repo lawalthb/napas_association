@@ -85,6 +85,18 @@ class ComponentsData{
 	
 
 	/**
+     * user_id_option_list Model Action
+     * @return array
+     */
+	function user_id_option_list(){
+		$sqltext = "SELECT  DISTINCT id AS value,lastname AS label FROM users ORDER BY lastname ASC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * level_id_option_list Model Action
      * @return array
      */
@@ -186,6 +198,31 @@ class ComponentsData{
 			return true;
 		}
 		return false;
+	}
+	
+
+	/**
+     * electionaspirants_academic_session_autofill Model Action
+     * @return array
+     */
+	function electionaspirants_academic_session_autofill(){
+		$sqltext = "SELECT session_name FROM academic_sessions WHERE session_name=:value" ;
+		$query_params = [];
+		$query_params['value'] = request()->get('value');
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * academic_session_option_list Model Action
+     * @return array
+     */
+	function academic_session_option_list(){
+		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
 	}
 	
 

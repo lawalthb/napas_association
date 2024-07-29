@@ -41,8 +41,8 @@ class AcademicSessions extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				session_name LIKE ? 
+				academic_sessions.id LIKE ?  OR 
+				academic_sessions.session_name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%"
@@ -59,14 +59,14 @@ class AcademicSessions extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"session_name",
-			"from_date",
-			"to_date",
-			"is_active",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"academic_sessions.id AS id",
+			"academic_sessions.session_name AS session_name",
+			"academic_sessions.from_date AS from_date",
+			"academic_sessions.to_date AS to_date",
+			"academic_sessions.is_active AS is_active",
+			"academic_sessions.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"academic_sessions.updated_at AS updated_at" 
 		];
 	}
 	
@@ -78,14 +78,14 @@ class AcademicSessions extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"session_name",
-			"from_date",
-			"to_date",
-			"is_active",
-			"updated_by",
-			"updated_at",
-			"created_at" 
+			"academic_sessions.id AS id",
+			"academic_sessions.session_name AS session_name",
+			"academic_sessions.from_date AS from_date",
+			"academic_sessions.to_date AS to_date",
+			"academic_sessions.is_active AS is_active",
+			"academic_sessions.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"academic_sessions.updated_at AS updated_at" 
 		];
 	}
 	
@@ -135,12 +135,12 @@ class AcademicSessions extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"session_name",
 			"from_date",
 			"to_date",
 			"is_active",
-			"updated_by" 
+			"updated_by",
+			"id" 
 		];
 	}
 }

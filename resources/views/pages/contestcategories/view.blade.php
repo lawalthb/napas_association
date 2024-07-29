@@ -61,10 +61,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Academic Session Id</small>
+                                                    <small class="text-muted">Academic Session</small>
                                                     <div class="fw-bold">
                                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
-                                                        <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
+                                                        <?php echo $data['academicsessions_session_name'] ?>
                                                     </a>
                                                 </div>
                                             </div>
@@ -102,7 +102,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <small class="text-muted">Updated By</small>
                                                 <div class="fw-bold">
                                                     <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                                    <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
+                                                    <?php echo $data['users_lastname'] ?>
                                                 </a>
                                             </div>
                                         </div>

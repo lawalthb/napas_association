@@ -25,10 +25,10 @@ class ElectionAspirantsAddRequest extends FormRequest
 		
         return [
             
+				"academic_session" => "required",
+				"position_id" => "required",
 				"user_id" => "required",
 				"name" => "required|string",
-				"position_id" => "required",
-				"academic_session" => "required",
 				"votes" => "required|numeric",
 				"payment_status" => "required",
             

@@ -150,7 +150,6 @@ class FinalProjects extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"user_id",
 			"level_id",
 			"topic1",
@@ -158,7 +157,8 @@ class FinalProjects extends Model
 			"topic3",
 			"approve_num",
 			"supervisor_topic",
-			"has_submit" 
+			"has_submit",
+			"id" 
 		];
 	}
 }

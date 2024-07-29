@@ -25,6 +25,7 @@ class AcademicSessionsController extends Controller
 			$search = trim($request->search);
 			AcademicSessions::search($query, $search); // search table records
 		}
+		$query->join("users", "academic_sessions.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "academic_sessions.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

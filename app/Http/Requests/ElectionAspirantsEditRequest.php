@@ -25,10 +25,10 @@ class ElectionAspirantsEditRequest extends FormRequest
 		
         return [
             
+				"academic_session" => "filled",
+				"position_id" => "filled",
 				"user_id" => "filled",
 				"name" => "filled|string",
-				"position_id" => "filled",
-				"academic_session" => "filled",
 				"votes" => "filled|numeric",
 				"payment_status" => "filled",
             

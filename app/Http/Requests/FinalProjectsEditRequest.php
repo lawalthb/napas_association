@@ -25,7 +25,7 @@ class FinalProjectsEditRequest extends FormRequest
 		
         return [
             
-				"user_id" => "filled|numeric",
+				"user_id" => "filled",
 				"level_id" => "filled",
 				"topic1" => "nullable|string",
 				"topic2" => "nullable|string",

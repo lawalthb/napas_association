@@ -92,33 +92,19 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="admin_id">Admin Id <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-admin_id-holder" class=" ">
-                                                <select required=""  id="ctrl-admin_id" data-field="admin_id" name="admin_id"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
-                                                    $options = $comp_model->updated_by_option_list() ?? [];
-                                                    foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('admin_id', $value, "");
-                                                ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
-                                                <?php
-                                                    }
-                                                ?>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input id="ctrl-admin_id" data-field="admin_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter Admin Id" list="admin_id_list"  required="" name="admin_id"  class="form-control " />
+                                <datalist id="admin_id_list">
+                                <?php 
+                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                    foreach($options as $option){
+                                    $value = $option->value;
+                                    $label = $option->label ?? $value;
+                                ?>
+                                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </datalist>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">

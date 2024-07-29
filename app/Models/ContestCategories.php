@@ -41,8 +41,8 @@ class ContestCategories extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ? 
+				contest_categories.id LIKE ?  OR 
+				contest_categories.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%"
@@ -59,14 +59,15 @@ class ContestCategories extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"academic_session_id",
-			"name",
-			"price",
-			"updated_by",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"contest_categories.id AS id",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"contest_categories.updated_at AS updated_at",
+			"contest_categories.positioning AS positioning" 
 		];
 	}
 	
@@ -78,14 +79,15 @@ class ContestCategories extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"academic_session_id",
-			"name",
-			"price",
-			"updated_by",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"contest_categories.id AS id",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"contest_categories.updated_at AS updated_at",
+			"contest_categories.positioning AS positioning" 
 		];
 	}
 	
@@ -97,14 +99,16 @@ class ContestCategories extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"academic_session_id",
-			"name",
-			"price",
-			"updated_by",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"contest_categories.id AS id",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"contest_categories.created_at AS created_at",
+			"contest_categories.updated_at AS updated_at",
+			"contest_categories.positioning AS positioning" 
 		];
 	}
 	
@@ -116,14 +120,16 @@ class ContestCategories extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"academic_session_id",
-			"name",
-			"price",
-			"updated_by",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"contest_categories.id AS id",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.updated_by AS updated_by",
+			"users.lastname AS users_lastname",
+			"contest_categories.created_at AS created_at",
+			"contest_categories.updated_at AS updated_at",
+			"contest_categories.positioning AS positioning" 
 		];
 	}
 	
@@ -135,12 +141,12 @@ class ContestCategories extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"academic_session_id",
 			"name",
 			"price",
 			"updated_by",
-			"positioning" 
+			"positioning",
+			"id" 
 		];
 	}
 }

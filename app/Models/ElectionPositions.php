@@ -41,11 +41,12 @@ class ElectionPositions extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ? 
+				election_positions.id LIKE ?  OR 
+				academic_sessions.session_name LIKE ?  OR 
+				election_positions.name LIKE ? 
 		)';
 		$search_params = [
-			"%$text%","%$text%"
+			"%$text%","%$text%","%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -59,14 +60,15 @@ class ElectionPositions extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"name",
-			"form_amt",
-			"admin_id",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"election_positions.id AS id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.updated_at AS updated_at",
+			"election_positions.positioning AS positioning",
+			"election_positions.admin_id AS admin_id",
+			"users.lastname AS users_lastname",
+			"academic_sessions.id AS academicsessions_id" 
 		];
 	}
 	
@@ -78,14 +80,15 @@ class ElectionPositions extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"name",
-			"form_amt",
-			"admin_id",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"election_positions.id AS id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.updated_at AS updated_at",
+			"election_positions.positioning AS positioning",
+			"election_positions.admin_id AS admin_id",
+			"users.lastname AS users_lastname",
+			"academic_sessions.id AS academicsessions_id" 
 		];
 	}
 	
@@ -97,14 +100,22 @@ class ElectionPositions extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"name",
-			"form_amt",
-			"admin_id",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"election_positions.id AS id",
+			"election_positions.academic_session AS academic_session",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.admin_id AS admin_id",
+			"election_positions.created_at AS created_at",
+			"election_positions.updated_at AS updated_at",
+			"election_positions.positioning AS positioning",
+			"academic_sessions.id AS academicsessions_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"academic_sessions.from_date AS academicsessions_from_date",
+			"academic_sessions.to_date AS academicsessions_to_date",
+			"academic_sessions.is_active AS academicsessions_is_active",
+			"academic_sessions.updated_by AS academicsessions_updated_by",
+			"academic_sessions.updated_at AS academicsessions_updated_at",
+			"academic_sessions.created_at AS academicsessions_created_at" 
 		];
 	}
 	
@@ -116,14 +127,22 @@ class ElectionPositions extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"academic_session",
-			"name",
-			"form_amt",
-			"admin_id",
-			"created_at",
-			"updated_at",
-			"positioning" 
+			"election_positions.id AS id",
+			"election_positions.academic_session AS academic_session",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.admin_id AS admin_id",
+			"election_positions.created_at AS created_at",
+			"election_positions.updated_at AS updated_at",
+			"election_positions.positioning AS positioning",
+			"academic_sessions.id AS academicsessions_id",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"academic_sessions.from_date AS academicsessions_from_date",
+			"academic_sessions.to_date AS academicsessions_to_date",
+			"academic_sessions.is_active AS academicsessions_is_active",
+			"academic_sessions.updated_by AS academicsessions_updated_by",
+			"academic_sessions.updated_at AS academicsessions_updated_at",
+			"academic_sessions.created_at AS academicsessions_created_at" 
 		];
 	}
 	
@@ -135,12 +154,12 @@ class ElectionPositions extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"academic_session",
 			"name",
 			"form_amt",
 			"admin_id",
-			"positioning" 
+			"positioning",
+			"id" 
 		];
 	}
 }

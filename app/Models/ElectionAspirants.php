@@ -28,7 +28,7 @@ class ElectionAspirants extends Model
      * @var array
      */
 	protected $fillable = [
-		'user_id','name','position_id','academic_session','votes','payment_status'
+		'academic_session','position_id','user_id','name','votes','payment_status'
 	];
 	public $timestamps = false;
 	
@@ -139,13 +139,13 @@ class ElectionAspirants extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
+			"academic_session",
+			"position_id",
 			"user_id",
 			"name",
-			"position_id",
-			"academic_session",
 			"votes",
-			"payment_status" 
+			"payment_status",
+			"id" 
 		];
 	}
 }

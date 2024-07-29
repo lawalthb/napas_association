@@ -29,7 +29,7 @@ class AcademicSessionsEditRequest extends FormRequest
 				"from_date" => "nullable|date",
 				"to_date" => "nullable|date",
 				"is_active" => "filled",
-				"updated_by" => "filled|numeric",
+				"updated_by" => "filled",
             
         ];
     }

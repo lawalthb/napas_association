@@ -129,7 +129,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('electionpositions/add', 'ElectionPositionsController@add')->name('electionpositions.add');
 	Route::post('electionpositions/add', 'ElectionPositionsController@store')->name('electionpositions.store');
 		
-	Route::any('electionpositions/edit/{rec_id}', 'ElectionPositionsController@edit')->name('electionpositions.edit');	
+	Route::any('electionpositions/edit/{rec_id}', 'ElectionPositionsController@edit')->name('electionpositions.edit');Route::any('electionpositions/editfield/{rec_id}', 'ElectionPositionsController@editfield');	
 	Route::get('electionpositions/delete/{rec_id}', 'ElectionPositionsController@delete');
 
 /* routes for ElectionVotes Controller */
@@ -467,6 +467,12 @@ Route::get('componentsdata/aspirant_id_option_list',  function(Request $request)
 	}
 )->middleware(['auth']);
 	
+Route::get('componentsdata/user_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->user_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/level_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->level_id_option_list($request);
@@ -514,6 +520,18 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 		return $compModel->users_email_value_exist($request);
 	}
 );
+	
+Route::get('componentsdata/electionaspirants_academic_session_autofill',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->electionaspirants_academic_session_autofill($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/academic_session_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->academic_session_option_list($request);
+	}
+)->middleware(['auth']);
 	
 Route::get('componentsdata/name_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();

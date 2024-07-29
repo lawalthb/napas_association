@@ -94,7 +94,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                     foreach($options as $option){
                                                     $value = $option['value'];
                                                     $label = $option['label'];
-                                                    $selected = Html::get_field_selected('is_active', $value, "");
+                                                    $selected = Html::get_field_selected('is_active', $value, "Yes");
                                                 ?>
                                                 <option <?php echo $selected ?> value="<?php echo $value ?>">
                                                 <?php echo $label ?>
@@ -108,18 +108,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="updated_by">Updated By <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-updated_by-holder" class=" ">
-                                                <input id="ctrl-updated_by" data-field="updated_by"  value="<?php echo get_value('updated_by') ?>" type="number" placeholder="Enter Updated By" step="any"  required="" name="updated_by"  class="form-control " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input id="ctrl-updated_by" data-field="updated_by"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter Updated By"  required="" name="updated_by"  class="form-control " />
                             </div>
                             <div class="form-ajax-status"></div>
                             <!--[form-button-start]-->

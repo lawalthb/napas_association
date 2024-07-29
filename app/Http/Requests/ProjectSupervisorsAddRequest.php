@@ -25,11 +25,11 @@ class ProjectSupervisorsAddRequest extends FormRequest
 		
         return [
             
-				"row.*.name" => "required|string",
-				"row.*.phone" => "required|string",
-				"row.*.email" => "nullable|email",
-				"row.*.other" => "nullable|string",
-				"row.*.is_active" => "required",
+				"name" => "required|string",
+				"phone" => "required|string",
+				"email" => "nullable|email",
+				"other" => "nullable|string",
+				"is_active" => "required",
             
         ];
     }

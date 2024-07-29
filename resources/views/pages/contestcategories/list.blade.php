@@ -69,12 +69,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </label>
                                         </th>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-academic_session_id" > Academic Session Id</th>
+                                        <th class="td-academic_session_id" > Academic Session</th>
                                         <th class="td-name" > Name</th>
-                                        <th class="td-price" > Price</th>
+                                        <th class="td-price" > Price per vote</th>
                                         <th class="td-updated_by" > Updated By</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
+                                        <th class="td-updated_at" > Updated@</th>
                                         <th class="td-positioning" > Positioning</th>
                                         <th class="td-btn"></th>
                                     </tr>
@@ -102,7 +101,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </td>
                                         <td class="td-academic_session_id">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Academic Sessions" ?>
+                                            <?php echo $data['academicsessions_session_name'] ?>
                                         </a>
                                     </td>
                                     <td class="td-name">
@@ -113,11 +112,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </td>
                                     <td class="td-updated_by">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                        <?php echo $data['users_lastname'] ?>
                                     </a>
-                                </td>
-                                <td class="td-created_at">
-                                    <?php echo  $data['created_at'] ; ?>
                                 </td>
                                 <td class="td-updated_at">
                                     <?php echo  $data['updated_at'] ; ?>
