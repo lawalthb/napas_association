@@ -25,11 +25,11 @@ class ElectionPositionsAddRequest extends FormRequest
 		
         return [
             
-				"academic_session" => "nullable",
 				"name" => "required|string",
 				"form_amt" => "required|numeric",
 				"admin_id" => "required",
 				"positioning" => "required|numeric",
+				"academic_session_id" => "required",
             
         ];
     }

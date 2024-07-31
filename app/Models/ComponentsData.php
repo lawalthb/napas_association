@@ -215,10 +215,10 @@ class ComponentsData{
 	
 
 	/**
-     * academic_session_option_list Model Action
+     * academic_session_id_option_list_2 Model Action
      * @return array
      */
-	function academic_session_option_list(){
+	function academic_session_id_option_list_2(){
 		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);

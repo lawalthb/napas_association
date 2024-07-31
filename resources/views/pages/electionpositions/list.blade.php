@@ -9,7 +9,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $academic_session_option_list = $comp_model->academic_session_option_list();
+    $academic_session_id_option_list_2 = $comp_model->academic_session_id_option_list_2();
     $pageTitle = "Election Positions"; //set dynamic page title
 ?>
 @extends($layout)
@@ -56,16 +56,16 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <form method="get" action="" class="form">
                     <div class="card mb-3 p-3 ">
                         <div class="">
-                            <div class="fw-bold">Academic Session</div>
+                            <div class="fw-bold">Filter by Academic Session</div>
                         </div>
-                        <select   name="academic_session" class="form-select custom " >
+                        <select   name="academic_session_id" class="form-select custom " >
                         <option value="">Select a value ...</option>
                         <?php 
-                            $options = $academic_session_option_list ?? [];
+                            $options = $academic_session_id_option_list_2 ?? [];
                             foreach($options as $option){
                             $value = $option->value;
                             $label = $option->label ?? $value;
-                            $selected = Html::get_field_selected('academic_session', $value);
+                            $selected = Html::get_field_selected('academic_session_id', $value);
                         ?>
                         <option <?php echo $selected; ?> value="<?php echo $value; ?>">
                         <?php echo $label; ?>
@@ -90,19 +90,19 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
                                 <?php
-                                    Html::filter_tag('academic_session', 'Academic Session', $academic_session_option_list);
+                                    Html::filter_tag('academic_session_id', 'Academic Session', $academic_session_id_option_list_2);
                                 ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
                                     <tr>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-session_name" > Academic Session</th>
                                         <th class="td-name" > Name</th>
                                         <th class="td-form_amt" > Form Amt</th>
                                         <th class="td-updated_at" > Updated At</th>
                                         <th class="td-positioning" > Positioning</th>
                                         <th class="td-admin_id" > updateBy</th>
+                                        <th class="td-academic_session_id" > Academic Session</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -121,9 +121,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <!--PageComponentStart-->
                                         <td class="td-id">
                                             <a href="<?php print_link("/electionpositions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
-                                        </td>
-                                        <td class="td-academicsessions_session_name">
-                                            <?php echo  $data['academicsessions_session_name'] ; ?>
                                         </td>
                                         <td class="td-name">
                                             <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
@@ -185,78 +182,83 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <?php echo $data['users_lastname'] ?>
                                         </a>
                                     </td>
-                                    <!--PageComponentEnd-->
-                                    <td class="td-btn">
-                                        <div class="dropdown" >
-                                            <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                            <i class="material-icons">menu</i> 
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <a class="dropdown-item "   href="<?php print_link("electionpositions/view/$rec_id"); ?>" >
-                                                <i class="material-icons">visibility</i> View
-                                            </a>
-                                            <a class="dropdown-item "   href="<?php print_link("electionpositions/edit/$rec_id"); ?>" >
-                                            <i class="material-icons">edit</i> Edit
-                                        </a>
-                                        <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("electionpositions/delete/$rec_id"); ?>" >
-                                        <i class="material-icons">delete_sweep</i> Delete
+                                    <td class="td-academic_session_id">
+                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
+                                        <?php echo $data['academicsessions_session_name'] ?>
                                     </a>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php 
-                        }
-                    ?>
-                    <!--endrecord-->
-                </tbody>
-                <tbody class="search-data"></tbody>
-                <?php
+                                </td>
+                                <!--PageComponentEnd-->
+                                <td class="td-btn">
+                                    <div class="dropdown" >
+                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                        <i class="material-icons">menu</i> 
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <a class="dropdown-item "   href="<?php print_link("electionpositions/view/$rec_id"); ?>" >
+                                            <i class="material-icons">visibility</i> View
+                                        </a>
+                                        <a class="dropdown-item "   href="<?php print_link("electionpositions/edit/$rec_id"); ?>" >
+                                        <i class="material-icons">edit</i> Edit
+                                    </a>
+                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("electionpositions/delete/$rec_id"); ?>" >
+                                    <i class="material-icons">delete_sweep</i> Delete
+                                </a>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <?php 
                     }
-                    else{
                 ?>
-                <tbody class="page-data">
-                    <tr>
-                        <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                            <i class="material-icons">block</i> No record found
-                        </td>
-                    </tr>
-                </tbody>
+                <!--endrecord-->
+            </tbody>
+            <tbody class="search-data"></tbody>
+            <?php
+                }
+                else{
+            ?>
+            <tbody class="page-data">
+                <tr>
+                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                        <i class="material-icons">block</i> No record found
+                    </td>
+                </tr>
+            </tbody>
+            <?php
+                }
+            ?>
+        </table>
+    </div>
+    <?php
+        if($show_footer){
+    ?>
+    <div class=" mt-3">
+        <div class="row align-items-center justify-content-between">    
+            <div class="col-md-auto d-flex">    
+                <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("electionpositions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                <i class="material-icons">delete_sweep</i> Delete Selected
+                </button>
+            </div>
+            <div class="col">   
                 <?php
+                    if($show_pagination == true){
+                    $pager = new Pagination($total_records, $record_count);
+                    $pager->show_page_count = false;
+                    $pager->show_record_count = true;
+                    $pager->show_page_limit =false;
+                    $pager->limit = $limit;
+                    $pager->show_page_number_list = true;
+                    $pager->pager_link_range=5;
+                    $pager->render();
                     }
                 ?>
-            </table>
-        </div>
-        <?php
-            if($show_footer){
-        ?>
-        <div class=" mt-3">
-            <div class="row align-items-center justify-content-between">    
-                <div class="col-md-auto d-flex">    
-                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("electionpositions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                    <i class="material-icons">delete_sweep</i> Delete Selected
-                    </button>
-                </div>
-                <div class="col">   
-                    <?php
-                        if($show_pagination == true){
-                        $pager = new Pagination($total_records, $record_count);
-                        $pager->show_page_count = false;
-                        $pager->show_record_count = true;
-                        $pager->show_page_limit =false;
-                        $pager->limit = $limit;
-                        $pager->show_page_number_list = true;
-                        $pager->pager_link_range=5;
-                        $pager->render();
-                        }
-                    ?>
-                </div>
             </div>
         </div>
-        <?php
-            }
-        ?>
     </div>
+    <?php
+        }
+    ?>
+</div>
 </div>
 </div>
 </div>

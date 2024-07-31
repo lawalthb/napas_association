@@ -27,16 +27,16 @@ class ElectionPositionsController extends Controller
 			ElectionPositions::search($query, $search); // search table records
 		}
 		$query->join("users", "election_positions.admin_id", "=", "users.id");
-		$query->join("academic_sessions", "election_positions.academic_session", "=", "academic_sessions.id");
+		$query->join("academic_sessions", "election_positions.academic_session_id", "=", "academic_sessions.id");
 		$orderby = $request->orderby ?? "election_positions.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
-		if($request->academic_session){
-			$val = $request->academic_session;
-			$query->where(DB::raw("election_positions.academic_session"), "=", $val);
+		if($request->academic_session_id){
+			$val = $request->academic_session_id;
+			$query->where(DB::raw("election_positions.academic_session_id"), "=", $val);
 		}
 		$records = $query->paginate($limit, ElectionPositions::listFields());
 		return $this->renderView($view, compact("records"));
@@ -50,7 +50,6 @@ class ElectionPositionsController extends Controller
      */
 	function view($rec_id = null){
 		$query = ElectionPositions::query();
-		$query->join("academic_sessions", "election_positions.academic_session", "=", "academic_sessions.id");
 		$record = $query->findOrFail($rec_id, ElectionPositions::viewFields());
 		return $this->renderView("pages.electionpositions.view", ["data" => $record]);
 	}

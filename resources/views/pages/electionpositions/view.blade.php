@@ -61,10 +61,34 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Academic Session</small>
+                                                    <small class="text-muted">Name</small>
                                                     <div class="fw-bold">
-                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">
-                                                        <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
+                                                        <?php echo  $data['name'] ; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <small class="text-muted">Form Amt</small>
+                                                    <div class="fw-bold">
+                                                        <?php echo  $data['form_amt'] ; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <small class="text-muted">Admin Id</small>
+                                                    <div class="fw-bold">
+                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[admin_id]?subpage=1") ?>">
+                                                        <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
                                                     </a>
                                                 </div>
                                             </div>
@@ -75,9 +99,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Name</small>
+                                                <small class="text-muted">Created At</small>
                                                 <div class="fw-bold">
-                                                    <?php echo  $data['name'] ; ?>
+                                                    <?php echo  $data['created_at'] ; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -87,9 +111,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Form Amt</small>
+                                                <small class="text-muted">Updated At</small>
                                                 <div class="fw-bold">
-                                                    <?php echo  $data['form_amt'] ; ?>
+                                                    <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                                    <?php echo relative_date($data['updated_at']); ?>
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,145 +125,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Admin Id</small>
+                                                <small class="text-muted">Positioning</small>
                                                 <div class="fw-bold">
-                                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[admin_id]?subpage=1") ?>">
-                                                    <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
+                                                    <?php echo  $data['positioning'] ; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <small class="text-muted">Academic Session Id</small>
+                                                <div class="fw-bold">
+                                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
+                                                    <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
                                                 </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Created At</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['created_at'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Updated At</small>
-                                            <div class="fw-bold">
-                                                <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
-                                                <?php echo relative_date($data['updated_at']); ?>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Positioning</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['positioning'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Id</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_id'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Session Name</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_session_name'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions From Date</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_from_date'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions To Date</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_to_date'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Is Active</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_is_active'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Updated By</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_updated_by'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Updated At</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_updated_at'] ; ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <small class="text-muted">Academicsessions Created At</small>
-                                            <div class="fw-bold">
-                                                <?php echo  $data['academicsessions_created_at'] ; ?>
                                             </div>
                                         </div>
                                     </div>

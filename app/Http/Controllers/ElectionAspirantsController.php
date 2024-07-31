@@ -25,6 +25,9 @@ class ElectionAspirantsController extends Controller
 			$search = trim($request->search);
 			ElectionAspirants::search($query, $search); // search table records
 		}
+		$query->join("users", "election_aspirants.user_id", "=", "users.id");
+		$query->join("election_positions", "election_aspirants.position_id", "=", "election_positions.id");
+		$query->join("academic_sessions", "election_aspirants.academic_session", "=", "academic_sessions.id");
 		$orderby = $request->orderby ?? "election_aspirants.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -43,6 +46,9 @@ class ElectionAspirantsController extends Controller
      */
 	function view($rec_id = null){
 		$query = ElectionAspirants::query();
+		$query->join("users", "election_aspirants.user_id", "=", "users.id");
+		$query->join("election_positions", "election_aspirants.position_id", "=", "election_positions.id");
+		$query->join("academic_sessions", "election_aspirants.academic_session", "=", "academic_sessions.id");
 		$record = $query->findOrFail($rec_id, ElectionAspirants::viewFields());
 		return $this->renderView("pages.electionaspirants.view", ["data" => $record]);
 	}

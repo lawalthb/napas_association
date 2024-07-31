@@ -96,23 +96,24 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-is_active-holder" class=" ">
+                                                <select required=""  id="ctrl-is_active" data-field="is_active" name="is_active"  placeholder="Select a value ..."    class="form-select" >
+                                                <option value="">Select a value ...</option>
                                                 <?php
                                                     $options = Menu::isActive();
                                                     if(!empty($options)){
                                                     foreach($options as $option){
                                                     $value = $option['value'];
                                                     $label = $option['label'];
-                                                    //check if current option is checked option
-                                                    $checked = Html::get_field_checked('is_active', $value, "Yes");
+                                                    $selected = Html::get_field_selected('is_active', $value, "");
                                                 ?>
-                                                <label class="form-check form-check-inline">
-                                                <input class="form-check-input" <?php echo $checked ?>  value="<?php echo $value ?>" type="radio" required=""   name="is_active" />
-                                                <span class="form-check-label"><?php echo $label ?></span>
-                                                </label>
+                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                <?php echo $label ?>
+                                                </option>                                   
                                                 <?php
                                                     }
                                                     }
                                                 ?>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>

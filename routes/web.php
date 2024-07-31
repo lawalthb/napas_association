@@ -527,9 +527,9 @@ Route::get('componentsdata/electionaspirants_academic_session_autofill',  functi
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/academic_session_option_list',  function(Request $request){
+Route::get('componentsdata/academic_session_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->academic_session_option_list($request);
+		return $compModel->academic_session_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	

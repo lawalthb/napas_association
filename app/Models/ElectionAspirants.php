@@ -41,8 +41,8 @@ class ElectionAspirants extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ? 
+				election_aspirants.id LIKE ?  OR 
+				election_aspirants.name LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%"
@@ -59,15 +59,17 @@ class ElectionAspirants extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"position_id",
-			"academic_session",
-			"votes",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"election_aspirants.id AS id",
+			"election_aspirants.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"election_aspirants.name AS name",
+			"election_aspirants.position_id AS position_id",
+			"election_positions.name AS electionpositions_name",
+			"election_aspirants.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_aspirants.votes AS votes",
+			"election_aspirants.created_at AS created_at",
+			"election_aspirants.payment_status AS payment_status" 
 		];
 	}
 	
@@ -79,15 +81,17 @@ class ElectionAspirants extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"position_id",
-			"academic_session",
-			"votes",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"election_aspirants.id AS id",
+			"election_aspirants.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"election_aspirants.name AS name",
+			"election_aspirants.position_id AS position_id",
+			"election_positions.name AS electionpositions_name",
+			"election_aspirants.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_aspirants.votes AS votes",
+			"election_aspirants.created_at AS created_at",
+			"election_aspirants.payment_status AS payment_status" 
 		];
 	}
 	
@@ -99,15 +103,18 @@ class ElectionAspirants extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"position_id",
-			"academic_session",
-			"votes",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"election_aspirants.id AS id",
+			"election_aspirants.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"election_aspirants.name AS name",
+			"election_aspirants.position_id AS position_id",
+			"election_positions.name AS electionpositions_name",
+			"election_aspirants.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_aspirants.votes AS votes",
+			"election_aspirants.created_at AS created_at",
+			"election_aspirants.updated_at AS updated_at",
+			"election_aspirants.payment_status AS payment_status" 
 		];
 	}
 	
@@ -119,15 +126,18 @@ class ElectionAspirants extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"position_id",
-			"academic_session",
-			"votes",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"election_aspirants.id AS id",
+			"election_aspirants.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"election_aspirants.name AS name",
+			"election_aspirants.position_id AS position_id",
+			"election_positions.name AS electionpositions_name",
+			"election_aspirants.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"election_aspirants.votes AS votes",
+			"election_aspirants.created_at AS created_at",
+			"election_aspirants.updated_at AS updated_at",
+			"election_aspirants.payment_status AS payment_status" 
 		];
 	}
 	

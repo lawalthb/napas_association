@@ -61,10 +61,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">User Id</small>
+                                                    <small class="text-muted">Member name</small>
                                                     <div class="fw-bold">
                                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                                        <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
+                                                        <?php echo $data['users_lastname'] ?>
                                                     </a>
                                                 </div>
                                             </div>
@@ -75,7 +75,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Name</small>
+                                                <small class="text-muted">NickName</small>
                                                 <div class="fw-bold">
                                                     <?php echo  $data['name'] ; ?>
                                                 </div>
@@ -90,7 +90,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <small class="text-muted">Position Id</small>
                                                 <div class="fw-bold">
                                                     <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("electionpositions/view/$data[position_id]?subpage=1") ?>">
-                                                    <i class="material-icons">visibility</i> <?php echo "Election Positions Detail" ?>
+                                                    <?php echo $data['electionpositions_name'] ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <small class="text-muted">Academic Session</small>
                                             <div class="fw-bold">
                                                 <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">
-                                                <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
+                                                <?php echo $data['academicsessions_session_name'] ?>
                                             </a>
                                         </div>
                                     </div>

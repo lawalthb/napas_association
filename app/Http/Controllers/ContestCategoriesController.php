@@ -26,7 +26,6 @@ class ContestCategoriesController extends Controller
 			ContestCategories::search($query, $search); // search table records
 		}
 		$query->join("academic_sessions", "contest_categories.academic_session_id", "=", "academic_sessions.id");
-		$query->join("users", "contest_categories.updated_by", "=", "users.id");
 		$orderby = $request->orderby ?? "contest_categories.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -45,8 +44,6 @@ class ContestCategoriesController extends Controller
      */
 	function view($rec_id = null){
 		$query = ContestCategories::query();
-		$query->join("academic_sessions", "contest_categories.academic_session_id", "=", "academic_sessions.id");
-		$query->join("users", "contest_categories.updated_by", "=", "users.id");
 		$record = $query->findOrFail($rec_id, ContestCategories::viewFields());
 		return $this->renderView("pages.contestcategories.view", ["data" => $record]);
 	}

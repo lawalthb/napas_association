@@ -65,7 +65,6 @@ class ContestCategories extends Model
 			"contest_categories.name AS name",
 			"contest_categories.price AS price",
 			"contest_categories.updated_by AS updated_by",
-			"users.lastname AS users_lastname",
 			"contest_categories.updated_at AS updated_at",
 			"contest_categories.positioning AS positioning" 
 		];
@@ -85,7 +84,6 @@ class ContestCategories extends Model
 			"contest_categories.name AS name",
 			"contest_categories.price AS price",
 			"contest_categories.updated_by AS updated_by",
-			"users.lastname AS users_lastname",
 			"contest_categories.updated_at AS updated_at",
 			"contest_categories.positioning AS positioning" 
 		];
@@ -99,16 +97,14 @@ class ContestCategories extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"contest_categories.id AS id",
-			"contest_categories.academic_session_id AS academic_session_id",
-			"academic_sessions.session_name AS academicsessions_session_name",
-			"contest_categories.name AS name",
-			"contest_categories.price AS price",
-			"contest_categories.updated_by AS updated_by",
-			"users.lastname AS users_lastname",
-			"contest_categories.created_at AS created_at",
-			"contest_categories.updated_at AS updated_at",
-			"contest_categories.positioning AS positioning" 
+			"id",
+			"academic_session_id",
+			"name",
+			"price",
+			"updated_by",
+			"created_at",
+			"updated_at",
+			"positioning" 
 		];
 	}
 	
@@ -120,16 +116,14 @@ class ContestCategories extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"contest_categories.id AS id",
-			"contest_categories.academic_session_id AS academic_session_id",
-			"academic_sessions.session_name AS academicsessions_session_name",
-			"contest_categories.name AS name",
-			"contest_categories.price AS price",
-			"contest_categories.updated_by AS updated_by",
-			"users.lastname AS users_lastname",
-			"contest_categories.created_at AS created_at",
-			"contest_categories.updated_at AS updated_at",
-			"contest_categories.positioning AS positioning" 
+			"id",
+			"academic_session_id",
+			"name",
+			"price",
+			"updated_by",
+			"created_at",
+			"updated_at",
+			"positioning" 
 		];
 	}
 	
@@ -141,12 +135,12 @@ class ContestCategories extends Model
      */
 	public static function editFields(){
 		return [ 
+			"id",
 			"academic_session_id",
 			"name",
 			"price",
 			"updated_by",
-			"positioning",
-			"id" 
+			"positioning" 
 		];
 	}
 }
