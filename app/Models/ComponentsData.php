@@ -233,6 +233,42 @@ class ComponentsData{
 	
 
 	/**
+     * category_id_option_list_2 Model Action
+     * @return array
+     */
+	function category_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories ORDER BY id DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * academic_session_option_list Model Action
+     * @return array
+     */
+	function academic_session_option_list(){
+		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * position_id_option_list_2 Model Action
+     * @return array
+     */
+	function position_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM election_positions ORDER BY id DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * electionaspirants_academic_session_autofill Model Action
      * @return array
      */
@@ -240,18 +276,6 @@ class ComponentsData{
 		$sqltext = "SELECT session_name FROM academic_sessions WHERE session_name=:value" ;
 		$query_params = [];
 		$query_params['value'] = request()->get('value');
-		$arr = DB::select($sqltext, $query_params);
-		return $arr;
-	}
-	
-
-	/**
-     * academic_session_id_option_list_2 Model Action
-     * @return array
-     */
-	function academic_session_id_option_list_2(){
-		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
-		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
@@ -270,10 +294,10 @@ class ComponentsData{
 	
 
 	/**
-     * category_id_option_list_2 Model Action
+     * category_id_option_list_3 Model Action
      * @return array
      */
-	function category_id_option_list_2(){
+	function category_id_option_list_3(){
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM resource_categories ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
@@ -299,6 +323,18 @@ class ComponentsData{
      */
 	function price_settings_id_option_list_2(){
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM price_settings ORDER BY name DESC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * level_id_option_list_2 Model Action
+     * @return array
+     */
+	function level_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM levels ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;

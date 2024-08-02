@@ -35,6 +35,14 @@ class ContestNomineesController extends Controller
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
 		}
+		if($request->category_id){
+			$val = $request->category_id;
+			$query->where(DB::raw("contest_nominees.category_id"), "=", $val);
+		}
+		if($request->academic_session){
+			$val = $request->academic_session;
+			$query->where(DB::raw("contest_nominees.academic_session"), "=", $val);
+		}
 		$records = $query->paginate($limit, ContestNominees::listFields());
 		return $this->renderView($view, compact("records"));
 	}

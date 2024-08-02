@@ -533,15 +533,27 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 	}
 );
 	
-Route::get('componentsdata/electionaspirants_academic_session_autofill',  function(Request $request){
+Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->electionaspirants_academic_session_autofill($request);
+		return $compModel->category_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/academic_session_id_option_list_2',  function(Request $request){
+Route::get('componentsdata/academic_session_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->academic_session_id_option_list_2($request);
+		return $compModel->academic_session_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/position_id_option_list_2',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->position_id_option_list_2($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/electionaspirants_academic_session_autofill',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->electionaspirants_academic_session_autofill($request);
 	}
 )->middleware(['auth']);
 	
@@ -551,9 +563,9 @@ Route::get('componentsdata/name_option_list',  function(Request $request){
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
+Route::get('componentsdata/category_id_option_list_3',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->category_id_option_list_2($request);
+		return $compModel->category_id_option_list_3($request);
 	}
 )->middleware(['auth']);
 	
@@ -566,6 +578,12 @@ Route::get('componentsdata/getcount_',  function(Request $request){
 Route::get('componentsdata/price_settings_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->price_settings_id_option_list_2($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/level_id_option_list_2',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->level_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 

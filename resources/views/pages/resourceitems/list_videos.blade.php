@@ -9,7 +9,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $category_id_option_list_2 = $comp_model->category_id_option_list_2();
+    $category_id_option_list_3 = $comp_model->category_id_option_list_3();
     $pageTitle = "Resource Items"; //set dynamic page title
 ?>
 @extends($layout)
@@ -76,7 +76,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                     <select   name="category_id" class="form-select custom " >
                     <option value="">Select a value ...</option>
                     <?php 
-                        $options = $category_id_option_list_2 ?? [];
+                        $options = $category_id_option_list_3 ?? [];
                         foreach($options as $option){
                         $value = $option->value;
                         $label = $option->label ?? $value;
@@ -129,7 +129,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <div class="filter-tags mb-2">
                             <?php Html::filter_tag('search', __('Search')); ?>
                             <?php
-                                Html::filter_tag('category_id', 'Category', $category_id_option_list_2);
+                                Html::filter_tag('category_id', 'Category', $category_id_option_list_3);
                             ?>
                             <?php
                                 Html::filter_tag('published', 'Published', Menu::isActive());

@@ -35,20 +35,20 @@ class Users extends Authenticatable implements MustVerifyEmail
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				firstname LIKE ?  OR 
-				lastname LIKE ?  OR 
-				nickname LIKE ?  OR 
-				email LIKE ?  OR 
-				matno LIKE ?  OR 
-				phone LIKE ?  OR 
-				expectation_msg LIKE ?  OR 
-				session_start LIKE ?  OR 
-				session_end LIKE ?  OR 
-				bio LIKE ?  OR 
-				facebook_link LIKE ?  OR 
-				x_link LIKE ?  OR 
-				linkedin_link LIKE ? 
+				users.id LIKE ?  OR 
+				users.firstname LIKE ?  OR 
+				users.lastname LIKE ?  OR 
+				users.nickname LIKE ?  OR 
+				users.email LIKE ?  OR 
+				users.matno LIKE ?  OR 
+				users.phone LIKE ?  OR 
+				users.expectation_msg LIKE ?  OR 
+				users.session_start LIKE ?  OR 
+				users.session_end LIKE ?  OR 
+				users.bio LIKE ?  OR 
+				users.facebook_link LIKE ?  OR 
+				users.x_link LIKE ?  OR 
+				users.linkedin_link LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%","%$text%"
@@ -65,31 +65,18 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"nickname",
-			"email",
-			"matno",
-			"phone",
-			"member_type",
-			"expectation_msg",
-			"session_start",
-			"session_end",
-			"created_at",
-			"updated_at",
-			"is_active",
-			"is_ban",
-			"fee_paid",
-			"role",
-			"bio",
-			"dob",
-			"image",
-			"facebook_link",
-			"x_link",
-			"linkedin_link",
-			"email_verified_at",
-			"level_id" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.nickname AS nickname",
+			"users.email AS email",
+			"users.matno AS matno",
+			"users.phone AS phone",
+			"users.level_id AS level_id",
+			"levels.name AS levels_name",
+			"users.is_active AS is_active",
+			"users.role AS role",
+			"users.image AS image" 
 		];
 	}
 	
@@ -101,31 +88,18 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"nickname",
-			"email",
-			"matno",
-			"phone",
-			"member_type",
-			"expectation_msg",
-			"session_start",
-			"session_end",
-			"created_at",
-			"updated_at",
-			"is_active",
-			"is_ban",
-			"fee_paid",
-			"role",
-			"bio",
-			"dob",
-			"image",
-			"facebook_link",
-			"x_link",
-			"linkedin_link",
-			"email_verified_at",
-			"level_id" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.nickname AS nickname",
+			"users.email AS email",
+			"users.matno AS matno",
+			"users.phone AS phone",
+			"users.level_id AS level_id",
+			"levels.name AS levels_name",
+			"users.is_active AS is_active",
+			"users.role AS role",
+			"users.image AS image" 
 		];
 	}
 	
@@ -309,27 +283,27 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function editFields(){
 		return [ 
-			"id",
 			"firstname",
 			"lastname",
 			"nickname",
 			"matno",
 			"phone",
+			"level_id",
 			"member_type",
-			"expectation_msg",
+			"is_active",
 			"session_start",
 			"session_end",
-			"is_active",
+			"expectation_msg",
 			"is_ban",
 			"fee_paid",
 			"role",
-			"bio",
 			"dob",
+			"bio",
 			"image",
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"level_id" 
+			"id" 
 		];
 	}
 	

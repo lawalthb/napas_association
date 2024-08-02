@@ -5,6 +5,7 @@ use App\Http\Requests\ElectionAspirantsAddRequest;
 use App\Http\Requests\ElectionAspirantsEditRequest;
 use App\Models\ElectionAspirants;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class ElectionAspirantsController extends Controller
 {
@@ -33,6 +34,14 @@ class ElectionAspirantsController extends Controller
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->position_id){
+			$val = $request->position_id;
+			$query->where(DB::raw("election_aspirants.position_id"), "=", $val);
+		}
+		if($request->academic_session){
+			$val = $request->academic_session;
+			$query->where(DB::raw("election_aspirants.academic_session"), "=", $val);
 		}
 		$records = $query->paginate($limit, ElectionAspirants::listFields());
 		return $this->renderView($view, compact("records"));

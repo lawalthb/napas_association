@@ -9,7 +9,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $pageTitle = "Users"; //set dynamic page title
+    $level_id_option_list_2 = $comp_model->level_id_option_list_2();
+    $pageTitle = "Members"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -23,13 +24,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class="row justify-content-between align-items-center gap-3">
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Users</div>
+                        <div class="h5 font-weight-bold text-primary">Member List</div>
                     </div>
                 </div>
                 <div class="col-auto  " >
                     <a  class="btn btn-primary btn-block" href="<?php print_link("users/add", true) ?>" >
                     <i class="material-icons">add</i>                               
-                    Add New User 
+                    Add New Member 
                 </a>
             </div>
             <div class="col-md-3  " >
@@ -51,7 +52,36 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <div  class="" >
     <div class="container-fluid">
         <div class="row ">
-            <div class="col comp-grid " >
+            <div class="col-md-2 comp-grid " >
+                <form method="get" action="" class="form">
+                    <div class="card mb-3 p-3 ">
+                        <div class="">
+                            <div class="fw-bold">Filter by Level</div>
+                        </div>
+                        <select   name="level_id" class="form-select custom " >
+                        <option value="">Select a value ...</option>
+                        <?php 
+                            $options = $level_id_option_list_2 ?? [];
+                            foreach($options as $option){
+                            $value = $option->value;
+                            $label = $option->label ?? $value;
+                            $selected = Html::get_field_selected('level_id', $value);
+                        ?>
+                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                        <?php echo $label; ?>
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-10 comp-grid " >
                 <div  class=" page-content" >
                     <div id="users-list-records">
                         <div id="page-main-content" class="table-responsive">
@@ -59,6 +89,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
+                                <?php
+                                    Html::filter_tag('level_id', 'Level', $level_id_option_list_2);
+                                ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
@@ -75,24 +108,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-email" > Email</th>
                                         <th class="td-matno" > Matno</th>
                                         <th class="td-phone" > Phone</th>
-                                        <th class="td-member_type" > Member Type</th>
-                                        <th class="td-expectation_msg" > Expectation Msg</th>
-                                        <th class="td-session_start" > Session Start</th>
-                                        <th class="td-session_end" > Session End</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
-                                        <th class="td-is_active" > Is Active</th>
-                                        <th class="td-is_ban" > Is Ban</th>
-                                        <th class="td-fee_paid" > Fee Paid</th>
+                                        <th class="td-level_id" > Level </th>
+                                        <th class="td-is_active" > IsActive</th>
                                         <th class="td-role" > Role</th>
-                                        <th class="td-bio" > Bio</th>
-                                        <th class="td-dob" > Dob</th>
                                         <th class="td-image" > Image</th>
-                                        <th class="td-facebook_link" > Facebook Link</th>
-                                        <th class="td-x_link" > X Link</th>
-                                        <th class="td-linkedin_link" > Linkedin Link</th>
-                                        <th class="td-email_verified_at" > Email Verified At</th>
-                                        <th class="td-level_id" > Level Id</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -135,63 +154,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <td class="td-phone">
                                             <a href="<?php print_link("tel:$data[phone]") ?>"><?php echo $data['phone']; ?></a>
                                         </td>
-                                        <td class="td-member_type">
-                                            <?php echo  $data['member_type'] ; ?>
-                                        </td>
-                                        <td class="td-expectation_msg">
-                                            <?php echo  $data['expectation_msg'] ; ?>
-                                        </td>
-                                        <td class="td-session_start">
-                                            <?php echo  $data['session_start'] ; ?>
-                                        </td>
-                                        <td class="td-session_end">
-                                            <?php echo  $data['session_end'] ; ?>
-                                        </td>
-                                        <td class="td-created_at">
-                                            <?php echo  $data['created_at'] ; ?>
-                                        </td>
-                                        <td class="td-updated_at">
-                                            <?php echo  $data['updated_at'] ; ?>
-                                        </td>
-                                        <td class="td-is_active">
-                                            <?php echo  $data['is_active'] ; ?>
-                                        </td>
-                                        <td class="td-is_ban">
-                                            <?php echo  $data['is_ban'] ; ?>
-                                        </td>
-                                        <td class="td-fee_paid">
-                                            <?php echo  $data['fee_paid'] ; ?>
-                                        </td>
-                                        <td class="td-role">
-                                            <?php echo  $data['role'] ; ?>
-                                        </td>
-                                        <td class="td-bio">
-                                            <?php echo  $data['bio'] ; ?>
-                                        </td>
-                                        <td class="td-dob">
-                                            <?php echo  $data['dob'] ; ?>
-                                        </td>
-                                        <td class="td-image">
-                                            <?php 
-                                                Html :: page_img($data['image'], '50px', '50px', "small", 1); 
-                                            ?>
-                                        </td>
-                                        <td class="td-facebook_link">
-                                            <?php echo  $data['facebook_link'] ; ?>
-                                        </td>
-                                        <td class="td-x_link">
-                                            <?php echo  $data['x_link'] ; ?>
-                                        </td>
-                                        <td class="td-linkedin_link">
-                                            <?php echo  $data['linkedin_link'] ; ?>
-                                        </td>
-                                        <td class="td-email_verified_at">
-                                            <a href="<?php print_link("mailto:$data[email_verified_at]") ?>"><?php echo $data['email_verified_at']; ?></a>
-                                        </td>
                                         <td class="td-level_id">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Levels" ?>
+                                            <?php echo $data['levels_name'] ?>
                                         </a>
+                                    </td>
+                                    <td class="td-is_active">
+                                        <?php echo  $data['is_active'] ; ?>
+                                    </td>
+                                    <td class="td-role">
+                                        <?php echo  $data['role'] ; ?>
+                                    </td>
+                                    <td class="td-image">
+                                        <?php 
+                                            Html :: page_img($data['image'], '50px', '50px', "small", 1); 
+                                        ?>
                                     </td>
                                     <!--PageComponentEnd-->
                                     <td class="td-btn">

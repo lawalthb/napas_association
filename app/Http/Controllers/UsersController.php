@@ -7,6 +7,7 @@ use App\Http\Requests\UsersAddRequest;
 use App\Http\Requests\UsersEditRequest;
 use App\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class UsersController extends Controller
 {
@@ -27,11 +28,16 @@ class UsersController extends Controller
 			$search = trim($request->search);
 			Users::search($query, $search); // search table records
 		}
+		$query->join("levels", "users.level_id", "=", "levels.id");
 		$orderby = $request->orderby ?? "users.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->level_id){
+			$val = $request->level_id;
+			$query->where(DB::raw("users.level_id"), "=", $val);
 		}
 		$records = $query->paginate($limit, Users::listFields());
 		return $this->renderView($view, compact("records"));
@@ -65,25 +71,21 @@ class UsersController extends Controller
      * @return \Illuminate\View\View
      */
 	function add(){
-		return view("pages.users.add");
+		return $this->renderView("pages.users.add");
 	}
 	
 
 	/**
-     * Insert multiple record into the database table
+     * Save form record to the table
      * @return \Illuminate\Http\Response
      */
 	function store(UsersAddRequest $request){
-		$postdata = $request->input("row");
-		$modeldata = array_values($postdata);
-		
-		if( array_key_exists("image", $modeldata) ){
-			//move uploaded file from temp directory to destination directory
-			$fileInfo = $this->moveUploadedFiles($modeldata['image'], "image");
-			$modeldata['image'] = $fileInfo['filepath'];
-		}
+		$modeldata = $this->normalizeFormData($request->validated());
 		$modeldata['password'] = bcrypt($modeldata['password']);
-		Users::insert($modeldata);
+		
+		//save Users record
+		$record = Users::create($modeldata);
+		$rec_id = $record->id;
 		return $this->redirect("users", "Record added successfully");
 	}
 	

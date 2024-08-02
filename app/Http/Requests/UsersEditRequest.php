@@ -27,26 +27,26 @@ class UsersEditRequest extends FormRequest
 
         return [
             
-				"firstname" => "filled|string|unique:users,firstname,$rec_id,id",
-				"lastname" => "nullable|string",
+				"firstname" => "filled|string",
+				"lastname" => "filled|string",
 				"nickname" => "nullable|string",
 				"matno" => "nullable|string",
-				"phone" => "filled|string",
+				"phone" => "filled|string|unique:users,phone,$rec_id,id",
+				"level_id" => "filled",
 				"member_type" => "filled",
-				"expectation_msg" => "nullable",
-				"session_start" => "nullable|string",
-				"session_end" => "nullable|string",
 				"is_active" => "filled",
+				"session_start" => "nullable|date",
+				"session_end" => "nullable|date",
+				"expectation_msg" => "nullable",
 				"is_ban" => "filled",
 				"fee_paid" => "filled",
 				"role" => "filled",
-				"bio" => "nullable",
 				"dob" => "nullable|date",
+				"bio" => "nullable",
 				"image" => "nullable",
 				"facebook_link" => "nullable|string",
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
-				"level_id" => "nullable",
             
         ];
     }

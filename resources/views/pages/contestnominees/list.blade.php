@@ -9,6 +9,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
+    $category_id_option_list_2 = $comp_model->category_id_option_list_2();
+    $academic_session_option_list = $comp_model->academic_session_option_list();
     $pageTitle = "Contest Nominees"; //set dynamic page title
 ?>
 @extends($layout)
@@ -51,6 +53,56 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <div  class="" >
     <div class="container-fluid">
         <div class="row ">
+            <div class="col-md-2 comp-grid " >
+                <form method="get" action="" class="form">
+                    <div class="card mb-3 p-3 ">
+                        <div class="">
+                            <div class="fw-bold">Filter by Category</div>
+                        </div>
+                        <select   name="category_id" class="form-select custom " >
+                        <option value="">Select a value ...</option>
+                        <?php 
+                            $options = $category_id_option_list_2 ?? [];
+                            foreach($options as $option){
+                            $value = $option->value;
+                            $label = $option->label ?? $value;
+                            $selected = Html::get_field_selected('category_id', $value);
+                        ?>
+                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                        <?php echo $label; ?>
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div class="card mb-3 p-3 ">
+                        <div class="">
+                            <div class="fw-bold">Filter by Academic Session</div>
+                        </div>
+                        <select   name="academic_session" class="form-select custom " >
+                        <option value="">Select a value ...</option>
+                        <?php 
+                            $options = $academic_session_option_list ?? [];
+                            foreach($options as $option){
+                            $value = $option->value;
+                            $label = $option->label ?? $value;
+                            $selected = Html::get_field_selected('academic_session', $value);
+                        ?>
+                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                        <?php echo $label; ?>
+                        </option>
+                        <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <hr />
+                    <div class="form-group text-center">
+                        <button class="btn btn-primary">Filter</button>
+                    </div>
+                </form>
+            </div>
             <div class="col comp-grid " >
                 <div  class=" page-content" >
                     <div id="contestnominees-list-records">
@@ -59,6 +111,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
+                                <?php
+                                    Html::filter_tag('category_id', 'Category', $category_id_option_list_2);
+                                ?>
+                                <?php
+                                    Html::filter_tag('academic_session', 'Academic Session', $academic_session_option_list);
+                                ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
