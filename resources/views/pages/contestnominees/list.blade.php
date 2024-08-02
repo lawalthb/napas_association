@@ -69,15 +69,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </label>
                                         </th>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-user_id" > User Id</th>
+                                        <th class="td-user_id" > Member</th>
                                         <th class="td-name" > Name</th>
-                                        <th class="td-category_id" > Category Id</th>
+                                        <th class="td-category_id" > Category</th>
                                         <th class="td-academic_session" > Academic Session</th>
                                         <th class="td-vote_link" > Vote Link</th>
                                         <th class="td-votes" > Votes</th>
-                                        <th class="td-slug" > Slug</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
+                                        <th class="td-updated_at" > Updated@</th>
                                         <th class="td-payment_status" > Payment Status</th>
                                         <th class="td-btn"></th>
                                     </tr>
@@ -105,7 +103,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </td>
                                         <td class="td-user_id">
                                             <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                            <?php echo $data['users_lastname'] ?>
                                         </a>
                                     </td>
                                     <td class="td-name">
@@ -113,12 +111,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </td>
                                     <td class="td-category_id">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("contestcategories/view/$data[category_id]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Contest Categories" ?>
+                                        <?php echo $data['contestcategories_name'] ?>
                                     </a>
                                 </td>
                                 <td class="td-academic_session">
                                     <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">
-                                    <i class="material-icons">visibility</i> <?php echo "Academic Sessions" ?>
+                                    <?php echo $data['academicsessions_session_name'] ?>
                                 </a>
                             </td>
                             <td class="td-vote_link">
@@ -127,14 +125,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <td class="td-votes">
                                 <?php echo  $data['votes'] ; ?>
                             </td>
-                            <td class="td-slug">
-                                <?php echo  $data['slug'] ; ?>
-                            </td>
-                            <td class="td-created_at">
-                                <?php echo  $data['created_at'] ; ?>
-                            </td>
                             <td class="td-updated_at">
-                                <?php echo  $data['updated_at'] ; ?>
+                                <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                <?php echo relative_date($data['updated_at']); ?>
+                                </span>
                             </td>
                             <td class="td-payment_status">
                                 <?php echo  $data['payment_status'] ; ?>

@@ -73,7 +73,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <th class="td-name" > Name</th>
                                         <th class="td-price" > Price</th>
                                         <th class="td-updated_by" > Updated By</th>
-                                        <th class="td-updated_at" > Updated At</th>
+                                        <th class="td-updated_at" > Updated@</th>
                                         <th class="td-positioning" > Positioning</th>
                                         <th class="td-btn"></th>
                                     </tr>
@@ -112,11 +112,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </td>
                                     <td class="td-updated_by">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[updated_by]?subpage=1") ?>">
-                                        <i class="material-icons">visibility</i> <?php echo "Users" ?>
+                                        <?php echo $data['users_lastname'] ?>
                                     </a>
                                 </td>
                                 <td class="td-updated_at">
-                                    <?php echo  $data['updated_at'] ; ?>
+                                    <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                    <?php echo relative_date($data['updated_at']); ?>
+                                    </span>
                                 </td>
                                 <td class="td-positioning">
                                     <?php echo  $data['positioning'] ; ?>

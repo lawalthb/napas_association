@@ -25,14 +25,10 @@ class ContestNomineesAddRequest extends FormRequest
 		
         return [
             
+				"academic_session" => "required",
+				"category_id" => "required",
 				"user_id" => "required",
 				"name" => "required|string",
-				"category_id" => "required",
-				"academic_session" => "required",
-				"vote_link" => "nullable",
-				"votes" => "required|numeric",
-				"slug" => "required",
-				"payment_status" => "required",
             
         ];
     }

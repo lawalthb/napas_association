@@ -28,7 +28,7 @@ class ContestNominees extends Model
      * @var array
      */
 	protected $fillable = [
-		'user_id','name','category_id','academic_session','vote_link','votes','slug','payment_status'
+		'academic_session','category_id','user_id','name','vote_link','votes','payment_status'
 	];
 	public $timestamps = false;
 	
@@ -41,10 +41,10 @@ class ContestNominees extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				name LIKE ?  OR 
-				vote_link LIKE ?  OR 
-				slug LIKE ? 
+				contest_nominees.id LIKE ?  OR 
+				contest_nominees.name LIKE ?  OR 
+				contest_nominees.vote_link LIKE ?  OR 
+				contest_nominees.slug LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%"
@@ -61,17 +61,18 @@ class ContestNominees extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"category_id",
-			"academic_session",
-			"vote_link",
-			"votes",
-			"slug",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"contest_nominees.id AS id",
+			"contest_nominees.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.votes AS votes",
+			"contest_nominees.updated_at AS updated_at",
+			"contest_nominees.payment_status AS payment_status" 
 		];
 	}
 	
@@ -83,17 +84,18 @@ class ContestNominees extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"category_id",
-			"academic_session",
-			"vote_link",
-			"votes",
-			"slug",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"contest_nominees.id AS id",
+			"contest_nominees.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.votes AS votes",
+			"contest_nominees.updated_at AS updated_at",
+			"contest_nominees.payment_status AS payment_status" 
 		];
 	}
 	
@@ -105,17 +107,19 @@ class ContestNominees extends Model
      */
 	public static function viewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"category_id",
-			"academic_session",
-			"vote_link",
-			"votes",
-			"slug",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"contest_nominees.id AS id",
+			"contest_nominees.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.votes AS votes",
+			"contest_nominees.created_at AS created_at",
+			"contest_nominees.updated_at AS updated_at",
+			"contest_nominees.payment_status AS payment_status" 
 		];
 	}
 	
@@ -127,17 +131,19 @@ class ContestNominees extends Model
      */
 	public static function exportViewFields(){
 		return [ 
-			"id",
-			"user_id",
-			"name",
-			"category_id",
-			"academic_session",
-			"vote_link",
-			"votes",
-			"slug",
-			"created_at",
-			"updated_at",
-			"payment_status" 
+			"contest_nominees.id AS id",
+			"contest_nominees.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.votes AS votes",
+			"contest_nominees.created_at AS created_at",
+			"contest_nominees.updated_at AS updated_at",
+			"contest_nominees.payment_status AS payment_status" 
 		];
 	}
 	
@@ -149,15 +155,14 @@ class ContestNominees extends Model
      */
 	public static function editFields(){
 		return [ 
-			"id",
+			"academic_session",
+			"category_id",
 			"user_id",
 			"name",
-			"category_id",
-			"academic_session",
 			"vote_link",
 			"votes",
-			"slug",
-			"payment_status" 
+			"payment_status",
+			"id" 
 		];
 	}
 }

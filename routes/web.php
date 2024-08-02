@@ -455,6 +455,18 @@ Route::get('componentsdata/category_id_option_list',  function(Request $request)
 	}
 )->middleware(['auth']);
 	
+Route::get('componentsdata/user_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->user_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/contestvotes_category_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->contestvotes_category_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/position_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->position_id_option_list($request);
@@ -467,9 +479,9 @@ Route::get('componentsdata/aspirant_id_option_list',  function(Request $request)
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/user_id_option_list',  function(Request $request){
+Route::get('componentsdata/finalprojects_user_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->user_id_option_list($request);
+		return $compModel->finalprojects_user_id_option_list($request);
 	}
 )->middleware(['auth']);
 	

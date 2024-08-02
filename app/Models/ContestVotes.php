@@ -41,9 +41,9 @@ class ContestVotes extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				email LIKE ?  OR 
-				ip_address LIKE ? 
+				contest_votes.id LIKE ?  OR 
+				contest_votes.email LIKE ?  OR 
+				contest_votes.ip_address LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%"
@@ -60,16 +60,16 @@ class ContestVotes extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"email",
-			"category_id",
-			"candidate_id",
-			"vote_number",
-			"amount",
-			"payment_status",
-			"created_at",
-			"updated_at",
-			"ip_address" 
+			"contest_votes.id AS id",
+			"contest_votes.email AS email",
+			"contest_votes.category_id AS category_id",
+			"contest_votes.candidate_id AS candidate_id",
+			"users.firstname AS users_firstname",
+			"contest_votes.vote_number AS vote_number",
+			"contest_votes.amount AS amount",
+			"contest_votes.payment_status AS payment_status",
+			"contest_votes.updated_at AS updated_at",
+			"contest_votes.ip_address AS ip_address" 
 		];
 	}
 	
@@ -81,16 +81,16 @@ class ContestVotes extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"email",
-			"category_id",
-			"candidate_id",
-			"vote_number",
-			"amount",
-			"payment_status",
-			"created_at",
-			"updated_at",
-			"ip_address" 
+			"contest_votes.id AS id",
+			"contest_votes.email AS email",
+			"contest_votes.category_id AS category_id",
+			"contest_votes.candidate_id AS candidate_id",
+			"users.firstname AS users_firstname",
+			"contest_votes.vote_number AS vote_number",
+			"contest_votes.amount AS amount",
+			"contest_votes.payment_status AS payment_status",
+			"contest_votes.updated_at AS updated_at",
+			"contest_votes.ip_address AS ip_address" 
 		];
 	}
 	

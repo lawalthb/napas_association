@@ -63,7 +63,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <select required=""  id="ctrl-category_id" data-field="category_id" name="category_id"  placeholder="Select a value ..."    class="form-select" >
                                                 <option value="">Select a value ...</option>
                                                 <?php 
-                                                    $options = $comp_model->category_id_option_list() ?? [];
+                                                    $options = $comp_model->contestvotes_category_id_option_list() ?? [];
                                                     foreach($options as $option){
                                                     $value = $option->value;
                                                     $label = $option->label ?? $value;

@@ -5,6 +5,7 @@ use App\Http\Requests\ContestNomineesAddRequest;
 use App\Http\Requests\ContestNomineesEditRequest;
 use App\Models\ContestNominees;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class ContestNomineesController extends Controller
 {
@@ -25,6 +26,9 @@ class ContestNomineesController extends Controller
 			$search = trim($request->search);
 			ContestNominees::search($query, $search); // search table records
 		}
+		$query->join("users", "contest_nominees.user_id", "=", "users.id");
+		$query->join("contest_categories", "contest_nominees.category_id", "=", "contest_categories.id");
+		$query->join("academic_sessions", "contest_nominees.academic_session", "=", "academic_sessions.id");
 		$orderby = $request->orderby ?? "contest_nominees.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -43,6 +47,9 @@ class ContestNomineesController extends Controller
      */
 	function view($rec_id = null){
 		$query = ContestNominees::query();
+		$query->join("users", "contest_nominees.user_id", "=", "users.id");
+		$query->join("contest_categories", "contest_nominees.category_id", "=", "contest_categories.id");
+		$query->join("academic_sessions", "contest_nominees.academic_session", "=", "academic_sessions.id");
 		$record = $query->findOrFail($rec_id, ContestNominees::viewFields());
 		return $this->renderView("pages.contestnominees.view", ["data" => $record]);
 	}
@@ -67,8 +74,21 @@ class ContestNomineesController extends Controller
 		//save ContestNominees record
 		$record = ContestNominees::create($modeldata);
 		$rec_id = $record->id;
+		$this->afterAdd($record);
 		return $this->redirect("contestnominees", "Record added successfully");
 	}
+    /**
+     * After new record created
+     * @param array $record // newly created record
+     */
+    private function afterAdd($record){
+        //to create slug and update votelink
+        $slug = \Illuminate\Support\Str::slug($record->name);
+       $vote_link = url("vote/$slug"); 
+       DB::table('contest_nominees')->where('id', $record->id)->update(['slug' => $slug, 
+       'vote_link' => $vote_link
+       ]);
+    }
 	
 
 	/**

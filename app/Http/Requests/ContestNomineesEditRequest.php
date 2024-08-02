@@ -25,13 +25,12 @@ class ContestNomineesEditRequest extends FormRequest
 		
         return [
             
+				"academic_session" => "filled",
+				"category_id" => "filled",
 				"user_id" => "filled",
 				"name" => "filled|string",
-				"category_id" => "filled",
-				"academic_session" => "filled",
 				"vote_link" => "nullable",
 				"votes" => "filled|numeric",
-				"slug" => "filled",
 				"payment_status" => "filled",
             
         ];

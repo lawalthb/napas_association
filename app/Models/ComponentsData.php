@@ -52,7 +52,38 @@ class ComponentsData{
      * category_id_option_list Model Action
      * @return array
      */
-	function category_id_option_list(){
+	function category_id_option_list($value = null){
+		$lookup_value = request()->lookup ?? $value;
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories WHERE academic_session_id=:lookup_academic_session ORDER BY name ASC" ;
+		$query_params = [];
+		$query_params['lookup_academic_session'] = $lookup_value;
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
+     * user_id_option_list Model Action
+     * @return array
+     */
+	function user_id_option_list(){
+		$arr = [];
+		if(request()->search){
+			$search = trim(request()->search);
+			$sqltext = "SELECT  DISTINCT id AS value,firstname AS label FROM users WHERE firstname LIKE  :search  ORDER BY firstname ASC LIMIT 10" ;
+			$query_params = [];
+			$query_params['search'] = "%$search%";
+			$arr = DB::select($sqltext, $query_params);
+		}
+		return $arr;
+	}
+	
+
+	/**
+     * contestvotes_category_id_option_list Model Action
+     * @return array
+     */
+	function contestvotes_category_id_option_list(){
 		$sqltext = "SELECT id as value, name as label FROM contest_categories";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
@@ -85,10 +116,10 @@ class ComponentsData{
 	
 
 	/**
-     * user_id_option_list Model Action
+     * finalprojects_user_id_option_list Model Action
      * @return array
      */
-	function user_id_option_list(){
+	function finalprojects_user_id_option_list(){
 		$sqltext = "SELECT  DISTINCT id AS value,lastname AS label FROM users ORDER BY lastname ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);

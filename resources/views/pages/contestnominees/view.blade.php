@@ -61,10 +61,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">User Id</small>
+                                                    <small class="text-muted">Member</small>
                                                     <div class="fw-bold">
                                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
-                                                        <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
+                                                        <?php echo $data['users_lastname'] ?>
                                                     </a>
                                                 </div>
                                             </div>
@@ -87,10 +87,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Category Id</small>
+                                                <small class="text-muted">Category</small>
                                                 <div class="fw-bold">
                                                     <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("contestcategories/view/$data[category_id]?subpage=1") ?>">
-                                                    <i class="material-icons">visibility</i> <?php echo "Contest Categories Detail" ?>
+                                                    <?php echo $data['contestcategories_name'] ?>
                                                 </a>
                                             </div>
                                         </div>
@@ -104,7 +104,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <small class="text-muted">Academic Session</small>
                                             <div class="fw-bold">
                                                 <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">
-                                                <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
+                                                <?php echo $data['academicsessions_session_name'] ?>
                                             </a>
                                         </div>
                                     </div>
@@ -139,18 +139,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="bg-light mb-1 card-1 p-2 border rounded">
                                 <div class="row align-items-center">
                                     <div class="col">
-                                        <small class="text-muted">Slug</small>
-                                        <div class="fw-bold">
-                                            <?php echo  $data['slug'] ; ?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                <div class="row align-items-center">
-                                    <div class="col">
                                         <small class="text-muted">Created At</small>
                                         <div class="fw-bold">
                                             <?php echo  $data['created_at'] ; ?>
@@ -165,7 +153,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="col">
                                         <small class="text-muted">Updated At</small>
                                         <div class="fw-bold">
-                                            <?php echo  $data['updated_at'] ; ?>
+                                            <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
+                                            <?php echo relative_date($data['updated_at']); ?>
+                                            </span>
                                         </div>
                                     </div>
                                 </div>

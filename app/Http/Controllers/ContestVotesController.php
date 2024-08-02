@@ -25,6 +25,7 @@ class ContestVotesController extends Controller
 			$search = trim($request->search);
 			ContestVotes::search($query, $search); // search table records
 		}
+		$query->join("users", "contest_votes.candidate_id", "=", "users.id");
 		$orderby = $request->orderby ?? "contest_votes.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
