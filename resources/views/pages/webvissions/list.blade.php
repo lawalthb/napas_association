@@ -4,6 +4,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
+    //check if current user role is allowed access to the pages
+    $can_add = $user->canAccess("webvissions/add");
+    $can_edit = $user->canAccess("webvissions/edit");
+    $can_view = $user->canAccess("webvissions/view");
+    $can_delete = $user->canAccess("webvissions/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
@@ -63,11 +68,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <table class="table table-hover table-striped table-sm text-left">
                                 <thead class="table-header ">
                                     <tr>
+                                        <?php if($can_delete){ ?>
                                         <th class="td-checkbox">
                                         <label class="form-check-label">
                                         <input class="toggle-check-all form-check-input" type="checkbox" />
                                         </label>
                                         </th>
+                                        <?php } ?>
                                         <th class="td-id" > Id</th>
                                         <th class="td-name" > Name</th>
                                         <th class="td-icon" > Icon</th>
@@ -90,11 +97,13 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         $counter++;
                                     ?>
                                     <tr>
+                                        <?php if($can_delete){ ?>
                                         <td class=" td-checkbox">
                                             <label class="form-check-label">
                                             <input class="optioncheck form-check-input" name="optioncheck[]" value="<?php echo $data['id'] ?>" type="checkbox" />
                                             </label>
                                         </td>
+                                        <?php } ?>
                                         <!--PageComponentStart-->
                                         <td class="td-id">
                                             <a href="<?php print_link("/webvissions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
@@ -121,9 +130,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </td>
                                     <!--PageComponentEnd-->
                                     <td class="td-btn">
+                                        <?php if($can_edit){ ?>
                                         <a class="btn btn-sm btn-success has-tooltip page-modal"    href="<?php print_link("webvissions/edit/$rec_id"); ?>" >
                                         <i class="material-icons">edit</i> Edit
                                     </a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php 
@@ -154,9 +165,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class=" mt-3">
                     <div class="row align-items-center justify-content-between">    
                         <div class="col-md-auto d-flex">    
+                            <?php if($can_delete){ ?>
                             <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("webvissions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                             <i class="material-icons">delete_sweep</i> Delete Selected
                             </button>
+                            <?php } ?>
                         </div>
                         <div class="col">   
                             <?php

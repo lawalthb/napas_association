@@ -4,6 +4,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
+    //check if current user role is allowed access to the pages
+    $can_add = $user->canAccess("transactions/add");
+    $can_edit = $user->canAccess("transactions/edit");
+    $can_view = $user->canAccess("transactions/view");
+    $can_delete = $user->canAccess("transactions/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
@@ -27,10 +32,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                     </div>
                 </div>
                 <div class="col-auto  " >
+                    <?php if($can_add){ ?>
                     <a  class="btn btn-primary btn-block" href="<?php print_link("transactions/add", true) ?>" >
                     <i class="material-icons">add</i>                               
                     Add New Transaction 
                 </a>
+                <?php } ?>
             </div>
             <div class="col-md-3  " >
                 <!-- Page drop down search component -->
@@ -107,12 +114,16 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </td>
                                         <!--PageComponentEnd-->
                                         <td class="td-btn">
+                                            <?php if($can_view){ ?>
                                             <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("transactions/view/$rec_id"); ?>" >
                                             <i class="material-icons ">receipt</i> Receipt
                                         </a>
+                                        <?php } ?>
+                                        <?php if($can_edit){ ?>
                                         <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("transactions/edit/$rec_id"); ?>" >
                                         <i class="material-icons">edit</i> Edit
                                     </a>
+                                    <?php } ?>
                                 </td>
                             </tr>
                             <?php 
@@ -143,9 +154,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 <div class=" mt-3">
                     <div class="row align-items-center justify-content-between">    
                         <div class="col-md-auto d-flex">    
+                            <?php if($can_delete){ ?>
                             <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("transactions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                             <i class="material-icons">delete_sweep</i> Delete Selected
                             </button>
+                            <?php } ?>
                         </div>
                         <div class="col">   
                             <?php

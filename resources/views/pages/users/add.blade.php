@@ -133,7 +133,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 foreach($options as $option){
                                                 $value = $option['value'];
                                                 $label = $option['label'];
-                                                $selected = Html::get_field_selected('member_type', $value, "Regular");
+                                                $selected = Html::get_field_selected('member_type', $value, "");
                                             ?>
                                             <option <?php echo $selected ?> value="<?php echo $value ?>">
                                             <?php echo $label ?>
@@ -158,6 +158,27 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <input id="ctrl-session_end" data-field="session_end" class="form-control datepicker  datepicker"  value="<?php echo get_value('session_end') ?>" type="datetime" name="session_end" placeholder="Enter Session End" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
                                             <span class="input-group-text"><i class="material-icons">date_range</i></span>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label" for="user_role_id">User Role Id </label>
+                                    <div id="ctrl-user_role_id-holder" class=" "> 
+                                        <select  id="ctrl-user_role_id" data-field="user_role_id" name="user_role_id"  placeholder="Select a value ..."    class="form-select" >
+                                        <option value="">Select a value ...</option>
+                                        <?php 
+                                            $options = $comp_model->role_id_option_list() ?? [];
+                                            foreach($options as $option){
+                                            $value = $option->value;
+                                            $label = $option->label ?? $value;
+                                            $selected = Html::get_field_selected('user_role_id', $value, "");
+                                        ?>
+                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                        <?php echo $label; ?>
+                                        </option>
+                                        <?php
+                                            }
+                                        ?>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

@@ -36,6 +36,7 @@ class UsersAddRequest extends FormRequest
 				"member_type" => "required",
 				"session_start" => "nullable|date",
 				"session_end" => "nullable|date",
+				"user_role_id" => "nullable",
             
         ];
     }

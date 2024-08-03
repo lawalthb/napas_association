@@ -4,6 +4,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
+    //check if current user role is allowed access to the pages
+    $can_add = $user->canAccess("resourceitems/add");
+    $can_edit = $user->canAccess("resourceitems/edit");
+    $can_view = $user->canAccess("resourceitems/view");
+    $can_delete = $user->canAccess("resourceitems/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
@@ -163,9 +168,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </td>
                                             <!--PageComponentEnd-->
                                             <td class="td-btn">
+                                                <?php if($can_view){ ?>
                                                 <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("resourceitems/view/$rec_id"); ?>" >
                                                 <i class="material-icons">visibility</i> View
                                             </a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php 
@@ -196,9 +203,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <div class=" mt-3">
                             <div class="row align-items-center justify-content-between">    
                                 <div class="col-md-auto d-flex">    
+                                    <?php if($can_delete){ ?>
                                     <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("resourceitems/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                                     <i class="material-icons">delete_sweep</i> Delete Selected
                                     </button>
+                                    <?php } ?>
                                 </div>
                                 <div class="col">   
                                     <?php

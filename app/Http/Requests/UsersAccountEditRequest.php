@@ -45,6 +45,7 @@ class UsersAccountEditRequest extends FormRequest
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
 				"level_id" => "nullable|numeric",
+				"user_role_id" => "nullable",
             
         ];
     }

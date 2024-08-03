@@ -47,6 +47,7 @@ class UsersEditRequest extends FormRequest
 				"facebook_link" => "nullable|string",
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
+				"user_role_id" => "nullable",
             
         ];
     }

@@ -4,6 +4,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
+    //check if current user role is allowed access to the pages
+    $can_add = $user->canAccess("appsettings/add");
+    $can_edit = $user->canAccess("appsettings/edit");
+    $can_view = $user->canAccess("appsettings/view");
+    $can_delete = $user->canAccess("appsettings/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
@@ -82,7 +87,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 <?php echo  $data['name'] ; ?>
                                             </td>
                                             <td class="td-value">
-                                                <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
+                                                <span <?php if($can_edit){ ?> data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['value']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
                                                 data-url="<?php print_link("appsettings/edit/" . urlencode($data['id'])); ?>" 
@@ -93,12 +98,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 data-type="text" 
                                                 data-mode="popover" 
                                                 data-showbuttons="left" 
-                                                class="is-editable" >
+                                                class="is-editable" <?php } ?>>
                                                 <?php echo  $data['value'] ; ?>
                                                 </span>
                                             </td>
                                             <td class="td-active">
-                                                <span  data-step="any" 
+                                                <span <?php if($can_edit){ ?> data-step="any" 
                                                 data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                                 data-value="<?php echo $data['active']; ?>" 
                                                 data-pk="<?php echo $data['id'] ?>" 
@@ -110,15 +115,17 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                 data-type="number" 
                                                 data-mode="popover" 
                                                 data-showbuttons="left" 
-                                                class="is-editable" >
+                                                class="is-editable" <?php } ?>>
                                                 <?php echo  $data['active'] ; ?>
                                                 </span>
                                             </td>
                                             <!--PageComponentEnd-->
                                             <td class="td-btn">
+                                                <?php if($can_edit){ ?>
                                                 <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("appsettings/edit/$rec_id"); ?>" >
                                                 <i class="material-icons">edit</i> Edit
                                             </a>
+                                            <?php } ?>
                                         </td>
                                     </tr>
                                     <?php 
@@ -149,9 +156,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <div class=" mt-3">
                             <div class="row align-items-center justify-content-between">    
                                 <div class="col-md-auto d-flex">    
+                                    <?php if($can_delete){ ?>
                                     <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("appsettings/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                                     <i class="material-icons">delete_sweep</i> Delete Selected
                                     </button>
+                                    <?php } ?>
                                 </div>
                                 <div class="col">   
                                     <?php

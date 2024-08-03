@@ -23,7 +23,7 @@ class Users extends Authenticatable implements MustVerifyEmail
      * @var string
      */
 	protected $primaryKey = 'id';
-	protected $fillable = ['firstname','lastname','phone','email','password','level_id','member_type','expectation_msg','image','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link'];
+	protected $fillable = ['firstname','lastname','phone','email','password','level_id','member_type','expectation_msg','image','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link','user_role_id'];
 	public $timestamps = false;
 	
 
@@ -76,7 +76,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"levels.name AS levels_name",
 			"users.is_active AS is_active",
 			"users.role AS role",
-			"users.image AS image" 
+			"users.image AS image",
+			"users.user_role_id AS user_role_id" 
 		];
 	}
 	
@@ -99,7 +100,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"levels.name AS levels_name",
 			"users.is_active AS is_active",
 			"users.role AS role",
-			"users.image AS image" 
+			"users.image AS image",
+			"users.user_role_id AS user_role_id" 
 		];
 	}
 	
@@ -134,7 +136,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"x_link",
 			"linkedin_link",
 			"email_verified_at",
-			"level_id" 
+			"level_id",
+			"user_role_id" 
 		];
 	}
 	
@@ -169,7 +172,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"x_link",
 			"linkedin_link",
 			"email_verified_at",
-			"level_id" 
+			"level_id",
+			"user_role_id" 
 		];
 	}
 	
@@ -201,7 +205,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"level_id" 
+			"level_id",
+			"user_role_id" 
 		];
 	}
 	
@@ -236,7 +241,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"x_link",
 			"linkedin_link",
 			"email_verified_at",
-			"level_id" 
+			"level_id",
+			"user_role_id" 
 		];
 	}
 	
@@ -271,7 +277,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"x_link",
 			"linkedin_link",
 			"email_verified_at",
-			"level_id" 
+			"level_id",
+			"user_role_id" 
 		];
 	}
 	
@@ -303,7 +310,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"id" 
+			"id",
+			"user_role_id" 
 		];
 	}
 	
@@ -330,6 +338,9 @@ class Users extends Authenticatable implements MustVerifyEmail
 	public function UserPhoto(){
 		return $this->image;
 	}
+	public function UserRole(){
+		return $this->user_role_id;
+	}
 	
 
 	/**
@@ -350,5 +361,97 @@ class Users extends Authenticatable implements MustVerifyEmail
 	public function sendEmailVerificationNotification()
 	{
 		$this->notify(new \App\Notifications\VerifyEmail);
+	}
+	
+	private $roleNames = [];
+	private $userPages = [];
+	
+	/**
+	* Get the permissions of the user.
+	*/
+	public function permissions(){
+		return $this->hasMany(Permissions::class, 'role_id', 'user_role_id');
+	}
+	
+	/**
+	* Get the roles of the user.
+	*/
+	public function roles(){
+		return $this->hasMany(Roles::class, 'role_id', 'user_role_id');
+	}
+	
+	/**
+	* set user role
+	*/
+	public function assignRole($roleName){
+		$roleId = Roles::select('role_id')->where('role_name', $roleName)->value('role_id');
+		$this->user_role_id = $roleId;
+		$this->save();
+	}
+	
+	/**
+     * return list of pages user can access
+     * @return array
+     */
+	public function getUserPages(){
+		if(empty($this->userPages)){ // ensure we make db query once
+			$this->userPages = $this->permissions()->pluck('permission')->toArray();
+		}
+		return $this->userPages;
+	}
+	
+	/**
+     * return user role names
+     * @return array
+     */
+	public function getRoleNames(){
+		if(empty($this->roleNames)){// ensure we make db query once
+			$this->roleNames = $this->roles()->pluck('role_name')->toArray();
+		}
+		return $this->roleNames;
+	}
+	
+	/**
+     * check if user has a role
+     * @return bool
+     */
+	public function hasRole($arrRoles){
+		if(!is_array($arrRoles)){
+			$arrRoles = [$arrRoles];
+		}
+		$userRoles = $this->getRoleNames();
+		if(array_intersect(array_map('strtolower', $userRoles), array_map('strtolower', $arrRoles))){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+     * check if user is the owner of the record
+     * @return bool
+     */
+	public function isOwner($recId){
+		return $this->UserId() == $recId;
+	}
+	
+	/**
+     * check if user can access page
+     * @return bool
+     */
+	public function canAccess($path){
+		$userPages = $this->getUserPages();
+		$arrPaths = explode("/", strtolower($path));
+		$page = $arrPaths[0] ?? "home";
+		$action = $arrPaths[1] ?? "index";
+		$page_path = "$page/$action";
+		return in_array($page_path, $userPages);
+	}
+	
+	/**
+     * check if user is the owner of the record or has role that can edit or delete it
+     * @return bool
+     */
+	public function canManage($path, $recId){
+		return false;
 	}
 }

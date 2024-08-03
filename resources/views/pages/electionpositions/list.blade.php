@@ -4,6 +4,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
+    //check if current user role is allowed access to the pages
+    $can_add = $user->canAccess("electionpositions/add");
+    $can_edit = $user->canAccess("electionpositions/edit");
+    $can_view = $user->canAccess("electionpositions/view");
+    $can_delete = $user->canAccess("electionpositions/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
@@ -28,10 +33,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                     </div>
                 </div>
                 <div class="col-auto  " >
+                    <?php if($can_add){ ?>
                     <a  class="btn btn-primary btn-block" href="<?php print_link("electionpositions/add", true) ?>" >
                     <i class="material-icons">add</i>                               
                     Add New Election Position 
                 </a>
+                <?php } ?>
             </div>
             <div class="col-md-3  " >
                 <!-- Page drop down search component -->
@@ -123,7 +130,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <a href="<?php print_link("/electionpositions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
                                         <td class="td-name">
-                                            <span  data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
+                                            <span <?php if($can_edit){ ?> data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                             data-value="<?php echo $data['name']; ?>" 
                                             data-pk="<?php echo $data['id'] ?>" 
                                             data-url="<?php print_link("electionpositions/edit/" . urlencode($data['id'])); ?>" 
@@ -134,12 +141,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             data-type="text" 
                                             data-mode="popover" 
                                             data-showbuttons="left" 
-                                            class="is-editable" >
+                                            class="is-editable" <?php } ?>>
                                             <?php echo  $data['name'] ; ?>
                                             </span>
                                         </td>
                                         <td class="td-form_amt">
-                                            <span  data-step="any" 
+                                            <span <?php if($can_edit){ ?> data-step="any" 
                                             data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                             data-value="<?php echo $data['form_amt']; ?>" 
                                             data-pk="<?php echo $data['id'] ?>" 
@@ -151,7 +158,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             data-type="number" 
                                             data-mode="popover" 
                                             data-showbuttons="left" 
-                                            class="is-editable" >
+                                            class="is-editable" <?php } ?>>
                                             <?php echo  $data['form_amt'] ; ?>
                                             </span>
                                         </td>
@@ -161,7 +168,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </span>
                                         </td>
                                         <td class="td-positioning">
-                                            <span  data-step="any" 
+                                            <span <?php if($can_edit){ ?> data-step="any" 
                                             data-source='<?php print_link('componentsdata/value_option_list'); ?>' 
                                             data-value="<?php echo $data['positioning']; ?>" 
                                             data-pk="<?php echo $data['id'] ?>" 
@@ -173,7 +180,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             data-type="number" 
                                             data-mode="popover" 
                                             data-showbuttons="left" 
-                                            class="is-editable" >
+                                            class="is-editable" <?php } ?>>
                                             <?php echo  $data['positioning'] ; ?>
                                             </span>
                                         </td>
@@ -194,15 +201,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <i class="material-icons">menu</i> 
                                         </button>
                                         <ul class="dropdown-menu">
+                                            <?php if($can_view){ ?>
                                             <a class="dropdown-item "   href="<?php print_link("electionpositions/view/$rec_id"); ?>" >
                                             <i class="material-icons">visibility</i> View
                                         </a>
+                                        <?php } ?>
+                                        <?php if($can_edit){ ?>
                                         <a class="dropdown-item "   href="<?php print_link("electionpositions/edit/$rec_id"); ?>" >
                                         <i class="material-icons">edit</i> Edit
                                     </a>
+                                    <?php } ?>
+                                    <?php if($can_delete){ ?>
                                     <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("electionpositions/delete/$rec_id"); ?>" >
                                     <i class="material-icons">delete_sweep</i> Delete
                                 </a>
+                                <?php } ?>
                             </ul>
                         </div>
                     </td>
@@ -235,9 +248,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     <div class=" mt-3">
         <div class="row align-items-center justify-content-between">    
             <div class="col-md-auto d-flex">    
+                <?php if($can_delete){ ?>
                 <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("electionpositions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
                 <i class="material-icons">delete_sweep</i> Delete Selected
                 </button>
+                <?php } ?>
             </div>
             <div class="col">   
                 <?php

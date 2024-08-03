@@ -35,7 +35,7 @@
 		],
 		
 		[
-			'path' => '#',
+			'path' => 'resourceitems',
 			'label' => "Resources", 
 			'icon' => '<i class="material-icons ">picture_as_pdf</i>','submenu' => [
 		[
@@ -65,7 +65,7 @@
 		],
 		
 		[
-			'path' => '#',
+			'path' => 'electionpositions',
 			'label' => "Election", 
 			'icon' => '<i class="material-icons ">group_add</i>','submenu' => [
 		[
@@ -89,7 +89,7 @@
 		],
 		
 		[
-			'path' => 'menu19',
+			'path' => 'contestcategories',
 			'label' => "Contest", 
 			'icon' => '<i class="material-icons ">contact_mail</i>','submenu' => [
 		[
@@ -113,7 +113,7 @@
 		],
 		
 		[
-			'path' => '#',
+			'path' => 'users',
 			'label' => "Users", 
 			'icon' => '<i class="material-icons ">person</i>','submenu' => [
 		[
@@ -123,7 +123,7 @@
 		],
 		
 		[
-			'path' => '#',
+			'path' => 'users',
 			'label' => "Admins", 
 			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
@@ -170,6 +170,30 @@
 			'path' => 'appsettings',
 			'label' => "App Settings", 
 			'icon' => '<i class="material-icons ">settings</i>'
+		],
+		
+		[
+			'path' => 'roles',
+			'label' => "Roles & Permission", 
+			'icon' => '<i class="material-icons ">person_pin</i>','submenu' => [
+		[
+			'path' => 'roles',
+			'label' => "Roles", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'permissions',
+			'label' => "Permissions", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		]
+	]
+		],
+		
+		[
+			'path' => 'allpermissions',
+			'label' => "All Permissions", 
+			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
 	}
@@ -177,8 +201,8 @@
 	public static function navbartopleft(){
 		return [
 		[
-			'path' => 'appsettings',
-			'label' => "App Settings", 
+			'path' => 'allpermissions',
+			'label' => "All Permissions", 
 			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
@@ -189,6 +213,12 @@
 		[
 			'path' => 'appsettings',
 			'label' => "App Settings", 
+			'icon' => '<i class="material-icons">extension</i>'
+		],
+		
+		[
+			'path' => 'allpermissions',
+			'label' => "All Permissions", 
 			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
