@@ -149,4 +149,36 @@ class ContestCategories extends Model
 			"id" 
 		];
 	}
+	
+
+	/**
+     * return categoryList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function categoryListFields(){
+		return [ 
+			"contest_categories.id AS id",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
+	
+
+	/**
+     * return exportCategoryList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportCategoryListFields(){
+		return [ 
+			"contest_categories.id AS id",
+			"contest_categories.name AS name",
+			"contest_categories.price AS price",
+			"contest_categories.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
 }

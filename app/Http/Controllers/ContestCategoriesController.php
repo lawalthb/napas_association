@@ -5,6 +5,7 @@ use App\Http\Requests\ContestCategoriesAddRequest;
 use App\Http\Requests\ContestCategoriesEditRequest;
 use App\Models\ContestCategories;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Exception;
 class ContestCategoriesController extends Controller
 {
@@ -20,7 +21,7 @@ class ContestCategoriesController extends Controller
 	function index(Request $request, $fieldname = null , $fieldvalue = null){
 		$view = "pages.contestcategories.list";
 		$query = ContestCategories::query();
-		$limit = $request->limit ?? 10;
+		$limit = $request->limit ?? 100;
 		if($request->search){
 			$search = trim($request->search);
 			ContestCategories::search($query, $search); // search table records
@@ -32,6 +33,10 @@ class ContestCategoriesController extends Controller
 		$query->orderBy($orderby, $ordertype);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		if($request->academic_session_id){
+			$val = $request->academic_session_id;
+			$query->where(DB::raw("contest_categories.academic_session_id"), "=", $val);
 		}
 		$records = $query->paginate($limit, ContestCategories::listFields());
 		return $this->renderView($view, compact("records"));
@@ -116,5 +121,33 @@ class ContestCategoriesController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
+	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function category_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.contestcategories.category_list";
+		$query = ContestCategories::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			ContestCategories::search($query, $search); // search table records
+		}
+		$query->join("academic_sessions", "contest_categories.academic_session_id", "=", "academic_sessions.id");
+		$orderby = $request->orderby ?? "contest_categories.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("academic_session_id", "=" , 1);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ContestCategories::categoryListFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

@@ -269,11 +269,11 @@ class ComponentsData{
 	
 
 	/**
-     * category_id_option_list_2 Model Action
+     * academic_session_id_option_list_2 Model Action
      * @return array
      */
-	function category_id_option_list_2(){
-		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories ORDER BY id DESC";
+	function academic_session_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
@@ -281,11 +281,11 @@ class ComponentsData{
 	
 
 	/**
-     * academic_session_option_list Model Action
+     * category_id_option_list_2 Model Action
      * @return array
      */
-	function academic_session_option_list(){
-		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
+	function category_id_option_list_2(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;

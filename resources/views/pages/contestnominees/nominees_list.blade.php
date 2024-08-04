@@ -5,16 +5,16 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
     //check if current user role is allowed access to the pages
-    $can_add = $user->canAccess("electionaspirants/add");
-    $can_edit = $user->canAccess("electionaspirants/edit");
-    $can_view = $user->canAccess("electionaspirants/view");
-    $can_delete = $user->canAccess("electionaspirants/delete");
+    $can_add = $user->canAccess("contestnominees/add");
+    $can_edit = $user->canAccess("contestnominees/edit");
+    $can_view = $user->canAccess("contestnominees/view");
+    $can_delete = $user->canAccess("contestnominees/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $pageTitle = "Election Aspirants"; //set dynamic page title
+    $pageTitle = "Contest Nominees"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -28,14 +28,14 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class="row justify-content-between align-items-center gap-3">
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Election Aspirants</div>
+                        <div class="h5 font-weight-bold text-primary">Contest Nominees</div>
                     </div>
                 </div>
                 <div class="col-auto  " >
                     <?php if($can_add){ ?>
-                    <a  class="btn btn-primary btn-block" href="<?php print_link("electionaspirants/add", true) ?>" >
+                    <a  class="btn btn-primary btn-block" href="<?php print_link("contestnominees/add", true) ?>" >
                     <i class="material-icons">add</i>                               
-                    Add New Election Aspirant 
+                    Add New Contest Nominee 
                 </a>
                 <?php } ?>
             </div>
@@ -60,9 +60,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
         <div class="row ">
             <div class="col comp-grid " >
                 <div  class=" page-content" >
-                    <div id="electionaspirants-member_list-records">
+                    <div id="contestnominees-nominees_list-records">
                         <div id="page-main-content" class="table-responsive">
-                            <?php Html::page_bread_crumb("/electionaspirants/member_list", $field_name, $field_value); ?>
+                            <?php Html::page_bread_crumb("/contestnominees/nominees_list", $field_name, $field_value); ?>
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
@@ -71,9 +71,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <thead class="table-header ">
                                     <tr>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-name" > Display Name</th>
-                                        <th class="td-position_id" > Position</th>
-                                        <th class="td-payment_status" > Payment Status</th>
+                                        <th class="td-name" > Name</th>
+                                        <th class="td-category_id" > Category</th>
+                                        <th class="td-vote_link" > Vote Link</th>
                                         <th class="td-academic_session" > Academic Session</th>
                                     </tr>
                                 </thead>
@@ -91,18 +91,18 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <tr>
                                         <!--PageComponentStart-->
                                         <td class="td-id">
-                                            <a href="<?php print_link("/electionaspirants/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
+                                            <a href="<?php print_link("/contestnominees/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
                                         <td class="td-name">
                                             <?php echo  $data['name'] ; ?>
                                         </td>
-                                        <td class="td-position_id">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("electionpositions/view/$data[position_id]?subpage=1") ?>">
-                                            <?php echo $data['electionpositions_name'] ?>
+                                        <td class="td-category_id">
+                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("contestcategories//$data[category_id]?subpage=1") ?>">
+                                            <?php echo $data['contestcategories_name'] ?>
                                         </a>
                                     </td>
-                                    <td class="td-payment_status">
-                                        <?php echo  $data['payment_status'] ; ?>
+                                    <td class="td-vote_link">
+                                        <?php echo  $data['vote_link'] ; ?>
                                     </td>
                                     <td class="td-academic_session">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">

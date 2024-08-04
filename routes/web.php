@@ -98,7 +98,9 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('contestcategories/add', 'ContestCategoriesController@store')->name('contestcategories.store');
 		
 	Route::any('contestcategories/edit/{rec_id}', 'ContestCategoriesController@edit')->name('contestcategories.edit');	
-	Route::get('contestcategories/delete/{rec_id}', 'ContestCategoriesController@delete');
+	Route::get('contestcategories/delete/{rec_id}', 'ContestCategoriesController@delete');	
+	Route::get('contestcategories/category_list', 'ContestCategoriesController@category_list');
+	Route::get('contestcategories/category_list/{filter?}/{filtervalue?}', 'ContestCategoriesController@category_list');
 
 /* routes for ContestNominees Controller */
 	Route::get('contestnominees', 'ContestNomineesController@index')->name('contestnominees.index');
@@ -108,7 +110,9 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('contestnominees/add', 'ContestNomineesController@store')->name('contestnominees.store');
 		
 	Route::any('contestnominees/edit/{rec_id}', 'ContestNomineesController@edit')->name('contestnominees.edit');	
-	Route::get('contestnominees/delete/{rec_id}', 'ContestNomineesController@delete');
+	Route::get('contestnominees/delete/{rec_id}', 'ContestNomineesController@delete');	
+	Route::get('contestnominees/nominees_list', 'ContestNomineesController@nominees_list');
+	Route::get('contestnominees/nominees_list/{filter?}/{filtervalue?}', 'ContestNomineesController@nominees_list');
 
 /* routes for ContestVotes Controller */
 	Route::get('contestvotes', 'ContestVotesController@index')->name('contestvotes.index');
@@ -592,15 +596,15 @@ Route::get('componentsdata/user_role_id_option_list',  function(Request $request
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
+Route::get('componentsdata/academic_session_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->category_id_option_list_2($request);
+		return $compModel->academic_session_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	
-Route::get('componentsdata/academic_session_option_list',  function(Request $request){
+Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
-		return $compModel->academic_session_option_list($request);
+		return $compModel->category_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	

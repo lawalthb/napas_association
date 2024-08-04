@@ -131,4 +131,33 @@ class ContestNomineesController extends Controller
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
 	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function nominees_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.contestnominees.nominees_list";
+		$query = ContestNominees::query();
+		$limit = $request->limit ?? 100;
+		if($request->search){
+			$search = trim($request->search);
+			ContestNominees::search($query, $search); // search table records
+		}
+		$query->join("contest_categories", "contest_nominees.category_id", "=", "contest_categories.id");
+		$query->join("academic_sessions", "contest_nominees.academic_session", "=", "academic_sessions.id");
+		$orderby = $request->orderby ?? "contest_nominees.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("academic_session", "=" , 1);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ContestNominees::nomineesListFields());
+		return $this->renderView($view, compact("records"));
+	}
 }

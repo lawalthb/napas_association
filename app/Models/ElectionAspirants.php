@@ -168,7 +168,6 @@ class ElectionAspirants extends Model
 	public static function memberListFields(){
 		return [ 
 			"election_aspirants.id AS id",
-			"election_aspirants.user_id AS user_id",
 			"users.firstname AS users_firstname",
 			"election_aspirants.name AS name",
 			"election_aspirants.position_id AS position_id",
@@ -188,7 +187,6 @@ class ElectionAspirants extends Model
 	public static function exportMemberListFields(){
 		return [ 
 			"election_aspirants.id AS id",
-			"election_aspirants.user_id AS user_id",
 			"users.firstname AS users_firstname",
 			"election_aspirants.name AS name",
 			"election_aspirants.position_id AS position_id",

@@ -165,4 +165,40 @@ class ContestNominees extends Model
 			"id" 
 		];
 	}
+	
+
+	/**
+     * return nomineesList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function nomineesListFields(){
+		return [ 
+			"contest_nominees.id AS id",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
+	
+
+	/**
+     * return exportNomineesList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportNomineesListFields(){
+		return [ 
+			"contest_nominees.id AS id",
+			"contest_nominees.name AS name",
+			"contest_nominees.category_id AS category_id",
+			"contest_categories.name AS contestcategories_name",
+			"contest_nominees.vote_link AS vote_link",
+			"contest_nominees.academic_session AS academic_session",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
 }

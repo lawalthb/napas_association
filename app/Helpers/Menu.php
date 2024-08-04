@@ -212,6 +212,24 @@
 			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
+		],
+		
+		[
+			'path' => 'contestcategories/category_list',
+			'label' => "Contests", 
+			'icon' => '<i class="material-icons ">wc</i>','submenu' => [
+		[
+			'path' => 'contestcategories/category_list',
+			'label' => "Category List", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'contestnominees/nominees_list',
+			'label' => "Nominees List", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		]
+	]
 		]
 	] ;
 	}

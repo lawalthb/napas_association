@@ -14,7 +14,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $academic_session_option_list = $comp_model->academic_session_option_list();
+    $academic_session_id_option_list_2 = $comp_model->academic_session_id_option_list_2();
     $pageTitle = "Election Positions"; //set dynamic page title
 ?>
 @extends($layout)
@@ -68,7 +68,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <select   name="academic_session_id" class="form-select custom " >
                         <option value="">Select a value ...</option>
                         <?php 
-                            $options = $academic_session_option_list ?? [];
+                            $options = $academic_session_id_option_list_2 ?? [];
                             foreach($options as $option){
                             $value = $option->value;
                             $label = $option->label ?? $value;
@@ -97,7 +97,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
                                 <?php
-                                    Html::filter_tag('academic_session_id', 'Academic Session', $academic_session_option_list);
+                                    Html::filter_tag('academic_session_id', 'Academic Session', $academic_session_id_option_list_2);
                                 ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">
