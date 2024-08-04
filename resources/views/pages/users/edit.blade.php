@@ -46,7 +46,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="firstname">Firstname <span class="text-danger">*</span></label>
                                     <div id="ctrl-firstname-holder" class=" "> 
-                                        <input id="ctrl-firstname" data-field="firstname"  value="<?php  echo $data['firstname']; ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  class="form-control " />
+                                        <input id="ctrl-firstname" data-field="firstname"  value="<?php  echo $data['firstname']; ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  data-url="componentsdata/users_firstname_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                        <div class="check-status"></div> 
                                     </div>
                                 </div>
                                 <div class="form-group col-md-6">
@@ -290,7 +291,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <select  id="ctrl-user_role_id" data-field="user_role_id" name="user_role_id"  placeholder="Select a value ..."    class="form-select" >
                                     <option value="">Select a value ...</option>
                                     <?php
-                                        $options = $comp_model->role_id_option_list() ?? [];
+                                        $options = $comp_model->user_role_id_option_list() ?? [];
                                         foreach($options as $option){
                                         $value = $option->value;
                                         $label = $option->label ?? $value;

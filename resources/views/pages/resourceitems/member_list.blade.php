@@ -29,7 +29,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class="row justify-content-between align-items-center gap-3">
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Images Resource</div>
+                        <div class="h5 font-weight-bold text-primary">Resources</div>
                     </div>
                 </div>
                 <div class="col-md-3  " >

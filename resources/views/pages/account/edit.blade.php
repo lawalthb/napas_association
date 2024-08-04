@@ -365,7 +365,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <select  id="ctrl-user_role_id" data-field="user_role_id" name="user_role_id"  placeholder="Select a value ..."    class="form-select" >
                                             <option value="">Select a value ...</option>
                                             <?php
-                                                $options = $comp_model->role_id_option_list() ?? [];
+                                                $options = $comp_model->user_role_id_option_list() ?? [];
                                                 foreach($options as $option){
                                                 $value = $option->value;
                                                 $label = $option->label ?? $value;

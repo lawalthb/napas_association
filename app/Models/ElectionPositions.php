@@ -145,4 +145,36 @@ class ElectionPositions extends Model
 			"id" 
 		];
 	}
+	
+
+	/**
+     * return memberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function memberListFields(){
+		return [ 
+			"election_positions.id AS id",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
+	
+
+	/**
+     * return exportMemberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportMemberListFields(){
+		return [ 
+			"election_positions.id AS id",
+			"election_positions.name AS name",
+			"election_positions.form_amt AS form_amt",
+			"election_positions.academic_session_id AS academic_session_id",
+			"academic_sessions.session_name AS academicsessions_session_name" 
+		];
+	}
 }

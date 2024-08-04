@@ -128,4 +128,33 @@ class ElectionAspirantsController extends Controller
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
 	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function member_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.electionaspirants.member_list";
+		$query = ElectionAspirants::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			ElectionAspirants::search($query, $search); // search table records
+		}
+		$query->join("users", "election_aspirants.user_id", "=", "users.id");
+		$query->join("election_positions", "election_aspirants.position_id", "=", "election_positions.id");
+		$query->join("academic_sessions", "election_aspirants.academic_session", "=", "academic_sessions.id");
+		$orderby = $request->orderby ?? "election_aspirants.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ElectionAspirants::memberListFields());
+		return $this->renderView($view, compact("records"));
+	}
 }

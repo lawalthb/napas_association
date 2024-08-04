@@ -45,7 +45,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <thead>
                                         <tr>
                                             <th class="bg-light"><label for="permission">Permission</label></th>
-                                            <th class="bg-light"><label for="role_id">Role Id</label></th>
+                                            <th class="bg-light"><label for="role_id">Role</label></th>
                                             <th></th>
                                         </tr>
                                     </thead>

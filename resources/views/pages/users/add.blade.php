@@ -45,19 +45,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="form-group col-md-6">
                                         <label class="control-label" for="firstname">Firstname <span class="text-danger">*</span></label>
                                         <div id="ctrl-firstname-holder" class=" "> 
-                                            <input id="ctrl-firstname" data-field="firstname"  value="<?php echo get_value('firstname') ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  class="form-control " />
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="lastname">Lastname <span class="text-danger">*</span></label>
-                                        <div id="ctrl-lastname-holder" class=" "> 
-                                            <input id="ctrl-lastname" data-field="lastname"  value="<?php echo get_value('lastname') ?>" type="text" placeholder="Enter Lastname"  required="" name="lastname"  class="form-control " />
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="nickname">Nickname </label>
-                                        <div id="ctrl-nickname-holder" class=" "> 
-                                            <input id="ctrl-nickname" data-field="nickname"  value="<?php echo get_value('nickname') ?>" type="text" placeholder="Enter Nickname"  name="nickname"  class="form-control " />
+                                            <input id="ctrl-firstname" data-field="firstname"  value="<?php echo get_value('firstname') ?>" type="text" placeholder="Enter Firstname"  required="" name="firstname"  data-url="componentsdata/users_firstname_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                            <div class="check-status"></div> 
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
@@ -89,96 +78,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label class="control-label" for="matno">Matno </label>
-                                        <div id="ctrl-matno-holder" class=" "> 
-                                            <input id="ctrl-matno" data-field="matno"  value="<?php echo get_value('matno') ?>" type="text" placeholder="Enter Matno"  name="matno"  class="form-control " />
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
                                         <label class="control-label" for="phone">Phone <span class="text-danger">*</span></label>
                                         <div id="ctrl-phone-holder" class=" "> 
                                             <input id="ctrl-phone" data-field="phone"  value="<?php echo get_value('phone') ?>" type="text" placeholder="Enter Phone"  required="" name="phone"  data-url="componentsdata/users_phone_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
                                             <div class="check-status"></div> 
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="level_id">Level <span class="text-danger">*</span></label>
-                                        <div id="ctrl-level_id-holder" class=" "> 
-                                            <select required=""  id="ctrl-level_id" data-field="level_id" name="level_id"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php 
-                                                $options = $comp_model->level_id_option_list() ?? [];
-                                                foreach($options as $option){
-                                                $value = $option->value;
-                                                $label = $option->label ?? $value;
-                                                $selected = Html::get_field_selected('level_id', $value, "");
-                                            ?>
-                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                            <?php echo $label; ?>
-                                            </option>
-                                            <?php
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
-                                        <div id="ctrl-member_type-holder" class=" "> 
-                                            <select required=""  id="ctrl-member_type" data-field="member_type" name="member_type"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::memberType();
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_field_selected('member_type', $value, "");
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="session_start">Session Start </label>
-                                        <div id="ctrl-session_start-holder" class="input-group "> 
-                                            <input id="ctrl-session_start" data-field="session_start" class="form-control datepicker  datepicker"  value="<?php echo get_value('session_start') ?>" type="datetime" name="session_start" placeholder="Enter Session Start" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
-                                            <span class="input-group-text"><i class="material-icons">date_range</i></span>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-md-6">
-                                        <label class="control-label" for="session_end">Session End </label>
-                                        <div id="ctrl-session_end-holder" class="input-group "> 
-                                            <input id="ctrl-session_end" data-field="session_end" class="form-control datepicker  datepicker"  value="<?php echo get_value('session_end') ?>" type="datetime" name="session_end" placeholder="Enter Session End" data-enable-time="false" data-min-date="" data-max-date="" data-date-format="Y-m-d" data-alt-format="F j, Y" data-inline="false" data-no-calendar="false" data-mode="single" />
-                                            <span class="input-group-text"><i class="material-icons">date_range</i></span>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group ">
-                                    <label class="control-label" for="user_role_id">User Role Id </label>
-                                    <div id="ctrl-user_role_id-holder" class=" "> 
-                                        <select  id="ctrl-user_role_id" data-field="user_role_id" name="user_role_id"  placeholder="Select a value ..."    class="form-select" >
-                                        <option value="">Select a value ...</option>
-                                        <?php 
-                                            $options = $comp_model->role_id_option_list() ?? [];
-                                            foreach($options as $option){
-                                            $value = $option->value;
-                                            $label = $option->label ?? $value;
-                                            $selected = Html::get_field_selected('user_role_id', $value, "");
-                                        ?>
-                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                        <?php echo $label; ?>
-                                        </option>
-                                        <?php
-                                            }
-                                        ?>
-                                        </select>
+                                    <label class="control-label" for="image">Image </label>
+                                    <div id="ctrl-image-holder" class=" "> 
+                                        <div class="dropzone " input="#ctrl-image" fieldname="image" uploadurl="{{ url('fileuploader/upload/image') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
+                                            <input name="image" id="ctrl-image" data-field="image" class="dropzone-input form-control" value="<?php echo get_value('image') ?>" type="text"  />
+                                            <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
+                                            <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

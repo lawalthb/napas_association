@@ -5,6 +5,9 @@ use App\Http\Requests\TransactionsAddRequest;
 use App\Http\Requests\TransactionsEditRequest;
 use App\Models\Transactions;
 use Illuminate\Http\Request;
+use \PDF;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\TransactionsMemberViewExport;
 use Illuminate\Support\Facades\DB;
 use Exception;
 class TransactionsController extends Controller
@@ -136,5 +139,52 @@ class TransactionsController extends Controller
 		}
 		$records = $query->paginate($limit, Transactions::memberListFields());
 		return $this->renderView($view, compact("records"));
+	}
+	
+
+	/**
+     * Select table record by ID
+	 * @param string $rec_id
+     * @return \Illuminate\View\View
+     */
+	function member_view($rec_id = null){
+		$query = Transactions::query();
+		$query->join("users", "transactions.user_id", "=", "users.id");
+		$query->join("price_settings", "transactions.price_settings_id", "=", "price_settings.id");
+		// if request format is for export example:- product/view/344?export=pdf
+		if($this->getExportFormat()){
+			return $this->ExportMemberView($query, $rec_id);
+		}
+		$record = $query->findOrFail($rec_id, Transactions::memberViewFields());
+		return $this->renderView("pages.transactions.member_view", ["data" => $record]);
+	}
+	
+
+	/**
+     * Export single record to different format
+	 * supported format:- PDF, CSV, EXCEL, HTML
+	 * @param \Illuminate\Database\Eloquent\Model $record
+	 * @param string $rec_id
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
+	private function ExportMemberView($query, $rec_id){
+		ob_end_clean();// clean any output to allow file download
+		$filename ="MemberViewTransactionsReport-" . date_now();
+		$format = $this->getExportFormat();
+		if($format == "print"){
+			$record = $query->findOrFail($rec_id, Transactions::exportMemberViewFields());
+			return view("reports.transactions-member_view", ["record" => $record]);
+		}
+		elseif($format == "pdf"){
+			$record = $query->findOrFail($rec_id, Transactions::exportMemberViewFields());
+			$pdf = PDF::loadView("reports.transactions-member_view", ["record" => $record]);
+			return $pdf->download("$filename.pdf");
+		}
+		elseif($format == "csv"){
+			return Excel::download(new TransactionsMemberViewExport($query, $rec_id), "$filename.csv", \Maatwebsite\Excel\Excel::CSV);
+		}
+		elseif($format == "excel"){
+			return Excel::download(new TransactionsMemberViewExport($query, $rec_id), "$filename.xlsx", \Maatwebsite\Excel\Excel::XLSX);
+		}
 	}
 }

@@ -120,4 +120,37 @@ class ElectionPositionsController extends Controller
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
 	}
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function member_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.electionpositions.member_list";
+		$query = ElectionPositions::query();
+		$limit = $request->limit ?? 50;
+		if($request->search){
+			$search = trim($request->search);
+			ElectionPositions::search($query, $search); // search table records
+		}
+		$query->join("academic_sessions", "election_positions.academic_session_id", "=", "academic_sessions.id");
+		if($request->orderby){
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		}
+		else{
+			$query->orderBy("election_positions.name", "ASC");
+		}
+		$query->where("academic_session_id", "=" , 1);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, ElectionPositions::memberListFields());
+		return $this->renderView($view, compact("records"));
+	}
 }

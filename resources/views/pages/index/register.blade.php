@@ -64,18 +64,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="form-group col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-4">
-                                                <label class="control-label" for="lastname">Lastname </label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div id="ctrl-lastname-holder" class=" ">
-                                                    <input id="ctrl-lastname" data-field="lastname"  value="<?php echo get_value('lastname') ?>" type="text" placeholder="Enter Lastname"  name="lastname"  class="form-control " />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-4">
                                                 <label class="control-label" for="phone">Phone <span class="text-danger">*</span></label>
                                             </div>
                                             <div class="col-sm-8">
@@ -132,72 +120,19 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="level_id">Level Id </label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div id="ctrl-level_id-holder" class=" ">
-                                                    <select  id="ctrl-level_id" data-field="level_id" name="level_id"  placeholder="Select a value ..."    class="form-select" >
-                                                    <option value="">Select a value ...</option>
-                                                    <?php 
-                                                        $options = $comp_model->level_id_option_list() ?? [];
-                                                        foreach($options as $option){
-                                                        $value = $option->value;
-                                                        $label = $option->label ?? $value;
-                                                        $selected = Html::get_field_selected('level_id', $value, "");
-                                                    ?>
-                                                    <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                    <?php echo $label; ?>
-                                                    </option>
-                                                    <?php
-                                                        }
-                                                    ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group col-sm-6">
-                                        <div class="row">
-                                            <div class="col-sm-4">
-                                                <label class="control-label" for="member_type">Member Type <span class="text-danger">*</span></label>
-                                            </div>
-                                            <div class="col-sm-8">
-                                                <div id="ctrl-member_type-holder" class=" ">
-                                                    <select required=""  id="ctrl-member_type" data-field="member_type" name="member_type"  placeholder="Select a value ..."    class="form-select" >
-                                                    <option value="">Select a value ...</option>
-                                                    <?php
-                                                        $options = Menu::memberType();
-                                                        if(!empty($options)){
-                                                        foreach($options as $option){
-                                                        $value = $option['value'];
-                                                        $label = $option['label'];
-                                                        $selected = Html::get_field_selected('member_type', $value, "");
-                                                    ?>
-                                                    <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                                    <?php echo $label ?>
-                                                    </option>                                   
-                                                    <?php
-                                                        }
-                                                        }
-                                                    ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="expectation_msg">Expectation Msg </label>
+                                            <label class="control-label" for="image">Image </label>
                                         </div>
                                         <div class="col-sm-8">
-                                            <div id="ctrl-expectation_msg-holder" class=" ">
-                                                <textarea placeholder="Enter Expectation Msg" id="ctrl-expectation_msg" data-field="expectation_msg"  rows="3" name="expectation_msg" class=" form-control"><?php echo get_value('expectation_msg') ?></textarea>
-                                                <!--<div class="invalid-feedback animated bounceIn text-center">Please enter text</div>-->
+                                            <div id="ctrl-image-holder" class=" ">
+                                                <div class="dropzone " input="#ctrl-image" fieldname="image" uploadurl="{{ url('fileuploader/upload/image') }}"    data-multiple="false" dropmsg="Choose files or drop files here"    btntext="Browse" extensions=".jpg,.png,.gif,.jpeg" filesize="3" maximum="1">
+                                                    <input name="image" id="ctrl-image" data-field="image" class="dropzone-input form-control" value="<?php echo get_value('image') ?>" type="text"  />
+                                                    <!--<div class="invalid-feedback animated bounceIn text-center">Please a choose file</div>-->
+                                                    <div class="dz-file-limit animated bounceIn text-center text-danger"></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

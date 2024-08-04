@@ -81,6 +81,12 @@ class UsersController extends Controller
      */
 	function store(UsersAddRequest $request){
 		$modeldata = $this->normalizeFormData($request->validated());
+		
+		if( array_key_exists("image", $modeldata) ){
+			//move uploaded file from temp directory to destination directory
+			$fileInfo = $this->moveUploadedFiles($modeldata['image'], "image");
+			$modeldata['image'] = $fileInfo['filepath'];
+		}
 		$modeldata['password'] = bcrypt($modeldata['password']);
 		
 		//save Users record

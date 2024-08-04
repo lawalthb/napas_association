@@ -112,7 +112,6 @@ class Transactions extends Model
 	public static function viewFields(){
 		return [ 
 			"transactions.id AS id",
-			"transactions.user_id AS user_id",
 			"transactions.price_settings_id AS price_settings_id",
 			"price_settings.name AS pricesettings_name",
 			"transactions.email AS email",
@@ -124,7 +123,8 @@ class Transactions extends Model
 			"transactions.status AS status",
 			"transactions.gateway_response AS gateway_response",
 			"transactions.channel AS channel",
-			"transactions.purpose_name AS purpose_name" 
+			"transactions.purpose_name AS purpose_name",
+			"transactions.user_id AS user_id" 
 		];
 	}
 	
@@ -137,7 +137,6 @@ class Transactions extends Model
 	public static function exportViewFields(){
 		return [ 
 			"transactions.id AS id",
-			"transactions.user_id AS user_id",
 			"transactions.price_settings_id AS price_settings_id",
 			"price_settings.name AS pricesettings_name",
 			"transactions.email AS email",
@@ -149,7 +148,8 @@ class Transactions extends Model
 			"transactions.status AS status",
 			"transactions.gateway_response AS gateway_response",
 			"transactions.channel AS channel",
-			"transactions.purpose_name AS purpose_name" 
+			"transactions.purpose_name AS purpose_name",
+			"transactions.user_id AS user_id" 
 		];
 	}
 	
@@ -213,6 +213,54 @@ class Transactions extends Model
 			"reference",
 			"created_at",
 			"status" 
+		];
+	}
+	
+
+	/**
+     * return memberView page fields of the model.
+     * 
+     * @return array
+     */
+	public static function memberViewFields(){
+		return [ 
+			"transactions.id AS id",
+			"transactions.reference AS reference",
+			"transactions.fullname AS fullname",
+			"transactions.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"transactions.email AS email",
+			"transactions.price_settings_id AS price_settings_id",
+			"price_settings.name AS pricesettings_name",
+			"transactions.amount AS amount",
+			"transactions.phone_number AS phone_number",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"transactions.authorization_url AS authorization_url" 
+		];
+	}
+	
+
+	/**
+     * return exportMemberView page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportMemberViewFields(){
+		return [ 
+			"transactions.id AS id",
+			"transactions.reference AS reference",
+			"transactions.fullname AS fullname",
+			"transactions.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"transactions.email AS email",
+			"transactions.price_settings_id AS price_settings_id",
+			"price_settings.name AS pricesettings_name",
+			"transactions.amount AS amount",
+			"transactions.phone_number AS phone_number",
+			"transactions.created_at AS created_at",
+			"transactions.status AS status",
+			"transactions.authorization_url AS authorization_url" 
 		];
 	}
 }

@@ -129,7 +129,9 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('electionaspirants/add', 'ElectionAspirantsController@store')->name('electionaspirants.store');
 		
 	Route::any('electionaspirants/edit/{rec_id}', 'ElectionAspirantsController@edit')->name('electionaspirants.edit');	
-	Route::get('electionaspirants/delete/{rec_id}', 'ElectionAspirantsController@delete');
+	Route::get('electionaspirants/delete/{rec_id}', 'ElectionAspirantsController@delete');	
+	Route::get('electionaspirants/member_list', 'ElectionAspirantsController@member_list');
+	Route::get('electionaspirants/member_list/{filter?}/{filtervalue?}', 'ElectionAspirantsController@member_list');
 
 /* routes for ElectionPositions Controller */
 	Route::get('electionpositions', 'ElectionPositionsController@index')->name('electionpositions.index');
@@ -140,7 +142,9 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('electionpositions/add', 'ElectionPositionsController@store')->name('electionpositions.store');
 		
 	Route::any('electionpositions/edit/{rec_id}', 'ElectionPositionsController@edit')->name('electionpositions.edit');Route::any('electionpositions/editfield/{rec_id}', 'ElectionPositionsController@editfield');	
-	Route::get('electionpositions/delete/{rec_id}', 'ElectionPositionsController@delete');
+	Route::get('electionpositions/delete/{rec_id}', 'ElectionPositionsController@delete');	
+	Route::get('electionpositions/member_list', 'ElectionPositionsController@member_list');
+	Route::get('electionpositions/member_list/{filter?}/{filtervalue?}', 'ElectionPositionsController@member_list');
 
 /* routes for ElectionVotes Controller */
 	Route::get('electionvotes', 'ElectionVotesController@index')->name('electionvotes.index');
@@ -282,7 +286,8 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::any('transactions/edit/{rec_id}', 'TransactionsController@edit')->name('transactions.edit');	
 	Route::get('transactions/delete/{rec_id}', 'TransactionsController@delete');	
 	Route::get('transactions/member_list', 'TransactionsController@member_list');
-	Route::get('transactions/member_list/{filter?}/{filtervalue?}', 'TransactionsController@member_list');
+	Route::get('transactions/member_list/{filter?}/{filtervalue?}', 'TransactionsController@member_list');	
+	Route::get('transactions/member_view/{rec_id}', 'TransactionsController@member_view')->name('transactions.member_view');
 
 /* routes for Users Controller */
 	Route::get('users', 'UsersController@index')->name('users.index');
@@ -457,7 +462,12 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('webvissions/add', 'WebVissionsController@store')->name('webvissions.store');
 		
 	Route::any('webvissions/edit/{rec_id}', 'WebVissionsController@edit')->name('webvissions.edit');	
-	Route::get('webvissions/delete/{rec_id}', 'WebVissionsController@delete');
+	Route::get('webvissions/delete/{rec_id}', 'WebVissionsController@delete');	
+Route::get('election_vote_page',  function(Request $request){
+		return view("pages.custom.election_vote_page");
+	}
+);
+
 });
 
 
@@ -520,7 +530,7 @@ Route::get('componentsdata/level_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->level_id_option_list($request);
 	}
-);
+)->middleware(['auth']);
 	
 Route::get('componentsdata/permission_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
@@ -576,6 +586,12 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 	}
 );
 	
+Route::get('componentsdata/user_role_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->user_role_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/category_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->category_id_option_list_2($request);
@@ -597,12 +613,6 @@ Route::get('componentsdata/position_id_option_list_2',  function(Request $reques
 Route::get('componentsdata/electionaspirants_academic_session_autofill',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->electionaspirants_academic_session_autofill($request);
-	}
-)->middleware(['auth']);
-	
-Route::get('componentsdata/role_id_option_list_2',  function(Request $request){
-		$compModel = new App\Models\ComponentsData();
-		return $compModel->role_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 	

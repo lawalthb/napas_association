@@ -72,7 +72,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="role_id">Role Id </label>
+                                        <label class="control-label" for="role_id">Role </label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-role_id-holder" class=" ">

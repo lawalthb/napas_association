@@ -27,7 +27,7 @@ class UsersEditRequest extends FormRequest
 
         return [
             
-				"firstname" => "filled|string",
+				"firstname" => "filled|string|unique:users,firstname,$rec_id,id",
 				"lastname" => "filled|string",
 				"nickname" => "nullable|string",
 				"matno" => "nullable|string",

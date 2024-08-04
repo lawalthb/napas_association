@@ -60,7 +60,7 @@
 		
 		[
 			'path' => 'resourceitems/member_list',
-			'label' => "_Resources", 
+			'label' => "Resources", 
 			'icon' => '<i class="material-icons ">picture_as_pdf</i>'
 		],
 		
@@ -191,19 +191,27 @@
 		],
 		
 		[
-			'path' => 'allpermissions',
-			'label' => "All Permissions", 
-			'icon' => '<i class="material-icons">extension</i>'
-		]
-	] ;
-	}
-	
-	public static function navbartopleft(){
-		return [
+			'path' => 'electionaspirants/member_list',
+			'label' => "Elections", 
+			'icon' => '<i class="material-icons ">touch_app</i>','submenu' => [
 		[
-			'path' => 'allpermissions',
-			'label' => "All Permissions", 
-			'icon' => '<i class="material-icons">extension</i>'
+			'path' => 'electionpositions/member_list',
+			'label' => "Positions", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'electionaspirants/member_list',
+			'label' => "Aspirants", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'election_vote_page',
+			'label' => "Vote", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		]
+	]
 		]
 	] ;
 	}
@@ -213,12 +221,6 @@
 		[
 			'path' => 'appsettings',
 			'label' => "App Settings", 
-			'icon' => '<i class="material-icons">extension</i>'
-		],
-		
-		[
-			'path' => 'allpermissions',
-			'label' => "All Permissions", 
 			'icon' => '<i class="material-icons">extension</i>'
 		]
 	] ;
@@ -345,7 +347,7 @@
 		],
 		[
 			'value' => 'pdf', 
-			'label' => "PDF/Doc/Excel", 
+			'label' => "PDF/Docs", 
 		],
 		[
 			'value' => 'videos', 

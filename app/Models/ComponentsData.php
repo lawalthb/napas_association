@@ -144,7 +144,7 @@ class ComponentsData{
      * @return array
      */
 	function permission_option_list(){
-		$sqltext = "SELECT  DISTINCT permission AS value,permission AS label FROM all_permissions ORDER BY permission ASC";
+		$sqltext = "SELECT  DISTINCT permission AS value,permission AS label FROM permissions where role_id=4 ORDER BY permission ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
@@ -156,7 +156,7 @@ class ComponentsData{
      * @return array
      */
 	function role_id_option_list(){
-		$sqltext = "SELECT role_id as value, role_name as label FROM roles";
+		$sqltext = "SELECT  DISTINCT role_id AS value,role_name AS label FROM roles ORDER BY role_name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
@@ -257,6 +257,18 @@ class ComponentsData{
 	
 
 	/**
+     * user_role_id_option_list Model Action
+     * @return array
+     */
+	function user_role_id_option_list(){
+		$sqltext = "SELECT role_id AS value, role_name AS label FROM roles";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * category_id_option_list_2 Model Action
      * @return array
      */
@@ -300,18 +312,6 @@ class ComponentsData{
 		$sqltext = "SELECT session_name FROM academic_sessions WHERE session_name=:value" ;
 		$query_params = [];
 		$query_params['value'] = request()->get('value');
-		$arr = DB::select($sqltext, $query_params);
-		return $arr;
-	}
-	
-
-	/**
-     * role_id_option_list_2 Model Action
-     * @return array
-     */
-	function role_id_option_list_2(){
-		$sqltext = "SELECT  DISTINCT role_id AS value,role_name AS label FROM roles ORDER BY role_name ASC";
-		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}

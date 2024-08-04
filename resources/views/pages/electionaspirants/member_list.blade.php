@@ -5,16 +5,16 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
     //check if current user role is allowed access to the pages
-    $can_add = $user->canAccess("transactions/add");
-    $can_edit = $user->canAccess("transactions/edit");
-    $can_view = $user->canAccess("transactions/view");
-    $can_delete = $user->canAccess("transactions/delete");
+    $can_add = $user->canAccess("electionaspirants/add");
+    $can_edit = $user->canAccess("electionaspirants/edit");
+    $can_view = $user->canAccess("electionaspirants/view");
+    $can_delete = $user->canAccess("electionaspirants/delete");
     $field_name = request()->segment(3);
     $field_value = request()->segment(4);
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $pageTitle = "Transactions"; //set dynamic page title
+    $pageTitle = "Election Aspirants"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -28,14 +28,14 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class="row justify-content-between align-items-center gap-3">
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Transactions</div>
+                        <div class="h5 font-weight-bold text-primary">Election Aspirants</div>
                     </div>
                 </div>
                 <div class="col-auto  " >
                     <?php if($can_add){ ?>
-                    <a  class="btn btn-primary btn-block" href="<?php print_link("transactions/add", true) ?>" >
+                    <a  class="btn btn-primary btn-block" href="<?php print_link("electionaspirants/add", true) ?>" >
                     <i class="material-icons">add</i>                               
-                    Add New Transaction 
+                    Add New Election Aspirant 
                 </a>
                 <?php } ?>
             </div>
@@ -60,9 +60,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
         <div class="row ">
             <div class="col comp-grid " >
                 <div  class=" page-content" >
-                    <div id="transactions-member_list-records">
+                    <div id="electionaspirants-member_list-records">
                         <div id="page-main-content" class="table-responsive">
-                            <?php Html::page_bread_crumb("/transactions/member_list", $field_name, $field_value); ?>
+                            <?php Html::page_bread_crumb("/electionaspirants/member_list", $field_name, $field_value); ?>
                             <?php Html::display_page_errors($errors); ?>
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
@@ -71,13 +71,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <thead class="table-header ">
                                     <tr>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-email" > Email</th>
-                                        <th class="td-amount" > Amount</th>
-                                        <th class="td-reference" > Reference</th>
-                                        <th class="td-created_at" > Date</th>
-                                        <th class="td-status" > Status</th>
-                                        <th class="td-#Template#Action" > Action</th>
-                                        <th class="td-btn"></th>
+                                        <th class="td-user_id" > Member</th>
+                                        <th class="td-name" > Display Name</th>
+                                        <th class="td-position_id" > Position</th>
+                                        <th class="td-payment_status" > Payment Status</th>
+                                        <th class="td-academic_session" > Academic Session</th>
                                     </tr>
                                 </thead>
                                 <?php
@@ -94,44 +92,30 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <tr>
                                         <!--PageComponentStart-->
                                         <td class="td-id">
-                                            <a href="<?php print_link("/transactions/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
+                                            <a href="<?php print_link("/electionaspirants/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
-                                        <td class="td-email">
-                                            <a href="<?php print_link("mailto:$data[email]") ?>"><?php echo $data['email']; ?></a>
-                                        </td>
-                                        <td class="td-amount">
-                                            <?php echo  $data['amount'] ; ?>
-                                        </td>
-                                        <td class="td-reference">
-                                            <?php echo str_truncate( $data['reference'] , 13,'...'); ?>
-                                        </td>
-                                        <td class="td-created_at">
-                                            <span title="<?php echo human_datetime($data['created_at']); ?>" class="has-tooltip">
-                                            <?php echo relative_date($data['created_at']); ?>
-                                            </span>
-                                        </td>
-                                        <td class="td-status">
-                                            <?php echo  $data['status'] ; ?>
-                                        </td>
-                                        <td class="td-#Template#Action"><a href="/transactions/member_view/<?php echo $data['id'] ?>"> Receipt</a></td>
-                                        <!--PageComponentEnd-->
-                                        <td class="td-btn">
-                                            <?php if($can_view){ ?>
-                                            <a class="btn btn-sm btn-primary has-tooltip "    href="<?php print_link("transactions/view/$rec_id"); ?>" >
-                                            <i class="material-icons ">receipt</i> Receipt
+                                        <td class="td-user_id">
+                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users//$data[user_id]?subpage=1") ?>">
+                                            <?php echo $data['users_firstname'] ?>
                                         </a>
-                                        <?php } ?>
-                                        <?php if($can_edit){ ?>
-                                        <a class="btn btn-sm btn-success has-tooltip "    href="<?php print_link("transactions/edit/$rec_id"); ?>" >
-                                        <i class="material-icons">edit</i> Edit
+                                    </td>
+                                    <td class="td-name">
+                                        <?php echo  $data['name'] ; ?>
+                                    </td>
+                                    <td class="td-position_id">
+                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("electionpositions/view/$data[position_id]?subpage=1") ?>">
+                                        <?php echo $data['electionpositions_name'] ?>
                                     </a>
-                                    <?php } ?>
-                                    <?php if($can_view){ ?>
-                                    <a class="btn btn-sm btn-primary has-tooltip "   title="Receipt" href="<?php print_link("transactions/member_view/$rec_id"); ?>" >
-                                    <i class="material-icons ">print</i> Receipt
+                                </td>
+                                <td class="td-payment_status">
+                                    <?php echo  $data['payment_status'] ; ?>
+                                </td>
+                                <td class="td-academic_session">
+                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">
+                                    <?php echo $data['academicsessions_session_name'] ?>
                                 </a>
-                                <?php } ?>
                             </td>
+                            <!--PageComponentEnd-->
                         </tr>
                         <?php 
                             }
@@ -161,11 +145,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
             <div class=" mt-3">
                 <div class="row align-items-center justify-content-between">    
                     <div class="col-md-auto d-flex">    
-                        <?php if($can_delete){ ?>
-                        <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("transactions/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                        <i class="material-icons">delete_sweep</i> Delete Selected
-                        </button>
-                        <?php } ?>
                     </div>
                     <div class="col">   
                         <?php

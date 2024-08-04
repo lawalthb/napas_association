@@ -5,11 +5,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
     //check if current user role is allowed access to the pages
-    $can_add = $user->canAccess("electionpositions/add");
-    $can_edit = $user->canAccess("electionpositions/edit");
-    $can_view = $user->canAccess("electionpositions/view");
-    $can_delete = $user->canAccess("electionpositions/delete");
-    $pageTitle = "Election Position Details"; //set dynamic page title
+    $can_add = $user->canAccess("transactions/add");
+    $can_edit = $user->canAccess("transactions/edit");
+    $can_view = $user->canAccess("transactions/view");
+    $can_delete = $user->canAccess("transactions/delete");
+    $pageTitle = "Receipt"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
@@ -28,7 +28,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                 </div>
                 <div class="col  " >
                     <div class="">
-                        <div class="h5 font-weight-bold text-primary">Election Position Details</div>
+                        <div class="h5 font-weight-bold text-primary">Payment Receipt</div>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Id</small>
+                                                    <small class="text-muted">Receipt No</small>
                                                     <div class="fw-bold">
                                                         <?php echo  $data['id'] ; ?>
                                                     </div>
@@ -66,9 +66,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Name</small>
+                                                    <small class="text-muted">Reference</small>
                                                     <div class="fw-bold">
-                                                        <?php echo  $data['name'] ; ?>
+                                                        <?php echo  $data['reference'] ; ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -78,9 +78,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Form Amt</small>
+                                                    <small class="text-muted">Fullname</small>
                                                     <div class="fw-bold">
-                                                        <?php echo to_currency( $data['form_amt'] , ''); ?>
+                                                        <?php echo  $data['fullname'] ; ?>
                                                     </div>
                                                 </div>
                                             </div>
@@ -90,11 +90,47 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                             <div class="row align-items-center">
                                                 <div class="col">
-                                                    <small class="text-muted">Admin Id</small>
+                                                    <small class="text-muted">Email</small>
                                                     <div class="fw-bold">
-                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[admin_id]?subpage=1") ?>">
-                                                        <i class="material-icons">visibility</i> <?php echo "Users Detail" ?>
+                                                        <?php echo  $data['email'] ; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                            <div class="row align-items-center">
+                                                <div class="col">
+                                                    <small class="text-muted">Price Settings</small>
+                                                    <div class="fw-bold">
+                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("pricesettings/view/$data[price_settings_id]?subpage=1") ?>">
+                                                        <?php echo $data['pricesettings_name'] ?>
                                                     </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <small class="text-muted">Amount</small>
+                                                <div class="fw-bold">
+                                                    <?php echo  $data['amount'] ; ?>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <small class="text-muted">Phone Number</small>
+                                                <div class="fw-bold">
+                                                    <?php echo  $data['phone_number'] ; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -116,11 +152,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Updated At</small>
+                                                <small class="text-muted">Status</small>
                                                 <div class="fw-bold">
-                                                    <span title="<?php echo human_datetime($data['updated_at']); ?>" class="has-tooltip">
-                                                    <?php echo relative_date($data['updated_at']); ?>
-                                                    </span>
+                                                    <?php echo  $data['status'] ; ?>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,57 +164,51 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                         <div class="row align-items-center">
                                             <div class="col">
-                                                <small class="text-muted">Positioning</small>
+                                                <small class="text-muted">Payment Link</small>
                                                 <div class="fw-bold">
-                                                    <?php echo  $data['positioning'] ; ?>
+                                                    <a href="<?php print_link("/transactions/view/$data[id]") ?>"><?php echo $data['authorization_url']; ?></a>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="bg-light mb-1 card-1 p-2 border rounded">
-                                        <div class="row align-items-center">
-                                            <div class="col">
-                                                <small class="text-muted">Academic Session Id</small>
-                                                <div class="fw-bold">
-                                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session_id]?subpage=1") ?>">
-                                                    <i class="material-icons">visibility</i> <?php echo "Academic Sessions Detail" ?>
-                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <!--PageComponentEnd-->
-                        <div class="d-flex align-items-center gap-2">
-                            <?php if($can_edit){ ?>
-                            <a class="btn btn-sm btn-success has-tooltip "   title="Edit" href="<?php print_link("electionpositions/edit/$rec_id"); ?>" >
-                            <i class="material-icons">edit</i> Edit
+                            <!--PageComponentEnd-->
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="dropup export-btn-holder">
+                                    <button  class="btn  btn-sm btn-outline-primary dropdown-toggle" title="Export" type="button" data-bs-toggle="dropdown">
+                                    <i class="material-icons">save</i> 
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <?php Html :: export_menus(['pdf', 'print']); ?>
+                                    </div>
+                                </div>
+                                <?php if($can_edit){ ?>
+                                <a class="btn btn-sm btn-success has-tooltip "   title="Edit" href="<?php print_link("transactions/edit/$rec_id"); ?>" >
+                                <i class="material-icons">edit</i> Edit
+                            </a>
+                            <?php } ?>
+                            <?php if($can_delete){ ?>
+                            <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" title="Delete" href="<?php print_link("transactions/delete/$rec_id?redirect=transactions"); ?>" >
+                            <i class="material-icons">delete_sweep</i> Delete
                         </a>
                         <?php } ?>
-                        <?php if($can_delete){ ?>
-                        <a class="btn btn-sm btn-danger has-tooltip record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" title="Delete" href="<?php print_link("electionpositions/delete/$rec_id?redirect=electionpositions"); ?>" >
-                        <i class="material-icons">delete_sweep</i> Delete
-                    </a>
-                    <?php } ?>
+                    </div>
                 </div>
             </div>
+            <?php
+                }
+                else{
+            ?>
+            <!-- Empty Record Message -->
+            <div class="text-muted p-3">
+                <i class="material-icons">block</i> No Record Found
+            </div>
+            <?php
+                }
+            ?>
         </div>
-        <?php
-            }
-            else{
-        ?>
-        <!-- Empty Record Message -->
-        <div class="text-muted p-3">
-            <i class="material-icons">block</i> No Record Found
-        </div>
-        <?php
-            }
-        ?>
     </div>
-</div>
 </div>
 </div>
 </div>
