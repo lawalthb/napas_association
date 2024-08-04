@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FinalProjectsAddRequest;
 use App\Http\Requests\FinalProjectsEditRequest;
+use App\Http\Requests\FinalProjectsmember_addRequest;
 use App\Models\FinalProjects;
 use Illuminate\Http\Request;
 use Exception;
@@ -100,5 +101,65 @@ class FinalProjectsController extends Controller
 		$query->delete();
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
+	}
+	
+
+	/**
+     * Display form page
+     * @return \Illuminate\View\View
+     */
+	function member_add(){
+		return $this->renderView("pages.finalprojects.member_add");
+	}
+	
+
+	/**
+     * Save form record to the table
+     * @return \Illuminate\Http\Response
+     */
+	function member_add_store(FinalProjectsmember_addRequest $request){
+		$modeldata = $this->normalizeFormData($request->validated());
+		$this->beforeMemberAdd($modeldata);
+		
+		//save FinalProjects record
+		$record = FinalProjects::create($modeldata);
+		$rec_id = $record->id;
+		return $this->redirect("finalprojects/member_view/$rec_id", "Record added successfully");
+	}
+    /**
+     * Before create new record
+     * @param array $modeldata // validated form data used to create new record
+     */
+    private function beforeMemberAdd($modeldata){
+        //enter statement here
+        dd("i will run");
+    }
+	
+
+	/**
+     * List table records
+	 * @param  \Illuminate\Http\Request
+     * @param string $fieldname //filter records by a table field
+     * @param string $fieldvalue //filter value
+     * @return \Illuminate\View\View
+     */
+	function member_list(Request $request, $fieldname = null , $fieldvalue = null){
+		$view = "pages.finalprojects.member_list";
+		$query = FinalProjects::query();
+		$limit = $request->limit ?? 10;
+		if($request->search){
+			$search = trim($request->search);
+			FinalProjects::search($query, $search); // search table records
+		}
+		$query->join("levels", "final_projects.level_id", "=", "levels.id");
+		$orderby = $request->orderby ?? "final_projects.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		$query->where("user_id", "=" , auth()->user()->id);
+		if($fieldname){
+			$query->where($fieldname , $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, FinalProjects::memberListFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

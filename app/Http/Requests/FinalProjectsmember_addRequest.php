@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UsersAccountEditRequest extends FormRequest
+class FinalProjectsmember_addRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,26 +25,11 @@ class UsersAccountEditRequest extends FormRequest
 		
         return [
             
-				"firstname" => "filled|string",
-				"lastname" => "nullable|string",
-				"nickname" => "nullable|string",
-				"matno" => "nullable|string",
-				"phone" => "filled|string",
-				"member_type" => "filled",
-				"expectation_msg" => "nullable",
-				"session_start" => "nullable|string",
-				"session_end" => "nullable|string",
-				"is_active" => "filled",
-				"is_ban" => "filled",
-				"fee_paid" => "filled",
-				"role" => "filled",
-				"bio" => "nullable",
-				"dob" => "nullable|date",
-				"image" => "nullable",
-				"facebook_link" => "nullable|string",
-				"x_link" => "nullable|string",
-				"linkedin_link" => "nullable|string",
-				"level_id" => "nullable|numeric",
+				"user_id" => "required|string|unique:final_projects,user_id",
+				"level_id" => "nullable|string",
+				"topic1" => "required|string",
+				"topic2" => "required|string",
+				"topic3" => "required|string",
             
         ];
     }

@@ -346,10 +346,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                         <div class="bg-light mb-1 card-1 p-2 border rounded">
                                                             <div class="row align-items-center">
                                                                 <div class="col">
-                                                                    <small class="text-muted">Level Id</small>
+                                                                    <small class="text-muted">Level</small>
                                                                     <div class="fw-bold">
-                                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
-                                                                        <i class="material-icons">visibility</i> <?php echo "Levels Detail" ?>
+                                                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels//$data[level_id]?subpage=1") ?>">
+                                                                        <?php echo $data['levels_name'] ?>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -360,10 +360,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                                     <div class="bg-light mb-1 card-1 p-2 border rounded">
                                                         <div class="row align-items-center">
                                                             <div class="col">
-                                                                <small class="text-muted">User Role Id</small>
+                                                                <small class="text-muted">User Role</small>
                                                                 <div class="fw-bold">
-                                                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("roles/view/$data[user_role_id]?subpage=1") ?>">
-                                                                    <i class="material-icons">visibility</i> <?php echo "Roles Detail" ?>
+                                                                    <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("roles//$data[user_role_id]?subpage=1") ?>">
+                                                                    <?php echo $data['roles_role_name'] ?>
                                                                 </a>
                                                             </div>
                                                         </div>

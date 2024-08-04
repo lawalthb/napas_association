@@ -102,7 +102,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </a>
                                     </td>
                                     <td class="td-vote_link">
-                                        <?php echo  $data['vote_link'] ; ?>
+                                        <a href="<?php print_link("/contestnominees/view/$data[id]") ?>"><?php echo $data['vote_link']; ?></a>
                                     </td>
                                     <td class="td-academic_session">
                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("academicsessions/view/$data[academic_session]?subpage=1") ?>">

@@ -230,6 +230,24 @@
 			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
+		],
+		
+		[
+			'path' => 'finalprojects/member_add',
+			'label' => "Projects", 
+			'icon' => '<i class="material-icons ">collections_bookmark</i>','submenu' => [
+		[
+			'path' => 'finalprojects/member_add',
+			'label' => "Member Add", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		],
+		
+		[
+			'path' => 'finalprojects/member_list',
+			'label' => "Approved  Topic", 
+			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
+		]
+	]
 		]
 	] ;
 	}

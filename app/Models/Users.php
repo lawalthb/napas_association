@@ -23,7 +23,7 @@ class Users extends Authenticatable implements MustVerifyEmail
      * @var string
      */
 	protected $primaryKey = 'id';
-	protected $fillable = ['firstname','lastname','phone','email','password','level_id','member_type','expectation_msg','image','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link','user_role_id'];
+	protected $fillable = ['firstname','phone','email','password','image','lastname','level_id','member_type','expectation_msg','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link','user_role_id'];
 	public $timestamps = false;
 	
 
@@ -185,7 +185,6 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function accounteditFields(){
 		return [ 
-			"id",
 			"firstname",
 			"lastname",
 			"nickname",
@@ -206,7 +205,7 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"x_link",
 			"linkedin_link",
 			"level_id",
-			"user_role_id" 
+			"id" 
 		];
 	}
 	
@@ -218,31 +217,33 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function accountviewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"nickname",
-			"email",
-			"matno",
-			"phone",
-			"member_type",
-			"expectation_msg",
-			"session_start",
-			"session_end",
-			"created_at",
-			"updated_at",
-			"is_active",
-			"is_ban",
-			"fee_paid",
-			"role",
-			"bio",
-			"dob",
-			"facebook_link",
-			"x_link",
-			"linkedin_link",
-			"email_verified_at",
-			"level_id",
-			"user_role_id" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.nickname AS nickname",
+			"users.email AS email",
+			"users.matno AS matno",
+			"users.phone AS phone",
+			"users.member_type AS member_type",
+			"users.expectation_msg AS expectation_msg",
+			"users.session_start AS session_start",
+			"users.session_end AS session_end",
+			"users.created_at AS created_at",
+			"users.updated_at AS updated_at",
+			"users.is_active AS is_active",
+			"users.is_ban AS is_ban",
+			"users.fee_paid AS fee_paid",
+			"users.role AS role",
+			"users.bio AS bio",
+			"users.dob AS dob",
+			"users.facebook_link AS facebook_link",
+			"users.x_link AS x_link",
+			"users.linkedin_link AS linkedin_link",
+			"users.email_verified_at AS email_verified_at",
+			"users.level_id AS level_id",
+			"levels.name AS levels_name",
+			"users.user_role_id AS user_role_id",
+			"roles.role_name AS roles_role_name" 
 		];
 	}
 	
@@ -254,31 +255,33 @@ class Users extends Authenticatable implements MustVerifyEmail
      */
 	public static function exportAccountviewFields(){
 		return [ 
-			"id",
-			"firstname",
-			"lastname",
-			"nickname",
-			"email",
-			"matno",
-			"phone",
-			"member_type",
-			"expectation_msg",
-			"session_start",
-			"session_end",
-			"created_at",
-			"updated_at",
-			"is_active",
-			"is_ban",
-			"fee_paid",
-			"role",
-			"bio",
-			"dob",
-			"facebook_link",
-			"x_link",
-			"linkedin_link",
-			"email_verified_at",
-			"level_id",
-			"user_role_id" 
+			"users.id AS id",
+			"users.firstname AS firstname",
+			"users.lastname AS lastname",
+			"users.nickname AS nickname",
+			"users.email AS email",
+			"users.matno AS matno",
+			"users.phone AS phone",
+			"users.member_type AS member_type",
+			"users.expectation_msg AS expectation_msg",
+			"users.session_start AS session_start",
+			"users.session_end AS session_end",
+			"users.created_at AS created_at",
+			"users.updated_at AS updated_at",
+			"users.is_active AS is_active",
+			"users.is_ban AS is_ban",
+			"users.fee_paid AS fee_paid",
+			"users.role AS role",
+			"users.bio AS bio",
+			"users.dob AS dob",
+			"users.facebook_link AS facebook_link",
+			"users.x_link AS x_link",
+			"users.linkedin_link AS linkedin_link",
+			"users.email_verified_at AS email_verified_at",
+			"users.level_id AS level_id",
+			"levels.name AS levels_name",
+			"users.user_role_id AS user_role_id",
+			"roles.role_name AS roles_role_name" 
 		];
 	}
 	
@@ -310,8 +313,8 @@ class Users extends Authenticatable implements MustVerifyEmail
 			"facebook_link",
 			"x_link",
 			"linkedin_link",
-			"id",
-			"user_role_id" 
+			"user_role_id",
+			"id" 
 		];
 	}
 	

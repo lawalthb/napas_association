@@ -168,7 +168,12 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::post('finalprojects/add', 'FinalProjectsController@store')->name('finalprojects.store');
 		
 	Route::any('finalprojects/edit/{rec_id}', 'FinalProjectsController@edit')->name('finalprojects.edit');	
-	Route::get('finalprojects/delete/{rec_id}', 'FinalProjectsController@delete');
+	Route::get('finalprojects/delete/{rec_id}', 'FinalProjectsController@delete');	
+	Route::get('finalprojects/member_add', 'FinalProjectsController@member_add')->name('finalprojects.member_add');
+	Route::post('finalprojects/member_add', 'FinalProjectsController@member_add_store')->name('finalprojects.member_add_store');
+		
+	Route::get('finalprojects/member_list', 'FinalProjectsController@member_list');
+	Route::get('finalprojects/member_list/{filter?}/{filtervalue?}', 'FinalProjectsController@member_list');
 
 /* routes for Levels Controller */
 	Route::get('levels', 'LevelsController@index')->name('levels.index');
@@ -471,6 +476,11 @@ Route::get('election_vote_page',  function(Request $request){
 		return view("pages.custom.election_vote_page");
 	}
 );
+	
+Route::get('my_topic',  function(Request $request){
+		return view("pages.custom.my_topic");
+	}
+);
 
 });
 
@@ -533,6 +543,12 @@ Route::get('componentsdata/finalprojects_user_id_option_list',  function(Request
 Route::get('componentsdata/level_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->level_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
+Route::get('componentsdata/finalprojects_user_id_value_exist',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->finalprojects_user_id_value_exist($request);
 	}
 )->middleware(['auth']);
 	

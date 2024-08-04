@@ -140,6 +140,21 @@ class ComponentsData{
 	
 
 	/**
+     * Check if value already exist in FinalProjects table
+	 * @param string $value
+     * @return bool
+     */
+	function finalprojects_user_id_value_exist(Request $request){
+		$value = trim($request->value);
+		$exist = DB::table('final_projects')->where('user_id', $value)->value('user_id');   
+		if($exist){
+			return true;
+		}
+		return false;
+	}
+	
+
+	/**
      * permission_option_list Model Action
      * @return array
      */

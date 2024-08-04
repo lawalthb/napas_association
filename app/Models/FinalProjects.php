@@ -161,4 +161,44 @@ class FinalProjects extends Model
 			"id" 
 		];
 	}
+	
+
+	/**
+     * return memberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function memberListFields(){
+		return [ 
+			"final_projects.topic1 AS topic1",
+			"final_projects.topic2 AS topic2",
+			"final_projects.topic3 AS topic3",
+			"final_projects.approve_num AS approve_num",
+			"final_projects.supervisor_topic AS supervisor_topic",
+			"final_projects.level_id AS level_id",
+			"levels.name AS levels_name",
+			"final_projects.id AS id",
+			"final_projects.updated_at AS updated_at" 
+		];
+	}
+	
+
+	/**
+     * return exportMemberList page fields of the model.
+     * 
+     * @return array
+     */
+	public static function exportMemberListFields(){
+		return [ 
+			"final_projects.topic1 AS topic1",
+			"final_projects.topic2 AS topic2",
+			"final_projects.topic3 AS topic3",
+			"final_projects.approve_num AS approve_num",
+			"final_projects.supervisor_topic AS supervisor_topic",
+			"final_projects.level_id AS level_id",
+			"levels.name AS levels_name",
+			"final_projects.id AS id",
+			"final_projects.updated_at AS updated_at" 
+		];
+	}
 }
