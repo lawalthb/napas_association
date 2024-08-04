@@ -123,150 +123,6 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="session_start">Session Start </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-session_start-holder" class=" ">
-                                            <input id="ctrl-session_start" data-field="session_start"  value="<?php  echo $data['session_start']; ?>" type="text" placeholder="Enter Session Start"  name="session_start"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="session_end">Session End </label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-session_end-holder" class=" ">
-                                            <input id="ctrl-session_end" data-field="session_end"  value="<?php  echo $data['session_end']; ?>" type="text" placeholder="Enter Session End"  name="session_end"  class="form-control " />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="is_active">Is Active <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-is_active-holder" class=" ">
-                                            <select required=""  id="ctrl-is_active" data-field="is_active" name="is_active"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::isActive();
-                                                $field_value = $data['is_active'];
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="is_ban">Is Ban <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-is_ban-holder" class=" ">
-                                            <select required=""  id="ctrl-is_ban" data-field="is_ban" name="is_ban"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::isActive();
-                                                $field_value = $data['is_ban'];
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="fee_paid">Fee Paid <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-fee_paid-holder" class=" ">
-                                            <select required=""  id="ctrl-fee_paid" data-field="fee_paid" name="fee_paid"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::isActive();
-                                                $field_value = $data['fee_paid'];
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
-                                        <label class="control-label" for="role">Role <span class="text-danger">*</span></label>
-                                    </div>
-                                    <div class="col-sm-8">
-                                        <div id="ctrl-role-holder" class=" ">
-                                            <select required=""  id="ctrl-role" data-field="role" name="role"  placeholder="Select a value ..."    class="form-select" >
-                                            <option value="">Select a value ...</option>
-                                            <?php
-                                                $options = Menu::role();
-                                                $field_value = $data['role'];
-                                                if(!empty($options)){
-                                                foreach($options as $option){
-                                                $value = $option['value'];
-                                                $label = $option['label'];
-                                                $selected = Html::get_record_selected($field_value, $value);
-                                            ?>
-                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                            <?php echo $label ?>
-                                            </option>                                   
-                                            <?php
-                                                }
-                                                }
-                                            ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group ">
-                                <div class="row">
-                                    <div class="col-sm-4">
                                         <label class="control-label" for="bio">Bio </label>
                                     </div>
                                     <div class="col-sm-8">
@@ -346,11 +202,26 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="level_id">Level Id </label>
+                                        <label class="control-label" for="level_id">Level </label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-level_id-holder" class=" ">
-                                            <input id="ctrl-level_id" data-field="level_id"  value="<?php  echo $data['level_id']; ?>" type="number" placeholder="Enter Level Id" step="any"  name="level_id"  class="form-control " />
+                                            <select  id="ctrl-level_id" data-field="level_id" name="level_id"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            <?php
+                                                $options = $comp_model->users_level_id_option_list() ?? [];
+                                                foreach($options as $option){
+                                                $value = $option->value;
+                                                $label = $option->label ?? $value;
+                                                $selected = ( $value == $data['level_id'] ? 'selected' : null );
+                                            ?>
+                                            <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                            <?php echo $label; ?>
+                                            </option>
+                                            <?php
+                                                }
+                                            ?>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

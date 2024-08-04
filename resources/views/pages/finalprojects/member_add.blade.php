@@ -41,31 +41,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <form id="finalprojects-member_add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('finalprojects.member_add_store') }}" method="post">
                             @csrf
                             <div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="user_id">User Id <span class="text-danger">*</span></label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-user_id-holder" class=" ">
-                                                <input id="ctrl-user_id" data-field="user_id"  value="{{auth()->user()->id}}" type="text" placeholder="Enter User Id"  required="" name="user_id"  data-url="componentsdata/finalprojects_user_id_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
-                                                <div class="check-status"></div> 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group ">
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <label class="control-label" for="level_id">Level Id </label>
-                                        </div>
-                                        <div class="col-sm-8">
-                                            <div id="ctrl-level_id-holder" class=" ">
-                                                <input id="ctrl-level_id" data-field="level_id"  value="{{auth()->user()->level_id}}" type="text" placeholder="Enter Level Id"  name="level_id"  class="form-control " />
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                <input id="ctrl-user_id" data-field="user_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter User Id"  name="user_id"  data-url="componentsdata/finalprojects_user_id_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                <div class="check-status"></div>
+                                <input id="ctrl-level_id" data-field="level_id"  value="{{auth()->user()->level_id}}" type="hidden" placeholder="Enter Level Id"  name="level_id"  class="form-control " />
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">

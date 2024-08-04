@@ -14,7 +14,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
     $total_records = $records->total();
     $limit = $records->perPage();
     $record_count = count($records);
-    $level_id_option_list_2 = $comp_model->level_id_option_list_2();
+    $users_level_id_option_list = $comp_model->users_level_id_option_list();
     $pageTitle = "Members"; //set dynamic page title
 ?>
 @extends($layout)
@@ -68,7 +68,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <select   name="level_id" class="form-select custom " >
                         <option value="">Select a value ...</option>
                         <?php 
-                            $options = $level_id_option_list_2 ?? [];
+                            $options = $users_level_id_option_list ?? [];
                             foreach($options as $option){
                             $value = $option->value;
                             $label = $option->label ?? $value;
@@ -97,7 +97,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="filter-tags mb-2">
                                 <?php Html::filter_tag('search', __('Search')); ?>
                                 <?php
-                                    Html::filter_tag('level_id', 'Level', $level_id_option_list_2);
+                                    Html::filter_tag('level_id', 'Level', $users_level_id_option_list);
                                 ?>
                             </div>
                             <table class="table table-hover table-striped table-sm text-left">

@@ -32,19 +32,13 @@ class UsersAccountEditRequest extends FormRequest
 				"phone" => "filled|string",
 				"member_type" => "filled",
 				"expectation_msg" => "nullable",
-				"session_start" => "nullable|string",
-				"session_end" => "nullable|string",
-				"is_active" => "filled",
-				"is_ban" => "filled",
-				"fee_paid" => "filled",
-				"role" => "filled",
 				"bio" => "nullable",
 				"dob" => "nullable|date",
 				"image" => "nullable",
 				"facebook_link" => "nullable|string",
 				"x_link" => "nullable|string",
 				"linkedin_link" => "nullable|string",
-				"level_id" => "nullable|numeric",
+				"level_id" => "nullable",
             
         ];
     }

@@ -606,6 +606,12 @@ Route::get('componentsdata/users_email_value_exist',  function(Request $request)
 	}
 );
 	
+Route::get('componentsdata/users_level_id_option_list',  function(Request $request){
+		$compModel = new App\Models\ComponentsData();
+		return $compModel->users_level_id_option_list($request);
+	}
+)->middleware(['auth']);
+	
 Route::get('componentsdata/user_role_id_option_list',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->user_role_id_option_list($request);
@@ -657,12 +663,6 @@ Route::get('componentsdata/getcount_',  function(Request $request){
 Route::get('componentsdata/price_settings_id_option_list_2',  function(Request $request){
 		$compModel = new App\Models\ComponentsData();
 		return $compModel->price_settings_id_option_list_2($request);
-	}
-)->middleware(['auth']);
-	
-Route::get('componentsdata/level_id_option_list_2',  function(Request $request){
-		$compModel = new App\Models\ComponentsData();
-		return $compModel->level_id_option_list_2($request);
 	}
 )->middleware(['auth']);
 

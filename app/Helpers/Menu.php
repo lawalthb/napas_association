@@ -248,6 +248,12 @@
 			'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 		]
 	]
+		],
+		
+		[
+			'path' => 'account',
+			'label' => "Profile", 
+			'icon' => '<i class="material-icons ">person_outline</i>'
 		]
 	] ;
 	}

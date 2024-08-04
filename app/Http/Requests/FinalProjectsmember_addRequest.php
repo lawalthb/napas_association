@@ -25,8 +25,8 @@ class FinalProjectsmember_addRequest extends FormRequest
 		
         return [
             
-				"user_id" => "required|string|unique:final_projects,user_id",
-				"level_id" => "nullable|string",
+				"user_id" => "nullable|unique:final_projects,user_id",
+				"level_id" => "nullable",
 				"topic1" => "required|string",
 				"topic2" => "required|string",
 				"topic3" => "required|string",

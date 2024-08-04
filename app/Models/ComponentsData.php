@@ -272,6 +272,18 @@ class ComponentsData{
 	
 
 	/**
+     * users_level_id_option_list Model Action
+     * @return array
+     */
+	function users_level_id_option_list(){
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM levels ORDER BY name ASC";
+		$query_params = [];
+		$arr = DB::select($sqltext, $query_params);
+		return $arr;
+	}
+	
+
+	/**
      * user_role_id_option_list Model Action
      * @return array
      */
@@ -374,18 +386,6 @@ class ComponentsData{
      */
 	function price_settings_id_option_list_2(){
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM price_settings ORDER BY name DESC";
-		$query_params = [];
-		$arr = DB::select($sqltext, $query_params);
-		return $arr;
-	}
-	
-
-	/**
-     * level_id_option_list_2 Model Action
-     * @return array
-     */
-	function level_id_option_list_2(){
-		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM levels ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
