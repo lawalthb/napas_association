@@ -44,7 +44,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <table class="table table-striped table-sm" data-maxrow="10" data-minrow="1">
                                     <thead>
                                         <tr>
-                                            <th class="bg-light"><label for="user_id">User</label></th>
+                                            <th class="bg-light"><label for="user_id">Member</label></th>
                                             <th class="bg-light"><label for="level_id">Level Id</label></th>
                                             <th class="bg-light"><label for="topic1">Topic1</label></th>
                                             <th class="bg-light"><label for="topic2">Topic2</label></th>
@@ -70,7 +70,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <tr data-row="<?php echo $row ?>" class="input-row">
                                 <td>
                                     <div id="ctrl-user_id-row<?php echo $row; ?>-holder" class=" ">
-                                    <select required=""  id="ctrl-user_id-row<?php echo $row; ?>" data-field="user_id" name="row[<?php echo $row ?>][user_id]"  placeholder="Select a value ..."    class="form-select" >
+                                    <select required=""  id="ctrl-user_id-row<?php echo $row; ?>" data-field="user_id" name="row[<?php echo $row ?>][user_id]"  placeholder="Select a value ..."    class="selectize" >
                                     <option value="">Select a value ...</option>
                                     <?php 
                                         $options = $comp_model->finalprojects_user_id_option_list() ?? [];
@@ -97,7 +97,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     foreach($options as $option){
                                     $value = $option->value;
                                     $label = $option->label ?? $value;
-                                    $selected = Html::get_field_selected('level_id', $value, "2");
+                                    $selected = Html::get_field_selected('level_id', $value, "");
                                 ?>
                                 <option <?php echo $selected; ?> value="<?php echo $value; ?>">
                                 <?php echo $label; ?>

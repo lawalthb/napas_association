@@ -28,8 +28,8 @@ class FinalProjectsmember_addRequest extends FormRequest
 				"user_id" => "nullable|unique:final_projects,user_id",
 				"level_id" => "nullable",
 				"topic1" => "required|string",
-				"topic2" => "required|string",
-				"topic3" => "required|string",
+				"topic2" => "nullable|string",
+				"topic3" => "nullable|string",
             
         ];
     }

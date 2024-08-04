@@ -41,11 +41,11 @@ class FinalProjects extends Model
 	public static function search($query, $text){
 		//search table record 
 		$search_condition = '(
-				id LIKE ?  OR 
-				topic1 LIKE ?  OR 
-				topic2 LIKE ?  OR 
-				topic3 LIKE ?  OR 
-				supervisor_topic LIKE ? 
+				final_projects.id LIKE ?  OR 
+				final_projects.topic1 LIKE ?  OR 
+				final_projects.topic2 LIKE ?  OR 
+				final_projects.topic3 LIKE ?  OR 
+				final_projects.supervisor_topic LIKE ? 
 		)';
 		$search_params = [
 			"%$text%","%$text%","%$text%","%$text%","%$text%"
@@ -62,17 +62,18 @@ class FinalProjects extends Model
      */
 	public static function listFields(){
 		return [ 
-			"id",
-			"user_id",
-			"level_id",
-			"topic1",
-			"topic2",
-			"topic3",
-			"approve_num",
-			"supervisor_topic",
-			"has_submit",
-			"created_at",
-			"updated_at" 
+			"final_projects.id AS id",
+			"final_projects.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"final_projects.level_id AS level_id",
+			"levels.name AS levels_name",
+			"final_projects.topic1 AS topic1",
+			"final_projects.topic2 AS topic2",
+			"final_projects.topic3 AS topic3",
+			"final_projects.approve_num AS approve_num",
+			"final_projects.supervisor_topic AS supervisor_topic",
+			"final_projects.has_submit AS has_submit",
+			"final_projects.updated_at AS updated_at" 
 		];
 	}
 	
@@ -84,17 +85,18 @@ class FinalProjects extends Model
      */
 	public static function exportListFields(){
 		return [ 
-			"id",
-			"user_id",
-			"level_id",
-			"topic1",
-			"topic2",
-			"topic3",
-			"approve_num",
-			"supervisor_topic",
-			"has_submit",
-			"created_at",
-			"updated_at" 
+			"final_projects.id AS id",
+			"final_projects.user_id AS user_id",
+			"users.lastname AS users_lastname",
+			"final_projects.level_id AS level_id",
+			"levels.name AS levels_name",
+			"final_projects.topic1 AS topic1",
+			"final_projects.topic2 AS topic2",
+			"final_projects.topic3 AS topic3",
+			"final_projects.approve_num AS approve_num",
+			"final_projects.supervisor_topic AS supervisor_topic",
+			"final_projects.has_submit AS has_submit",
+			"final_projects.updated_at AS updated_at" 
 		];
 	}
 	
@@ -177,8 +179,8 @@ class FinalProjects extends Model
 			"final_projects.supervisor_topic AS supervisor_topic",
 			"final_projects.level_id AS level_id",
 			"levels.name AS levels_name",
-			"final_projects.id AS id",
-			"final_projects.updated_at AS updated_at" 
+			"final_projects.updated_at AS updated_at",
+			"final_projects.id AS id" 
 		];
 	}
 	
@@ -197,8 +199,8 @@ class FinalProjects extends Model
 			"final_projects.supervisor_topic AS supervisor_topic",
 			"final_projects.level_id AS level_id",
 			"levels.name AS levels_name",
-			"final_projects.id AS id",
-			"final_projects.updated_at AS updated_at" 
+			"final_projects.updated_at AS updated_at",
+			"final_projects.id AS id" 
 		];
 	}
 }

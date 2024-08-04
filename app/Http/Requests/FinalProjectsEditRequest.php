@@ -30,7 +30,7 @@ class FinalProjectsEditRequest extends FormRequest
 				"topic1" => "nullable|string",
 				"topic2" => "nullable|string",
 				"topic3" => "nullable|string",
-				"approve_num" => "filled|numeric",
+				"approve_num" => "filled",
 				"supervisor_topic" => "nullable|string",
 				"has_submit" => "filled",
             

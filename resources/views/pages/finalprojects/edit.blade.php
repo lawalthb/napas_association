@@ -45,11 +45,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <div class="form-group ">
                                 <div class="row">
                                     <div class="col-sm-4">
-                                        <label class="control-label" for="user_id">User <span class="text-danger">*</span></label>
+                                        <label class="control-label" for="user_id">Member <span class="text-danger">*</span></label>
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-user_id-holder" class=" ">
-                                            <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="Select a value ..."    class="form-select" >
+                                            <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="Select a value ..."    class="selectize" >
                                             <option value="">Select a value ...</option>
                                             <?php
                                                 $options = $comp_model->finalprojects_user_id_option_list() ?? [];
@@ -139,7 +139,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                     </div>
                                     <div class="col-sm-8">
                                         <div id="ctrl-approve_num-holder" class=" ">
-                                            <input id="ctrl-approve_num" data-field="approve_num"  value="<?php  echo $data['approve_num']; ?>" type="number" placeholder="Enter Approve Num" step="any"  required="" name="approve_num"  class="form-control " />
+                                            <select required=""  id="ctrl-approve_num" data-field="approve_num" name="approve_num"  placeholder="Select a value ..."    class="form-select" >
+                                            <option value="">Select a value ...</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>

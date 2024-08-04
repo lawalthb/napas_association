@@ -41,9 +41,33 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                         <form id="finalprojects-member_add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('finalprojects.member_add_store') }}" method="post">
                             @csrf
                             <div>
-                                <input id="ctrl-user_id" data-field="user_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter User Id"  name="user_id"  data-url="componentsdata/finalprojects_user_id_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                <input id="ctrl-user_id" data-field="user_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter User Id" list="user_id_list"  name="user_id"  data-url="componentsdata/finalprojects_user_id_value_exist/" data-loading-msg="Checking availability ..." data-available-msg="Available" data-unavailable-msg="Not available" class="form-control  ctrl-check-duplicate" />
+                                <datalist id="user_id_list">
+                                <?php 
+                                    $options = $comp_model->updated_by_option_list() ?? [];
+                                    foreach($options as $option){
+                                    $value = $option->value;
+                                    $label = $option->label ?? $value;
+                                ?>
+                                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </datalist>
                                 <div class="check-status"></div>
-                                <input id="ctrl-level_id" data-field="level_id"  value="{{auth()->user()->level_id}}" type="hidden" placeholder="Enter Level Id"  name="level_id"  class="form-control " />
+                                <input id="ctrl-level_id" data-field="level_id"  value="{{auth()->user()->id}}" type="hidden" placeholder="Enter Level Id" list="level_id_list"  name="level_id"  class="form-control " />
+                                <datalist id="level_id_list">
+                                <?php 
+                                    $options = $comp_model->level_id_option_list() ?? [];
+                                    foreach($options as $option){
+                                    $value = $option->value;
+                                    $label = $option->label ?? $value;
+                                ?>
+                                <option value="<?php echo $value; ?>"><?php echo $label; ?></option>
+                                <?php
+                                    }
+                                ?>
+                                </datalist>
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
@@ -59,11 +83,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="topic2">Propose Topic2 <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="topic2">Propose Topic2 </label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-topic2-holder" class=" ">
-                                                <input id="ctrl-topic2" data-field="topic2"  value="<?php echo get_value('topic2') ?>" type="text" placeholder="Enter Propose Topic2"  required="" name="topic2"  class="form-control " />
+                                                <input id="ctrl-topic2" data-field="topic2"  value="<?php echo get_value('topic2') ?>" type="text" placeholder="Enter Propose Topic2"  name="topic2"  class="form-control " />
                                             </div>
                                         </div>
                                     </div>
@@ -71,11 +95,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="topic3">Propose Topic3 <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="topic3">Propose Topic3 </label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-topic3-holder" class=" ">
-                                                <input id="ctrl-topic3" data-field="topic3"  value="<?php echo get_value('topic3') ?>" type="text" placeholder="Enter Propose Topic3"  required="" name="topic3"  class="form-control " />
+                                                <input id="ctrl-topic3" data-field="topic3"  value="<?php echo get_value('topic3') ?>" type="text" placeholder="Enter Propose Topic3"  name="topic3"  class="form-control " />
                                             </div>
                                         </div>
                                     </div>

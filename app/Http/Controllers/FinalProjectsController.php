@@ -26,6 +26,8 @@ class FinalProjectsController extends Controller
 			$search = trim($request->search);
 			FinalProjects::search($query, $search); // search table records
 		}
+		$query->join("users", "final_projects.user_id", "=", "users.id");
+		$query->join("levels", "final_projects.level_id", "=", "levels.id");
 		$orderby = $request->orderby ?? "final_projects.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);

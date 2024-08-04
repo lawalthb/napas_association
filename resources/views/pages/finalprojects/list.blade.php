@@ -78,16 +78,15 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </th>
                                         <?php } ?>
                                         <th class="td-id" > Id</th>
-                                        <th class="td-user_id" > User Id</th>
-                                        <th class="td-level_id" > Level Id</th>
+                                        <th class="td-user_id" > Member</th>
+                                        <th class="td-level_id" > Level</th>
                                         <th class="td-topic1" > Topic1</th>
                                         <th class="td-topic2" > Topic2</th>
                                         <th class="td-topic3" > Topic3</th>
                                         <th class="td-approve_num" > Approve Num</th>
                                         <th class="td-supervisor_topic" > Supervisor Topic</th>
                                         <th class="td-has_submit" > Has Submit</th>
-                                        <th class="td-created_at" > Created At</th>
-                                        <th class="td-updated_at" > Updated At</th>
+                                        <th class="td-updated_at" > Date</th>
                                         <th class="td-btn"></th>
                                     </tr>
                                 </thead>
@@ -115,117 +114,116 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                             <a href="<?php print_link("/finalprojects/view/$data[id]") ?>"><?php echo $data['id']; ?></a>
                                         </td>
                                         <td class="td-user_id">
-                                            <?php echo  $data['user_id'] ; ?>
-                                        </td>
-                                        <td class="td-level_id">
-                                            <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
-                                            <i class="material-icons">visibility</i> <?php echo "Levels" ?>
+                                            <a size="sm" class="btn btn-sm btn btn-secondary" href="<?php print_link("users/view/$data[user_id]?subpage=1") ?>">
+                                            <?php echo $data['users_lastname'] ?>
                                         </a>
                                     </td>
-                                    <td class="td-topic1">
-                                        <?php echo  $data['topic1'] ; ?>
-                                    </td>
-                                    <td class="td-topic2">
-                                        <?php echo  $data['topic2'] ; ?>
-                                    </td>
-                                    <td class="td-topic3">
-                                        <?php echo  $data['topic3'] ; ?>
-                                    </td>
-                                    <td class="td-approve_num">
-                                        <?php echo  $data['approve_num'] ; ?>
-                                    </td>
-                                    <td class="td-supervisor_topic">
-                                        <?php echo  $data['supervisor_topic'] ; ?>
-                                    </td>
-                                    <td class="td-has_submit">
-                                        <?php echo  $data['has_submit'] ; ?>
-                                    </td>
-                                    <td class="td-created_at">
-                                        <?php echo  $data['created_at'] ; ?>
-                                    </td>
-                                    <td class="td-updated_at">
-                                        <?php echo  $data['updated_at'] ; ?>
-                                    </td>
-                                    <!--PageComponentEnd-->
-                                    <td class="td-btn">
-                                        <div class="dropdown" >
-                                            <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
-                                            <i class="material-icons">menu</i> 
-                                            </button>
-                                            <ul class="dropdown-menu">
-                                                <?php if($can_view){ ?>
-                                                <a class="dropdown-item "   href="<?php print_link("finalprojects/view/$rec_id"); ?>" >
-                                                <i class="material-icons">visibility</i> View
-                                            </a>
-                                            <?php } ?>
-                                            <?php if($can_edit){ ?>
-                                            <a class="dropdown-item "   href="<?php print_link("finalprojects/edit/$rec_id"); ?>" >
-                                            <i class="material-icons">edit</i> Edit
+                                    <td class="td-level_id">
+                                        <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("levels/view/$data[level_id]?subpage=1") ?>">
+                                        <?php echo $data['levels_name'] ?>
+                                    </a>
+                                </td>
+                                <td class="td-topic1">
+                                    <?php echo  $data['topic1'] ; ?>
+                                </td>
+                                <td class="td-topic2">
+                                    <?php echo  $data['topic2'] ; ?>
+                                </td>
+                                <td class="td-topic3">
+                                    <?php echo  $data['topic3'] ; ?>
+                                </td>
+                                <td class="td-approve_num">
+                                    <?php echo  $data['approve_num'] ; ?>
+                                </td>
+                                <td class="td-supervisor_topic">
+                                    <?php echo  $data['supervisor_topic'] ; ?>
+                                </td>
+                                <td class="td-has_submit">
+                                    <?php echo  $data['has_submit'] ; ?>
+                                </td>
+                                <td class="td-updated_at">
+                                    <?php echo  $data['updated_at'] ; ?>
+                                </td>
+                                <!--PageComponentEnd-->
+                                <td class="td-btn">
+                                    <div class="dropdown" >
+                                        <button data-bs-toggle="dropdown" class="dropdown-toggle btn text-primary btn-flat btn-sm">
+                                        <i class="material-icons">menu</i> 
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <?php if($can_view){ ?>
+                                            <a class="dropdown-item "   href="<?php print_link("finalprojects/view/$rec_id"); ?>" >
+                                            <i class="material-icons">visibility</i> View
                                         </a>
                                         <?php } ?>
-                                        <?php if($can_delete){ ?>
-                                        <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("finalprojects/delete/$rec_id"); ?>" >
-                                        <i class="material-icons">delete_sweep</i> Delete
+                                        <?php if($can_edit){ ?>
+                                        <a class="dropdown-item "   href="<?php print_link("finalprojects/edit/$rec_id"); ?>" >
+                                        <i class="material-icons">edit</i> Edit
                                     </a>
                                     <?php } ?>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php 
-                        }
-                    ?>
-                    <!--endrecord-->
-                </tbody>
-                <tbody class="search-data"></tbody>
-                <?php
-                    }
-                    else{
-                ?>
-                <tbody class="page-data">
-                    <tr>
-                        <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
-                            <i class="material-icons">block</i> No record found
-                        </td>
-                    </tr>
-                </tbody>
-                <?php
+                                    <?php if($can_delete){ ?>
+                                    <a class="dropdown-item record-delete-btn" data-prompt-msg="Are you sure you want to delete this record?" data-display-style="modal" href="<?php print_link("finalprojects/delete/$rec_id"); ?>" >
+                                    <i class="material-icons">delete_sweep</i> Delete
+                                </a>
+                                <?php } ?>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                <?php 
                     }
                 ?>
-            </table>
-        </div>
-        <?php
-            if($show_footer){
-        ?>
-        <div class=" mt-3">
-            <div class="row align-items-center justify-content-between">    
-                <div class="col-md-auto d-flex">    
-                    <?php if($can_delete){ ?>
-                    <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("finalprojects/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
-                    <i class="material-icons">delete_sweep</i> Delete Selected
-                    </button>
-                    <?php } ?>
-                </div>
-                <div class="col">   
-                    <?php
-                        if($show_pagination == true){
-                        $pager = new Pagination($total_records, $record_count);
-                        $pager->show_page_count = false;
-                        $pager->show_record_count = true;
-                        $pager->show_page_limit =false;
-                        $pager->limit = $limit;
-                        $pager->show_page_number_list = true;
-                        $pager->pager_link_range=5;
-                        $pager->render();
-                        }
-                    ?>
-                </div>
+                <!--endrecord-->
+            </tbody>
+            <tbody class="search-data"></tbody>
+            <?php
+                }
+                else{
+            ?>
+            <tbody class="page-data">
+                <tr>
+                    <td class="bg-light text-center text-muted animated bounce p-3" colspan="1000">
+                        <i class="material-icons">block</i> No record found
+                    </td>
+                </tr>
+            </tbody>
+            <?php
+                }
+            ?>
+        </table>
+    </div>
+    <?php
+        if($show_footer){
+    ?>
+    <div class=" mt-3">
+        <div class="row align-items-center justify-content-between">    
+            <div class="col-md-auto d-flex">    
+                <?php if($can_delete){ ?>
+                <button data-prompt-msg="Are you sure you want to delete these records?" data-display-style="modal" data-url="<?php print_link("finalprojects/delete/{sel_ids}"); ?>" class="btn btn-sm btn-danger btn-delete-selected d-none">
+                <i class="material-icons">delete_sweep</i> Delete Selected
+                </button>
+                <?php } ?>
+            </div>
+            <div class="col">   
+                <?php
+                    if($show_pagination == true){
+                    $pager = new Pagination($total_records, $record_count);
+                    $pager->show_page_count = false;
+                    $pager->show_record_count = true;
+                    $pager->show_page_limit =false;
+                    $pager->limit = $limit;
+                    $pager->show_page_number_list = true;
+                    $pager->pager_link_range=5;
+                    $pager->render();
+                    }
+                ?>
             </div>
         </div>
-        <?php
-            }
-        ?>
     </div>
+    <?php
+        }
+    ?>
+</div>
 </div>
 </div>
 </div>
