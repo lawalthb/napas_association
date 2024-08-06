@@ -231,21 +231,6 @@ class ComponentsData{
 	 * @param string $value
      * @return bool
      */
-	function users_firstname_value_exist(Request $request){
-		$value = trim($request->value);
-		$exist = DB::table('users')->where('firstname', $value)->value('firstname');   
-		if($exist){
-			return true;
-		}
-		return false;
-	}
-	
-
-	/**
-     * Check if value already exist in Users table
-	 * @param string $value
-     * @return bool
-     */
 	function users_phone_value_exist(Request $request){
 		$value = trim($request->value);
 		$exist = DB::table('users')->where('phone', $value)->value('phone');   
@@ -280,6 +265,21 @@ class ComponentsData{
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
+	}
+	
+
+	/**
+     * Check if value already exist in Users table
+	 * @param string $value
+     * @return bool
+     */
+	function users_firstname_value_exist(Request $request){
+		$value = trim($request->value);
+		$exist = DB::table('users')->where('firstname', $value)->value('firstname');   
+		if($exist){
+			return true;
+		}
+		return false;
 	}
 	
 

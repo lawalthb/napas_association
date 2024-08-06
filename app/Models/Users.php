@@ -23,7 +23,7 @@ class Users extends Authenticatable implements MustVerifyEmail
      * @var string
      */
 	protected $primaryKey = 'id';
-	protected $fillable = ['firstname','phone','email','password','image','lastname','level_id','member_type','expectation_msg','matno','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link','user_role_id'];
+	protected $fillable = ['firstname','lastname','phone','email','password','level_id','matno','member_type','expectation_msg','image','nickname','session_start','session_end','is_active','is_ban','fee_paid','role','bio','dob','facebook_link','x_link','linkedin_link','user_role_id'];
 	public $timestamps = false;
 	
 

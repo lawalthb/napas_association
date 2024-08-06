@@ -21,7 +21,7 @@ class ContestNomineesController extends Controller
 	function index(Request $request, $fieldname = null , $fieldvalue = null){
 		$view = "pages.contestnominees.list";
 		$query = ContestNominees::query();
-		$limit = $request->limit ?? 10;
+		$limit = $request->limit ?? 100;
 		if($request->search){
 			$search = trim($request->search);
 			ContestNominees::search($query, $search); // search table records

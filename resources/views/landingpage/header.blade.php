@@ -38,7 +38,7 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     </nav><!-- .navbar -->
     @if(auth()->check())
 
-    <a href="{{route('login')}}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Back to </span>Dashboard</a>
+    <a href="{{route('home')}}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Back to </span>Dashboard</a>
     @else
     <a href="{{route('login')}}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login to</span> Dashbaord</a>
     @endif

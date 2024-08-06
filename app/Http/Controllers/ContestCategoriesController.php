@@ -134,15 +134,20 @@ class ContestCategoriesController extends Controller
 	function category_list(Request $request, $fieldname = null , $fieldvalue = null){
 		$view = "pages.contestcategories.category_list";
 		$query = ContestCategories::query();
-		$limit = $request->limit ?? 10;
+		$limit = $request->limit ?? 50;
 		if($request->search){
 			$search = trim($request->search);
 			ContestCategories::search($query, $search); // search table records
 		}
 		$query->join("academic_sessions", "contest_categories.academic_session_id", "=", "academic_sessions.id");
-		$orderby = $request->orderby ?? "contest_categories.id";
-		$ordertype = $request->ordertype ?? "desc";
-		$query->orderBy($orderby, $ordertype);
+		if($request->orderby){
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		}
+		else{
+			$query->orderBy("contest_categories.name", "ASC");
+		}
 		$query->where("academic_session_id", "=" , 1);
 		if($fieldname){
 			$query->where($fieldname , $fieldvalue); //filter by a table field

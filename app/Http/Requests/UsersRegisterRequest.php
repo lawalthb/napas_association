@@ -25,11 +25,15 @@ class UsersRegisterRequest extends FormRequest
 		
         return [
             
-				"firstname" => "required|string|unique:users,firstname",
+				"firstname" => "required|string",
+				"lastname" => "nullable|string",
 				"phone" => "required|string|unique:users,phone",
 				"email" => "required|email|unique:users,email",
-				"password" => "required|same:confirm_password",
-				"image" => "nullable",
+				"password" => "required",
+				"level_id" => "nullable",
+				"matno" => "nullable|string",
+				"member_type" => "required",
+				"expectation_msg" => "nullable",
             
         ];
     }
