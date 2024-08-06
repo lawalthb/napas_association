@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Mail;
 
 
 use App\Http\Controllers\LandingpageController;
+use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\VoteController;
 
 Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
@@ -30,8 +31,8 @@ Route::get('/vote/{slug}', [VoteController::class, 'ContestVote'])->name('vote')
 Route::get('payment/{contestant}', [VoteController::class, 'ContestVotePayment'])->name('payment');
 
 Route::post('vote/process', [VoteController::class, 'processPayment'])->name('vote.payment.process');
-Route::get('/payment_callback_forvote', [TransactionController::class, 'PaymentCallbackVote'])->name('payment_callback_vote');
-Route::get('/payment_callback', [TransactionController::class, 'PaymentCallback'])->name('payment_callback');
+Route::get('/payment_callback_forvote', [TransactionsController::class, 'PaymentCallbackVote'])->name('payment_callback_vote');
+Route::get('/payment_callback', [TransactionsController::class, 'PaymentCallback'])->name('payment_callback');
 
 
 

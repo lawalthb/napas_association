@@ -9,6 +9,7 @@ use App\Models\ContestantPosition;
 use App\Models\ContestCategories;
 use App\Models\ContestNominees;
 use App\Models\ContestVote;
+use App\Models\ContestVotes;
 use App\Models\ElectionCandidate;
 use App\Models\ElectionPosition;
 use App\Models\ElectionVotes;
@@ -77,15 +78,15 @@ class VoteController extends Controller
             'email' => 'required',
         ]);
 
-        $contestant = ContestantCandidate::findOrFail($request->contestant_id);
+        $contestant = ContestNominees::findOrFail($request->contestant_id);
         $numVotes = $request->num_votes;
         $id = $request->id;
 
         //dd($ElectionPosition);
 
-        $ContestVote = new ContestVote();
+        $ContestVote = new ContestVotes();
         $ContestVote->email = $request->email;
-        $ContestVote->position_id = $contestant->position_id;
+        $ContestVote->category_id = $contestant->category_id;
         $ContestVote->candidate_id  = $request->contestant_id;
         $ContestVote->vote_number = $request->num_votes;
         $ContestVote->amount = $request->amount;
@@ -93,8 +94,13 @@ class VoteController extends Controller
         $ContestVote->save();
         $lastInsertedId = $ContestVote->id;
         $callback_url = route('payment_callback');
-        $data = $this->nomba_checkout(1, $request->email, $request->amount,  $callback_url);
 
+        //connect to payment gateway
+        $data = makePayment(
+            $request->amount,
+            $request->email,
+            $callback_url
+        );
 
 
 
@@ -114,95 +120,16 @@ class VoteController extends Controller
             'fullname' =>  'Anonymous',
             'phone_number' =>  '08132712715',
             'callback_url' => $callback_url,
-            'reference' => $data['data']['orderReference'],
-            'authorization_url' => $data['data']['checkoutLink'],
+            'reference' => $data['orderReference'],
+            'authorization_url' => $data['checkoutLink'],
+            'purpose_name' =>'contest',
         ]);
-        $payment_link = $data['data']['checkoutLink'];
-
-
-
-
-        return redirect($data['data']['checkoutLink']);
+        $payment_link = $data['checkoutLink'];
+        return redirect($data['checkoutLink']);
     }
 
 
 
 
-    //nomba payment function
-    public function nomba_checkout($customerId, $email, $amount,  $callback_url)
-    {
-        $NOMBA_CLIENT_ID = env('NOMBA_CLIENT_ID');
-        $NOMBA_CLIENT_SECRET = env('NOMBA_CLIENT_SECRET');
-        $NOMBA_ACCOUNT_ID = env('NOMBA_ACCOUNT_ID');
 
-        $curl = curl_init();
-
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://api.nomba.com/v1/auth/token/issue",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\n  \"grant_type\": \"client_credentials\",\n  \"client_id\": \"$NOMBA_CLIENT_ID\",\n  \"client_secret\": \"$NOMBA_CLIENT_SECRET\"\n}",
-            CURLOPT_HTTPHEADER => [
-                "Content-Type: application/json",
-                "accountId: $NOMBA_ACCOUNT_ID"
-            ],
-        ]);
-
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            "cURL Error #:" . $err;
-        } else {
-            $response;
-        }
-
-        // dd($response);
-        $auth_data = json_decode($response, true);
-        $access_token = $auth_data['data']['access_token'];
-
-        $reference = 'REF' . uniqid();
-
-
-
-        //dd($access_token);
-        $curl = curl_init();
-        curl_setopt_array($curl, [
-            CURLOPT_URL => "https://api.nomba.com/v1/checkout/order",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => "",
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => "POST",
-            CURLOPT_POSTFIELDS => "{\n  \"order\": {\n    \"orderReference\": \"$reference\",\n    \"customerId\": \"$customerId\",\n    \"callbackUrl\": \"$callback_url\",\n    \"customerEmail\": \"$email\",\n    \"amount\": \"$amount\",\n    \"currency\": \"NGN\"\n  },\n  \"tokenizeCard\": \"false\"\n}",
-
-            CURLOPT_HTTPHEADER => [
-                "Authorization: Bearer $access_token",
-                "Content-Type: application/json",
-                "Cache-Control: no-cache",
-                "accountId: $NOMBA_ACCOUNT_ID",
-            ],
-        ]);
-
-        $result  = curl_exec($curl);
-        $err = curl_error($curl);
-
-        curl_close($curl);
-
-        if ($err) {
-            "cURL Error #:" . $err;
-        } else {
-
-            $result;
-        }
-
-        return  $data = json_decode($result, true);
-    }
 }
