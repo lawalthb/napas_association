@@ -18,11 +18,13 @@ use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\LandingpageController;
 use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\VoteController;
+use App\Http\Controllers\AuthController;
 
 Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
 Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
-Route::get('payment_callback', 'AuthController@PaymentCallback')->name('registerCallback');
+Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
+Route::get('payment_callback', [AuthController::class, 'PaymentCallback' ] )->name('registerCallback');
 
 //Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
 

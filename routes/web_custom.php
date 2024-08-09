@@ -38,7 +38,7 @@ Route::get('auth/accountinactive', 'AuthController@accountinactive')->name('acco
 Route::get('index/register', 'AuthController@register')->name('auth.register')->middleware(['redirect.to.home']);
 Route::post('index/register', 'AuthController@register_store')->name('auth.register_store');
 
-Route::get('webabouts', 'WebAboutsController@index')->name('webabouts.index');
+//Route::get('webabouts', 'WebAboutsController@index')->name('webabouts.index');
 Route::get('webabouts/index/{filter?}/{filtervalue?}', 'WebAboutsController@index')->name('webabouts.index');
 Route::get('webabouts/view/{rec_id}', 'WebAboutsController@view')->name('webabouts.view');
 Route::post('auth/login', 'AuthController@login')->name('auth.login');
