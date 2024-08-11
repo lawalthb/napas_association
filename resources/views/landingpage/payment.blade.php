@@ -58,11 +58,11 @@
                 <h4> Number of Votes:</h4>
 
                 <input type="number" id="vote_number" name="num_votes" min="1" value="1" required><br /><br />
-                <input type="hidden" id="amount" name="amount" min="1" value="{{  $contestant->contest_categories->price  }}" required>
+                <input type="hidden" id="amount" name="amount" min="1" value="{{  $category->price }}" required>
                 <h4> Your Email:</h4>
                 <input type="email" name="email" required /><br /><br />
 
-                Amount: ₦<span id="amt">{{ $contestant->contest_categories->price }}</span><br />
+                Amount: ₦<span id="amt">{{ $category->price }}</span><br />
                 <button class="button" type="submit" style="background-color:green;">Pay to Vote</button><br />
                 <br />
                 <img src="{{asset('website/cards_images.webp')}}" width="200px" height="100px" />
@@ -101,7 +101,7 @@
         var voteNumber = parseInt(this.value);
 
         // Calculate the new amount based on vote_number and multiply by 5
-        var newAmount = voteNumber * `{{$contestant->contest_categories->price}}`;
+        var newAmount = voteNumber * `{{$category->price}}`;
 
         // Update the amount input field with the new calculated value
         amountInput.value = newAmount;
