@@ -93,7 +93,8 @@ class AuthController extends Controller
 		} else {
 			$amount = 1000;
 		}
-		$callbackUrl = route("registerCallback");
+	//	$callbackUrl = route("registerCallback");
+			$callbackUrl = url().'/payment_callback';
 		$response = makePayment($amount, $request->email, $callbackUrl);
 		$checkoutLink  = $response['checkoutLink'];
 		//	$result['data']['checkoutLink'];
