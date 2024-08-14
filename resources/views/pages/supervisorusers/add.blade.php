@@ -71,25 +71,12 @@ $pageTitle = "Add New Supervisor User"; //set dynamic page title
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="user_id">Member name/matric Number <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="user_id">Member <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-user_id-holder" class=" ">
-                                                <select required="" id="ctrl-user_id" data-field="user_id" name="user_id" placeholder="Select a value ..." class="form-select">
+                                                <select required="" data-endpoint="<?php print_link('componentsdata/user_id_option_list') ?>" id="ctrl-user_id" data-field="user_id" name="user_id" placeholder="Select a value ..." class="selectize-ajax">
                                                     <option value="">Select a value ...</option>
-                                                    <?php
-                                                    $options = $comp_model->updated_by_option_list() ?? [];
-                                                    foreach ($options as $option) {
-                                                        $value = $option->value;
-                                                        $label = $option->label ?? $value;
-                                                        $selected = Html::get_field_selected('user_id', $value, "");
-                                                    ?>
-                                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                            <?php echo $label; ?>
-                                                        </option>
-                                                    <?php
-                                                    }
-                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -102,7 +89,7 @@ $pageTitle = "Add New Supervisor User"; //set dynamic page title
                             <div class="form-group form-submit-btn-holder text-center mt-3">
                                 <button class="btn btn-primary" type="submit">
                                     Submit
-                                    <i class="material-icons">send</i>
+
                                 </button>
                             </div>
                             <!--[form-button-end]-->

@@ -1,4 +1,4 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupervisorUsersAddRequest;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Exception;
 class SupervisorUsersController extends Controller
 {
-	
+
 
 	/**
      * List table records
@@ -25,6 +25,8 @@ class SupervisorUsersController extends Controller
 			$search = trim($request->search);
 			SupervisorUsers::search($query, $search); // search table records
 		}
+		$query->join("users", "supervisor_users.user_id", "=", "users.id");
+		$query->join("project_supervisors", "supervisor_users.supervisor_id", "=", "project_supervisors.id");
 		$orderby = $request->orderby ?? "supervisor_users.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
@@ -34,7 +36,7 @@ class SupervisorUsersController extends Controller
 		$records = $query->paginate($limit, SupervisorUsers::listFields());
 		return $this->renderView($view, compact("records"));
 	}
-	
+
 
 	/**
      * Select table record by ID
@@ -46,7 +48,7 @@ class SupervisorUsersController extends Controller
 		$record = $query->findOrFail($rec_id, SupervisorUsers::viewFields());
 		return $this->renderView("pages.supervisorusers.view", ["data" => $record]);
 	}
-	
+
 
 	/**
      * Display form page
@@ -55,7 +57,7 @@ class SupervisorUsersController extends Controller
 	function add(){
 		return $this->renderView("pages.supervisorusers.add");
 	}
-	
+
 
 	/**
      * Save form record to the table
@@ -63,13 +65,13 @@ class SupervisorUsersController extends Controller
      */
 	function store(SupervisorUsersAddRequest $request){
 		$modeldata = $this->normalizeFormData($request->validated());
-		
+
 		//save SupervisorUsers record
 		$record = SupervisorUsers::create($modeldata);
 		$rec_id = $record->id;
 		return $this->redirect("supervisorusers", "Record added successfully");
 	}
-	
+
 
 	/**
      * Update table record with form data
@@ -86,13 +88,13 @@ class SupervisorUsersController extends Controller
 		}
 		return $this->renderView("pages.supervisorusers.edit", ["data" => $record, "rec_id" => $rec_id]);
 	}
-	
+
 
 	/**
      * Delete record from the database
 	 * Support multi delete by separating record id by comma.
 	 * @param  \Illuminate\Http\Request
-	 * @param string $rec_id //can be separated by comma 
+	 * @param string $rec_id //can be separated by comma
      * @return \Illuminate\Http\Response
      */
 	function delete(Request $request, $rec_id = null){
