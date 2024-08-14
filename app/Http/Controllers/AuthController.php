@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\URL;
 
 class AuthController extends Controller
 {
@@ -93,8 +94,9 @@ class AuthController extends Controller
 		} else {
 			$amount = 1000;
 		}
-	//	$callbackUrl = route("registerCallback");
-			$callbackUrl = url().'/payment_callback';
+		//	$callbackUrl = route("registerCallback");
+		$callbackUrl = URL::to('/payment_callback');
+
 		$response = makePayment($amount, $request->email, $callbackUrl);
 		$checkoutLink  = $response['checkoutLink'];
 		//	$result['data']['checkoutLink'];
