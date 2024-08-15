@@ -1,22 +1,34 @@
-<!-- 
+<!--
 expose component model to current view
 e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
-<?php 
-    $pageTitle = "Home"; // set dynamic page title
+<?php
+$pageTitle = "Home"; // set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
 @section('content')
 <div>
-    <div  class="bg-light p-3 mb-3" >
+    <div class="bg-light p-3 mb-3">
         <div class="container-fluid">
             <div class="row ">
-                <div class="col comp-grid " >
+                <div class="col comp-grid ">
                     <div class="">
                         <div class="h5 font-weight-bold">Home</div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="container">
+        <div class="row ">
+            <div class="col-md-9 comp-grid ">
+                <div class="card card-1 border rounded page-content">
+                    Welcome to NABAM<br />
+                    Your Supervisor is Mr...
                 </div>
             </div>
         </div>
@@ -31,8 +43,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <!-- Page custom js -->
 @section('pagejs')
 <script>
-    $(document).ready(function(){
-    // custom javascript | jquery codes
+    $(document).ready(function() {
+        // custom javascript | jquery codes
     });
 </script>
 @endsection
