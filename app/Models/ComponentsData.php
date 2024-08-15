@@ -1,390 +1,423 @@
-<?php 
+<?php
+
 namespace App\Models;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 /**
  * Components data Model
  * Use for getting values from the database for page components
  * Support raw query builder
  * @category Model
  */
-class ComponentsData{
-	
+class ComponentsData
+{
+
 
 	/**
-     * value_option_list Model Action
-     * @return array
-     */
-	function value_option_list(){
+	 * value_option_list Model Action
+	 * @return array
+	 */
+	function value_option_list()
+	{
 		$sqltext = "";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * academic_session_id_option_list Model Action
-     * @return array
-     */
-	function academic_session_id_option_list(){
+	 * academic_session_id_option_list Model Action
+	 * @return array
+	 */
+	function academic_session_id_option_list()
+	{
 		$sqltext = "SELECT id as value, session_name as label FROM academic_sessions";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * updated_by_option_list Model Action
-     * @return array
-     */
-	function updated_by_option_list(){
+	 * updated_by_option_list Model Action
+	 * @return array
+	 */
+	function updated_by_option_list()
+	{
 		$sqltext = "SELECT id as value, firstname as label FROM users";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * category_id_option_list Model Action
-     * @return array
-     */
-	function category_id_option_list($value = null){
+	 * category_id_option_list Model Action
+	 * @return array
+	 */
+	function category_id_option_list($value = null)
+	{
 		$lookup_value = request()->lookup ?? $value;
-		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories WHERE academic_session_id=:lookup_academic_session ORDER BY name ASC" ;
+		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories WHERE academic_session_id=:lookup_academic_session ORDER BY name ASC";
 		$query_params = [];
 		$query_params['lookup_academic_session'] = $lookup_value;
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * user_id_option_list Model Action
-     * @return array
-     */
-	function user_id_option_list(){
+	 * user_id_option_list Model Action
+	 * @return array
+	 */
+	function user_id_option_list()
+	{
 		$arr = [];
-		if(request()->search){
+		if (request()->search) {
 			$search = trim(request()->search);
-			$sqltext = "SELECT  DISTINCT id AS value,firstname AS label FROM users WHERE firstname LIKE  :search  ORDER BY firstname ASC LIMIT 10" ;
+			$sqltext = "SELECT  DISTINCT id AS value, CONCAT(firstname, ' ', lastname, ' ', matno) AS label FROM users WHERE firstname LIKE  :search OR matno LIKE :search ORDER BY id ASC LIMIT 10";
 			$query_params = [];
 			$query_params['search'] = "%$search%";
 			$arr = DB::select($sqltext, $query_params);
 		}
 		return $arr;
 	}
-	
+
 
 	/**
-     * contestvotes_category_id_option_list Model Action
-     * @return array
-     */
-	function contestvotes_category_id_option_list(){
+	 * contestvotes_category_id_option_list Model Action
+	 * @return array
+	 */
+	function contestvotes_category_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM contest_categories";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * position_id_option_list Model Action
-     * @return array
-     */
-	function position_id_option_list(){
+	 * position_id_option_list Model Action
+	 * @return array
+	 */
+	function position_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM election_positions";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * aspirant_id_option_list Model Action
-     * @return array
-     */
-	function aspirant_id_option_list(){
+	 * aspirant_id_option_list Model Action
+	 * @return array
+	 */
+	function aspirant_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM election_aspirants";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * finalprojects_user_id_option_list Model Action
-     * @return array
-     */
-	function finalprojects_user_id_option_list(){
+	 * finalprojects_user_id_option_list Model Action
+	 * @return array
+	 */
+	function finalprojects_user_id_option_list()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,lastname AS label FROM users ORDER BY lastname ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * level_id_option_list Model Action
-     * @return array
-     */
-	function level_id_option_list(){
+	 * level_id_option_list Model Action
+	 * @return array
+	 */
+	function level_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM levels";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * Check if value already exist in FinalProjects table
+	 * Check if value already exist in FinalProjects table
 	 * @param string $value
-     * @return bool
-     */
-	function finalprojects_user_id_value_exist(Request $request){
+	 * @return bool
+	 */
+	function finalprojects_user_id_value_exist(Request $request)
+	{
 		$value = trim($request->value);
-		$exist = DB::table('final_projects')->where('user_id', $value)->value('user_id');   
-		if($exist){
+		$exist = DB::table('final_projects')->where('user_id', $value)->value('user_id');
+		if ($exist) {
 			return true;
 		}
 		return false;
 	}
-	
+
 
 	/**
-     * permission_option_list Model Action
-     * @return array
-     */
-	function permission_option_list(){
+	 * permission_option_list Model Action
+	 * @return array
+	 */
+	function permission_option_list()
+	{
 		$sqltext = "SELECT  DISTINCT permission AS value,permission AS label FROM permissions where role_id=4 ORDER BY permission ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * role_id_option_list Model Action
-     * @return array
-     */
-	function role_id_option_list(){
+	 * role_id_option_list Model Action
+	 * @return array
+	 */
+	function role_id_option_list()
+	{
 		$sqltext = "SELECT  DISTINCT role_id AS value,role_name AS label FROM roles ORDER BY role_name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * resourceitems_category_id_option_list Model Action
-     * @return array
-     */
-	function resourceitems_category_id_option_list(){
+	 * resourceitems_category_id_option_list Model Action
+	 * @return array
+	 */
+	function resourceitems_category_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM resource_categories";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * resources_id_option_list Model Action
-     * @return array
-     */
-	function resources_id_option_list(){
+	 * resources_id_option_list Model Action
+	 * @return array
+	 */
+	function resources_id_option_list()
+	{
 		$sqltext = "SELECT id as value, title as label FROM resource_items";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * supervisor_id_option_list Model Action
-     * @return array
-     */
-	function supervisor_id_option_list(){
+	 * supervisor_id_option_list Model Action
+	 * @return array
+	 */
+	function supervisor_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM project_supervisors";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * price_settings_id_option_list Model Action
-     * @return array
-     */
-	function price_settings_id_option_list(){
+	 * price_settings_id_option_list Model Action
+	 * @return array
+	 */
+	function price_settings_id_option_list()
+	{
 		$sqltext = "SELECT id as value, name as label FROM price_settings";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * Check if value already exist in Users table
+	 * Check if value already exist in Users table
 	 * @param string $value
-     * @return bool
-     */
-	function users_phone_value_exist(Request $request){
+	 * @return bool
+	 */
+	function users_phone_value_exist(Request $request)
+	{
 		$value = trim($request->value);
-		$exist = DB::table('users')->where('phone', $value)->value('phone');   
-		if($exist){
+		$exist = DB::table('users')->where('phone', $value)->value('phone');
+		if ($exist) {
 			return true;
 		}
 		return false;
 	}
-	
+
 
 	/**
-     * Check if value already exist in Users table
+	 * Check if value already exist in Users table
 	 * @param string $value
-     * @return bool
-     */
-	function users_email_value_exist(Request $request){
+	 * @return bool
+	 */
+	function users_email_value_exist(Request $request)
+	{
 		$value = trim($request->value);
-		$exist = DB::table('users')->where('email', $value)->value('email');   
-		if($exist){
+		$exist = DB::table('users')->where('email', $value)->value('email');
+		if ($exist) {
 			return true;
 		}
 		return false;
 	}
-	
+
 
 	/**
-     * users_level_id_option_list Model Action
-     * @return array
-     */
-	function users_level_id_option_list(){
+	 * users_level_id_option_list Model Action
+	 * @return array
+	 */
+	function users_level_id_option_list()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM levels ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * Check if value already exist in Users table
+	 * Check if value already exist in Users table
 	 * @param string $value
-     * @return bool
-     */
-	function users_firstname_value_exist(Request $request){
+	 * @return bool
+	 */
+	function users_firstname_value_exist(Request $request)
+	{
 		$value = trim($request->value);
-		$exist = DB::table('users')->where('firstname', $value)->value('firstname');   
-		if($exist){
+		$exist = DB::table('users')->where('firstname', $value)->value('firstname');
+		if ($exist) {
 			return true;
 		}
 		return false;
 	}
-	
+
 
 	/**
-     * user_role_id_option_list Model Action
-     * @return array
-     */
-	function user_role_id_option_list(){
+	 * user_role_id_option_list Model Action
+	 * @return array
+	 */
+	function user_role_id_option_list()
+	{
 		$sqltext = "SELECT role_id AS value, role_name AS label FROM roles";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * academic_session_id_option_list_2 Model Action
-     * @return array
-     */
-	function academic_session_id_option_list_2(){
+	 * academic_session_id_option_list_2 Model Action
+	 * @return array
+	 */
+	function academic_session_id_option_list_2()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,session_name AS label FROM academic_sessions ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * category_id_option_list_2 Model Action
-     * @return array
-     */
-	function category_id_option_list_2(){
+	 * category_id_option_list_2 Model Action
+	 * @return array
+	 */
+	function category_id_option_list_2()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM contest_categories ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * position_id_option_list_2 Model Action
-     * @return array
-     */
-	function position_id_option_list_2(){
+	 * position_id_option_list_2 Model Action
+	 * @return array
+	 */
+	function position_id_option_list_2()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM election_positions ORDER BY id DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * electionaspirants_academic_session_autofill Model Action
-     * @return array
-     */
-	function electionaspirants_academic_session_autofill(){
-		$sqltext = "SELECT session_name FROM academic_sessions WHERE session_name=:value" ;
+	 * electionaspirants_academic_session_autofill Model Action
+	 * @return array
+	 */
+	function electionaspirants_academic_session_autofill()
+	{
+		$sqltext = "SELECT session_name FROM academic_sessions WHERE session_name=:value";
 		$query_params = [];
 		$query_params['value'] = request()->get('value');
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * name_option_list Model Action
-     * @return array
-     */
-	function name_option_list(){
+	 * name_option_list Model Action
+	 * @return array
+	 */
+	function name_option_list()
+	{
 		$sqltext = "SELECT  DISTINCT name AS value,name AS label FROM resource_categories ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * category_id_option_list_3 Model Action
-     * @return array
-     */
-	function category_id_option_list_3(){
+	 * category_id_option_list_3 Model Action
+	 * @return array
+	 */
+	function category_id_option_list_3()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM resource_categories ORDER BY name ASC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
-	
+
 
 	/**
-     * getcount_ Model Action
-     * @return int
-     */
-	function getcount_(){
+	 * getcount_ Model Action
+	 * @return int
+	 */
+	function getcount_()
+	{
 		$sqltext = "SELECT SUM(amount) AS num  FROM transactions WHERE `status` = 'Success'";
 		$query_params = [];
 		$val = DB::selectOne($sqltext, $query_params);
 		return $val->num;
 	}
-	
+
 
 	/**
-     * price_settings_id_option_list_2 Model Action
-     * @return array
-     */
-	function price_settings_id_option_list_2(){
+	 * price_settings_id_option_list_2 Model Action
+	 * @return array
+	 */
+	function price_settings_id_option_list_2()
+	{
 		$sqltext = "SELECT  DISTINCT id AS value,name AS label FROM price_settings ORDER BY name DESC";
 		$query_params = [];
 		$arr = DB::select($sqltext, $query_params);

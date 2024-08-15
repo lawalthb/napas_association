@@ -71,7 +71,7 @@ $pageTitle = "Add New Supervisor User"; //set dynamic page title
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="user_id">Member <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="user_id">Member name/matric no <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-user_id-holder" class=" ">
