@@ -13,6 +13,7 @@ use App\Exports\TransactionsMemberViewExport;
 use App\Models\AppSettings;
 use App\Models\ContestNominees;
 use App\Models\ContestVotes;
+use App\Models\ElectionAspirants;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -252,6 +253,7 @@ class TransactionsController extends Controller
 				if ($updateRecord) {
 					$contest =  Transactions::where('reference', $orderId)->where('purpose_name', 'contest')->first();
 					$resource =  Transactions::where('reference', $orderId)->where('purpose_name', 'resource')->first();
+					$election =  Transactions::where('reference', $orderId)->where('purpose_name', 'election')->first();
 					if ($contest) {
 
 						$vote_paid =  ContestVotes::where('id', $contest->purpose_id)->update([
@@ -259,6 +261,7 @@ class TransactionsController extends Controller
 							'payment_status' => 'approved',
 
 						]);
+
 						if ($vote_paid) {
 							$candidate = ContestVotes::where('id', $contest->purpose_id)->first();
 							$votePaid = ContestNominees::find($candidate->candidate_id);
@@ -270,6 +273,22 @@ class TransactionsController extends Controller
 							$votecount = $newVotes;
 							//event(new VoteCasted($user, $votecount));
 							return redirect()->route('thankyou');
+						}
+					}
+
+
+
+					// to update election form status for paid aspirant
+					if ($election) {
+
+						$form_paid =  ElectionAspirants::where('id', $election->purpose_id)->update([
+
+							'payment_status' => 'approved',
+
+						]);
+						if ($form_paid) {
+
+							return redirect()->route('home');
 						}
 					}
 				}
