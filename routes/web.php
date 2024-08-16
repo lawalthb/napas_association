@@ -24,7 +24,7 @@ Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
 Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
-Route::get('payment_callback', [AuthController::class, 'PaymentCallback' ] )->name('registerCallback');
+Route::get('payment_callback', [AuthController::class, 'PaymentCallback'])->name('registerCallback');
 
 //Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
 
@@ -173,6 +173,8 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::get('electionpositions/delete/{rec_id}', 'ElectionPositionsController@delete');
 	Route::get('electionpositions/member_list', 'ElectionPositionsController@member_list');
 	Route::get('electionpositions/member_list/{filter?}/{filtervalue?}', 'ElectionPositionsController@member_list');
+
+	Route::get('electionpositions/buyform/{id}', 'ElectionPositionsController@buyForm')->name('buy_form');
 
 	/* routes for ElectionVotes Controller */
 	Route::get('electionvotes', 'ElectionVotesController@index')->name('electionvotes.index');
