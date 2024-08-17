@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ElectionVotesAddRequest;
 use App\Http\Requests\ElectionVotesEditRequest;
+use App\Models\AppSettings;
 use App\Models\AcademicSessions;
 use App\Models\ElectionAspirants;
 use App\Models\ElectionPositions;
@@ -130,8 +131,9 @@ class ElectionVotesController extends Controller
 			}])
 			->get();
 		//dd($positions);
+		$election_status = AppSettings::where(['slug' => 'election'])->first()->value;
 		//return view('member.election.votes.index', compact('positions'));
-		return $this->renderView("pages.electionvotes.member_list", ["positions" => $positions]);
+		return $this->renderView("pages.electionvotes.member_list", ["positions" => $positions, "election_status" => $election_status]);
 	}
 
 	public function vote(Request $request)

@@ -26,6 +26,10 @@ $pageTitle = "election_vote_page"; // set dynamic page title
     <div class="container-fluid">
       <div class="row ">
         <div class="col comp-grid ">
+
+          @if ($election_status =='On')
+
+
           <!-- //start position here -->
           @foreach($positions as $position)
           @php $count = 0; @endphp
@@ -96,6 +100,9 @@ $pageTitle = "election_vote_page"; // set dynamic page title
       <hr />
       @endforeach
     </div>
+    @else
+    Election is over for this Academic Session
+    @endif
   </div>
 </div>
 </div>
