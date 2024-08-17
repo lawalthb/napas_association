@@ -1,42 +1,42 @@
-<!-- 
+<!--
 expose component model to current view
 e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 -->
 @inject('comp_model', 'App\Models\ComponentsData')
 <?php
-    $pageTitle = "Add New Election Aspirant"; //set dynamic page title
+$pageTitle = "Add New Election Aspirant"; //set dynamic page title
 ?>
 @extends($layout)
 @section('title', $pageTitle)
 @section('content')
 <section class="page" data-page-type="add" data-page-url="{{ url()->full() }}">
     <?php
-        if( $show_header == true ){
+    if ($show_header == true) {
     ?>
-    <div  class="bg-light p-3 mb-3" >
-        <div class="container">
-            <div class="row justify-content-between align-items-center">
-                <div class="col-auto  back-btn-col" >
-                    <a class="back-btn btn " href="{{ url()->previous() }}" >
-                        <i class="material-icons">arrow_back</i>                                
-                    </a>
-                </div>
-                <div class="col  " >
-                    <div class="">
-                        <div class="h5 font-weight-bold text-primary">Add New Election Aspirant</div>
+        <div class="bg-light p-3 mb-3">
+            <div class="container">
+                <div class="row justify-content-between align-items-center">
+                    <div class="col-auto  back-btn-col">
+                        <a class="back-btn btn " href="{{ url()->previous() }}">
+                            <i class="material-icons">arrow_back</i>
+                        </a>
+                    </div>
+                    <div class="col  ">
+                        <div class="">
+                            <div class="h5 font-weight-bold text-primary">Add New Election Aspirant</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php
-        }
+    }
     ?>
-    <div  class="" >
+    <div class="">
         <div class="container">
             <div class="row ">
-                <div class="col-md-9 comp-grid " >
-                    <div  class="card card-1 border rounded page-content" >
+                <div class="col-md-9 comp-grid ">
+                    <div class="card card-1 border rounded page-content">
                         <!--[form-start]-->
                         <form id="electionaspirants-add-form" role="form" novalidate enctype="multipart/form-data" class="form page-form form-horizontal needs-validation" action="{{ route('electionaspirants.store') }}" method="post">
                             @csrf
@@ -48,21 +48,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-academic_session-holder" class=" ">
-                                                <select required=""  id="ctrl-academic_session" data-field="academic_session" name="academic_session"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
+                                                <select required="" id="ctrl-academic_session" data-field="academic_session" name="academic_session" placeholder="Select a value ..." class="form-select">
+                                                    <option value="">Select a value ...</option>
+                                                    <?php
                                                     $options = $comp_model->academic_session_id_option_list() ?? [];
-                                                    foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('academic_session', $value, "");
-                                                ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
-                                                <?php
+                                                    foreach ($options as $option) {
+                                                        $value = $option->value;
+                                                        $label = $option->label ?? $value;
+                                                        $selected = Html::get_field_selected('academic_session', $value, "");
+                                                    ?>
+                                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                                            <?php echo $label; ?>
+                                                        </option>
+                                                    <?php
                                                     }
-                                                ?>
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -75,21 +75,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-position_id-holder" class=" ">
-                                                <select required=""  id="ctrl-position_id" data-field="position_id" name="position_id"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
+                                                <select required="" id="ctrl-position_id" data-field="position_id" name="position_id" placeholder="Select a value ..." class="form-select">
+                                                    <option value="">Select a value ...</option>
+                                                    <?php
                                                     $options = $comp_model->position_id_option_list() ?? [];
-                                                    foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('position_id', $value, "");
-                                                ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
-                                                <?php
+                                                    foreach ($options as $option) {
+                                                        $value = $option->value;
+                                                        $label = $option->label ?? $value;
+                                                        $selected = Html::get_field_selected('position_id', $value, "");
+                                                    ?>
+                                                        <option <?php echo $selected; ?> value="<?php echo $value; ?>">
+                                                            <?php echo $label; ?>
+                                                        </option>
+                                                    <?php
                                                     }
-                                                ?>
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -98,25 +98,12 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="user_id">User <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="user_id">Member name/Matric No. <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-user_id-holder" class=" ">
-                                                <select required=""  id="ctrl-user_id" data-field="user_id" name="user_id"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php 
-                                                    $options = $comp_model->updated_by_option_list() ?? [];
-                                                    foreach($options as $option){
-                                                    $value = $option->value;
-                                                    $label = $option->label ?? $value;
-                                                    $selected = Html::get_field_selected('user_id', $value, "");
-                                                ?>
-                                                <option <?php echo $selected; ?> value="<?php echo $value; ?>">
-                                                <?php echo $label; ?>
-                                                </option>
-                                                <?php
-                                                    }
-                                                ?>
+                                                <select required="" data-endpoint="<?php print_link('componentsdata/user_id_option_list') ?>" id="ctrl-user_id" data-field="user_id" name="user_id" placeholder="Select a value ..." class="selectize-ajax">
+                                                    <option value="">Select a value ...</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -125,11 +112,11 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                 <div class="form-group ">
                                     <div class="row">
                                         <div class="col-sm-4">
-                                            <label class="control-label" for="name">Name <span class="text-danger">*</span></label>
+                                            <label class="control-label" for="name">Display Name <span class="text-danger">*</span></label>
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-name-holder" class=" ">
-                                                <input id="ctrl-name" data-field="name"  value="<?php echo get_value('name') ?>" type="text" placeholder="Enter Name"  required="" name="name"  class="form-control " />
+                                                <input id="ctrl-name" data-field="name" value="<?php echo get_value('name') ?>" type="text" placeholder="Enter Name" required="" name="name" class="form-control " />
                                             </div>
                                         </div>
                                     </div>
@@ -141,7 +128,7 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-votes-holder" class=" ">
-                                                <input id="ctrl-votes" data-field="votes"  value="<?php echo get_value('votes', "0") ?>" type="number" placeholder="Enter Votes" step="any"  required="" name="votes"  class="form-control " />
+                                                <input readonly id="ctrl-votes" data-field="votes" value="<?php echo get_value('votes', "0") ?>" type="number" placeholder="Enter Votes" step="any" required="" name="votes" class="form-control " />
                                             </div>
                                         </div>
                                     </div>
@@ -153,23 +140,23 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                                         </div>
                                         <div class="col-sm-8">
                                             <div id="ctrl-payment_status-holder" class=" ">
-                                                <select required=""  id="ctrl-payment_status" data-field="payment_status" name="payment_status"  placeholder="Select a value ..."    class="form-select" >
-                                                <option value="">Select a value ...</option>
-                                                <?php
+                                                <select required="" id="ctrl-payment_status" data-field="payment_status" name="payment_status" placeholder="Select a value ..." class="form-select">
+                                                    <option value="">Select a value ...</option>
+                                                    <?php
                                                     $options = Menu::paymentStatus();
-                                                    if(!empty($options)){
-                                                    foreach($options as $option){
-                                                    $value = $option['value'];
-                                                    $label = $option['label'];
-                                                    $selected = Html::get_field_selected('payment_status', $value, "");
-                                                ?>
-                                                <option <?php echo $selected ?> value="<?php echo $value ?>">
-                                                <?php echo $label ?>
-                                                </option>                                   
-                                                <?php
+                                                    if (!empty($options)) {
+                                                        foreach ($options as $option) {
+                                                            $value = $option['value'];
+                                                            $label = $option['label'];
+                                                            $selected = Html::get_field_selected('payment_status', $value, "");
+                                                    ?>
+                                                            <option <?php echo $selected ?> value="<?php echo $value ?>">
+                                                                <?php echo $label ?>
+                                                            </option>
+                                                    <?php
+                                                        }
                                                     }
-                                                    }
-                                                ?>
+                                                    ?>
                                                 </select>
                                             </div>
                                         </div>
@@ -180,8 +167,8 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
                             <!--[form-button-start]-->
                             <div class="form-group form-submit-btn-holder text-center mt-3">
                                 <button class="btn btn-primary" type="submit">
-                                Submit
-                                <i class="material-icons">send</i>
+                                    Submit
+                                    <i class="material-icons">send</i>
                                 </button>
                             </div>
                             <!--[form-button-end]-->
@@ -193,20 +180,21 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
         </div>
     </div>
 </section>
-<!-- Page custom js --><script>
-    
+<!-- Page custom js -->
+<script>
     $(document).on('change', '#ctrl-academic_session', function() {
-    var val = $(this).val();
-    var url = `/componentsdata/electionaspirants_academic_session_autofill?value=${val}`;
-    $.get(url, function(result){
-    const data = result[0];
-    if(data){
-    $('#ctrl-position_id').val(data.session_name);
-    }
+        var val = $(this).val();
+        var url = `/componentsdata/electionaspirants_academic_session_autofill?value=${val}`;
+        $.get(url, function(result) {
+            const data = result[0];
+            if (data) {
+                $('#ctrl-position_id').val(data.session_name);
+            }
+        });
     });
+    $(document).ready(function() {
+        // custom javascript | jquery codes
     });
-$(document).ready(function(){
-	// custom javascript | jquery codes
-});</script>
+</script>
 
 @endsection
