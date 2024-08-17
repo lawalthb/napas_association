@@ -185,6 +185,8 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 
 	Route::any('electionvotes/edit/{rec_id}', 'ElectionVotesController@edit')->name('electionvotes.edit');
 	Route::get('electionvotes/delete/{rec_id}', 'ElectionVotesController@delete');
+	Route::get('electionvotes/member_list', 'ElectionVotesController@member_list');
+	Route::post('electionvotes/member_list', 'ElectionVotesController@vote')->name('election.vote');
 
 	/* routes for FinalProjects Controller */
 	Route::get('finalprojects', 'FinalProjectsController@index')->name('finalprojects.index');
@@ -499,12 +501,12 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 
 	Route::any('webvissions/edit/{rec_id}', 'WebVissionsController@edit')->name('webvissions.edit');
 	Route::get('webvissions/delete/{rec_id}', 'WebVissionsController@delete');
-	Route::get(
-		'election_vote_page',
-		function (Request $request) {
-			return view("pages.custom.election_vote_page");
-		}
-	);
+	// Route::get(
+	// 	'election_vote_page',
+	// 	function (Request $request) {
+	// 		return view("pages.custom.election_vote_page");
+	// 	}
+	// );
 
 	Route::get(
 		'my_topic',

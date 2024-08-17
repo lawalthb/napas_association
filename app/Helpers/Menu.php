@@ -216,7 +216,7 @@ class Menu
 					],
 
 					[
-						'path' => 'election_vote_page',
+						'path' => 'electionvotes/member_list',
 						'label' => "Vote",
 						'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 					]
