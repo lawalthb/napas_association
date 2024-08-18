@@ -325,11 +325,31 @@ class TransactionsController extends Controller
 		// Update transactions with the provided emails
 		Transactions::whereIn('email', $emails)
 			->update(['status' => 'Success', 'amount' => '0']);
-			
+
 		$today_date = NOW();
 		Users::whereIn('email', $emails)
 			->update(['email_verified_at' => $today_date]);
 
 		return redirect()->back()->with('success', 'Members Cleared successfully');
+	}
+
+	function home_list(Request $request, $fieldname = null, $fieldvalue = null)
+	{
+		$view = "pages.transactions.home_list";
+		$query = Transactions::query();
+		$limit = $request->limit ?? 10;
+		if ($request->search) {
+			$search = trim($request->search);
+			Transactions::search($query, $search); // search table records
+		}
+		$query->join("price_settings", "transactions.price_settings_id", "=", "price_settings.id");
+		$orderby = $request->orderby ?? "transactions.id";
+		$ordertype = $request->ordertype ?? "desc";
+		$query->orderBy($orderby, $ordertype);
+		if ($fieldname) {
+			$query->where($fieldname, $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Transactions::homeListFields());
+		return $this->renderView($view, compact("records"));
 	}
 }

@@ -170,4 +170,37 @@ class UsersController extends Controller
 		$redirectUrl = $request->redirect ?? url()->previous();
 		return $this->redirect($redirectUrl, "Record deleted successfully");
 	}
+
+
+	/**
+	 * List table records
+	 * @param  \Illuminate\Http\Request
+	 * @param string $fieldname //filter records by a table field
+	 * @param string $fieldvalue //filter value
+	 * @return \Illuminate\View\View
+	 */
+	function home_list(Request $request, $fieldname = null, $fieldvalue = null)
+	{
+		$view = "pages.users.home_list";
+		$query = Users::query();
+		$limit = $request->limit ?? 10;
+		if ($request->search) {
+			$search = trim($request->search);
+			Users::search($query, $search); // search table records
+		}
+		if ($request->orderby) {
+			$orderby = $request->orderby;
+			$ordertype = ($request->ordertype ? $request->ordertype : "desc");
+			$query->orderBy($orderby, $ordertype);
+		} else {
+			$query->orderBy("users.id", "DESC");
+		}
+		$query->where("email_verified_at", "!=", NULL);
+		$query->where("user_role_id", "=", 2);
+		if ($fieldname) {
+			$query->where($fieldname, $fieldvalue); //filter by a table field
+		}
+		$records = $query->paginate($limit, Users::homeListFields());
+		return $this->renderView($view, compact("records"));
+	}s
 }

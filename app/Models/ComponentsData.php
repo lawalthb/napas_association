@@ -423,4 +423,103 @@ class ComponentsData
 		$arr = DB::select($sqltext, $query_params);
 		return $arr;
 	}
+
+	function getcount()
+	{
+		$sqltext = "SELECT session_name AS num FROM academic_sessions WHERE `is_active` = 'Yes'";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_members Model Action
+	 * @return int
+	 */
+	function getcount_members()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM users WHERE user_role_id =2";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_admins Model Action
+	 * @return int
+	 */
+	function getcount_admins()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM users WHERE user_role_id =1";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_supervisors Model Action
+	 * @return int
+	 */
+	function getcount_supervisors()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM project_supervisors";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_resourceitems Model Action
+	 * @return int
+	 */
+	function getcount_resourceitems()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM resource_items";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_purchaseresources Model Action
+	 * @return int
+	 */
+	function getcount_purchaseresources()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM resources_paids";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_electionaspirants Model Action
+	 * @return int
+	 */
+	function getcount_electionaspirants()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM election_aspirants";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
+
+
+	/**
+	 * getcount_contestnominees Model Action
+	 * @return int
+	 */
+	function getcount_contestnominees()
+	{
+		$sqltext = "SELECT COUNT(*) AS num FROM contest_nominees";
+		$query_params = [];
+		$val = DB::selectOne($sqltext, $query_params);
+		return $val->num;
+	}
 }

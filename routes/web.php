@@ -328,6 +328,8 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	'TransactionsController@member_view')->name('transactions.member_view');
 	Route::get('transactions/clear_member', 'TransactionsController@clear_member')->name('transactions.clear');
 	Route::post('transactions/clear_member', 'TransactionsController@cash_payment')->name('transactions.cash');
+	Route::get('transactions/home_list', 'TransactionsController@home_list');
+	Route::get('transactions/home_list/{filter?}/{filtervalue?}', 'TransactionsController@home_list');
 
 
 	/* routes for Users Controller */
@@ -344,7 +346,8 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 
 	Route::any('users/edit/{rec_id}', 'UsersController@edit')->name('users.edit');
 	Route::get('users/delete/{rec_id}', 'UsersController@delete');
-
+	Route::get('users/home_list', 'UsersController@home_list');
+	Route::get('users/home_list/{filter?}/{filtervalue?}', 'UsersController@home_list');
 	/* routes for WebAbouts Controller */
 	Route::get('webabouts/add', 'WebAboutsController@add')->name('webabouts.add');
 	Route::post('webabouts/add', 'WebAboutsController@store')->name('webabouts.store');

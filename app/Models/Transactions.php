@@ -31,7 +31,24 @@ class Transactions extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'user_id', 'price_settings_id', 'email', 'amount', 'fullname', 'phone_number', 'reference', 'status', 'authorization_url', 'callback_url', 'gateway_response', 'paid_at', 'channel', 'message', 'orderid', 'other_info', 'purpose_name', 'purpose_id'
+		'user_id',
+		'price_settings_id',
+		'email',
+		'amount',
+		'fullname',
+		'phone_number',
+		'reference',
+		'status',
+		'authorization_url',
+		'callback_url',
+		'gateway_response',
+		'paid_at',
+		'channel',
+		'message',
+		'orderid',
+		'other_info',
+		'purpose_name',
+		'purpose_id'
 	];
 	public $timestamps = false;
 
@@ -61,7 +78,20 @@ class Transactions extends Model
 				transactions.other_info LIKE ?
 		)';
 		$search_params = [
-			"%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%", "%$text%"
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%",
+			"%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -274,6 +304,23 @@ class Transactions extends Model
 			"transactions.created_at AS created_at",
 			"transactions.status AS status",
 			"transactions.authorization_url AS authorization_url"
+		];
+	}
+
+	/**
+	 * return homeList page fields of the model.
+	 *
+	 * @return array
+	 */
+	public static function homeListFields()
+	{
+		return [
+			"transactions.id AS id",
+			"price_settings.name AS pricesettings_name",
+			"transactions.email AS email",
+			"transactions.amount AS amount",
+			"transactions.fullname AS fullname",
+			"transactions.status AS status"
 		];
 	}
 }
