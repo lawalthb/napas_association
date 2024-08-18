@@ -48,9 +48,15 @@ class SupervisorUsers extends Model
 	{
 		//search table record
 		$search_condition = '(
-				id LIKE ?
+
+					users.firstname LIKE ?  OR
+				users.lastname LIKE ?  OR
+
+				users.matno LIKE ?
 		)';
 		$search_params = [
+			"%$text%",
+			"%$text%",
 			"%$text%"
 		];
 		//setting search conditions

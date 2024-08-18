@@ -1,27 +1,31 @@
 <?php
+
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SupervisorUsersAddRequest;
 use App\Http\Requests\SupervisorUsersEditRequest;
 use App\Models\SupervisorUsers;
 use Illuminate\Http\Request;
 use Exception;
+
 class SupervisorUsersController extends Controller
 {
 
 
 	/**
-     * List table records
+	 * List table records
 	 * @param  \Illuminate\Http\Request
-     * @param string $fieldname //filter records by a table field
-     * @param string $fieldvalue //filter value
-     * @return \Illuminate\View\View
-     */
-	function index(Request $request, $fieldname = null , $fieldvalue = null){
+	 * @param string $fieldname //filter records by a table field
+	 * @param string $fieldvalue //filter value
+	 * @return \Illuminate\View\View
+	 */
+	function index(Request $request, $fieldname = null, $fieldvalue = null)
+	{
 		$view = "pages.supervisorusers.list";
 		$query = SupervisorUsers::query();
-		$limit = $request->limit ?? 10;
-		if($request->search){
+		$limit = $request->limit ?? 500;
+		if ($request->search) {
 			$search = trim($request->search);
 			SupervisorUsers::search($query, $search); // search table records
 		}
@@ -30,8 +34,8 @@ class SupervisorUsersController extends Controller
 		$orderby = $request->orderby ?? "supervisor_users.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
-		if($fieldname){
-			$query->where($fieldname , $fieldvalue); //filter by a table field
+		if ($fieldname) {
+			$query->where($fieldname, $fieldvalue); //filter by a table field
 		}
 		$records = $query->paginate($limit, SupervisorUsers::listFields());
 		return $this->renderView($view, compact("records"));
@@ -39,11 +43,12 @@ class SupervisorUsersController extends Controller
 
 
 	/**
-     * Select table record by ID
+	 * Select table record by ID
 	 * @param string $rec_id
-     * @return \Illuminate\View\View
-     */
-	function view($rec_id = null){
+	 * @return \Illuminate\View\View
+	 */
+	function view($rec_id = null)
+	{
 		$query = SupervisorUsers::query();
 		$record = $query->findOrFail($rec_id, SupervisorUsers::viewFields());
 		return $this->renderView("pages.supervisorusers.view", ["data" => $record]);
@@ -51,19 +56,21 @@ class SupervisorUsersController extends Controller
 
 
 	/**
-     * Display form page
-     * @return \Illuminate\View\View
-     */
-	function add(){
+	 * Display form page
+	 * @return \Illuminate\View\View
+	 */
+	function add()
+	{
 		return $this->renderView("pages.supervisorusers.add");
 	}
 
 
 	/**
-     * Save form record to the table
-     * @return \Illuminate\Http\Response
-     */
-	function store(SupervisorUsersAddRequest $request){
+	 * Save form record to the table
+	 * @return \Illuminate\Http\Response
+	 */
+	function store(SupervisorUsersAddRequest $request)
+	{
 		$modeldata = $this->normalizeFormData($request->validated());
 
 		//save SupervisorUsers record
@@ -74,11 +81,12 @@ class SupervisorUsersController extends Controller
 
 
 	/**
-     * Update table record with form data
+	 * Update table record with form data
 	 * @param string $rec_id //select record by table primary key
-     * @return \Illuminate\View\View;
-     */
-	function edit(SupervisorUsersEditRequest $request, $rec_id = null){
+	 * @return \Illuminate\View\View;
+	 */
+	function edit(SupervisorUsersEditRequest $request, $rec_id = null)
+	{
 		$query = SupervisorUsers::query();
 		$record = $query->findOrFail($rec_id, SupervisorUsers::editFields());
 		if ($request->isMethod('post')) {
@@ -91,13 +99,14 @@ class SupervisorUsersController extends Controller
 
 
 	/**
-     * Delete record from the database
+	 * Delete record from the database
 	 * Support multi delete by separating record id by comma.
 	 * @param  \Illuminate\Http\Request
 	 * @param string $rec_id //can be separated by comma
-     * @return \Illuminate\Http\Response
-     */
-	function delete(Request $request, $rec_id = null){
+	 * @return \Illuminate\Http\Response
+	 */
+	function delete(Request $request, $rec_id = null)
+	{
 		$arr_id = explode(",", $rec_id);
 		$query = SupervisorUsers::query();
 		$query->whereIn("id", $arr_id);
