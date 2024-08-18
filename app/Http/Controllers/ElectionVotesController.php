@@ -28,11 +28,14 @@ class ElectionVotesController extends Controller
 	{
 		$view = "pages.electionvotes.list";
 		$query = ElectionVotes::query();
-		$limit = $request->limit ?? 10;
+		$limit = $request->limit ?? 100;
 		if ($request->search) {
 			$search = trim($request->search);
 			ElectionVotes::search($query, $search); // search table records
 		}
+		$query->join("users", "election_votes.user_id", "=", "users.id");
+		$query->join("election_positions", "election_votes.position_id", "=", "election_positions.id");
+		$query->join("election_aspirants", "election_votes.aspirant_id", "=", "election_aspirants.id");
 		$orderby = $request->orderby ?? "election_votes.id";
 		$ordertype = $request->ordertype ?? "desc";
 		$query->orderBy($orderby, $ordertype);
