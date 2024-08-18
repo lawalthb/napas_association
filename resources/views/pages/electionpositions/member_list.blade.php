@@ -97,7 +97,7 @@ $pageTitle = "Election Positions"; //set dynamic page title
                                                         <?php echo  $data['name']; ?>
                                                     </td>
                                                     <td class="td-form_amt">
-                                                        <?php echo to_currency($data['form_amt'], ''); ?>
+                                                        <?php echo $data['form_amt']; ?>
                                                     </td>
                                                     <td class="td-#Template#Buy Form"><a href="{{route('buy_form', $data['id'] )}}" onclick="return confirmBuyform();"> Buy </a></td>
                                                     <td class="td-academic_session_id">
