@@ -31,7 +31,13 @@ class ContestVotes extends Model
 	 * @var array
 	 */
 	protected $fillable = [
-		'email', 'category_id', 'candidate_id', 'vote_number', 'amount', 'payment_status', 'ip_address'
+		'email',
+		'category_id',
+		'candidate_id',
+		'vote_number',
+		'amount',
+		'payment_status',
+		'ip_address'
 	];
 	public $timestamps = false;
 
@@ -50,7 +56,9 @@ class ContestVotes extends Model
 				contest_votes.ip_address LIKE ?
 		)';
 		$search_params = [
-			"%$text%", "%$text%", "%$text%"
+			"%$text%",
+			"%$text%",
+			"%$text%"
 		];
 		//setting search conditions
 		$query->whereRaw($search_condition, $search_params);
@@ -71,6 +79,7 @@ class ContestVotes extends Model
 			"contest_categories.name AS contestcategories_name",
 			"contest_votes.candidate_id AS candidate_id",
 			"users.firstname AS users_firstname",
+			"users.lastname AS users_lastname",
 			"contest_votes.vote_number AS vote_number",
 			"contest_votes.amount AS amount",
 			"contest_votes.payment_status AS payment_status",

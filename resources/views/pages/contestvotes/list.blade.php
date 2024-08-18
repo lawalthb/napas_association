@@ -74,7 +74,7 @@ $pageTitle = "Contest Votes"; //set dynamic page title
                                             <th class="td-id"> Id</th>
                                             <th class="td-email"> Email</th>
                                             <th class="td-category_id"> Category</th>
-                                            <th class="td-candidate_id"> Candidate</th>
+                                            <th class="td-candidate_id"> Nominees</th>
                                             <th class="td-vote_number"> Vote Number</th>
                                             <th class="td-amount"> Amount</th>
                                             <th class="td-payment_status"> Payment Status</th>
@@ -116,7 +116,7 @@ $pageTitle = "Contest Votes"; //set dynamic page title
                                                     </td>
                                                     <td class="td-candidate_id">
                                                         <a size="sm" class="btn btn-sm btn btn-secondary page-modal" href="<?php print_link("users/view/$data[candidate_id]?subpage=1") ?>">
-                                                            <?php echo $data['users_firstname'] ?>
+                                                            <?php echo $data['users_firstname'] . " " . $data['users_lastname'] ?>
                                                         </a>
                                                     </td>
                                                     <td class="td-vote_number">
