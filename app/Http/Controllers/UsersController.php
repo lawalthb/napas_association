@@ -202,5 +202,5 @@ class UsersController extends Controller
 		}
 		$records = $query->paginate($limit, Users::homeListFields());
 		return $this->renderView($view, compact("records"));
-	}s
+	}
 }
