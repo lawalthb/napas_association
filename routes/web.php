@@ -324,7 +324,11 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::get('transactions/delete/{rec_id}', 'TransactionsController@delete');
 	Route::get('transactions/member_list', 'TransactionsController@member_list');
 	Route::get('transactions/member_list/{filter?}/{filtervalue?}', 'TransactionsController@member_list');
-	Route::get('transactions/member_view/{rec_id}', 'TransactionsController@member_view')->name('transactions.member_view');
+	Route::get('transactions/member_view/{rec_id}',
+	'TransactionsController@member_view')->name('transactions.member_view');
+	Route::get('transactions/clear_member', 'TransactionsController@clear_member')->name('transactions.clear');
+	Route::post('transactions/clear_member', 'TransactionsController@cash_payment')->name('transactions.cash');
+
 
 	/* routes for Users Controller */
 	Route::get('users', 'UsersController@index')->name('users.index');

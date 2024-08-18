@@ -14,7 +14,9 @@ use App\Models\AppSettings;
 use App\Models\ContestNominees;
 use App\Models\ContestVotes;
 use App\Models\ElectionAspirants;
+use App\Models\Users;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use Exception;
 
 class TransactionsController extends Controller
@@ -294,5 +296,40 @@ class TransactionsController extends Controller
 				}
 			}
 		}
+	}
+
+	// to clear pending payment if member has paid cash
+	public function clear_member()
+	{
+		return view("pages.transactions.clear_member");
+	}
+
+
+	//for admin to clear member that paid cash
+	public function cash_payment(Request $request)
+	{
+
+		// Validate the emails
+		$validator = Validator::make($request->all(), [
+			'emails' => 'required|string',
+		]);
+
+		if ($validator->fails()) {
+			return redirect()->back()->withErrors($validator)->withInput();
+		}
+
+
+		// Split the list of emails into an array
+		$emails = explode(',', $request->input('emails'));
+
+		// Update transactions with the provided emails
+		Transactions::whereIn('email', $emails)
+			->update(['status' => 'Success', 'amount' => '0']);
+			
+		$today_date = NOW();
+		Users::whereIn('email', $emails)
+			->update(['email_verified_at' => $today_date]);
+
+		return redirect()->back()->with('success', 'Members Cleared successfully');
 	}
 }
