@@ -154,4 +154,9 @@ class SupervisorUsers extends Model
 			"id"
 		];
 	}
+
+	public function supervisors()
+	{
+		return $this->belongsTo(ProjectSupervisors::class, 'supervisor_id');
+	}
 }
