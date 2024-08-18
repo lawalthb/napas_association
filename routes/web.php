@@ -328,6 +328,7 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 
 	/* routes for Users Controller */
 	Route::get('users', 'UsersController@index')->name('users.index');
+	Route::get('users/admin_list', 'UsersController@admin_list')->name('users.admin_list');
 	Route::get('users/index/{filter?}/{filtervalue?}', 'UsersController@index')->name('users.index');
 	Route::get('users/view/{rec_id}', 'UsersController@view')->name('users.view');
 	Route::get('users/masterdetail/{rec_id}', 'UsersController@masterDetail')->name('users.masterdetail')->withoutMiddleware(['rbac']);

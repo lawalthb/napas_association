@@ -129,7 +129,7 @@ class Menu
 					],
 
 					[
-						'path' => 'users',
+						'path' => 'users/admin_list',
 						'label' => "Admins",
 						'icon' => '<i class="material-icons ">subdirectory_arrow_right</i>'
 					]
