@@ -216,5 +216,17 @@ class ContestNominees extends Model
 	public function contest_categories()
 	{
 		return $this->belongsTo(ContestCategories::class, 'id');
+
+	}
+
+
+	public function user()
+	{
+		return $this->belongsTo(Users::class, 'user_id');
+	}
+
+	public function academicSession()
+	{
+		return $this->belongsTo(AcademicSessions::class, 'academic_session');
 	}
 }

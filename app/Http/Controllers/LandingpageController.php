@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ContestantCandidate;
 use App\Models\ContestantPosition;
 use App\Models\ContestCategories;
+use App\Models\ContestNominees;
 use Illuminate\Http\Request;
 use App\Models\WebColours;
 
@@ -23,11 +24,14 @@ class LandingpageController extends Controller
     {
 
         $categories = ContestCategories::OrderBy('name', 'asc')->get();
+        //dd($categories);
         if (!empty($request->id)) {
-
-            $contestants = ContestCategories::where('category_id', $request->id)->get();
+            //dd($request->id);
+            $contestants = ContestNominees::where('category_id', $request->id)->get();
         } elseif (empty($request->id)) {
-            $contestants = ContestCategories::orderBy('category_id')->get();
+
+            $contestants = ContestNominees::orderBy('category_id')->get();
+            // dd($contestants);
         }
 
 
