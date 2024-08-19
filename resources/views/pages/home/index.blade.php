@@ -10,17 +10,6 @@ $pageTitle = "Home"; // set dynamic page title
 @section('title', $pageTitle)
 @section('content')
 <div>
-    <div class="bg-light p-3 mb-3">
-        <div class="container-fluid">
-            <div class="row ">
-                <div class="col comp-grid ">
-                    <div class="">
-                        <div class="h5 font-weight-bold">Home</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="mb-3">
         <div class="container-fluid">
             <div class="row ">
@@ -180,6 +169,9 @@ $pageTitle = "Home"; // set dynamic page title
             <div class="row ">
                 <div class="col-md-6 comp-grid ">
                     <div class=" ">
+                        <div>Last 10 Member Registration</div>
+                    </div>
+                    <div class=" ">
                         <?php
                         $params = ['show_header' => false, 'show_footer' => false, 'show_pagination' => false, 'limit' => 10]; //new query param
                         $query = array_merge(request()->query(), $params);
@@ -197,6 +189,9 @@ $pageTitle = "Home"; // set dynamic page title
                     </div>
                 </div>
                 <div class="col-md-6 comp-grid ">
+                    <div class=" ">
+                        <div>Last 10 transactions</div>
+                    </div>
                     <div class=" ">
                         <?php
                         $params = ['show_header' => false, 'show_footer' => false, 'show_pagination' => false, 'limit' => 10]; //new query param
