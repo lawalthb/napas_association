@@ -14,6 +14,11 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>@yield('title')</title>
+  <meta property="og:title" content="@yield('title2')" />
+  <meta property=" og:description" content="@yield('description')" />
+  <meta property="og:image" content="@yield('image')" />
+
+
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -47,7 +52,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     a {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       text-decoration: none;
     }
 
@@ -76,7 +87,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       bottom: 0;
       z-index: 9999;
       overflow: hidden;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     #preloader:before {
@@ -84,7 +102,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       position: fixed;
       top: calc(50% - 30px);
       left: calc(50% - 30px);
-      border: 6px solid {{$fill_colour}};
+
+      border: 6px solid {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       border-top-color: #ecf8f9;
       border-radius: 50%;
       width: 60px;
@@ -112,7 +137,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       right: 15px;
       bottom: 15px;
       z-index: 996;
-      background: {{$fill_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       width: 40px;
       height: 40px;
       border-radius: 4px;
@@ -121,13 +153,27 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .back-to-top i {
       font-size: 28px;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       line-height: 0;
     }
 
     .back-to-top:hover {
       background: #5ec6ca;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     .back-to-top.active {
@@ -148,8 +194,21 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 # Top Bar
 --------------------------------------------------------------*/
     #topbar {
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       height: 40px;
       font-size: 16px;
       font-weight: 600;
@@ -170,7 +229,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 # Header
 --------------------------------------------------------------*/
     #header {
-      background: {{$main_colour}};
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       transition: all 0.5s;
       z-index: 997;
       padding: 20px 0;
@@ -199,7 +264,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     #header .logo a {
-      color: {{$text_colour }};
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
     }
 
     #header .logo img {
@@ -211,8 +282,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 */
     .appointment-btn {
       margin-left: 25px;
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       border-radius: 4px;
       padding: 8px 25px;
       white-space: nowrap;
@@ -223,7 +308,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .appointment-btn:hover {
       background: #65c9cd;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     @media (max-width: 768px) {
@@ -281,7 +373,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .navbar .active,
     .navbar .active:focus,
     .navbar li:hover>a {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .navbar .dropdown ul {
@@ -294,7 +392,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       z-index: 99;
       opacity: 0;
       visibility: hidden;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
       transition: 0.3s;
       border-radius: 4px;
@@ -316,7 +421,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .navbar .dropdown ul a:hover,
     .navbar .dropdown ul .active:hover,
     .navbar .dropdown ul li:hover>a {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .navbar .dropdown:hover>ul {
@@ -352,7 +463,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 * Mobile Navigation
 */
     .mobile-nav-toggle {
-      color: {{$text_colour }};
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       font-size: 28px;
       cursor: pointer;
       display: none;
@@ -361,7 +478,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .mobile-nav-toggle.bi-x {
-      color: {{$main_colour}};
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     @media (max-width: 991px) {
@@ -401,7 +524,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       left: 15px;
       padding: 10px 0;
       border-radius: 8px;
-      background-color: {{$main_colour}};
+
+      background-color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       overflow-y: auto;
       transition: 0.3s;
     }
@@ -410,13 +540,26 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .navbar-mobile a:focus {
       padding: 10px 20px;
       font-size: 15px;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
     }
 
     .navbar-mobile a:hover,
     .navbar-mobile .active,
     .navbar-mobile li:hover>a {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .navbar-mobile .dropdown ul {
@@ -427,7 +570,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       z-index: 99;
       opacity: 1;
       visibility: visible;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       box-shadow: 0px 0px 30px rgba(127, 137, 161, 0.25);
     }
 
@@ -446,7 +596,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .navbar-mobile .dropdown ul a:hover,
     .navbar-mobile .dropdown ul .active:hover,
     .navbar-mobile .dropdown ul li:hover>a {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .navbar-mobile .dropdown>.dropdown-active {
@@ -490,7 +646,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       padding-top: 30px;
       padding-bottom: 30px;
       margin-bottom: 50px;
-      border-top: 4px solid {{$fill_colour}};
+
+      border-top: 4px solid {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     @media (max-width: 1200px) {
@@ -509,7 +672,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     #hero p {
       margin: 0 auto 30px auto;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
     }
 
     #hero .carousel-inner .carousel-item {
@@ -558,14 +728,27 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     #hero .carousel-control-next-icon:hover,
     #hero .carousel-control-prev-icon:hover {
-      background: {{$fill_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       color: rgba(255, 255, 255, 0.8);
     }
 
     #hero .carousel-indicators li {
       list-style-type: none;
       cursor: pointer;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       overflow: hidden;
       border: 0;
       width: 12px;
@@ -577,7 +760,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     #hero .carousel-indicators li.active {
       opacity: 1;
-      background: {{$fill_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     #hero .btn-get-started {
@@ -590,8 +780,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       border-radius: 4px;
       transition: 0.5s;
       line-height: 1;
-      color: {{$main_colour}};
-      background: {{$fill_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     #hero .btn-get-started:hover {
@@ -660,7 +864,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       display: block;
       width: 50px;
       height: 3px;
-      background: {{$fill_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       bottom: 0;
       left: calc(50% - 25px);
     }
@@ -738,7 +949,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       padding: 30px;
       position: relative;
       overflow: hidden;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
       transition: all 0.3s ease-in-out;
       border-radius: 8px;
@@ -758,7 +976,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .featured-services .icon-box:hover::before {
-      background: {{$fill_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       top: 0;
       border-radius: 0px;
     }
@@ -770,7 +994,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .featured-services .icon i {
       font-size: 48px;
       line-height: 1;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       transition: all 0.3s ease-in-out;
     }
 
@@ -792,19 +1023,44 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .featured-services .icon-box:hover .title a,
     .featured-services .icon-box:hover .description {
-      color: {{$main_colour}};
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     .featured-services .icon-box:hover .icon i {
-      color: {{$main_colour}};
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     /*--------------------------------------------------------------
 # Cta
 --------------------------------------------------------------*/
     .cta {
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       background-size: cover;
       padding: 60px 0;
     }
@@ -824,13 +1080,40 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       border-radius: 25px;
       transition: 0.5s;
       margin-top: 10px;
-      border: 2px solid {{$main_colour}};
-      color: {{$main_colour}};
+
+      border: 2px solid {
+          {
+          $main_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     .cta .cta-btn:hover {
-      background: {{$main_colour}};
-      color: {{$fill_colour}};
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     /*--------------------------------------------------------------
@@ -853,7 +1136,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .about .content ul i {
       font-size: 20px;
       padding-right: 4px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .about .content p:last-child {
@@ -876,7 +1166,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .counts .count-box i {
       display: block;
       font-size: 30px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       float: left;
     }
 
@@ -885,7 +1182,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       line-height: 24px;
       display: block;
       font-weight: 700;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       margin-left: 50px;
     }
 
@@ -907,7 +1211,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .counts .count-box a:hover {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     /*--------------------------------------------------------------
@@ -922,7 +1232,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .features .icon-box i {
       font-size: 48px;
       float: left;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .features .icon-box p {
@@ -953,10 +1270,24 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       width: 80px;
       height: 80px;
       margin-bottom: 20px;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       border-radius: 50%;
       transition: 0.5s;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       overflow: hidden;
       box-shadow: 0px 0 25px rgba(0, 0, 0, 0.15);
     }
@@ -984,7 +1315,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .services .title a:hover {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .services .title::after {
@@ -993,7 +1330,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       display: block;
       width: 50px;
       height: 2px;
-      background: {{$fill_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       bottom: 0;
       left: calc(50% - 25px);
     }
@@ -1024,7 +1368,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .appointment .php-email-form .error-message {
       display: none;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       background: #ed3c0d;
       text-align: left;
       padding: 15px;
@@ -1037,7 +1388,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .appointment .php-email-form .sent-message {
       display: none;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       background: #18d26e;
       text-align: center;
       padding: 15px;
@@ -1046,7 +1404,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .appointment .php-email-form .loading {
       display: none;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       text-align: center;
       padding: 15px;
     }
@@ -1075,7 +1440,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .appointment .php-email-form input:focus,
     .appointment .php-email-form textarea:focus,
     .appointment .php-email-form select:focus {
-      border-color: {{$fill_colour}};
+      border-color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .appointment .php-email-form input,
@@ -1088,10 +1459,23 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .appointment .php-email-form button[type=submit] {
-      background: {{$fill_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       border: 0;
       padding: 10px 35px;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       transition: 0.4s;
       border-radius: 50px;
     }
@@ -1110,9 +1494,23 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .departments .nav-link {
       border: 0;
       padding: 20px;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       border-radius: 0;
-      border-left: 5px solid {{$main_colour}};
+
+      border-left: 5px solid {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       cursor: pointer;
     }
 
@@ -1128,16 +1526,35 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .departments .nav-link:hover h4 {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .departments .nav-link.active {
       background: #f7fcfc;
-      border-color: {{$fill_colour}};
+
+      border-color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .departments .nav-link.active h4 {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .departments .tab-pane.active {
@@ -1162,7 +1579,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       font-size: 26px;
       font-weight: 600;
       margin-bottom: 20px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .departments .tab-pane p {
@@ -1202,7 +1626,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       margin: -40px 0 0 40px;
       position: relative;
       z-index: 2;
-      border: 6px solid {{$main_colour}};
+
+      border: 6px solid {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     .testimonials .testimonial-item h3 {
@@ -1256,13 +1687,33 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .testimonials .swiper-pagination .swiper-pagination-bullet {
       width: 12px;
       height: 12px;
-      background-color: {{$main_colour}};
+
+      background-color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       opacity: 1;
-      border: 1px solid {{$fill_colour}};
+
+      border: 1px solid {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-      background-color: {{$fill_colour}};
+      background-color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     /*--------------------------------------------------------------
@@ -1273,7 +1724,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       overflow: hidden;
       text-align: center;
       border-radius: 4px;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       box-shadow: 0px 2px 15px rgba(63, 187, 192, 0.1);
     }
 
@@ -1298,7 +1756,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .doctors .member .social a {
       transition: color 0.3s;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       margin: 0 10px;
       display: inline-flex;
       align-items: center;
@@ -1310,7 +1775,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .doctors .member .social a:hover {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .doctors .member .social i {
@@ -1326,7 +1797,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       font-weight: 700;
       margin-bottom: 5px;
       font-size: 18px;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
     }
 
     .doctors .member .member-info span {
@@ -1362,13 +1840,33 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .gallery .swiper-pagination .swiper-pagination-bullet {
       width: 12px;
       height: 12px;
-      background-color: {{$main_colour}};
+
+      background-color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       opacity: 1;
-      border: 1px solid {{$fill_colour}};
+
+      border: 1px solid {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .gallery .swiper-pagination .swiper-pagination-bullet-active {
-      background-color: {{$fill_colour}};
+      background-color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .gallery .swiper-slide-active {
@@ -1381,9 +1879,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       }
 
       .gallery .swiper-slide-active {
-        border: 6px solid {{$fill_colour}};
+        border: 6px solid {
+            {
+            $fill_colour
+          }
+        }
+
+        ;
         padding: 4px;
-        background: {{$main_colour}};
+
+        background: {
+            {
+            $main_colour
+          }
+        }
+
+        ;
         z-index: 1;
         transform: scale(1.2);
         margin-top: 10px;
@@ -1395,7 +1906,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 --------------------------------------------------------------*/
     .pricing .box {
       padding: 20px;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       text-align: center;
       box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.12);
       border-radius: 4px;
@@ -1415,9 +1933,17 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .pricing h4 {
       font-size: 36px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       font-weight: 600;
-      font-family: "Poppins", sans-serif;
+      font-family: "Poppins",
+      sans-serif;
       margin-bottom: 20px;
     }
 
@@ -1447,7 +1973,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .pricing ul i {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       font-size: 18px;
       padding-right: 4px;
     }
@@ -1465,15 +1997,29 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .pricing .btn-buy {
-      background: {{$fill_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       display: inline-block;
       padding: 8px 35px 10px 35px;
       border-radius: 4px;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       transition: none;
       font-size: 14px;
       font-weight: 400;
-      font-family: "Roboto", sans-serif;
+      font-family: "Roboto",
+      sans-serif;
       font-weight: 600;
       transition: 0.3s;
     }
@@ -1483,8 +2029,21 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .pricing .featured h3 {
-      color: {{$main_colour}};
-      background: {{$fill_colour}};
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .pricing .advanced {
@@ -1496,8 +2055,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       z-index: 1;
       font-size: 14px;
       padding: 1px 0 3px 0;
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
     }
 
     /*--------------------------------------------------------------
@@ -1521,7 +2094,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     .faq .faq-list .question {
       display: block;
       position: relative;
-      font-family: {{$fill_colour}};
+
+      font-family: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       font-size: 18px;
       line-height: 24px;
       font-weight: 400;
@@ -1552,7 +2132,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .faq .faq-list .collapsed:hover {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .faq .faq-list .collapsed .icon-show {
@@ -1577,7 +2163,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .contact .info-box i {
       font-size: 32px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       border-radius: 50%;
       padding: 8px;
       border: 2px dotted #c5ebec;
@@ -1604,7 +2197,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .contact .php-email-form .error-message {
       display: none;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       background: #ed3c0d;
       text-align: left;
       padding: 15px;
@@ -1617,7 +2217,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .contact .php-email-form .sent-message {
       display: none;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       background: #18d26e;
       text-align: center;
       padding: 15px;
@@ -1626,7 +2233,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .contact .php-email-form .loading {
       display: none;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       text-align: center;
       padding: 15px;
     }
@@ -1652,7 +2266,13 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     .contact .php-email-form input:focus,
     .contact .php-email-form textarea:focus {
-      border-color: {{$fill_colour}};
+      border-color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     .contact .php-email-form input {
@@ -1664,10 +2284,23 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     .contact .php-email-form button[type=submit] {
-      background: {{$fill_colour}};
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       border: 0;
       padding: 10px 30px;
-      color: {{$main_colour}};
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       transition: 0.4s;
       border-radius: 4px;
     }
@@ -1692,7 +2325,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     #footer {
       background: #eeeeee;
       padding: 0 0 30px 0;
-      color: {{$text_colour }};
+
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       font-size: 14px;
     }
 
@@ -1723,8 +2363,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     #footer .footer-top .social-links a {
       font-size: 18px;
       display: inline-block;
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       line-height: 1;
       padding: 8px 0;
       margin-right: 4px;
@@ -1759,7 +2413,14 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
     #footer .footer-top .footer-links ul i {
       padding-right: 2px;
-      color: {{$fill_colour}};
+
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
       font-size: 18px;
       line-height: 1;
     }
@@ -1775,19 +2436,38 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
     }
 
     #footer .footer-top .footer-links ul a {
-      color: {{$text_colour }};
+      color: {
+          {
+          $text_colour
+        }
+      }
+
+      ;
       transition: 0.3s;
       display: inline-block;
       line-height: 1;
     }
 
     #footer .footer-top .footer-links ul a:hover {
-      color: {{$fill_colour}};
+      color: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
     }
 
     #footer .footer-top .footer-newsletter form {
       margin-top: 30px;
-      background: {{$main_colour}};
+
+      background: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       padding: 6px 10px;
       position: relative;
       border: 1px solid #d5d5d5;
@@ -1809,8 +2489,22 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
       background: none;
       font-size: 16px;
       padding: 0 20px;
-      background: {{$fill_colour}};
-      color: {{$main_colour}};
+
+      background: {
+          {
+          $fill_colour
+        }
+      }
+
+      ;
+
+      color: {
+          {
+          $main_colour
+        }
+      }
+
+      ;
       transition: 0.3s;
       border-radius: 0 4px 4px 0;
     }
