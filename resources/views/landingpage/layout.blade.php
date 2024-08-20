@@ -15,7 +15,7 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 
   <title>@yield('title')</title>
   <meta property="og:title" content="@yield('title2')" />
-  <meta property=" og:description" content="@yield('description')" />
+  <meta property="og:description" content="@yield('description')" />
   <meta property="og:image" content="@yield('image')" />
 
 

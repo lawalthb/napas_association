@@ -1,9 +1,9 @@
 @extends('landingpage.layout')
 
 @section('title', 'NABAMS -'. $contestant->name )
-@section('title2', "NABAMS - {{$contestant->name}}" )
-@section('description', "as {{ $category->name }}" )
-@section('image',"{{asset($nominees->image)}}" )
+@section('title2', "NABAMS - $contestant->name" )
+@section('description', "as $category->name " )
+@section('image',"https://ogitechnabams.com/$nominees->image" )
 
 @section('content')
 
