@@ -52,9 +52,9 @@ class VoteController extends Controller
         $contestant = ContestNominees::where('slug', $slug)->firstOrFail();
 
         $category = ContestCategories::where('id', $contestant->category_id)->first();
-        $user = Users::where('id', $contestant->user_id)->first();
-        //dd($user);
-        return view('landingpage.payment', ['contestant' => $contestant, 'category' => $category, 'user' => $user]);
+        $nominees = Users::where('id', $contestant->user_id)->first();
+        // dd($user);
+        return view('landingpage.payment', ['contestant' => $contestant, 'category' => $category, 'nominees' => $nominees]);
     }
 
     public function ContestVotePayment($slug)
@@ -122,14 +122,9 @@ class VoteController extends Controller
             'callback_url' => $callback_url,
             'reference' => $data['orderReference'],
             'authorization_url' => $data['checkoutLink'],
-            'purpose_name' =>'contest',
+            'purpose_name' => 'contest',
         ]);
         $payment_link = $data['checkoutLink'];
         return redirect($data['checkoutLink']);
     }
-
-
-
-
-
 }

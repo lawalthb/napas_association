@@ -48,7 +48,11 @@
 
         <div class="row">
           <div class="col-lg-6 text-center" data-aos="fade-right">
-            <img src="{{asset($user->image)}}" height="400px" width="300px" class="img-fluid" alt="">
+            @if($nominees && $nominees->image)
+            <img src="{{asset($nominees->image)}}" height="400px" width="300px" class="img-fluid" alt="">
+            @else
+            &nbsp;
+            @endif
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-left">
             <form method="POST" action="{{ route('vote.payment.process') }}">
