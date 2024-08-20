@@ -1,7 +1,9 @@
 @extends('landingpage.layout')
 
-@section('title', 'NACOS -'. $contestant->name )
-
+@section('title', 'NABAMS -'. $contestant->name )
+<meta property="og:title" content="NABAMS - {{$contestant->name}}" />
+<meta property="og:description" content="as  {{ $category->name }}" />
+<meta property="og:image" content="{{asset($nominees->image)}}" />
 @section('content')
 
 @include('landingpage.topbar')
