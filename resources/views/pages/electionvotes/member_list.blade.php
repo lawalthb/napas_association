@@ -10,6 +10,7 @@ $pageTitle = "election_vote_page"; // set dynamic page title
 @section('title', $pageTitle)
 <script src="https://cdn.tailwindcss.com"></script>
 @section('content')
+
 <div>
   <div class="bg-light p-3 mb-3">
     <div class="container-fluid">
