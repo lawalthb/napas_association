@@ -1,7 +1,7 @@
 
 @extends('layouts.report')
 @section('content')
-<div id="report-title"><h1>Transaction Details</h1></div>
+<div id="report-title"><h1>Official Receipt</h1></div>
 <table class="table table-sm table-striped">
     <tbody>
         <tr>
