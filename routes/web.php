@@ -327,7 +327,10 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	Route::get('transactions/member_view/{rec_id}',
 	'TransactionsController@member_view')->name('transactions.member_view');
 	Route::get('transactions/clear_member', 'TransactionsController@clear_member')->name('transactions.clear');
+
 	Route::post('transactions/clear_member', 'TransactionsController@cash_payment')->name('transactions.cash');
+	Route::get('transactions/apply_for_receipt', 'TransactionsController@apply_for_receipt')->name('transactions.apply_for_receipt');
+	
 	Route::get('transactions/home_list', 'TransactionsController@home_list');
 	Route::get('transactions/home_list/{filter?}/{filtervalue?}', 'TransactionsController@home_list');
 

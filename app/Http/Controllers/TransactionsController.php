@@ -18,6 +18,7 @@ use App\Models\Users;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Exception;
+use Illuminate\Support\Str;
 
 class TransactionsController extends Controller
 {
@@ -351,5 +352,22 @@ class TransactionsController extends Controller
 		}
 		$records = $query->paginate($limit, Transactions::homeListFields());
 		return $this->renderView($view, compact("records"));
+	}
+	function apply_for_receipt()
+	{
+		$view = "pages.transactions.member_list";
+		Transactions::create([
+			'user_id' => auth()->user()->id,
+			'price_settings_id' => 1,
+			'email' => auth()->user()->email,
+			'amount' => 0,
+			'fullname' =>   auth()->user()->lastname . " " . auth()->user()->firstname,
+			'phone_number' => auth()->user()->phone,
+			'callback_url' => '',
+			'reference' =>  Str::uuid(),
+			'authorization_url' =>  '',
+			'status' =>  'Success',
+		]);
+		return redirect()->back();
 	}
 }

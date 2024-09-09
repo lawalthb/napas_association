@@ -173,7 +173,7 @@ $header = App\Models\WebHeaders::where('id', 1)->first();
 		</table>
 	</div>
 	<script>
-		//window.print();
+		window.print();
 	</script>
 </body>
 
