@@ -6,10 +6,10 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <?php
 $pageTitle = "election_vote_page"; // set dynamic page title
 ?>
-@extends($layout)
+
 @section('title', $pageTitle)
 <script src="https://cdn.tailwindcss.com"></script>
-@section('content')
+
 
 <div>
   <div class="bg-light p-3 mb-3">
@@ -59,7 +59,7 @@ $pageTitle = "election_vote_page"; // set dynamic page title
                 class="border border-[#ebedf2] dark:border-[#191e3a] rounded-md bg-white dark:bg-[#0e1726] p-5 shadow-[0px_0px_2px_0px_rgba(145,158,171,0.20),_0px_12px_24px_-4px_rgba(145,158,171,0.12)]">
                 <div
                   class="rounded-md overflow-hidden mb-5 shadow-[0_6px_10px_0_rgba(0,0,0,0.14),_0_1px_18px_0_rgba(0,0,0,0.12),_0_3px_5px_-1px_rgba(0,0,0,0.20)]">
-                  <img src="{{asset($candidate_details->image)}}" alt="..." height="200px" />
+                  <img src="{{asset($candidate_details->image)}}" alt="..." height="100px" width="80px" />
                 </div>
                 <h5 class="text-xl mb-1"> {{ $candidate->name }}
                   @php
@@ -108,7 +108,7 @@ $pageTitle = "election_vote_page"; // set dynamic page title
 </div>
 </div>
 </div>
-@endsection
+
 <!-- Page custom css -->
 @section('pagecss')
 <style>
