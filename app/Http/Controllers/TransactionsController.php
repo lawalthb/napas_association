@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Cookie;
 
 class TransactionsController extends Controller
 {
@@ -255,6 +256,10 @@ class TransactionsController extends Controller
 
 				if ($updateRecord) {
 					$contest =  Transactions::where('reference', $orderId)->where('purpose_name', 'contest')->first();
+
+                    $profile_update =  Transactions::where('reference', $orderId)->where('purpose_name', 'profile_update')->first();
+
+
 					$resource =  Transactions::where('reference', $orderId)->where('purpose_name', 'resource')->first();
 					$election =  Transactions::where('reference', $orderId)->where('purpose_name', 'election')->first();
 					if ($contest) {
@@ -294,6 +299,21 @@ class TransactionsController extends Controller
 							return redirect()->route('home');
 						}
 					}
+
+                    //update profile
+
+                    if ($profile_update) {
+
+                        $levelID = Cookie::get('level_id');
+$user_id =  $profile_update->user_id;
+                        //update user level
+                       $user = Users::find($user_id);
+                        $user->update(['level_id' => $levelID]);
+                            return redirect()->route('home');
+
+                    }
+
+
 				}
 			}
 		}
@@ -370,4 +390,11 @@ class TransactionsController extends Controller
 		]);
 		return redirect()->back();
 	}
+
+
+
+
 }
+
+
+
