@@ -53,7 +53,7 @@ Route::get('auth/accountinactive', 'AuthController@accountinactive')->name('acco
 
 
 
-Route::get('index/register', 'AuthController@register')->name('auth.register')->middleware(['redirect.to.home']);
+Route::get('index/register', 'AuthController@register')->name('auth.register')->middleware(['redirect.to.home','throttle:3,1' ]);
 Route::post('index/register', 'AuthController@register_store')->name('auth.register_store');
 
 Route::get('webabouts', 'WebAboutsController@index')->name('webabouts.index');

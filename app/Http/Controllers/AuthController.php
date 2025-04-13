@@ -70,6 +70,9 @@ class AuthController extends Controller
 	 */
 	function register_store(UsersRegisterRequest $request)
 	{
+        if (!empty($request->nickname)) {
+    return response()->json(['message' => 'Bot detected'], 403);
+}
 		$modeldata = $this->normalizeFormData($request->validated());
 
 		if (array_key_exists("image", $modeldata)) {
@@ -174,6 +177,7 @@ class AuthController extends Controller
 	 */
 	public function resendVerifyEmail(Request $request)
 	{
+        die('loading payment page...');
 		$user_id = $request->get("id");
 		$user = Users::findOrFail($user_id);
 		if ($user->hasVerifiedEmail()) {

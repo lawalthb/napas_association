@@ -22,26 +22,29 @@ class UsersRegisterRequest extends FormRequest
      */
     public function rules()
     {
-		
+
         return [
-            
-				"firstname" => "required|string",
-				"lastname" => "nullable|string",
-				"phone" => "required|string|unique:users,phone",
-				"email" => "required|email|unique:users,email",
-				"password" => "required",
-				"level_id" => "nullable",
-				"matno" => "nullable|string",
-				"member_type" => "required",
-				"expectation_msg" => "nullable",
-            
-        ];
-    }
+        "firstname" => "required|string|regex:/^[a-zA-Z\s]+$/",
+        "lastname" => "nullable|string|regex:/^[a-zA-Z\s]+$/",
+        "phone" => "required|string|unique:users,phone|regex:/^[0-9]{10,15}$/",
+        "email" => "required|email|unique:users,email",
+        "password" => "required|min:8",
+        "level_id" => "nullable",
+        "matno" => [
+            "required",
+            "string",
+            "regex:/^[A-Z]{4}\/[0-9]{2}\/[0-9]{4}$/"
+        ],
+        "member_type" => "required",
+        "expectation_msg" => "nullable",
+
+    ];
+}
 
 	public function messages()
     {
         return [
-			
+
             //using laravel default validation messages
         ];
     }

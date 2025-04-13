@@ -35,7 +35,7 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
           @enderror
         </div>
         <div class="col-md-4 form-group mt-3 mt-md-0">
-          <input type="text" class="form-control" name="matno" id="matno" value="{{ old('matno') }}" placeholder="Your Matric Number (Optional)">
+          <input type="text" class="form-control" name="matno" id="matno" value="{{ old('matno') }}" placeholder="Your Matric Number (eg.:HBAF/25/0042)">
           @error('matno')
           <p class="error_msg">{{ $message }}</p>
           @enderror
@@ -103,6 +103,7 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
           @enderror
         </div>
       </div>
+<input type="text" name="nickname" style="display:none">
 
       <div class="form-group mt-3">
         <textarea class="form-control" name="expectation_msg" rows="5" placeholder="Your expectation in this association (Optional)">{{ old('expectation_msg') }}</textarea>
