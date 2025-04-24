@@ -15,7 +15,11 @@ class LandingpageController extends Controller
     public function LandingPage()
     {
         $colours = WebColours::all();
+  $num1 = rand(0, 9);
+    $num2 = rand(0, 9);
 
+    // Store in session
+    session(['captcha_num1' => $num1, 'captcha_num2' => $num2]);
         return view('landingpage.index', compact('colours'));
     }
 

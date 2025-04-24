@@ -59,9 +59,10 @@ class VoteController extends Controller
 
     public function ContestVotePayment($slug)
     {
-        $contestant = ContestantCandidate::where('slug', $slug)->firstOrFail();
+       // $contestant = ContestantCandidate::where('slug', $slug)->firstOrFail();
+        
         // Redirect user to the payment page
-        return view('payment', ['contestant' => $contestant->id]);
+        return 1;
     }
 
 

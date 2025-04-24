@@ -111,6 +111,14 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
         <p class="error_msg">{{ $message }}</p>
         @enderror
       </div>
+      <div class="form-group">
+    <label for="captcha">Security Question: {{ session('captcha_num1') }} + {{ session('captcha_num2') }} = ?</label>
+    <input type="number" class="form-control" id="captcha" name="captcha" required>
+    <input type="hidden" name="captcha_num1" value="{{ session('captcha_num1') }}">
+    <input type="hidden" name="captcha_num2" value="{{ session('captcha_num2') }}">
+</div>
+
+
       <div class="my-3">
         <div class="loading">Loading</div>
         <div class="error-message"></div>
@@ -133,4 +141,24 @@ $reg = App\Models\WebRegistrations::where('id', 1)->first();
       });
     });
   </script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', function(e) {
+        const num1 = parseInt(document.querySelector('input[name="captcha_num1"]').value);
+        const num2 = parseInt(document.querySelector('input[name="captcha_num2"]').value);
+        const userAnswer = parseInt(document.querySelector('input[name="captcha"]').value);
+
+        if (userAnswer !== (num1 + num2)) {
+            e.preventDefault();
+            alert('The answer to the security question is incorrect.');
+            return false;
+        }
+    });
+});
+</script>
+
 </section><!-- End Registration Section -->

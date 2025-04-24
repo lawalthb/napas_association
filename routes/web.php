@@ -20,6 +20,8 @@ use App\Http\Controllers\TransactionsController;
 use App\Http\Controllers\VoteController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\PaymentController;
+
 Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
 Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
@@ -520,6 +522,9 @@ Route::middleware(['auth', 'verified', 'rbac'])->group(function () {
 	// 		return view("pages.custom.election_vote_page");
 	// 	}
 	// );
+Route::get('member/payment', 'PaymentController@index')->name('payment.index');
+Route::get('admin_payment', 'PaymentController@admin_new')->name('payment.admin_new');
+
 
 	Route::get(
 		'my_topic',
@@ -863,3 +868,23 @@ Route::get('info/changelocale/{locale}', function ($locale) {
 	session()->put('locale', $locale);
 	return redirect()->back();
 })->name('info.changelocale');
+
+
+Route::get('admin/payments', 'PaymentsController@index')->name('payments.index');
+Route::get('admin/payments/index/{filter?}/{filtervalue?}', 'PaymentsController@index')->name('payments.index');
+Route::get('admin/payments/view/{rec_id}', 'PaymentsController@view')->name('payments.view');
+Route::get('admin/payments/add', 'PaymentsController@add')->name('payments.add');
+Route::post('admin/payments/add', 'PaymentsController@store')->name('payments.store');
+Route::get('admin/payments/edit/{rec_id}', 'PaymentsController@edit')->name('payments.edit');
+Route::post('admin/payments/edit/{rec_id}', 'PaymentsController@update')->name('payments.update');
+Route::get('admin/payments/delete/{rec_id}', 'PaymentsController@delete')->name('payments.delete');
+
+
+
+//member
+Route::post('member/payment', 'PaymentController@processPayment')->name('payments.process');
+Route::get('member/payment/verify', 'PaymentController@verifyPayment')->name('payments.verify');
+Route::get('member/payment/success', 'PaymentController@paymentSuccess')->name('payments.success');
+
+
+Route::get('transactions/download_receipt/{id}', 'TransactionsController@downloadReceipt')->name('transactions.download_receipt');

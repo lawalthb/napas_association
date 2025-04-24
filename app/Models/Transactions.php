@@ -323,4 +323,10 @@ class Transactions extends Model
 			"transactions.status AS status"
 		];
 	}
+
+
+    public function payment()
+{
+    return $this->belongsTo(\App\Models\Payment::class, 'price_settings_id');
+}
 }

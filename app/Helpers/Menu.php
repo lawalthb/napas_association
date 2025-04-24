@@ -265,6 +265,18 @@ class Menu
 				'path' => 'account',
 				'label' => "Profile",
 				'icon' => '<i class="material-icons ">person_outline</i>'
+            ],
+            [
+				'path' => 'member/payment',
+				'label' => "Make Payment",
+				'icon' => '<i class="material-icons ">payment</i>'
+			]
+
+            ,
+             [
+				'path' => 'admin/payments',
+				'label' => "Custom Payments",
+				'icon' => '<i class="material-icons ">payment</i>'
 			]
 		];
 	}

@@ -208,6 +208,7 @@ class TransactionsController extends Controller
 
 	public function PaymentCallback(Request $request)
 	{
+
 		$reference = $request->orderReference;
 		$orderId = $request->orderId;
 		$access_token = nombaAccessToken();
@@ -262,6 +263,10 @@ class TransactionsController extends Controller
 
 					$resource =  Transactions::where('reference', $orderId)->where('purpose_name', 'resource')->first();
 					$election =  Transactions::where('reference', $orderId)->where('purpose_name', 'election')->first();
+
+                    $custom =  Transactions::where('reference', $orderId)->where('purpose_name', 'custom')->first();
+
+
 					if ($contest) {
 
 						$vote_paid =  ContestVotes::where('id', $contest->purpose_id)->update([
@@ -313,6 +318,12 @@ $user_id =  $profile_update->user_id;
 
                     }
 
+
+  if ($custom) {
+//redirect with success message
+                            return redirect()->route('payment.index')->with('success', 'Payment successful!');
+
+                    }
 
 				}
 			}
@@ -392,7 +403,49 @@ $user_id =  $profile_update->user_id;
 	}
 
 
+public function downloadReceipt($id)
+{
+    try {
+        // Get the transaction
+        $transaction = Transactions::findOrFail($id);
 
+        // Check if user owns this transaction
+        if (auth()->user()->id != $transaction->user_id) {
+            return redirect()->back()->with('error', 'You are not authorized to download this receipt.');
+        }
+
+        // Check if transaction is successful
+        if ($transaction->status != 'Success') {
+            return redirect()->back()->with('error', 'Receipt is only available for successful payments.');
+        }
+
+        // Get user details
+        $user = \App\Models\Users::findOrFail($transaction->user_id);
+
+        // Get payment details if available
+        $paymentName = $transaction->purpose_name ?? 'Payment';
+
+        // Generate PDF receipt
+        $pdf = \PDF::loadView('pages.receipts.payment_receipt', [
+            'transaction' => $transaction,
+            'user' => $user,
+            'paymentName' => $paymentName
+        ]);
+
+        // Generate a filename
+        $filename = 'receipt_' . $transaction->reference . '.pdf';
+
+        // Return the PDF for download
+        return $pdf->download($filename);
+    } catch (\Exception $e) {
+        \Log::error('Receipt download failed', [
+            'transaction_id' => $id,
+            'error' => $e->getMessage()
+        ]);
+
+        return redirect()->back()->with('error', 'Failed to generate receipt. Please try again later.');
+    }
+}
 
 }
 

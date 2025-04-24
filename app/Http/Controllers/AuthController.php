@@ -117,7 +117,7 @@ class AuthController extends Controller
 				'reference' =>  $response['orderReference'],
 				'authorization_url' =>  $response['checkoutLink'],
 			]);
-			$user->sendEmailVerificationNotification();
+		//	$user->sendEmailVerificationNotification();
 			return redirect()->away($checkoutLink);
 		}
 	}

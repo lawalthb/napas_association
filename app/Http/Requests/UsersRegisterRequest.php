@@ -37,6 +37,25 @@ class UsersRegisterRequest extends FormRequest
         ],
         "member_type" => "required",
         "expectation_msg" => "nullable",
+          "captcha" => [
+            'required',
+            function ($attribute, $value, $fail) {
+                $num1 = request('captcha_num1');
+                $num2 = request('captcha_num2');
+
+                // Verify the numbers match what's in the session
+                if ($num1 != session('captcha_num1') || $num2 != session('captcha_num2')) {
+                    $fail('Security verification failed. Please try again.');
+                    return;
+                }
+
+                // Check if the answer is correct
+                if ((int)$value !== ((int)$num1 + (int)$num2)) {
+                    $fail('The answer to the security question is incorrect.');
+                }
+            },
+        ],
+    
 
     ];
 }

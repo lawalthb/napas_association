@@ -42,15 +42,22 @@ class AccountController extends Controller{
      */
 	function edit(UsersAccountEditRequest $request){
 
-        $levelID = $request->level_id;
-        if
-        ($levelID = 2 OR $levelID = 3 OR $levelID = 5 OR $levelID = 6){
+
+		$rec_id = Auth::id();
+		$query = Users::query();
+		$user = $query->findOrFail($rec_id, Users::accounteditFields());
+		if ($request->isMethod('post')) {
+
+            $levelID = Auth::user()->level_id;
+
+        if($levelID = 2 OR $levelID = 3 OR $levelID = 5 OR $levelID = 6){
             Cookie::queue('level_id', $levelID, 60);
             $price_setting = PriceSettings::where('level_id', $levelID)->first();
 
             if ($price_setting) {
 
                 $amount = $price_setting->amount;
+
             } else {
                 $amount = 1500;
             }
@@ -58,19 +65,20 @@ class AccountController extends Controller{
 
             $callbackUrl = URL::to('/payment_callback');
 
-            $response = makePayment($amount, auth()->user()->email, $callbackUrl);
+            $response = makePayment($amount,  Auth::user()->email, $callbackUrl);
+
             $checkoutLink  = $response['checkoutLink'];
             //	$result['data']['checkoutLink'];
             $user['checkoutLink'] = $checkoutLink;
-            $user['or_password'] = $request->password;
+            $user['or_password'] = Auth::user()->password;
             if ($response) {
                 Transactions::create([
                     'user_id' => Auth::id(),
                     'price_settings_id' => $price_setting->id,
-                    'email' =>  auth()->user()->email,
+                    'email' =>   Auth::user()->email,
                     'amount' =>    $amount,
-                    'fullname' =>   $request->lastname . " " . $request->firstname,
-                    'phone_number' => $request->phone,
+                    'fullname' =>    Auth::user()->lastname . " " .  Auth::user()->firstname,
+                    'phone_number' =>  Auth::user()->phone,
                     'callback_url' => $callbackUrl,
                     'reference' =>  $response['orderReference'],
                     'authorization_url' =>  $response['checkoutLink'],
@@ -83,10 +91,8 @@ class AccountController extends Controller{
 
 
         }
-		$rec_id = Auth::id();
-		$query = Users::query();
-		$user = $query->findOrFail($rec_id, Users::accounteditFields());
-		if ($request->isMethod('post')) {
+
+
 			$modeldata = $this->normalizeFormData($request->validated());
 
 		if( array_key_exists("image", $modeldata) ){
