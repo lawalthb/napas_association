@@ -26,7 +26,7 @@ Route::get('/', [LandingpageController::class, 'LandingPage'])->name('index');
 Route::get('/contest', [LandingpageController::class, 'contest'])->name('contest');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
 Route::get('/thankyou', [LandingpageController::class, 'thankyou'])->name('thankyou');
-Route::get('payment_callback', [AuthController::class, 'PaymentCallback'])->name('registerCallback');
+Route::get('payment_callback_reg', [AuthController::class, 'PaymentCallback'])->name('registerCallback');
 
 //Route::get('', 'IndexController@index')->name('index')->middleware(['redirect.to.home']);
 

@@ -95,7 +95,7 @@
 <body>
     <div class="receipt">
         <div class="receipt-header">
-            <h1>NAPAS ASSOCIATION</h1>
+            <h1>NABAMS</h1>
             <p>Official Payment Receipt</p>
             <p>{{ date('F d, Y') }}</p>
         </div>
