@@ -154,6 +154,24 @@ class UsersController extends Controller
 	}
 
 
+function reset_password($rec_id = null)
+{
+    if(!empty($rec_id)){
+        $modeldata = [
+            'password' => bcrypt('nabams2025')
+        ];
+
+        $record = \App\Models\Users::findOrFail($rec_id);
+        $record->update($modeldata);
+
+        return $this->redirect("users", "Password reset successfully to 'nabams2025'");
+    }
+
+    return $this->redirect("users", "Invalid user ID provided");
+}
+
+
+
 	/**
 	 * Delete record from the database
 	 * Support multi delete by separating record id by comma.

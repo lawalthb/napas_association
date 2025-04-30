@@ -888,3 +888,6 @@ Route::get('member/payment/success', 'PaymentController@paymentSuccess')->name('
 
 
 Route::get('transactions/download_receipt/{id}', 'TransactionsController@downloadReceipt')->name('transactions.download_receipt');
+
+
+Route::get('users/reset_password/{id}', 'UsersController@reset_password');

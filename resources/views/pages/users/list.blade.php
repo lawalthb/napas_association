@@ -205,6 +205,9 @@ $pageTitle = "Members"; //set dynamic page title
                                                                         <i class="material-icons">delete_sweep</i> Delete
                                                                     </a>
                                                                 <?php } ?>
+                                                                <a class="dropdown-item " href="<?php print_link("users/reset_password/$rec_id"); ?>">
+                                                                        <i class="material-icons">edit</i> Reset password
+                                                                    </a>
                                                             </ul>
                                                         </div>
                                                     </td>
