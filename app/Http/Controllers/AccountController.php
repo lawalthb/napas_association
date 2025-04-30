@@ -50,47 +50,6 @@ class AccountController extends Controller{
 
             $levelID = Auth::user()->level_id;
 
-        if($levelID = 2 OR $levelID = 3 OR $levelID = 5 OR $levelID = 6){
-            Cookie::queue('level_id', $levelID, 60);
-            $price_setting = PriceSettings::where('level_id', $levelID)->first();
-
-            if ($price_setting) {
-
-                $amount = $price_setting->amount;
-
-            } else {
-                $amount = 1500;
-            }
-
-
-            $callbackUrl = URL::to('/payment_callback');
-
-            $response = makePayment($amount,  Auth::user()->email, $callbackUrl);
-
-            $checkoutLink  = $response['checkoutLink'];
-            //	$result['data']['checkoutLink'];
-            $user['checkoutLink'] = $checkoutLink;
-            $user['or_password'] = Auth::user()->password;
-            if ($response) {
-                Transactions::create([
-                    'user_id' => Auth::id(),
-                    'price_settings_id' => $price_setting->id,
-                    'email' =>   Auth::user()->email,
-                    'amount' =>    $amount,
-                    'fullname' =>    Auth::user()->lastname . " " .  Auth::user()->firstname,
-                    'phone_number' =>  Auth::user()->phone,
-                    'callback_url' => $callbackUrl,
-                    'reference' =>  $response['orderReference'],
-                    'authorization_url' =>  $response['checkoutLink'],
-                    'purpose_name' =>  'profile_update',
-                ]);
-
-                return redirect()->away($checkoutLink);
-            }
-
-
-
-        }
 
 
 			$modeldata = $this->normalizeFormData($request->validated());
