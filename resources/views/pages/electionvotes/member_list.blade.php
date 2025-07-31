@@ -6,10 +6,9 @@ e.g $arrDataFromDb = $comp_model->fetchData(); //function name
 <?php
 $pageTitle = "election_vote_page"; // set dynamic page title
 ?>
-@extends($layout)
-@section('title', $pageTitle)
+
 <script src="https://cdn.tailwindcss.com"></script>
-@section('content')
+
 
 <div>
   <div class="bg-light p-3 mb-3">
@@ -108,7 +107,7 @@ $pageTitle = "election_vote_page"; // set dynamic page title
 </div>
 </div>
 </div>
-@endsection
+
 <!-- Page custom css -->
 @section('pagecss')
 <style>
